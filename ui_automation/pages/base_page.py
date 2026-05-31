@@ -1,7 +1,14 @@
 """
 Page Object 基类
 封装 Selenium WebDriver 常用操作，所有页面对象继承此类。
-提供元素操作、等待、截图、高级交互等常用方法。
+提供核心元素操作方法，并集成 Helpers 辅助工具。
+
+辅助方法已拆分至 helpers/ 模块：
+- WaitHelpers: 自定义等待（AJAX、页面加载、元素消失等）
+- ActionHelpers: 高级交互（拖拽、双击、键盘快捷键等）
+- ValidationHelpers: UI 断言验证
+
+通过 self.waits / self.actions_helper / self.validator 属性访问
 """
 import os
 import time
@@ -18,11 +25,16 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 from common.logger import get_logger
 
+# 导入辅助工具
+from ui_automation.pages.helpers.wait_helpers import WaitHelpers
+from ui_automation.pages.helpers.action_helpers import ActionHelpers
+from ui_automation.pages.helpers.validation_helpers import ValidationHelpers
+
 logger = get_logger("BasePage")
 
 
 class BasePage:
-    """页面对象基类，封装 WebDriver 常用操作"""
+    """页面对象基类，封装 WebDriver 核心操作并集成辅助工具"""
 
     # 证据保存目录
     EVIDENCE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "evidence")
@@ -38,6 +50,10 @@ class BasePage:
         self.wait = WebDriverWait(driver, 10)
         # 确保证据目录存在
         os.makedirs(self.EVIDENCE_DIR, exist_ok=True)
+        # 集成辅助工具
+        self.waits = WaitHelpers(driver)
+        self.actions_helper = ActionHelpers(driver)
+        self.validator = ValidationHelpers(driver)
 
     # ========== 元素操作 ==========
 

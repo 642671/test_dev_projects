@@ -1,0 +1,20 @@
+# 用户预置数据
+# 用于测试中需要预先存在的用户数据
+
+admin_user:
+  username: "admin"
+  password: "Admin@123"
+  role: "管理员"
+  email: "admin@example.com"
+
+test_user:
+  username: "testuser"
+  password: "Test@123"
+  role: "普通用户"
+  email: "test@example.com"
+
+readonly_user:
+  username: "viewer"
+  password: "View@123"
+  role: "只读用户"
+  email: "viewer@example.com"

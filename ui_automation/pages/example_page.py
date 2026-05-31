@@ -1,6 +1,16 @@
 """
 示例页面对象 - 登录页面（LoginPage）
 演示如何继承 BasePage 创建具体的页面对象。
+
+❗ 此文件保留为向后兼容，推荐使用新结构：
+   - 新版登录页面: ui_automation/pages/pages/login_page.py
+   - 定位器集中管理: ui_automation/pages/locators/login_page_locators.py
+   - 共享组件: ui_automation/pages/components/
+
+新项目请使用 pages/pages/ 下的新结构，可获得：
+   - Locator 分离，便于统一维护
+   - 组件复用（HeaderComponent / NavigationComponent）
+   - 集成 WaitHelpers / ActionHelpers / ValidationHelpers
 """
 from selenium.webdriver.common.by import By
 from ui_automation.pages.base_page import BasePage

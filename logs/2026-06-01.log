@@ -1,0 +1,26 @@
+2026-06-01 00:54:59.639 | INFO     | test_module | Logger 模块导入成功
+2026-06-01 00:59:52.407 | DEBUG    | APIClient | Session 已关闭
+2026-06-01 00:59:57.157 | INFO     | TestCaseGenerator | 初始化测试用例生成器 - 模块: 登录模块, 缩写: LOGIN
+2026-06-01 00:59:57.158 | INFO     | TestCaseGenerator | 添加测试用例: TC_LOGIN_001 - 正确用户名密码登录
+2026-06-01 00:59:57.158 | INFO     | TestCaseGenerator | 添加测试用例: TC_LOGIN_002 - 用户名为空登录
+2026-06-01 00:59:57.158 | INFO     | TestCaseGenerator | 添加测试用例: TC_LOGIN_003 - 密码为空登录
+2026-06-01 00:59:57.158 | INFO     | TestCaseGenerator | 添加测试用例: TC_LOGIN_004 - 错误密码登录
+2026-06-01 00:59:57.158 | INFO     | TestCaseGenerator | 从测试点批量生成 4 条用例
+2026-06-01 00:59:57.163 | INFO     | FileHandler | 成功写入 YAML 文件: /Users/miaoqi/Desktop/test_dev_projects/testcase_generator/output/login_testcases.yaml
+2026-06-01 00:59:57.164 | INFO     | TestCaseGenerator | 测试用例已导出为 YAML: /Users/miaoqi/Desktop/test_dev_projects/testcase_generator/output/login_testcases.yaml, 共 4 条
+2026-06-01 00:59:57.176 | INFO     | FileHandler | 成功写入 Excel 文件: /Users/miaoqi/Desktop/test_dev_projects/testcase_generator/output/login_testcases.xlsx, 共 4 行数据
+2026-06-01 00:59:57.176 | INFO     | TestCaseGenerator | 测试用例已导出为 Excel: /Users/miaoqi/Desktop/test_dev_projects/testcase_generator/output/login_testcases.xlsx, 共 4 条
+2026-06-01 00:59:57.176 | INFO     | TestCaseGenerator | 初始化测试用例生成器 - 模块: 登录模块, 缩写: DL
+2026-06-01 00:59:57.176 | INFO     | TestCaseGenerator | 添加测试用例: TC_DL_001 - 正确用户名密码登录
+2026-06-01 00:59:57.177 | INFO     | TestCaseGenerator | 添加测试用例: TC_DL_002 - 用户名为空登录
+2026-06-01 00:59:57.177 | INFO     | TestCaseGenerator | 添加测试用例: TC_DL_003 - 密码为空登录
+2026-06-01 00:59:57.177 | INFO     | TestCaseGenerator | 添加测试用例: TC_DL_004 - 错误密码登录
+2026-06-01 00:59:57.177 | INFO     | TestCaseGenerator | 从测试点批量生成 4 条用例
+2026-06-01 00:59:57.182 | INFO     | FileHandler | 成功写入 YAML 文件: /Users/miaoqi/Desktop/test_dev_projects/testcase_generator/output/dl_testcases.yaml
+2026-06-01 00:59:57.182 | INFO     | TestCaseGenerator | 测试用例已导出为 YAML: /Users/miaoqi/Desktop/test_dev_projects/testcase_generator/output/dl_testcases.yaml, 共 4 条
+2026-06-01 00:59:57.192 | INFO     | FileHandler | 成功写入 Excel 文件: /Users/miaoqi/Desktop/test_dev_projects/testcase_generator/output/dl_testcases.xlsx, 共 4 行数据
+2026-06-01 00:59:57.192 | INFO     | TestCaseGenerator | 测试用例已导出为 Excel: /Users/miaoqi/Desktop/test_dev_projects/testcase_generator/output/dl_testcases.xlsx, 共 4 条
+2026-06-01 00:59:57.192 | INFO     | TestCaseGenerator | 用例生成完成 - {'module': '登录模块', 'total_cases': 4, 'generated_at': '2026-06-01 00:59:57'}
+2026-06-01 01:00:25.476 | INFO     | FileHandler | 成功读取 YAML 文件: testcase_generator/output/login_testcases.yaml
+2026-06-01 01:00:25.493 | INFO     | FileHandler | 成功读取 Excel 文件: testcase_generator/output/login_testcases.xlsx, 共 4 行数据
+2026-06-01 01:01:14.262 | DEBUG    | APIClient | Session 已关闭

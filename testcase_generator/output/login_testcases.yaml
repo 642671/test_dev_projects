@@ -1,0 +1,56 @@
+module: 登录模块
+generated_at: '2026-06-01 00:59:57'
+total_cases: 4
+test_cases:
+- case_id: TC_LOGIN_001
+  module: 登录模块
+  case_name: 正确用户名密码登录
+  precondition: 用户已注册
+  steps:
+  - 打开登录页面
+  - 输入正确用户名
+  - 输入正确密码
+  - 点击登录按钮
+  input_data: '用户名: admin, 密码: admin123'
+  expected_result: 登录成功，跳转首页
+  test_result: 未执行
+  remark: ''
+- case_id: TC_LOGIN_002
+  module: 登录模块
+  case_name: 用户名为空登录
+  precondition: 无
+  steps:
+  - 打开登录页面
+  - 不输入用户名
+  - 输入密码
+  - 点击登录按钮
+  input_data: '用户名: 空, 密码: admin123'
+  expected_result: 提示"用户名不能为空"
+  test_result: 未执行
+  remark: ''
+- case_id: TC_LOGIN_003
+  module: 登录模块
+  case_name: 密码为空登录
+  precondition: 无
+  steps:
+  - 打开登录页面
+  - 输入用户名
+  - 不输入密码
+  - 点击登录按钮
+  input_data: '用户名: admin, 密码: 空'
+  expected_result: 提示"密码不能为空"
+  test_result: 未执行
+  remark: ''
+- case_id: TC_LOGIN_004
+  module: 登录模块
+  case_name: 错误密码登录
+  precondition: 无
+  steps:
+  - 打开登录页面
+  - 输入正确用户名
+  - 输入错误密码
+  - 点击登录按钮
+  input_data: '用户名: admin, 密码: wrong123'
+  expected_result: 提示"用户名或密码错误"
+  test_result: 未执行
+  remark: ''

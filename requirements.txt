@@ -1,20 +1,24 @@
 # 测试框架
-pytest==7.4.4
-pytest-html==4.1.1
-pytest-xdist==3.5.0
+pytest>=8.3
+pytest-html>=4.1
+pytest-xdist>=3.5
 
 # Web UI 自动化
-selenium==4.16.0
+selenium>=4.27
 
 # 接口测试
-requests==2.31.0
+requests>=2.32
 
 # 数据处理
-PyYAML==6.0.1
-openpyxl==3.1.2
+PyYAML>=6.0.2
+openpyxl>=3.1.5
 
 # 日志
-loguru==0.7.2
+loguru>=0.7.2
 
-# 报告（可选）
-allure-pytest==2.13.2
+# 报告
+allure-pytest>=2.13
+pytest-rerunfailures>=14.0
+
+# 工具
+python-dotenv>=1.0

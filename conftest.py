@@ -26,6 +26,10 @@ logger = get_logger("conftest")
 def driver():
     """
     WebDriver fixture - 每个测试函数独立的浏览器实例
+    
+    注意：UI 自动化测试推荐使用 ui_automation/conftest.py 中的模块级 driver fixture，
+    该 fixture 提供更完善的浏览器配置（headless=new、--disable-gpu 等）。
+    此全局 driver 主要供非 UI 模块（如需要浏览器的集成测试）使用。
 
     根据 config/environments/{env}.yaml 中的 browser 配置来初始化浏览器：
     - type: 浏览器类型（chrome / firefox）
@@ -105,6 +109,17 @@ def pytest_runtest_makereport(item, call):
             try:
                 driver.save_screenshot(screenshot_path)
                 logger.error(f"测试失败，截图已保存: {screenshot_path}")
+                
+                # Allure 报告附件 - 失败截图
+                try:
+                    import allure
+                    allure.attach.file(
+                        screenshot_path,
+                        name=screenshot_name,
+                        attachment_type=allure.attachment_type.PNG
+                    )
+                except ImportError:
+                    pass  # 未安装 allure 时跳过
             except Exception as e:
                 logger.error(f"测试失败截图保存异常: {e}")
 
@@ -113,9 +128,20 @@ def pytest_configure(config):
     """
     pytest 配置钩子 - 注册自定义 marker
 
-    注册 UI 自动化相关的 marker，避免 pytest 警告。
+    注册测试相关的 marker，避免 pytest 警告。
     """
     config.addinivalue_line("markers", "ui: UI 自动化测试用例")
     config.addinivalue_line("markers", "smoke: 冒烟测试用例")
     config.addinivalue_line("markers", "regression: 回归测试用例")
     config.addinivalue_line("markers", "api: 接口测试用例")
+    config.addinivalue_line("markers", "functional: 功能测试用例")
+    config.addinivalue_line("markers", "sanity: 基本健全性测试用例")
+
+
+@pytest.fixture(scope="session")
+def env_config():
+    """
+    会话级 fixture - 提供当前环境的完整配置
+    可在任何测试中使用以获取环境信息
+    """
+    return settings.to_dict() if hasattr(settings, 'to_dict') else settings._config

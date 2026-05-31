@@ -1,0 +1,20 @@
+# 账号相关预置数据
+# 包含注册、密码重置等场景的测试数据
+
+new_account:
+  username: "newuser_test"
+  password: "NewUser@123"
+  email: "newuser@example.com"
+  phone: "13800000001"
+
+password_reset:
+  email: "reset@example.com"
+  new_password: "Reset@New123"
+  security_question: "你的宠物名字是什么?"
+  security_answer: "小白"
+
+locked_account:
+  username: "locked_user"
+  password: "Locked@123"
+  reason: "连续5次密码错误"
+  lock_duration: "30分钟"
