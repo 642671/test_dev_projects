@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# pytest
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Evidence (截图等大文件不提交)
+ui_automation/evidence/*.png
+ui_automation/evidence/*.html
+ui_automation/evidence/*.jpg
+
+# Reports
+performance/reports/*.html
+performance/reports/*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Allure
+allure-results/
+allure-report/
+
+# Output (测试用例生成产出)
+testcase_generator/output/
+
+# Logs
+logs/
+*.log

@@ -1,0 +1,115 @@
+# 接口测试数据示例
+# 说明：
+#   - 本文件为接口测试数据模板，供测试用例参数化使用
+#   - 每个接口包含 endpoint、method 和多个测试 case
+#   - [TODO: 替换] 标注的内容需根据实际接口修改
+
+login_api:
+  endpoint: "/api/login"
+  method: "POST"
+  description: "用户登录接口"
+  cases:
+    - name: "正常登录"
+      description: "使用正确的用户名和密码进行登录"
+      request:
+        username: "admin"
+        password: "admin123"
+      expected:
+        status_code: 200
+        body:
+          code: 0
+          message: "success"
+
+    - name: "密码错误"
+      description: "使用错误密码登录，验证错误提示"
+      request:
+        username: "admin"
+        password: "wrong"
+      expected:
+        status_code: 200
+        body:
+          code: 1001
+          message: "密码错误"
+
+    - name: "用户名为空"
+      description: "用户名为空时的校验"
+      request:
+        username: ""
+        password: "admin123"
+      expected:
+        status_code: 200
+        body:
+          code: 1002
+          message: "用户名不能为空"
+
+    - name: "密码为空"
+      description: "密码为空时的校验"
+      request:
+        username: "admin"
+        password: ""
+      expected:
+        status_code: 200
+        body:
+          code: 1002
+          message: "密码不能为空"
+
+user_api:
+  endpoint: "/api/users"
+  method: "GET"
+  description: "用户列表查询接口"
+  cases:
+    - name: "获取用户列表"
+      description: "默认分页获取用户列表"
+      params:
+        page: 1
+        size: 10
+      expected:
+        status_code: 200
+
+    - name: "获取第二页"
+      description: "获取分页的第二页数据"
+      params:
+        page: 2
+        size: 10
+      expected:
+        status_code: 200
+
+    - name: "搜索用户"
+      description: "按关键字搜索用户"
+      params:
+        page: 1
+        size: 10
+        keyword: "test"
+      expected:
+        status_code: 200
+
+create_user_api:
+  endpoint: "/api/users"
+  method: "POST"
+  description: "创建用户接口"
+  cases:
+    - name: "正常创建用户"
+      description: "提交完整信息创建新用户"
+      request:
+        username: "newuser"
+        email: "newuser@example.com"
+        password: "Pass123456"
+        role: "user"
+      expected:
+        status_code: 201
+        body:
+          code: 0
+          message: "创建成功"
+
+    - name: "用户名已存在"
+      description: "创建重复用户名时的错误处理"
+      request:
+        username: "admin"
+        email: "another@example.com"
+        password: "Pass123456"
+        role: "user"
+      expected:
+        status_code: 200
+        body:
+          code: 2001
+          message: "用户名已存在"

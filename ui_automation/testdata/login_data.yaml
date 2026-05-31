@@ -1,0 +1,18 @@
+# 登录测试数据
+# 用于 UI 自动化登录功能测试
+
+valid_login:
+  username: "admin"
+  password: "admin123"
+  expected: "登录成功"
+
+invalid_login:
+  - username: ""
+    password: "admin123"
+    expected: "用户名不能为空"
+  - username: "admin"
+    password: ""
+    expected: "密码不能为空"
+  - username: "wrong_user"
+    password: "wrong_pass"
+    expected: "用户名或密码错误"

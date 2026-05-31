@@ -1,0 +1,60 @@
+# 功能测试用例模板
+# 字段说明：
+#   case_id: 用例编号（自动生成，格式：TC_模块缩写_001）
+#   module: 所属模块
+#   case_name: 用例名称
+#   precondition: 前置条件
+#   steps: 操作步骤（列表）
+#   input_data: 输入数据
+#   expected_result: 预期结果
+#   test_result: 测试结果（未执行/通过/失败）
+#   remark: 备注
+
+template:
+  fields:
+    - name: "case_id"
+      label: "用例编号"
+      format: "TC_{module_abbr}_{seq:03d}"
+      auto_generate: true
+    - name: "module"
+      label: "模块"
+      required: true
+    - name: "case_name"
+      label: "用例名称"
+      required: true
+    - name: "precondition"
+      label: "前置条件"
+      default: "无"
+    - name: "steps"
+      label: "操作步骤"
+      type: "list"
+      required: true
+    - name: "input_data"
+      label: "输入数据"
+      default: "无"
+    - name: "expected_result"
+      label: "预期结果"
+      required: true
+    - name: "test_result"
+      label: "测试结果"
+      default: "未执行"
+      options: ["未执行", "通过", "失败", "阻塞", "跳过"]
+    - name: "remark"
+      label: "备注"
+      default: ""
+
+# 示例用例
+example:
+  - case_id: "TC_LOGIN_001"
+    module: "登录模块"
+    case_name: "使用正确用户名和密码登录"
+    precondition: "用户已注册，账号未锁定"
+    steps:
+      - "打开登录页面"
+      - "输入用户名 admin"
+      - "输入密码 admin123"
+      - "点击登录按钮"
+    input_data: "用户名: admin, 密码: admin123"
+    expected_result: "登录成功，跳转到首页"
+    test_result: "未执行"
+    remark: ""
