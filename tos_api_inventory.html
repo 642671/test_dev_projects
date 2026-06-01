@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOS 系统默认模块 API 完整清单</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        h1 { color: #2c3e50; margin-bottom: 30px; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 30px; margin-bottom: 15px; padding: 10px; background: #ecf0f1; border-left: 4px solid #3498db; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .stat-box h3 { color: #3498db; font-size: 14px; margin-bottom: 5px; }
+        .stat-box .number { font-size: 32px; font-weight: bold; color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; background: white; margin-top: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        th { background: #34495e; color: white; padding: 12px; text-align: left; font-weight: 600; }
+        td { padding: 10px 12px; border-bottom: 1px solid #ecf0f1; }
+        tr:hover { background: #f8f9fa; }
+        .method-get { color: #27ae60; font-weight: bold; }
+        .method-post { color: #e74c3c; font-weight: bold; }
+        .method-put { color: #f39c12; font-weight: bold; }
+        .method-delete { color: #c0392b; font-weight: bold; }
+        .path { font-family: 'Courier New', monospace; background: #ecf0f1; padding: 2px 6px; border-radius: 3px; }
+        .tag { display: inline-block; background: #3498db; color: white; padding: 2px 8px; border-radius: 3px; font-size: 12px; }
+        .summary { color: #2c3e50; font-weight: 500; }
+        .description { color: #7f8c8d; font-size: 13px; margin-top: 5px; }
+        .no-tag { background: #95a5a6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TOS 系统默认模块 API 完整清单</h1>
+        <p style="color: #7f8c8d; margin-bottom: 20px;">生成时间: 2026-06-01 | 服务器: http://192.168.64.8:8181</p>
+        
+        <div class="stats">
+
+            <div class="stat-box">
+                <h3>总接口数</h3>
+                <div class="number">199</div>
+            </div>
+            <div class="stat-box">
+                <h3>功能分类</h3>
+                <div class="number">8</div>
+            </div>
+            <div class="stat-box">
+                <h3>GET</h3>
+                <div class="number" style="color: #27ae60;">85</div>
+            </div>
+            <div class="stat-box">
+                <h3>POST</h3>
+                <div class="number" style="color: #e74c3c;">87</div>
+            </div>
+            <div class="stat-box">
+                <h3>PUT</h3>
+                <div class="number" style="color: #f39c12;">18</div>
+            </div>
+            <div class="stat-box">
+                <h3>DELETE</h3>
+                <div class="number" style="color: #c0392b;">9</div>
+            </div>
+        </div>
+
+        <h2>【其他】- 共 186 个接口</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>HTTP 方法</th>
+                    <th>API 路径</th>
+                    <th>接口名称/描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/Initialise/IsInitialise</code></td>
+                    <td><div class='summary'>是否已被初始化</div></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/lang/tos</code></td>
+                    <td><div class='summary'>获取-语言变量</div><div class='description'>注意事项：当前接口返回cookie不固定有，不能用来提取变量与断言</div></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/login</code></td>
+                    <td><div class='summary'>用户登录</div></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/login/state</code></td>
+                    <td><div class='summary'>获取-登录状态-登录成功</div></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/desktop/kernelVersion/pass</code></td>
+                    <td><div class='summary'>检查内核版本</div><div class='description'>检查系统内核版本是否符合要求，判断是否支持特定功能</div></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/desktop/init</code></td>
+                    <td><div class='summary'>初始化桌面配置</div><div class='description'>获取用户桌面初始化配置，包括桌面布局、应用列表等</div></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/desktop/list</code></td>
+                    <td><div class='summary'>获取导航栏列表</div><div class='description'>获取用户桌面导航栏应用列表。通过参数控制是否返回所有应用</div></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/desktop/listDesktop</code></td>
+                    <td><div class='summary'>获取桌面应用列表</div><div class='description'>获取用户桌面上显示的应用列表</div></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/desktop/DealDesktopApp</code></td>
+                    <td><div class='summary'>处理桌面应用【由于加密，无法进一步测试】</div><div class='description'>添加或移除桌面应用快捷方式</div></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/desktop/module</code></td>
+                    <td><div class='summary'>获取桌面模块【由于加密，无法进一步测试】</div><div class='description'>根据模块ID获取桌面模块的对话框配置</div></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/desktop/recentlyVisited</code></td>
+                    <td><div class='summary'>获取最近访问列表</div><div class='description'>获取用户最近访问的文件、应用等项目列表</div></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/desktop/recentlyVisited</code></td>
+                    <td><div class='summary'>设置最近访问</div><div class='description'>添加或更新用户的最近访问记录
+打开的最近访问的时候添加应用</div></td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td><span class="method-delete">DELETE</span></td>
+                    <td><code class="path">/v2/desktop/recentlyVisited/{id}</code></td>
+                    <td><div class='summary'>删除最近访问记录</div><div class='description'>删除指定的最近访问记录</div></td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/desktop/quickConnection</code></td>
+                    <td><div class='summary'>处理快捷连接</div><div class='description'>处理桌面快捷连接的新增和修改操作，根据HTTP方法执行不同操作</div></td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/desktop/recentlyVisitedQuantity/{quantity}</code></td>
+                    <td><div class='summary'>设置最近访问返回数量</div><div class='description'>设置最近访问列表返回的项目数量（接口保留，当前未实现具体逻辑）</div></td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/desktop/getSort/{id}</code></td>
+                    <td><div class='summary'>获取桌面排序配置</div><div class='description'>获取指定模块的桌面排序配置</div></td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/desktop/setSort/{id}</code></td>
+                    <td><div class='summary'>设置桌面排序配置</div><div class='description'>设置指定模块的桌面排序配置</div></td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/desktop/showState</code></td>
+                    <td><div class='summary'>设置应用显示状态</div><div class='description'>设置单个应用在桌面或应用列表中的显示状态</div></td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/desktop/batchshowState</code></td>
+                    <td><div class='summary'>批量设置应用显示状态</div><div class='description'>批量设置多个应用在桌面或应用列表中的显示状态</div></td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/v2/desktop/show</code></td>
+                    <td><div class='summary'>显示应用</div><div class='description'>在指定位置显示应用</div></td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/v2/desktop/hide</code></td>
+                    <td><div class='summary'>隐藏应用</div><div class='description'>在指定位置隐藏应用</div></td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/subscribe/close</code></td>
+                    <td><div class='summary'>关闭订阅消息</div><div class='description'>将当前用户的所有订阅消息标记为已读，不再显示。前置要求：需要已登录用户的有效 TMSESSNAME Cookie 以及 Cookie 中携带 userName</div></td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td><span class="method-delete">DELETE</span></td>
+                    <td><code class="path">/delete/{id}</code></td>
+                    <td><div class='summary'>删除单条消息</div><div class='description'>根据消息ID删除指定消息。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td><span class="method-delete">DELETE</span></td>
+                    <td><code class="path">/delete_all</code></td>
+                    <td><div class='summary'>删除所有消息</div><div class='description'>清空所有消息记录，谨慎操作。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/subscribe/ignore</code></td>
+                    <td><div class='summary'>忽略订阅消息</div><div class='description'>将当前用户的订阅消息下次提醒时间延后24小时。前置要求：需要已登录用户的有效 TMSESSNAME Cookie 以及 Cookie 中携带 userName</div></td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/batch/read</code></td>
+                    <td><div class='summary'>批量标记消息已读</div><div class='description'>批量将多条消息标记为已读状态。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/insert</code></td>
+                    <td><div class='summary'>插入消息</div><div class='description'>创建一条新的消息记录。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/read/all</code></td>
+                    <td><div class='summary'>标记所有消息已读</div><div class='description'>将所有未读消息标记为已读状态。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/read/{id}</code></td>
+                    <td><div class='summary'>标记消息已读</div><div class='description'>将指定消息标记为已读状态。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/app/config/register</code></td>
+                    <td><div class='summary'>注册消息配置文件</div><div class='description'>外部应用通过此接口注册消息配置文件，注册后消息中心将加载该应用的配置和语言包。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/monitorSystemStatus</code></td>
+                    <td><div class='summary'>监控系统状态</div><div class='description'>监控消息中心系统状态，当前返回版本号。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/version</code></td>
+                    <td><div class='summary'>获取消息中心版本</div><div class='description'>获取消息中心服务版本号。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/settings</code></td>
+                    <td><div class='summary'>获取消息中心配置</div><div class='description'>获取消息中心当前所有配置项。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/settings</code></td>
+                    <td><div class='summary'>设置消息中心配置</div><div class='description'>更新消息中心配置项，写入配置文件后立即生效。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/list</code></td>
+                    <td><div class='summary'>获取消息列表</div><div class='description'>根据用户和筛选条件获取消息列表。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>36</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/app/config/language</code></td>
+                    <td><div class='summary'>获取消息配置语言包</div><div class='description'>获取当前系统语言的消息配置语言包，用于显示消息类型的国际化名称。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/subscribe/list</code></td>
+                    <td><div class='summary'>获取订阅消息列表</div><div class='description'>获取当前用户的未读订阅消息列表，返回每条订阅消息的访问URL地址。前置要求：需要已登录用户的有效 TMSESSNAME Cookie 以及 Cookie 中携带 userName</div></td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/static/subscribe/{path}</code></td>
+                    <td><div class='summary'>获取订阅消息静态资源</div><div class='description'>访问订阅消息的静态文件资源，包括HTML页面等</div></td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/app/config/unregister</code></td>
+                    <td><div class='summary'>解除注册消息配置</div><div class='description'>外部应用通过此接口解除注册消息配置文件，解除后消息中心将不再加载该应用的配置。前置要求：需要已登录用户的有效 TMSESSNAME Cookie</div></td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/otp/enable_twice</code></td>
+                    <td><div class='summary'>关闭双因素认证</div><div class='description'>关闭用户的双因素认证功能。关闭时会清空受信设备列表</div></td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td><span class="method-delete">DELETE</span></td>
+                    <td><code class="path">/otp/del_device</code></td>
+                    <td><div class='summary'>删除受信设备</div><div class='description'>从受信设备列表中删除指定设备，删除后该设备需要重新进行OTP验证</div></td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/otp/finish</code></td>
+                    <td><div class='summary'>完成OTP绑定</div><div class='description'>完成双因素认证的绑定流程，将OTP密钥写入数据库并记录绑定时间和手机号</div></td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/otp/forgot</code></td>
+                    <td><div class='summary'>忘记OTP密钥</div><div class='description'>通过绑定的邮箱发送OTP恢复验证码。仅对已绑定邮箱的用户有效</div></td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/otp/is_twice</code></td>
+                    <td><div class='summary'>检查用户是否启用双因素认证</div><div class='description'>检查指定用户是否启用了双因素认证。通过Cookie和数据库双重验证</div></td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/otp/bind_email</code></td>
+                    <td><div class='summary'>绑定邮箱地址</div><div class='description'>为当前用户绑定或更新邮箱地址，用于OTP恢复</div></td>
+                </tr>
+                <tr>
+                    <td>46</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/otp/qrbind</code></td>
+                    <td><div class='summary'>获取OTP绑定二维码</div><div class='description'>生成一次性密码（OTP）绑定的二维码图片，用于双因素认证设置</div></td>
+                </tr>
+                <tr>
+                    <td>47</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/otp/info</code></td>
+                    <td><div class='summary'>获取OTP配置信息</div><div class='description'>获取当前用户的OTP绑定信息，包括用户名和OTP密钥</div></td>
+                </tr>
+                <tr>
+                    <td>48</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/otp/devices</code></td>
+                    <td><div class='summary'>获取受信设备列表</div><div class='description'>获取当前用户的所有受信设备列表，用于查看已信任的设备</div></td>
+                </tr>
+                <tr>
+                    <td>49</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/otp/checkcode</code></td>
+                    <td><div class='summary'>验证OTP验证码</div><div class='description'>验证用户输入的OTP验证码是否正确。支持记住设备功能，可选择是否将设备加入受信列表</div></td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/otp/verify_pwd</code></td>
+                    <td><div class='summary'>验证用户密码</div><div class='description'>验证用户密码是否正确，用于敏感操作前的身份确认。该接口需要特殊的密码验证中间件</div></td>
+                </tr>
+                <tr>
+                    <td>51</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/desktop/getDebugModel</code></td>
+                    <td><div class='summary'>获取调试模式信息</div><div class='description'>功能：获取调试模式信息</div></td>
+                </tr>
+                <tr>
+                    <td>52</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/assistent/generate</code></td>
+                    <td><div class='summary'>生成系统报告</div><div class='description'>功能：生成系统报告，以便开发人员定位问题解决远程问题</div></td>
+                </tr>
+                <tr>
+                    <td>53</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/assistent/process</code></td>
+                    <td><div class='summary'>生成报告进度</div><div class='description'>功能：获取生成系统报告的进度，前置接口：/assistent/generate</div></td>
+                </tr>
+                <tr>
+                    <td>54</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/assistent/get</code></td>
+                    <td><div class='summary'>获取生成系统报告信息</div><div class='description'>功能：获取已生成的系统报告基本信息（前置接口：/assistent/generate)，或未生成系统报告时返回空数据占位信息</div></td>
+                </tr>
+                <tr>
+                    <td>55</td>
+                    <td><span class="method-delete">DELETE</span></td>
+                    <td><code class="path">/assistent/delete</code></td>
+                    <td><div class='summary'>删除系统报告</div><div class='description'>功能：删除以及生成的系统报告，前置接口： /assistent/get</div></td>
+                </tr>
+                <tr>
+                    <td>56</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/overview</code></td>
+                    <td><div class='summary'>获取磁盘分配总览</div><div class='description'>获取系统中所有磁盘、存储池和卷的分配结构概览。</div></td>
+                </tr>
+                <tr>
+                    <td>57</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/GetOverview</code></td>
+                    <td><div class='summary'>获取磁盘插槽总览</div><div class='description'>获取所有硬盘插槽的状态信息（包括插槽编号、磁盘状态等）。</div></td>
+                </tr>
+                <tr>
+                    <td>58</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/create/volume</code></td>
+                    <td><div class='summary'>创建卷或存储池</div><div class='description'>创建新的逻辑卷或存储池。</div></td>
+                </tr>
+                <tr>
+                    <td>59</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/create/volume</code></td>
+                    <td><div class='summary'>获取创建资源信息</div><div class='description'>获取创建卷或存储池所需的资源信息（可用磁盘、可用存储池等）。</div></td>
+                </tr>
+                <tr>
+                    <td>60</td>
+                    <td><span class="method-delete">DELETE</span></td>
+                    <td><code class="path">/v2/storage/delete/{role}/{uuid}</code></td>
+                    <td><div class='summary'>删除卷或存储池</div><div class='description'>删除指定的卷或存储池。**需要用户密码验证**。删除存储池前需先删除其下的所有卷。</div></td>
+                </tr>
+                <tr>
+                    <td>61</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/volumeOccupyAction</code></td>
+                    <td><div class='summary'>卷容量统计操作</div><div class='description'>开始或关闭卷容量占用统计。</div></td>
+                </tr>
+                <tr>
+                    <td>62</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/volumeFormatting</code></td>
+                    <td><div class='summary'>卷格式化</div><div class='description'>格式化指定卷。**需要用户密码验证**。</div></td>
+                </tr>
+                <tr>
+                    <td>63</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/v2/storage/defragment/{uuid}</code></td>
+                    <td><div class='summary'>碎片整理</div><div class='description'>对指定卷执行碎片整理操作。</div></td>
+                </tr>
+                <tr>
+                    <td>64</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/EditVolumeRemindConfig</code></td>
+                    <td><div class='summary'>编辑卷容量预警配置</div><div class='description'>设置卷容量预警阈值。</div></td>
+                </tr>
+                <tr>
+                    <td>65</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/edit/volume/{uuid}</code></td>
+                    <td><div class='summary'>编辑卷或存储池</div><div class='description'>修改卷或存储池的配置信息。</div></td>
+                </tr>
+                <tr>
+                    <td>66</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/edit/volume/{uuid}</code></td>
+                    <td><div class='summary'>获取卷或存储池信息</div><div class='description'>获取指定卷或存储池的详细信息。</div></td>
+                </tr>
+                <tr>
+                    <td>67</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/ssd/trim/{uuid}</code></td>
+                    <td><div class='summary'>获取SSD TRIM信息</div><div class='description'>获取指定卷的SSD TRIM配置信息。</div></td>
+                </tr>
+                <tr>
+                    <td>68</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/ssd/trim/{uuid}</code></td>
+                    <td><div class='summary'>设置SSD TRIM</div><div class='description'>设置指定卷的SSD TRIM计划任务。</div></td>
+                </tr>
+                <tr>
+                    <td>69</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/volumeOccupyStatusAll</code></td>
+                    <td><div class='summary'>获取全部卷容量占用情况</div><div class='description'>获取指定卷的全部容量使用详情（包含子项）。</div></td>
+                </tr>
+                <tr>
+                    <td>70</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/volumeOccupyStatus</code></td>
+                    <td><div class='summary'>获取卷容量占用情况</div><div class='description'>获取指定卷的容量使用详情。</div></td>
+                </tr>
+                <tr>
+                    <td>71</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/GetVolumeRemindConfig</code></td>
+                    <td><div class='summary'>获取卷容量预警配置</div><div class='description'>获取当前卷容量预警配置。</div></td>
+                </tr>
+                <tr>
+                    <td>72</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/list/volume</code></td>
+                    <td><div class='summary'>获取卷或存储池列表</div><div class='description'>获取系统中所有卷或存储池的列表信息。</div></td>
+                </tr>
+                <tr>
+                    <td>73</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/status</code></td>
+                    <td><div class='summary'>获取存储状态</div><div class='description'>获取系统中是否存在卷或存储池的状态。</div></td>
+                </tr>
+                <tr>
+                    <td>74</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/compression/{uuid}</code></td>
+                    <td><div class='summary'>设置卷压缩</div><div class='description'>设置指定卷的压缩功能。</div></td>
+                </tr>
+                <tr>
+                    <td>75</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/VgMonitor</code></td>
+                    <td><div class='summary'>VG监控</div><div class='description'>处理卷组事件监控（内部接口）。</div></td>
+                </tr>
+                <tr>
+                    <td>76</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/StopDataScrubbing</code></td>
+                    <td><div class='summary'>停止Data Scrubbing</div><div class='description'>停止正在运行的数据校验任务。</div></td>
+                </tr>
+                <tr>
+                    <td>77</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/create/pool</code></td>
+                    <td><div class='summary'>创建卷或存储池</div><div class='description'>创建新的逻辑卷或存储池。</div></td>
+                </tr>
+                <tr>
+                    <td>78</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/create/pool</code></td>
+                    <td><div class='summary'>获取创建资源信息</div><div class='description'>获取创建卷或存储池所需的资源信息（可用磁盘、可用存储池等）。</div></td>
+                </tr>
+                <tr>
+                    <td>79</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/VgMonitor</code></td>
+                    <td><div class='summary'>同步状态监控通知_6.0</div><div class='description'>sock文件路径：<span class="colour" style="color:rgb(68, 140, 39)">/var/api/TerVgMonitor.sock</span>
+<span...</div></td>
+                </tr>
+                <tr>
+                    <td>80</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/EnableQuota</code></td>
+                    <td><div class='summary'>启用Btrfs配额</div><div class='description'>为Btrfs文件系统的卷启用或禁用配额功能。</div></td>
+                </tr>
+                <tr>
+                    <td>81</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/MountPool/{role}/{uuid}</code></td>
+                    <td><div class='summary'>挂载存储池</div><div class='description'>挂载可用池或已损坏的存储池。</div></td>
+                </tr>
+                <tr>
+                    <td>82</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/MountPool/{role}/{uuid}</code></td>
+                    <td><div class='summary'>获取挂载信息</div><div class='description'>获取可挂载存储池的顺序和逻辑卷顺序信息。</div></td>
+                </tr>
+                <tr>
+                    <td>83</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/CheckQuota</code></td>
+                    <td><div class='summary'>检查Btrfs配额状态</div><div class='description'>检查Btrfs卷的配额是否已启用。</div></td>
+                </tr>
+                <tr>
+                    <td>84</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/CheckMdInfo/{md}</code></td>
+                    <td><div class='summary'>检查mdadm信息</div><div class='description'>检查指定md设备的RAID阵列信息。</div></td>
+                </tr>
+                <tr>
+                    <td>85</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/CheckCapacity</code></td>
+                    <td><div class='summary'>检查卷容量预警</div><div class='description'>检查所有卷的容量并发送预警通知。</div></td>
+                </tr>
+                <tr>
+                    <td>86</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/CheckAvailablePool/{disk}</code></td>
+                    <td><div class='summary'>检测可用存储池</div><div class='description'>检测指定磁盘上是否存在可用的或已损坏的存储池。</div></td>
+                </tr>
+                <tr>
+                    <td>87</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/edit/{role}/{uuid}</code></td>
+                    <td><div class='summary'>编辑卷或存储池</div><div class='description'>修改卷或存储池的配置信息。</div></td>
+                </tr>
+                <tr>
+                    <td>88</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/StorageDescription/{uuid}</code></td>
+                    <td><div class='summary'>编辑存储池描述</div><div class='description'>修改存储池的描述信息。</div></td>
+                </tr>
+                <tr>
+                    <td>89</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/GetDataScrubbingConf</code></td>
+                    <td><div class='summary'>获取Data Scrubbing配置</div><div class='description'>获取RAID阵列的数据校验配置。</div></td>
+                </tr>
+                <tr>
+                    <td>90</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/StatusForDeleting/{role}</code></td>
+                    <td><div class='summary'>获取删除状态</div><div class='description'>检查是否有卷或存储池正在被删除。</div></td>
+                </tr>
+                <tr>
+                    <td>91</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/edit/pool/{uuid}</code></td>
+                    <td><div class='summary'>获取卷或存储池信息</div><div class='description'>获取指定卷或存储池的详细信息。</div></td>
+                </tr>
+                <tr>
+                    <td>92</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/list/storagePool</code></td>
+                    <td><div class='summary'>获取卷或存储池列表</div><div class='description'>获取系统中所有卷或存储池的列表信息。</div></td>
+                </tr>
+                <tr>
+                    <td>93</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/storage/GetRaidSpeedOrBitmap</code></td>
+                    <td><div class='summary'>获取阵列同步速度及Bitmap</div><div class='description'>获取RAID阵列的同步速度和Bitmap状态。</div></td>
+                </tr>
+                <tr>
+                    <td>94</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/SetDataScrubbing</code></td>
+                    <td><div class='summary'>设置Data Scrubbing</div><div class='description'>设置RAID阵列的数据校验计划任务。</div></td>
+                </tr>
+                <tr>
+                    <td>95</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/storage/SetRaidSpeedOrBitmap</code></td>
+                    <td><div class='summary'>设置阵列同步速度及Bitmap</div><div class='description'>设置RAID阵列的同步速度和Bitmap开关。</div></td>
+                </tr>
+                <tr>
+                    <td>96</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/setting</code></td>
+                    <td><div class='summary'>修改磁盘设置</div><div class='description'>设置磁盘缓存开关、坏块通知、SMART报告等功能。</div></td>
+                </tr>
+                <tr>
+                    <td>97</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/setting</code></td>
+                    <td><div class='summary'>获取磁盘设置</div><div class='description'>获取磁盘缓存、坏块通知、SMART报告等设置状态。</div></td>
+                </tr>
+                <tr>
+                    <td>98</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/smart_test/schedule/{id}/stop</code></td>
+                    <td><div class='summary'>停止SMART测试任务</div><div class='description'>停止正在执行的SMART测试任务。</div></td>
+                </tr>
+                <tr>
+                    <td>99</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/benchmark/stop</code></td>
+                    <td><div class='summary'>停止性能测试</div><div class='description'>停止指定磁盘的性能测试。</div></td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/smart_test/schedule</code></td>
+                    <td><div class='summary'>创建SMART测试任务</div><div class='description'>创建新的SMART测试计划任务。</div></td>
+                </tr>
+                <tr>
+                    <td>101</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/smart_test/schedule</code></td>
+                    <td><div class='summary'>获取SMART测试任务列表</div><div class='description'>获取所有已配置的SMART测试计划任务列表。</div></td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/InitSysDisk</code></td>
+                    <td><div class='summary'>初始化系统盘</div><div class='description'>初始化目标磁盘作为系统盘。</div></td>
+                </tr>
+                <tr>
+                    <td>103</td>
+                    <td><span class="method-delete">DELETE</span></td>
+                    <td><code class="path">/v2/disk/smart_test/schedule/{id}</code></td>
+                    <td><div class='summary'>删除SMART测试任务</div><div class='description'>删除指定的SMART测试计划任务。</div></td>
+                </tr>
+                <tr>
+                    <td>104</td>
+                    <td><span class="method-delete">DELETE</span></td>
+                    <td><code class="path">/v2/disk/DelSysDisk</code></td>
+                    <td><div class='summary'>删除系统盘</div><div class='description'>删除指定的系统盘。**需要用户密码验证**。</div></td>
+                </tr>
+                <tr>
+                    <td>105</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/v1/encrypt/{action}/{name}/{password}</code></td>
+                    <td><div class='summary'>加密存储设备</div><div class='description'>存储设备工具接口：加密或插入加密的USB设备（内部接口）。</div></td>
+                </tr>
+                <tr>
+                    <td>106</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/UmountDisk/{name}</code></td>
+                    <td><div class='summary'>卸载硬盘</div><div class='description'>卸载指定硬盘分区。</div></td>
+                </tr>
+                <tr>
+                    <td>107</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/activation/enable</code></td>
+                    <td><div class='summary'>启用磁盘</div><div class='description'>启用已移除的磁盘，使其重新可用。</div></td>
+                </tr>
+                <tr>
+                    <td>108</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/ExportIhmLog</code></td>
+                    <td><div class='summary'>导出IHM日志</div><div class='description'>导出IronWolf健康管理日志文件。</div></td>
+                </tr>
+                <tr>
+                    <td>109</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/ExportOverview</code></td>
+                    <td><div class='summary'>导出SMART信息</div><div class='description'>导出指定磁盘的SMART详细信息报告。</div></td>
+                </tr>
+                <tr>
+                    <td>110</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/disk_log/export</code></td>
+                    <td><div class='summary'>导出磁盘日志</div><div class='description'>导出磁盘事件日志为CSV文件。</div></td>
+                </tr>
+                <tr>
+                    <td>111</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/sec_erase/start</code></td>
+                    <td><div class='summary'>开始安全擦除</div><div class='description'>对指定磁盘执行安全擦除操作。**需要用户密码验证**。擦除将清除磁盘上的所有数据。</div></td>
+                </tr>
+                <tr>
+                    <td>112</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/benchmark/start</code></td>
+                    <td><div class='summary'>开始性能测试</div><div class='description'>开始对指定磁盘进行读写性能测试。</div></td>
+                </tr>
+                <tr>
+                    <td>113</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/format/start</code></td>
+                    <td><div class='summary'>开始抹除磁盘</div><div class='description'>格式化抹除指定磁盘。**需要用户密码验证**。</div></td>
+                </tr>
+                <tr>
+                    <td>114</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/ManualTest</code></td>
+                    <td><div class='summary'>手动测试IHM</div><div class='description'>对指定磁盘执行手动IHM测试。</div></td>
+                </tr>
+                <tr>
+                    <td>115</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/smart_test/schedule/{id}/exec</code></td>
+                    <td><div class='summary'>执行SMART测试任务</div><div class='description'>立即执行指定的SMART测试计划任务。</div></td>
+                </tr>
+                <tr>
+                    <td>116</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/MountDisk/{name}</code></td>
+                    <td><div class='summary'>挂载硬盘</div><div class='description'>挂载指定硬盘分区。</div></td>
+                </tr>
+                <tr>
+                    <td>117</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/AddSysDisk</code></td>
+                    <td><div class='summary'>新增系统盘</div><div class='description'>将指定磁盘添加为新的系统盘。</div></td>
+                </tr>
+                <tr>
+                    <td>118</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/v1/notice/{name}</code></td>
+                    <td><div class='summary'>新磁盘通知</div><div class='description'>存储设备工具接口：检测到新磁盘时发送通知（内部接口，无需认证）。</div></td>
+                </tr>
+                <tr>
+                    <td>119</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/v2/disk/UpdatePartPerms</code></td>
+                    <td><div class='summary'>更新分区权限列表</div><div class='description'>更新硬盘分区的用户访问权限设置。</div></td>
+                </tr>
+                <tr>
+                    <td>120</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v1/update_mount_status</code></td>
+                    <td><div class='summary'>更新挂载状态</div><div class='description'>存储设备工具接口：更新设备的手动挂载状态（内部接口）。</div></td>
+                </tr>
+                <tr>
+                    <td>121</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/v1/{name}/{fs}</code></td>
+                    <td><div class='summary'>格式化存储设备</div><div class='description'>存储设备工具接口：格式化USB设备为指定文件系统（内部接口）。</div></td>
+                </tr>
+                <tr>
+                    <td>122</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/CheckSysDisk</code></td>
+                    <td><div class='summary'>检查磁盘是否符合系统盘条件</div><div class='description'>判断指定磁盘是否符合作为系统盘的条件要求。</div></td>
+                </tr>
+                <tr>
+                    <td>123</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/disk_log/delete</code></td>
+                    <td><div class='summary'>清除磁盘日志</div><div class='description'>清除所有磁盘事件日志记录。</div></td>
+                </tr>
+                <tr>
+                    <td>124</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/v1/active/{uuid}</code></td>
+                    <td><div class='summary'>激活弹出的USB设备</div><div class='description'>存储设备工具接口：激活已弹出的USB设备（内部接口）。</div></td>
+                </tr>
+                <tr>
+                    <td>125</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/DiskScan</code></td>
+                    <td><div class='summary'>磁盘坏块扫描</div><div class='description'>开始或停止磁盘坏块扫描。</div></td>
+                </tr>
+                <tr>
+                    <td>126</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/v1/{name}</code></td>
+                    <td><div class='summary'>磁盘自动挂载</div><div class='description'>存储设备工具接口：自动插入挂载存储设备（内部接口，无需认证）。</div></td>
+                </tr>
+                <tr>
+                    <td>127</td>
+                    <td><span class="method-delete">DELETE</span></td>
+                    <td><code class="path">/v1/{name}/{remove}</code></td>
+                    <td><div class='summary'>移除存储设备</div><div class='description'>存储设备工具接口：移除存储设备（内部接口）。</div></td>
+                </tr>
+                <tr>
+                    <td>128</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/activation/disable</code></td>
+                    <td><div class='summary'>移除磁盘</div><div class='description'>移除指定磁盘。**需要用户密码验证**。移除后磁盘将不可用。</div></td>
+                </tr>
+                <tr>
+                    <td>129</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/smart_test/schedule/{id}/edit</code></td>
+                    <td><div class='summary'>编辑SMART测试任务</div><div class='description'>修改指定的SMART测试计划任务配置。</div></td>
+                </tr>
+                <tr>
+                    <td>130</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/IhmInfoList</code></td>
+                    <td><div class='summary'>获取IHM信息列表</div><div class='description'>获取IronWolf健康管理(IHM)信息列表。</div></td>
+                </tr>
+                <tr>
+                    <td>131</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/GetPartPerms</code></td>
+                    <td><div class='summary'>获取分区权限列表</div><div class='description'>获取指定硬盘分区的用户访问权限设置。</div></td>
+                </tr>
+                <tr>
+                    <td>132</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v1/part_perms</code></td>
+                    <td><div class='summary'>获取分区权限列表</div><div class='description'>存储设备工具接口：获取硬盘分区权限列表（内部接口）。</div></td>
+                </tr>
+                <tr>
+                    <td>133</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/v1/part_perms</code></td>
+                    <td><div class='summary'>设置分区权限</div><div class='description'>存储设备工具接口：设置硬盘分区权限（内部接口）。</div></td>
+                </tr>
+                <tr>
+                    <td>134</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/benchmark/status</code></td>
+                    <td><div class='summary'>获取性能测试状态</div><div class='description'>获取指定磁盘的性能测试进度和结果。</div></td>
+                </tr>
+                <tr>
+                    <td>135</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/GetDiskDetailData</code></td>
+                    <td><div class='summary'>获取指定磁盘SMART详细信息</div><div class='description'>获取指定磁盘的SMART详细信息，包括各项属性值。</div></td>
+                </tr>
+                <tr>
+                    <td>136</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/GetDiskCapabilities</code></td>
+                    <td><div class='summary'>获取指定磁盘功能</div><div class='description'>获取指定磁盘支持的功能特性，如是否支持SMART、是否可做系统盘等。</div></td>
+                </tr>
+                <tr>
+                    <td>137</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/GetDiskOption</code></td>
+                    <td><div class='summary'>获取硬盘下拉选项</div><div class='description'>获取可用硬盘的下拉选择列表。</div></td>
+                </tr>
+                <tr>
+                    <td>138</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/GetDiskAllocations</code></td>
+                    <td><div class='summary'>获取硬盘分配信息</div><div class='description'>获取硬盘在存储池、热备盘、SSD缓存中的分配使用情况。</div></td>
+                </tr>
+                <tr>
+                    <td>139</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/GetDiskListData</code></td>
+                    <td><div class='summary'>获取硬盘列表数据</div><div class='description'>获取系统中所有硬盘的详细信息列表，包括SMART信息、分区信息等。</div></td>
+                </tr>
+                <tr>
+                    <td>140</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/GetDiskStatus</code></td>
+                    <td><div class='summary'>获取硬盘状态</div><div class='description'>获取所有硬盘的健康状态、温度、通电时长等状态信息。</div></td>
+                </tr>
+                <tr>
+                    <td>141</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/guidanceInfo</code></td>
+                    <td><div class='summary'>获取磁盘引导信息</div><div class='description'>获取磁盘引导信息，包括可用磁盘用途建议。</div></td>
+                </tr>
+                <tr>
+                    <td>142</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/disk_log</code></td>
+                    <td><div class='summary'>获取磁盘日志列表</div><div class='description'>获取磁盘相关事件的日志记录列表。</div></td>
+                </tr>
+                <tr>
+                    <td>143</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/GetDiskListSpeedData</code></td>
+                    <td><div class='summary'>获取磁盘速度数据</div><div class='description'>获取所有硬盘的读写速度数据。</div></td>
+                </tr>
+                <tr>
+                    <td>144</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/disk/GetSysDiskLists</code></td>
+                    <td><div class='summary'>获取系统盘列表</div><div class='description'>获取当前系统盘列表及其状态信息。</div></td>
+                </tr>
+                <tr>
+                    <td>145</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/disk/MigrateSysDisk</code></td>
+                    <td><div class='summary'>迁移系统盘</div><div class='description'>将系统盘数据迁移到目标磁盘。</div></td>
+                </tr>
+                <tr>
+                    <td>146</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/virtualdisk/IscsiAction</code></td>
+                    <td><div class='summary'>iSCSI操作</div><div class='description'>对已登录的iSCSI Target执行断开或联机操作。</div></td>
+                </tr>
+                <tr>
+                    <td>147</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/virtualdisk/RemoveIscsi</code></td>
+                    <td><div class='summary'>删除iSCSI连接</div><div class='description'>删除与指定Target的连接。</div></td>
+                </tr>
+                <tr>
+                    <td>148</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/virtualdisk/ClientLunRemove</code></td>
+                    <td><div class='summary'>卸载LUN</div><div class='description'>卸载指定的LUN设备。</div></td>
+                </tr>
+                <tr>
+                    <td>149</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/virtualdisk/MountLun</code></td>
+                    <td><div class='summary'>挂载LUN</div><div class='description'>挂载指定的LUN设备到系统。</div></td>
+                </tr>
+                <tr>
+                    <td>150</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/virtualdisk/FormattingMountLun</code></td>
+                    <td><div class='summary'>格式化LUN</div><div class='description'>格式化指定的LUN设备。</div></td>
+                </tr>
+                <tr>
+                    <td>151</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/virtualdisk/IscsiLogin</code></td>
+                    <td><div class='summary'>登录iSCSI Target</div><div class='description'>使用CHAP认证登录到指定的iSCSI Target。</div></td>
+                </tr>
+                <tr>
+                    <td>152</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/virtualdisk/GetLunList</code></td>
+                    <td><div class='summary'>获取LUN列表</div><div class='description'>获取指定Target下的所有LUN信息。</div></td>
+                </tr>
+                <tr>
+                    <td>153</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/virtualdisk/GetTargetInfo</code></td>
+                    <td><div class='summary'>获取Target信息</div><div class='description'>根据IP和端口获取iSCSI Target列表信息。</div></td>
+                </tr>
+                <tr>
+                    <td>154</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/virtualdisk/GetTargetAttr</code></td>
+                    <td><div class='summary'>获取Target认证信息</div><div class='description'>获取指定Target的CHAP认证信息。</div></td>
+                </tr>
+                <tr>
+                    <td>155</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/virtualdisk/GetIscsidStatus</code></td>
+                    <td><div class='summary'>获取iSCSI服务状态</div><div class='description'>获取iSCSI服务的运行状态。</div></td>
+                </tr>
+                <tr>
+                    <td>156</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/virtualdisk/GetIscsiInfo</code></td>
+                    <td><div class='summary'>获取虚拟磁盘信息</div><div class='description'>获取已登录的iSCSI Target和LUN信息。</div></td>
+                </tr>
+                <tr>
+                    <td>157</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/virtualdisk/SetIscsidStatus</code></td>
+                    <td><div class='summary'>设置iSCSI服务状态</div><div class='description'>启动或停止iSCSI服务。</div></td>
+                </tr>
+                <tr>
+                    <td>158</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/extStorageDevice/DownloadSecretKey</code></td>
+                    <td><div class='summary'>下载密钥文件</div><div class='description'>下载加密USB设备的密钥文件。</div></td>
+                </tr>
+                <tr>
+                    <td>159</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/extStorageDevice/EditUsbLabel</code></td>
+                    <td><div class='summary'>修改USB卷标</div><div class='description'>修改USB分区的卷标名称。仅支持ext2/ext3/ext4/ntfs/vfat/exfat文件系统。</div></td>
+                </tr>
+                <tr>
+                    <td>160</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/extStorageDevice/EncryptDevice</code></td>
+                    <td><div class='summary'>加密USB设备</div><div class='description'>对USB设备进行加密处理。</div></td>
+                </tr>
+                <tr>
+                    <td>161</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/extStorageDevice/UnmountDevice</code></td>
+                    <td><div class='summary'>卸载USB设备</div><div class='description'>卸载指定的USB存储设备。</div></td>
+                </tr>
+                <tr>
+                    <td>162</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/extStorageDevice/UsbAclAll</code></td>
+                    <td><div class='summary'>批量获取USB访问权限</div><div class='description'>批量获取多个USB分区的用户访问权限。</div></td>
+                </tr>
+                <tr>
+                    <td>163</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/extStorageDevice/SetUsbAclAll</code></td>
+                    <td><div class='summary'>批量设置USB访问权限</div><div class='description'>批量设置多个USB分区的用户访问权限。</div></td>
+                </tr>
+                <tr>
+                    <td>164</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/extStorageDevice/MountedDevice</code></td>
+                    <td><div class='summary'>挂载加密USB设备</div><div class='description'>使用密码或密钥文件挂载加密的USB设备。password和file参数二选一，不可同时为空。</div></td>
+                </tr>
+                <tr>
+                    <td>165</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/extStorageDevice/FormattingDevice</code></td>
+                    <td><div class='summary'>格式化USB设备</div><div class='description'>格式化指定的USB存储设备为指定文件系统。支持ext4、ntfs、vfat、exfat文件系统。格式化会清除设备上所有数据。</div></td>
+                </tr>
+                <tr>
+                    <td>166</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/extStorageDevice/CheckUsbCapacity</code></td>
+                    <td><div class='summary'>检查USB容量</div><div class='description'>检查USB设备容量并发送容量预警通知。</div></td>
+                </tr>
+                <tr>
+                    <td>167</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/extStorageDevice/IsFormating</code></td>
+                    <td><div class='summary'>检查格式化状态</div><div class='description'>检查指定设备是否正在格式化中。</div></td>
+                </tr>
+                <tr>
+                    <td>168</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/extStorageDevice/EditUsbRemindConfig</code></td>
+                    <td><div class='summary'>编辑USB容量预警配置</div><div class='description'>设置USB设备容量预警阈值。</div></td>
+                </tr>
+                <tr>
+                    <td>169</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/extStorageDevice/GetUsbRemindConfig</code></td>
+                    <td><div class='summary'>获取USB容量预警配置</div><div class='description'>获取当前USB设备容量预警配置。返回预警开关状态和预警阈值比例。</div></td>
+                </tr>
+                <tr>
+                    <td>170</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/extStorageDevice/DeviceList</code></td>
+                    <td><div class='summary'>获取USB设备列表</div><div class='description'>获取所有已连接的USB存储设备列表。</div></td>
+                </tr>
+                <tr>
+                    <td>171</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/extStorageDevice/Process</code></td>
+                    <td><div class='summary'>获取加密进度</div><div class='description'>获取USB设备加密操作的进度。</div></td>
+                </tr>
+                <tr>
+                    <td>172</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/extStorageDevice/ObtainSecretKey</code></td>
+                    <td><div class='summary'>获取密钥文件路径</div><div class='description'>获取加密USB设备的密钥文件下载路径。验证用户密码后返回密钥文件路径，用于DownloadSecretKey接口下载。</div></td>
+                </tr>
+                <tr>
+                    <td>173</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/hotsparedisk/ModifyArray</code></td>
+                    <td><div class='summary'>修改热备盘阵列关联</div><div class='description'>修改热备盘所关联的RAID阵列。</div></td>
+                </tr>
+                <tr>
+                    <td>174</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/hotsparedisk/CreateHotSpareDisk</code></td>
+                    <td><div class='summary'>创建热备盘</div><div class='description'>将指定磁盘设置为热备盘，并关联到指定的RAID阵列。</div></td>
+                </tr>
+                <tr>
+                    <td>175</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/hotsparedisk/DelHotSpare</code></td>
+                    <td><div class='summary'>删除热备盘</div><div class='description'>取消指定磁盘的热备盘配置。</div></td>
+                </tr>
+                <tr>
+                    <td>176</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/hotsparedisk/GetHotSpareList</code></td>
+                    <td><div class='summary'>获取热备盘列表</div><div class='description'>获取当前已配置为热备盘的磁盘列表。</div></td>
+                </tr>
+                <tr>
+                    <td>177</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/hotsparedisk/GetRaidHotSpare</code></td>
+                    <td><div class='summary'>获取阵列列表</div><div class='description'>获取系统中所有支持热备功能的RAID阵列列表。</div></td>
+                </tr>
+                <tr>
+                    <td>178</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/lvmCache/FixLvmCache</code></td>
+                    <td><div class='summary'>修复LVM缓存</div><div class='description'>修复损坏的LVM缓存阵列。</div></td>
+                </tr>
+                <tr>
+                    <td>179</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/lvmCache/CreateCacheLv</code></td>
+                    <td><div class='summary'>创建SSD缓存</div><div class='description'>使用SSD磁盘为指定卷创建读写缓存，提升存储性能。</div></td>
+                </tr>
+                <tr>
+                    <td>180</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/lvmCache/DeleteCacheLv</code></td>
+                    <td><div class='summary'>删除SSD缓存</div><div class='description'>删除指定的LVM缓存。**需要用户密码验证**。</div></td>
+                </tr>
+                <tr>
+                    <td>181</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/lvmCache/GetLvmCacheSort</code></td>
+                    <td><div class='summary'>获取LVM缓存排序</div><div class='description'>获取下一个可用的LVM缓存排序编号。</div></td>
+                </tr>
+                <tr>
+                    <td>182</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/lvmCache/CacheLvsInfo</code></td>
+                    <td><div class='summary'>获取SSD缓存列表</div><div class='description'>获取系统中所有LVM缓存（Hyper Cache）的详细信息列表。</div></td>
+                </tr>
+                <tr>
+                    <td>183</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/lvmCache/GetVolumeList</code></td>
+                    <td><div class='summary'>获取卷列表</div><div class='description'>获取系统中所有可配置SSD缓存的卷列表。</div></td>
+                </tr>
+                <tr>
+                    <td>184</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/lvmCache/CacheInfo/{uuid}</code></td>
+                    <td><div class='summary'>获取指定SSD缓存信息</div><div class='description'>根据UUID获取指定卷的SSD缓存详细信息。</div></td>
+                </tr>
+                <tr>
+                    <td>185</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/lvmCache/GetMaxResidueCacheSize</code></td>
+                    <td><div class='summary'>获取最大剩余可设置缓存大小</div><div class='description'>获取指定卷可设置的最大缓存大小。</div></td>
+                </tr>
+                <tr>
+                    <td>186</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/lvmCache/FreeSSDs</code></td>
+                    <td><div class='summary'>获取空闲SSD列表</div><div class='description'>获取所有可用于创建LVM缓存的空闲SSD磁盘列表。</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>【提示管理】- 共 2 个接口</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>HTTP 方法</th>
+                    <th>API 路径</th>
+                    <th>接口名称/描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/desktop/getTips</code></td>
+                    <td><div class='summary'>获取应用提示状态</div><div class='description'>获取Beta版本提示的显示状态</div></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/desktop/setTips</code></td>
+                    <td><div class='summary'>设置应用提示状态</div><div class='description'>设置Beta版本提示为已显示状态</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>【桌面总览】- 共 2 个接口</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>HTTP 方法</th>
+                    <th>API 路径</th>
+                    <th>接口名称/描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/desktop/overviewLocation</code></td>
+                    <td><div class='summary'>获取桌面总览位置信息</div><div class='description'>获取用户桌面总览模块的位置和显示配置</div></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/desktop/overviewLocation</code></td>
+                    <td><div class='summary'>设置桌面总览位置信息【由于加密 无法进一步测试】</div><div class='description'>设置桌面总览模块的位置配置</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>【欢迎页】- 共 2 个接口</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>HTTP 方法</th>
+                    <th>API 路径</th>
+                    <th>接口名称/描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/welcome</code></td>
+                    <td><div class='summary'>获取登录欢迎页配置</div><div class='description'>获取登录页面的标题、描述等配置信息</div></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/welcome/advancedSetting</code></td>
+                    <td><div class='summary'>获取用户高级设置</div><div class='description'>获取用户高级配置信息，包括密码策略和家目录设置</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>【用户协议】- 共 2 个接口</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>HTTP 方法</th>
+                    <th>API 路径</th>
+                    <th>接口名称/描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/desktop/eula</code></td>
+                    <td><div class='summary'>获取用户协议</div><div class='description'>获取最终用户许可协议（EULA）内容</div></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="method-put">PUT</span></td>
+                    <td><code class="path">/v2/desktop/eula</code></td>
+                    <td><div class='summary'>同意用户协议</div><div class='description'>用户同意最终用户许可协议（EULA）</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>【系统信息】- 共 1 个接口</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>HTTP 方法</th>
+                    <th>API 路径</th>
+                    <th>接口名称/描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/desktop/IsBeta</code></td>
+                    <td><div class='summary'>检查是否为Beta版本</div><div class='description'>检查当前系统是否为Beta版本</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>【系统提示】- 共 2 个接口</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>HTTP 方法</th>
+                    <th>API 路径</th>
+                    <th>接口名称/描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/v2/system/prompt/{id}</code></td>
+                    <td><div class='summary'>获取提示状态【未找到接口，无法填写id】</div><div class='description'>获取指定提示ID的显示状态</div></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/v2/system/prompt</code></td>
+                    <td><div class='summary'>设置提示状态</div><div class='description'>将指定提示标记为已显示</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>【调试模式】- 共 2 个接口</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>HTTP 方法</th>
+                    <th>API 路径</th>
+                    <th>接口名称/描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><span class="method-post">POST</span></td>
+                    <td><code class="path">/desktop/setDebugModel</code></td>
+                    <td><div class='summary'>设置调试模式</div><div class='description'>开启、关闭或配置调试模式。调试模式用于收集系统日志以便问题诊断</div></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="method-get">GET</span></td>
+                    <td><code class="path">/assistent/download</code></td>
+                    <td><div class='summary'>下载系统报告</div><div class='description'>功能：下载已生成的系统报告，前置接口1. /assistent/generate 生成系统报告，2. /assistent/get 获取生成的系统报告信息（主要是logfile)
+
+接口返回zip文件...</div></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>

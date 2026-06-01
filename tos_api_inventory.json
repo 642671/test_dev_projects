@@ -1,0 +1,1599 @@
+{
+  "title": "TOS 系统默认模块 API 完整清单",
+  "version": "1.0.0",
+  "total_apis": 199,
+  "endpoints": [
+    {
+      "path": "/app/config/language",
+      "method": "GET",
+      "summary": "获取消息配置语言包",
+      "description": "获取当前系统语言的消息配置语言包，用于显示消息类型的国际化名称。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/app/config/register",
+      "method": "PUT",
+      "summary": "注册消息配置文件",
+      "description": "外部应用通过此接口注册消息配置文件，注册后消息中心将加载该应用的配置和语言包。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/app/config/unregister",
+      "method": "PUT",
+      "summary": "解除注册消息配置",
+      "description": "外部应用通过此接口解除注册消息配置文件，解除后消息中心将不再加载该应用的配置。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/assistent/delete",
+      "method": "DELETE",
+      "summary": "删除系统报告",
+      "description": "功能：删除以及生成的系统报告，前置接口： /assistent/get",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/assistent/download",
+      "method": "GET",
+      "summary": "下载系统报告",
+      "description": "功能：下载已生成的系统报告，前置接口1. /assistent/generate 生成系统报告，2. /assistent/get 获取生成的系统报告信息（主要是logfile)\n\n接口返回zip文件下载流",
+      "tags": "调试模式",
+      "operationId": ""
+    },
+    {
+      "path": "/assistent/generate",
+      "method": "POST",
+      "summary": "生成系统报告",
+      "description": "功能：生成系统报告，以便开发人员定位问题解决远程问题",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/assistent/get",
+      "method": "POST",
+      "summary": "获取生成系统报告信息",
+      "description": "功能：获取已生成的系统报告基本信息（前置接口：/assistent/generate)，或未生成系统报告时返回空数据占位信息",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/assistent/process",
+      "method": "POST",
+      "summary": "生成报告进度",
+      "description": "功能：获取生成系统报告的进度，前置接口：/assistent/generate",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/batch/read",
+      "method": "PUT",
+      "summary": "批量标记消息已读",
+      "description": "批量将多条消息标记为已读状态。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/delete/{id}",
+      "method": "DELETE",
+      "summary": "删除单条消息",
+      "description": "根据消息ID删除指定消息。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/delete_all",
+      "method": "DELETE",
+      "summary": "删除所有消息",
+      "description": "清空所有消息记录，谨慎操作。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/desktop/getDebugModel",
+      "method": "GET",
+      "summary": "获取调试模式信息",
+      "description": "功能：获取调试模式信息",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/desktop/setDebugModel",
+      "method": "POST",
+      "summary": "设置调试模式",
+      "description": "开启、关闭或配置调试模式。调试模式用于收集系统日志以便问题诊断",
+      "tags": "调试模式",
+      "operationId": ""
+    },
+    {
+      "path": "/insert",
+      "method": "POST",
+      "summary": "插入消息",
+      "description": "创建一条新的消息记录。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/list",
+      "method": "GET",
+      "summary": "获取消息列表",
+      "description": "根据用户和筛选条件获取消息列表。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/monitorSystemStatus",
+      "method": "GET",
+      "summary": "监控系统状态",
+      "description": "监控消息中心系统状态，当前返回版本号。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/otp/bind_email",
+      "method": "POST",
+      "summary": "绑定邮箱地址",
+      "description": "为当前用户绑定或更新邮箱地址，用于OTP恢复",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/otp/checkcode",
+      "method": "POST",
+      "summary": "验证OTP验证码",
+      "description": "验证用户输入的OTP验证码是否正确。支持记住设备功能，可选择是否将设备加入受信列表",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/otp/del_device",
+      "method": "DELETE",
+      "summary": "删除受信设备",
+      "description": "从受信设备列表中删除指定设备，删除后该设备需要重新进行OTP验证",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/otp/devices",
+      "method": "GET",
+      "summary": "获取受信设备列表",
+      "description": "获取当前用户的所有受信设备列表，用于查看已信任的设备",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/otp/enable_twice",
+      "method": "POST",
+      "summary": "关闭双因素认证",
+      "description": "关闭用户的双因素认证功能。关闭时会清空受信设备列表",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/otp/finish",
+      "method": "POST",
+      "summary": "完成OTP绑定",
+      "description": "完成双因素认证的绑定流程，将OTP密钥写入数据库并记录绑定时间和手机号",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/otp/forgot",
+      "method": "POST",
+      "summary": "忘记OTP密钥",
+      "description": "通过绑定的邮箱发送OTP恢复验证码。仅对已绑定邮箱的用户有效",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/otp/info",
+      "method": "GET",
+      "summary": "获取OTP配置信息",
+      "description": "获取当前用户的OTP绑定信息，包括用户名和OTP密钥",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/otp/is_twice",
+      "method": "POST",
+      "summary": "检查用户是否启用双因素认证",
+      "description": "检查指定用户是否启用了双因素认证。通过Cookie和数据库双重验证",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/otp/qrbind",
+      "method": "GET",
+      "summary": "获取OTP绑定二维码",
+      "description": "生成一次性密码（OTP）绑定的二维码图片，用于双因素认证设置",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/otp/verify_pwd",
+      "method": "POST",
+      "summary": "验证用户密码",
+      "description": "验证用户密码是否正确，用于敏感操作前的身份确认。该接口需要特殊的密码验证中间件",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/read/all",
+      "method": "PUT",
+      "summary": "标记所有消息已读",
+      "description": "将所有未读消息标记为已读状态。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/read/{id}",
+      "method": "PUT",
+      "summary": "标记消息已读",
+      "description": "将指定消息标记为已读状态。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/settings",
+      "method": "GET",
+      "summary": "获取消息中心配置",
+      "description": "获取消息中心当前所有配置项。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/settings",
+      "method": "POST",
+      "summary": "设置消息中心配置",
+      "description": "更新消息中心配置项，写入配置文件后立即生效。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/static/subscribe/{path}",
+      "method": "GET",
+      "summary": "获取订阅消息静态资源",
+      "description": "访问订阅消息的静态文件资源，包括HTML页面等",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/subscribe/close",
+      "method": "PUT",
+      "summary": "关闭订阅消息",
+      "description": "将当前用户的所有订阅消息标记为已读，不再显示。前置要求：需要已登录用户的有效 TMSESSNAME Cookie 以及 Cookie 中携带 userName",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/subscribe/ignore",
+      "method": "PUT",
+      "summary": "忽略订阅消息",
+      "description": "将当前用户的订阅消息下次提醒时间延后24小时。前置要求：需要已登录用户的有效 TMSESSNAME Cookie 以及 Cookie 中携带 userName",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/subscribe/list",
+      "method": "GET",
+      "summary": "获取订阅消息列表",
+      "description": "获取当前用户的未读订阅消息列表，返回每条订阅消息的访问URL地址。前置要求：需要已登录用户的有效 TMSESSNAME Cookie 以及 Cookie 中携带 userName",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v1/active/{uuid}",
+      "method": "PUT",
+      "summary": "激活弹出的USB设备",
+      "description": "存储设备工具接口：激活已弹出的USB设备（内部接口）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v1/encrypt/{action}/{name}/{password}",
+      "method": "PUT",
+      "summary": "加密存储设备",
+      "description": "存储设备工具接口：加密或插入加密的USB设备（内部接口）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v1/notice/{name}",
+      "method": "PUT",
+      "summary": "新磁盘通知",
+      "description": "存储设备工具接口：检测到新磁盘时发送通知（内部接口，无需认证）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v1/part_perms",
+      "method": "GET",
+      "summary": "获取分区权限列表",
+      "description": "存储设备工具接口：获取硬盘分区权限列表（内部接口）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v1/part_perms",
+      "method": "PUT",
+      "summary": "设置分区权限",
+      "description": "存储设备工具接口：设置硬盘分区权限（内部接口）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v1/update_mount_status",
+      "method": "POST",
+      "summary": "更新挂载状态",
+      "description": "存储设备工具接口：更新设备的手动挂载状态（内部接口）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v1/{name}",
+      "method": "PUT",
+      "summary": "磁盘自动挂载",
+      "description": "存储设备工具接口：自动插入挂载存储设备（内部接口，无需认证）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v1/{name}/{fs}",
+      "method": "PUT",
+      "summary": "格式化存储设备",
+      "description": "存储设备工具接口：格式化USB设备为指定文件系统（内部接口）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v1/{name}/{remove}",
+      "method": "DELETE",
+      "summary": "移除存储设备",
+      "description": "存储设备工具接口：移除存储设备（内部接口）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/Initialise/IsInitialise",
+      "method": "GET",
+      "summary": "是否已被初始化",
+      "description": "",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/VgMonitor",
+      "method": "POST",
+      "summary": "同步状态监控通知_6.0",
+      "description": "sock文件路径：<span class=\"colour\" style=\"color:rgb(68, 140, 39)\">/var/api/TerVgMonitor.sock</span>\n<span class=\"colour\" style=\"color:rgb(68, 140, 39)\">url: [http://TerVgMonitor.sock](http://TerVgMonitor.sock)</span>",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/DealDesktopApp",
+      "method": "POST",
+      "summary": "处理桌面应用【由于加密，无法进一步测试】",
+      "description": "添加或移除桌面应用快捷方式",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/IsBeta",
+      "method": "GET",
+      "summary": "检查是否为Beta版本",
+      "description": "检查当前系统是否为Beta版本",
+      "tags": "系统信息",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/batchshowState",
+      "method": "POST",
+      "summary": "批量设置应用显示状态",
+      "description": "批量设置多个应用在桌面或应用列表中的显示状态",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/eula",
+      "method": "GET",
+      "summary": "获取用户协议",
+      "description": "获取最终用户许可协议（EULA）内容",
+      "tags": "用户协议",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/eula",
+      "method": "PUT",
+      "summary": "同意用户协议",
+      "description": "用户同意最终用户许可协议（EULA）",
+      "tags": "用户协议",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/getSort/{id}",
+      "method": "GET",
+      "summary": "获取桌面排序配置",
+      "description": "获取指定模块的桌面排序配置",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/getTips",
+      "method": "GET",
+      "summary": "获取应用提示状态",
+      "description": "获取Beta版本提示的显示状态",
+      "tags": "提示管理",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/hide",
+      "method": "PUT",
+      "summary": "隐藏应用",
+      "description": "在指定位置隐藏应用",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/init",
+      "method": "GET",
+      "summary": "初始化桌面配置",
+      "description": "获取用户桌面初始化配置，包括桌面布局、应用列表等",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/kernelVersion/pass",
+      "method": "GET",
+      "summary": "检查内核版本",
+      "description": "检查系统内核版本是否符合要求，判断是否支持特定功能",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/list",
+      "method": "GET",
+      "summary": "获取导航栏列表",
+      "description": "获取用户桌面导航栏应用列表。通过参数控制是否返回所有应用",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/listDesktop",
+      "method": "GET",
+      "summary": "获取桌面应用列表",
+      "description": "获取用户桌面上显示的应用列表",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/module",
+      "method": "POST",
+      "summary": "获取桌面模块【由于加密，无法进一步测试】",
+      "description": "根据模块ID获取桌面模块的对话框配置",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/overviewLocation",
+      "method": "GET",
+      "summary": "获取桌面总览位置信息",
+      "description": "获取用户桌面总览模块的位置和显示配置",
+      "tags": "桌面总览",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/overviewLocation",
+      "method": "POST",
+      "summary": "设置桌面总览位置信息【由于加密 无法进一步测试】",
+      "description": "设置桌面总览模块的位置配置",
+      "tags": "桌面总览",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/quickConnection",
+      "method": "POST",
+      "summary": "处理快捷连接",
+      "description": "处理桌面快捷连接的新增和修改操作，根据HTTP方法执行不同操作",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/recentlyVisited",
+      "method": "GET",
+      "summary": "获取最近访问列表",
+      "description": "获取用户最近访问的文件、应用等项目列表",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/recentlyVisited",
+      "method": "POST",
+      "summary": "设置最近访问",
+      "description": "添加或更新用户的最近访问记录\n打开的最近访问的时候添加应用",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/recentlyVisited/{id}",
+      "method": "DELETE",
+      "summary": "删除最近访问记录",
+      "description": "删除指定的最近访问记录",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/recentlyVisitedQuantity/{quantity}",
+      "method": "GET",
+      "summary": "设置最近访问返回数量",
+      "description": "设置最近访问列表返回的项目数量（接口保留，当前未实现具体逻辑）",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/setSort/{id}",
+      "method": "POST",
+      "summary": "设置桌面排序配置",
+      "description": "设置指定模块的桌面排序配置",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/setTips",
+      "method": "POST",
+      "summary": "设置应用提示状态",
+      "description": "设置Beta版本提示为已显示状态",
+      "tags": "提示管理",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/show",
+      "method": "PUT",
+      "summary": "显示应用",
+      "description": "在指定位置显示应用",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/desktop/showState",
+      "method": "POST",
+      "summary": "设置应用显示状态",
+      "description": "设置单个应用在桌面或应用列表中的显示状态",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/AddSysDisk",
+      "method": "POST",
+      "summary": "新增系统盘",
+      "description": "将指定磁盘添加为新的系统盘。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/CheckSysDisk",
+      "method": "GET",
+      "summary": "检查磁盘是否符合系统盘条件",
+      "description": "判断指定磁盘是否符合作为系统盘的条件要求。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/DelSysDisk",
+      "method": "DELETE",
+      "summary": "删除系统盘",
+      "description": "删除指定的系统盘。**需要用户密码验证**。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/DiskScan",
+      "method": "POST",
+      "summary": "磁盘坏块扫描",
+      "description": "开始或停止磁盘坏块扫描。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/ExportIhmLog",
+      "method": "GET",
+      "summary": "导出IHM日志",
+      "description": "导出IronWolf健康管理日志文件。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/ExportOverview",
+      "method": "GET",
+      "summary": "导出SMART信息",
+      "description": "导出指定磁盘的SMART详细信息报告。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/GetDiskAllocations",
+      "method": "GET",
+      "summary": "获取硬盘分配信息",
+      "description": "获取硬盘在存储池、热备盘、SSD缓存中的分配使用情况。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/GetDiskCapabilities",
+      "method": "GET",
+      "summary": "获取指定磁盘功能",
+      "description": "获取指定磁盘支持的功能特性，如是否支持SMART、是否可做系统盘等。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/GetDiskDetailData",
+      "method": "GET",
+      "summary": "获取指定磁盘SMART详细信息",
+      "description": "获取指定磁盘的SMART详细信息，包括各项属性值。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/GetDiskListData",
+      "method": "GET",
+      "summary": "获取硬盘列表数据",
+      "description": "获取系统中所有硬盘的详细信息列表，包括SMART信息、分区信息等。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/GetDiskListSpeedData",
+      "method": "GET",
+      "summary": "获取磁盘速度数据",
+      "description": "获取所有硬盘的读写速度数据。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/GetDiskOption",
+      "method": "GET",
+      "summary": "获取硬盘下拉选项",
+      "description": "获取可用硬盘的下拉选择列表。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/GetDiskStatus",
+      "method": "GET",
+      "summary": "获取硬盘状态",
+      "description": "获取所有硬盘的健康状态、温度、通电时长等状态信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/GetOverview",
+      "method": "GET",
+      "summary": "获取磁盘插槽总览",
+      "description": "获取所有硬盘插槽的状态信息（包括插槽编号、磁盘状态等）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/GetPartPerms",
+      "method": "GET",
+      "summary": "获取分区权限列表",
+      "description": "获取指定硬盘分区的用户访问权限设置。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/GetSysDiskLists",
+      "method": "GET",
+      "summary": "获取系统盘列表",
+      "description": "获取当前系统盘列表及其状态信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/IhmInfoList",
+      "method": "GET",
+      "summary": "获取IHM信息列表",
+      "description": "获取IronWolf健康管理(IHM)信息列表。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/InitSysDisk",
+      "method": "POST",
+      "summary": "初始化系统盘",
+      "description": "初始化目标磁盘作为系统盘。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/ManualTest",
+      "method": "POST",
+      "summary": "手动测试IHM",
+      "description": "对指定磁盘执行手动IHM测试。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/MigrateSysDisk",
+      "method": "POST",
+      "summary": "迁移系统盘",
+      "description": "将系统盘数据迁移到目标磁盘。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/MountDisk/{name}",
+      "method": "POST",
+      "summary": "挂载硬盘",
+      "description": "挂载指定硬盘分区。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/UmountDisk/{name}",
+      "method": "POST",
+      "summary": "卸载硬盘",
+      "description": "卸载指定硬盘分区。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/UpdatePartPerms",
+      "method": "PUT",
+      "summary": "更新分区权限列表",
+      "description": "更新硬盘分区的用户访问权限设置。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/activation/disable",
+      "method": "POST",
+      "summary": "移除磁盘",
+      "description": "移除指定磁盘。**需要用户密码验证**。移除后磁盘将不可用。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/activation/enable",
+      "method": "POST",
+      "summary": "启用磁盘",
+      "description": "启用已移除的磁盘，使其重新可用。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/benchmark/start",
+      "method": "POST",
+      "summary": "开始性能测试",
+      "description": "开始对指定磁盘进行读写性能测试。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/benchmark/status",
+      "method": "GET",
+      "summary": "获取性能测试状态",
+      "description": "获取指定磁盘的性能测试进度和结果。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/benchmark/stop",
+      "method": "POST",
+      "summary": "停止性能测试",
+      "description": "停止指定磁盘的性能测试。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/disk_log",
+      "method": "GET",
+      "summary": "获取磁盘日志列表",
+      "description": "获取磁盘相关事件的日志记录列表。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/disk_log/delete",
+      "method": "POST",
+      "summary": "清除磁盘日志",
+      "description": "清除所有磁盘事件日志记录。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/disk_log/export",
+      "method": "GET",
+      "summary": "导出磁盘日志",
+      "description": "导出磁盘事件日志为CSV文件。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/format/start",
+      "method": "POST",
+      "summary": "开始抹除磁盘",
+      "description": "格式化抹除指定磁盘。**需要用户密码验证**。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/guidanceInfo",
+      "method": "GET",
+      "summary": "获取磁盘引导信息",
+      "description": "获取磁盘引导信息，包括可用磁盘用途建议。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/sec_erase/start",
+      "method": "POST",
+      "summary": "开始安全擦除",
+      "description": "对指定磁盘执行安全擦除操作。**需要用户密码验证**。擦除将清除磁盘上的所有数据。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/setting",
+      "method": "GET",
+      "summary": "获取磁盘设置",
+      "description": "获取磁盘缓存、坏块通知、SMART报告等设置状态。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/setting",
+      "method": "POST",
+      "summary": "修改磁盘设置",
+      "description": "设置磁盘缓存开关、坏块通知、SMART报告等功能。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/smart_test/schedule",
+      "method": "GET",
+      "summary": "获取SMART测试任务列表",
+      "description": "获取所有已配置的SMART测试计划任务列表。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/smart_test/schedule",
+      "method": "POST",
+      "summary": "创建SMART测试任务",
+      "description": "创建新的SMART测试计划任务。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/smart_test/schedule/{id}",
+      "method": "DELETE",
+      "summary": "删除SMART测试任务",
+      "description": "删除指定的SMART测试计划任务。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/smart_test/schedule/{id}/edit",
+      "method": "POST",
+      "summary": "编辑SMART测试任务",
+      "description": "修改指定的SMART测试计划任务配置。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/smart_test/schedule/{id}/exec",
+      "method": "POST",
+      "summary": "执行SMART测试任务",
+      "description": "立即执行指定的SMART测试计划任务。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/disk/smart_test/schedule/{id}/stop",
+      "method": "POST",
+      "summary": "停止SMART测试任务",
+      "description": "停止正在执行的SMART测试任务。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/CheckUsbCapacity",
+      "method": "POST",
+      "summary": "检查USB容量",
+      "description": "检查USB设备容量并发送容量预警通知。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/DeviceList",
+      "method": "GET",
+      "summary": "获取USB设备列表",
+      "description": "获取所有已连接的USB存储设备列表。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/DownloadSecretKey",
+      "method": "GET",
+      "summary": "下载密钥文件",
+      "description": "下载加密USB设备的密钥文件。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/EditUsbLabel",
+      "method": "POST",
+      "summary": "修改USB卷标",
+      "description": "修改USB分区的卷标名称。仅支持ext2/ext3/ext4/ntfs/vfat/exfat文件系统。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/EditUsbRemindConfig",
+      "method": "POST",
+      "summary": "编辑USB容量预警配置",
+      "description": "设置USB设备容量预警阈值。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/EncryptDevice",
+      "method": "POST",
+      "summary": "加密USB设备",
+      "description": "对USB设备进行加密处理。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/FormattingDevice",
+      "method": "POST",
+      "summary": "格式化USB设备",
+      "description": "格式化指定的USB存储设备为指定文件系统。支持ext4、ntfs、vfat、exfat文件系统。格式化会清除设备上所有数据。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/GetUsbRemindConfig",
+      "method": "GET",
+      "summary": "获取USB容量预警配置",
+      "description": "获取当前USB设备容量预警配置。返回预警开关状态和预警阈值比例。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/IsFormating",
+      "method": "GET",
+      "summary": "检查格式化状态",
+      "description": "检查指定设备是否正在格式化中。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/MountedDevice",
+      "method": "POST",
+      "summary": "挂载加密USB设备",
+      "description": "使用密码或密钥文件挂载加密的USB设备。password和file参数二选一，不可同时为空。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/ObtainSecretKey",
+      "method": "POST",
+      "summary": "获取密钥文件路径",
+      "description": "获取加密USB设备的密钥文件下载路径。验证用户密码后返回密钥文件路径，用于DownloadSecretKey接口下载。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/Process",
+      "method": "GET",
+      "summary": "获取加密进度",
+      "description": "获取USB设备加密操作的进度。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/SetUsbAclAll",
+      "method": "POST",
+      "summary": "批量设置USB访问权限",
+      "description": "批量设置多个USB分区的用户访问权限。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/UnmountDevice",
+      "method": "POST",
+      "summary": "卸载USB设备",
+      "description": "卸载指定的USB存储设备。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/extStorageDevice/UsbAclAll",
+      "method": "POST",
+      "summary": "批量获取USB访问权限",
+      "description": "批量获取多个USB分区的用户访问权限。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/hotsparedisk/CreateHotSpareDisk",
+      "method": "POST",
+      "summary": "创建热备盘",
+      "description": "将指定磁盘设置为热备盘，并关联到指定的RAID阵列。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/hotsparedisk/DelHotSpare",
+      "method": "POST",
+      "summary": "删除热备盘",
+      "description": "取消指定磁盘的热备盘配置。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/hotsparedisk/GetHotSpareList",
+      "method": "GET",
+      "summary": "获取热备盘列表",
+      "description": "获取当前已配置为热备盘的磁盘列表。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/hotsparedisk/GetRaidHotSpare",
+      "method": "GET",
+      "summary": "获取阵列列表",
+      "description": "获取系统中所有支持热备功能的RAID阵列列表。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/hotsparedisk/ModifyArray",
+      "method": "POST",
+      "summary": "修改热备盘阵列关联",
+      "description": "修改热备盘所关联的RAID阵列。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/lang/tos",
+      "method": "GET",
+      "summary": "获取-语言变量",
+      "description": "注意事项：当前接口返回cookie不固定有，不能用来提取变量与断言",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/login",
+      "method": "POST",
+      "summary": "用户登录",
+      "description": "",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/login/state",
+      "method": "GET",
+      "summary": "获取-登录状态-登录成功",
+      "description": "",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/lvmCache/CacheInfo/{uuid}",
+      "method": "GET",
+      "summary": "获取指定SSD缓存信息",
+      "description": "根据UUID获取指定卷的SSD缓存详细信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/lvmCache/CacheLvsInfo",
+      "method": "GET",
+      "summary": "获取SSD缓存列表",
+      "description": "获取系统中所有LVM缓存（Hyper Cache）的详细信息列表。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/lvmCache/CreateCacheLv",
+      "method": "POST",
+      "summary": "创建SSD缓存",
+      "description": "使用SSD磁盘为指定卷创建读写缓存，提升存储性能。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/lvmCache/DeleteCacheLv",
+      "method": "POST",
+      "summary": "删除SSD缓存",
+      "description": "删除指定的LVM缓存。**需要用户密码验证**。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/lvmCache/FixLvmCache",
+      "method": "POST",
+      "summary": "修复LVM缓存",
+      "description": "修复损坏的LVM缓存阵列。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/lvmCache/FreeSSDs",
+      "method": "GET",
+      "summary": "获取空闲SSD列表",
+      "description": "获取所有可用于创建LVM缓存的空闲SSD磁盘列表。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/lvmCache/GetLvmCacheSort",
+      "method": "GET",
+      "summary": "获取LVM缓存排序",
+      "description": "获取下一个可用的LVM缓存排序编号。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/lvmCache/GetMaxResidueCacheSize",
+      "method": "GET",
+      "summary": "获取最大剩余可设置缓存大小",
+      "description": "获取指定卷可设置的最大缓存大小。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/lvmCache/GetVolumeList",
+      "method": "GET",
+      "summary": "获取卷列表",
+      "description": "获取系统中所有可配置SSD缓存的卷列表。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/CheckAvailablePool/{disk}",
+      "method": "POST",
+      "summary": "检测可用存储池",
+      "description": "检测指定磁盘上是否存在可用的或已损坏的存储池。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/CheckCapacity",
+      "method": "POST",
+      "summary": "检查卷容量预警",
+      "description": "检查所有卷的容量并发送预警通知。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/CheckMdInfo/{md}",
+      "method": "POST",
+      "summary": "检查mdadm信息",
+      "description": "检查指定md设备的RAID阵列信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/CheckQuota",
+      "method": "GET",
+      "summary": "检查Btrfs配额状态",
+      "description": "检查Btrfs卷的配额是否已启用。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/EditVolumeRemindConfig",
+      "method": "POST",
+      "summary": "编辑卷容量预警配置",
+      "description": "设置卷容量预警阈值。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/EnableQuota",
+      "method": "POST",
+      "summary": "启用Btrfs配额",
+      "description": "为Btrfs文件系统的卷启用或禁用配额功能。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/GetDataScrubbingConf",
+      "method": "GET",
+      "summary": "获取Data Scrubbing配置",
+      "description": "获取RAID阵列的数据校验配置。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/GetRaidSpeedOrBitmap",
+      "method": "GET",
+      "summary": "获取阵列同步速度及Bitmap",
+      "description": "获取RAID阵列的同步速度和Bitmap状态。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/GetVolumeRemindConfig",
+      "method": "GET",
+      "summary": "获取卷容量预警配置",
+      "description": "获取当前卷容量预警配置。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/MountPool/{role}/{uuid}",
+      "method": "GET",
+      "summary": "获取挂载信息",
+      "description": "获取可挂载存储池的顺序和逻辑卷顺序信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/MountPool/{role}/{uuid}",
+      "method": "POST",
+      "summary": "挂载存储池",
+      "description": "挂载可用池或已损坏的存储池。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/SetDataScrubbing",
+      "method": "POST",
+      "summary": "设置Data Scrubbing",
+      "description": "设置RAID阵列的数据校验计划任务。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/SetRaidSpeedOrBitmap",
+      "method": "POST",
+      "summary": "设置阵列同步速度及Bitmap",
+      "description": "设置RAID阵列的同步速度和Bitmap开关。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/StatusForDeleting/{role}",
+      "method": "POST",
+      "summary": "获取删除状态",
+      "description": "检查是否有卷或存储池正在被删除。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/StopDataScrubbing",
+      "method": "POST",
+      "summary": "停止Data Scrubbing",
+      "description": "停止正在运行的数据校验任务。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/StorageDescription/{uuid}",
+      "method": "POST",
+      "summary": "编辑存储池描述",
+      "description": "修改存储池的描述信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/VgMonitor",
+      "method": "GET",
+      "summary": "VG监控",
+      "description": "处理卷组事件监控（内部接口）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/compression/{uuid}",
+      "method": "POST",
+      "summary": "设置卷压缩",
+      "description": "设置指定卷的压缩功能。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/create/pool",
+      "method": "GET",
+      "summary": "获取创建资源信息",
+      "description": "获取创建卷或存储池所需的资源信息（可用磁盘、可用存储池等）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/create/pool",
+      "method": "POST",
+      "summary": "创建卷或存储池",
+      "description": "创建新的逻辑卷或存储池。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/create/volume",
+      "method": "GET",
+      "summary": "获取创建资源信息",
+      "description": "获取创建卷或存储池所需的资源信息（可用磁盘、可用存储池等）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/create/volume",
+      "method": "POST",
+      "summary": "创建卷或存储池",
+      "description": "创建新的逻辑卷或存储池。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/defragment/{uuid}",
+      "method": "PUT",
+      "summary": "碎片整理",
+      "description": "对指定卷执行碎片整理操作。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/delete/{role}/{uuid}",
+      "method": "DELETE",
+      "summary": "删除卷或存储池",
+      "description": "删除指定的卷或存储池。**需要用户密码验证**。删除存储池前需先删除其下的所有卷。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/edit/pool/{uuid}",
+      "method": "GET",
+      "summary": "获取卷或存储池信息",
+      "description": "获取指定卷或存储池的详细信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/edit/volume/{uuid}",
+      "method": "GET",
+      "summary": "获取卷或存储池信息",
+      "description": "获取指定卷或存储池的详细信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/edit/volume/{uuid}",
+      "method": "POST",
+      "summary": "编辑卷或存储池",
+      "description": "修改卷或存储池的配置信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/edit/{role}/{uuid}",
+      "method": "POST",
+      "summary": "编辑卷或存储池",
+      "description": "修改卷或存储池的配置信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/list/storagePool",
+      "method": "GET",
+      "summary": "获取卷或存储池列表",
+      "description": "获取系统中所有卷或存储池的列表信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/list/volume",
+      "method": "GET",
+      "summary": "获取卷或存储池列表",
+      "description": "获取系统中所有卷或存储池的列表信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/overview",
+      "method": "GET",
+      "summary": "获取磁盘分配总览",
+      "description": "获取系统中所有磁盘、存储池和卷的分配结构概览。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/ssd/trim/{uuid}",
+      "method": "GET",
+      "summary": "获取SSD TRIM信息",
+      "description": "获取指定卷的SSD TRIM配置信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/ssd/trim/{uuid}",
+      "method": "POST",
+      "summary": "设置SSD TRIM",
+      "description": "设置指定卷的SSD TRIM计划任务。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/status",
+      "method": "GET",
+      "summary": "获取存储状态",
+      "description": "获取系统中是否存在卷或存储池的状态。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/volumeFormatting",
+      "method": "POST",
+      "summary": "卷格式化",
+      "description": "格式化指定卷。**需要用户密码验证**。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/volumeOccupyAction",
+      "method": "POST",
+      "summary": "卷容量统计操作",
+      "description": "开始或关闭卷容量占用统计。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/volumeOccupyStatus",
+      "method": "GET",
+      "summary": "获取卷容量占用情况",
+      "description": "获取指定卷的容量使用详情。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/storage/volumeOccupyStatusAll",
+      "method": "GET",
+      "summary": "获取全部卷容量占用情况",
+      "description": "获取指定卷的全部容量使用详情（包含子项）。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/system/prompt",
+      "method": "POST",
+      "summary": "设置提示状态",
+      "description": "将指定提示标记为已显示",
+      "tags": "系统提示",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/system/prompt/{id}",
+      "method": "GET",
+      "summary": "获取提示状态【未找到接口，无法填写id】",
+      "description": "获取指定提示ID的显示状态",
+      "tags": "系统提示",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/ClientLunRemove",
+      "method": "POST",
+      "summary": "卸载LUN",
+      "description": "卸载指定的LUN设备。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/FormattingMountLun",
+      "method": "POST",
+      "summary": "格式化LUN",
+      "description": "格式化指定的LUN设备。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/GetIscsiInfo",
+      "method": "GET",
+      "summary": "获取虚拟磁盘信息",
+      "description": "获取已登录的iSCSI Target和LUN信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/GetIscsidStatus",
+      "method": "GET",
+      "summary": "获取iSCSI服务状态",
+      "description": "获取iSCSI服务的运行状态。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/GetLunList",
+      "method": "GET",
+      "summary": "获取LUN列表",
+      "description": "获取指定Target下的所有LUN信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/GetTargetAttr",
+      "method": "GET",
+      "summary": "获取Target认证信息",
+      "description": "获取指定Target的CHAP认证信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/GetTargetInfo",
+      "method": "GET",
+      "summary": "获取Target信息",
+      "description": "根据IP和端口获取iSCSI Target列表信息。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/IscsiAction",
+      "method": "POST",
+      "summary": "iSCSI操作",
+      "description": "对已登录的iSCSI Target执行断开或联机操作。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/IscsiLogin",
+      "method": "POST",
+      "summary": "登录iSCSI Target",
+      "description": "使用CHAP认证登录到指定的iSCSI Target。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/MountLun",
+      "method": "POST",
+      "summary": "挂载LUN",
+      "description": "挂载指定的LUN设备到系统。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/RemoveIscsi",
+      "method": "POST",
+      "summary": "删除iSCSI连接",
+      "description": "删除与指定Target的连接。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/virtualdisk/SetIscsidStatus",
+      "method": "POST",
+      "summary": "设置iSCSI服务状态",
+      "description": "启动或停止iSCSI服务。",
+      "tags": "",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/welcome",
+      "method": "GET",
+      "summary": "获取登录欢迎页配置",
+      "description": "获取登录页面的标题、描述等配置信息",
+      "tags": "欢迎页",
+      "operationId": ""
+    },
+    {
+      "path": "/v2/welcome/advancedSetting",
+      "method": "GET",
+      "summary": "获取用户高级设置",
+      "description": "获取用户高级配置信息，包括密码策略和家目录设置",
+      "tags": "欢迎页",
+      "operationId": ""
+    },
+    {
+      "path": "/version",
+      "method": "GET",
+      "summary": "获取消息中心版本",
+      "description": "获取消息中心服务版本号。前置要求：需要已登录用户的有效 TMSESSNAME Cookie",
+      "tags": "",
+      "operationId": ""
+    }
+  ]
+}

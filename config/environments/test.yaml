@@ -2,7 +2,7 @@
 env_name: "测试环境"
 
 # 基础 URL
-base_url: "https://test.example.com"
+base_url: "http://192.168.64.7:8181"
 
 # 账号信息
 username: "test_user"

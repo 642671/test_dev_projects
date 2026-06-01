@@ -1,0 +1,830 @@
+================================================================================
+TOS 系统默认模块 API 完整清单
+================================================================================
+生成时间: 2026-06-01
+服务器地址: http://192.168.64.8:8181
+总接口数: 199
+功能分类: 8
+================================================================================
+
+
+【其他】- 共 186 个接口
+--------------------------------------------------------------------------------
+
+1. GET    /v2/Initialise/IsInitialise
+   名称: 是否已被初始化
+
+2. GET    /v2/lang/tos
+   名称: 获取-语言变量
+   描述: 注意事项：当前接口返回cookie不固定有，不能用来提取变量与断言
+
+3. POST   /v2/login
+   名称: 用户登录
+
+4. GET    /v2/login/state
+   名称: 获取-登录状态-登录成功
+
+5. GET    /v2/desktop/kernelVersion/pass
+   名称: 检查内核版本
+   描述: 检查系统内核版本是否符合要求，判断是否支持特定功能
+
+6. GET    /v2/desktop/init
+   名称: 初始化桌面配置
+   描述: 获取用户桌面初始化配置，包括桌面布局、应用列表等
+
+7. GET    /v2/desktop/list
+   名称: 获取导航栏列表
+   描述: 获取用户桌面导航栏应用列表。通过参数控制是否返回所有应用
+
+8. GET    /v2/desktop/listDesktop
+   名称: 获取桌面应用列表
+   描述: 获取用户桌面上显示的应用列表
+
+9. POST   /v2/desktop/DealDesktopApp
+   名称: 处理桌面应用【由于加密，无法进一步测试】
+   描述: 添加或移除桌面应用快捷方式
+
+10. POST   /v2/desktop/module
+   名称: 获取桌面模块【由于加密，无法进一步测试】
+   描述: 根据模块ID获取桌面模块的对话框配置
+
+11. GET    /v2/desktop/recentlyVisited
+   名称: 获取最近访问列表
+   描述: 获取用户最近访问的文件、应用等项目列表
+
+12. POST   /v2/desktop/recentlyVisited
+   名称: 设置最近访问
+   描述: 添加或更新用户的最近访问记录
+打开的最近访问的时候添加应用
+
+13. DELETE /v2/desktop/recentlyVisited/{id}
+   名称: 删除最近访问记录
+   描述: 删除指定的最近访问记录
+
+14. POST   /v2/desktop/quickConnection
+   名称: 处理快捷连接
+   描述: 处理桌面快捷连接的新增和修改操作，根据HTTP方法执行不同操作
+
+15. GET    /v2/desktop/recentlyVisitedQuantity/{quantity}
+   名称: 设置最近访问返回数量
+   描述: 设置最近访问列表返回的项目数量（接口保留，当前未实现具体逻辑）
+
+16. GET    /v2/desktop/getSort/{id}
+   名称: 获取桌面排序配置
+   描述: 获取指定模块的桌面排序配置
+
+17. POST   /v2/desktop/setSort/{id}
+   名称: 设置桌面排序配置
+   描述: 设置指定模块的桌面排序配置
+
+18. POST   /v2/desktop/showState
+   名称: 设置应用显示状态
+   描述: 设置单个应用在桌面或应用列表中的显示状态
+
+19. POST   /v2/desktop/batchshowState
+   名称: 批量设置应用显示状态
+   描述: 批量设置多个应用在桌面或应用列表中的显示状态
+
+20. PUT    /v2/desktop/show
+   名称: 显示应用
+   描述: 在指定位置显示应用
+
+21. PUT    /v2/desktop/hide
+   名称: 隐藏应用
+   描述: 在指定位置隐藏应用
+
+22. PUT    /subscribe/close
+   名称: 关闭订阅消息
+   描述: 将当前用户的所有订阅消息标记为已读，不再显示。前置要求：需要已登录用户的有效 TMSESSNAME Cookie 以及 Cookie 中携带 userName
+
+23. DELETE /delete/{id}
+   名称: 删除单条消息
+   描述: 根据消息ID删除指定消息。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+24. DELETE /delete_all
+   名称: 删除所有消息
+   描述: 清空所有消息记录，谨慎操作。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+25. PUT    /subscribe/ignore
+   名称: 忽略订阅消息
+   描述: 将当前用户的订阅消息下次提醒时间延后24小时。前置要求：需要已登录用户的有效 TMSESSNAME Cookie 以及 Cookie 中携带 userName
+
+26. PUT    /batch/read
+   名称: 批量标记消息已读
+   描述: 批量将多条消息标记为已读状态。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+27. POST   /insert
+   名称: 插入消息
+   描述: 创建一条新的消息记录。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+28. PUT    /read/all
+   名称: 标记所有消息已读
+   描述: 将所有未读消息标记为已读状态。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+29. PUT    /read/{id}
+   名称: 标记消息已读
+   描述: 将指定消息标记为已读状态。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+30. PUT    /app/config/register
+   名称: 注册消息配置文件
+   描述: 外部应用通过此接口注册消息配置文件，注册后消息中心将加载该应用的配置和语言包。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+31. GET    /monitorSystemStatus
+   名称: 监控系统状态
+   描述: 监控消息中心系统状态，当前返回版本号。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+32. GET    /version
+   名称: 获取消息中心版本
+   描述: 获取消息中心服务版本号。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+33. GET    /settings
+   名称: 获取消息中心配置
+   描述: 获取消息中心当前所有配置项。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+34. POST   /settings
+   名称: 设置消息中心配置
+   描述: 更新消息中心配置项，写入配置文件后立即生效。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+35. GET    /list
+   名称: 获取消息列表
+   描述: 根据用户和筛选条件获取消息列表。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+36. GET    /app/config/language
+   名称: 获取消息配置语言包
+   描述: 获取当前系统语言的消息配置语言包，用于显示消息类型的国际化名称。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+37. GET    /subscribe/list
+   名称: 获取订阅消息列表
+   描述: 获取当前用户的未读订阅消息列表，返回每条订阅消息的访问URL地址。前置要求：需要已登录用户的有效 TMSESSNAME Cookie 以及 Cookie 中携带 userName
+
+38. GET    /static/subscribe/{path}
+   名称: 获取订阅消息静态资源
+   描述: 访问订阅消息的静态文件资源，包括HTML页面等
+
+39. PUT    /app/config/unregister
+   名称: 解除注册消息配置
+   描述: 外部应用通过此接口解除注册消息配置文件，解除后消息中心将不再加载该应用的配置。前置要求：需要已登录用户的有效 TMSESSNAME Cookie
+
+40. POST   /otp/enable_twice
+   名称: 关闭双因素认证
+   描述: 关闭用户的双因素认证功能。关闭时会清空受信设备列表
+
+41. DELETE /otp/del_device
+   名称: 删除受信设备
+   描述: 从受信设备列表中删除指定设备，删除后该设备需要重新进行OTP验证
+
+42. POST   /otp/finish
+   名称: 完成OTP绑定
+   描述: 完成双因素认证的绑定流程，将OTP密钥写入数据库并记录绑定时间和手机号
+
+43. POST   /otp/forgot
+   名称: 忘记OTP密钥
+   描述: 通过绑定的邮箱发送OTP恢复验证码。仅对已绑定邮箱的用户有效
+
+44. POST   /otp/is_twice
+   名称: 检查用户是否启用双因素认证
+   描述: 检查指定用户是否启用了双因素认证。通过Cookie和数据库双重验证
+
+45. POST   /otp/bind_email
+   名称: 绑定邮箱地址
+   描述: 为当前用户绑定或更新邮箱地址，用于OTP恢复
+
+46. GET    /otp/qrbind
+   名称: 获取OTP绑定二维码
+   描述: 生成一次性密码（OTP）绑定的二维码图片，用于双因素认证设置
+
+47. GET    /otp/info
+   名称: 获取OTP配置信息
+   描述: 获取当前用户的OTP绑定信息，包括用户名和OTP密钥
+
+48. GET    /otp/devices
+   名称: 获取受信设备列表
+   描述: 获取当前用户的所有受信设备列表，用于查看已信任的设备
+
+49. POST   /otp/checkcode
+   名称: 验证OTP验证码
+   描述: 验证用户输入的OTP验证码是否正确。支持记住设备功能，可选择是否将设备加入受信列表
+
+50. POST   /otp/verify_pwd
+   名称: 验证用户密码
+   描述: 验证用户密码是否正确，用于敏感操作前的身份确认。该接口需要特殊的密码验证中间件
+
+51. GET    /desktop/getDebugModel
+   名称: 获取调试模式信息
+   描述: 功能：获取调试模式信息
+
+52. POST   /assistent/generate
+   名称: 生成系统报告
+   描述: 功能：生成系统报告，以便开发人员定位问题解决远程问题
+
+53. POST   /assistent/process
+   名称: 生成报告进度
+   描述: 功能：获取生成系统报告的进度，前置接口：/assistent/generate
+
+54. POST   /assistent/get
+   名称: 获取生成系统报告信息
+   描述: 功能：获取已生成的系统报告基本信息（前置接口：/assistent/generate)，或未生成系统报告时返回空数据占位信息
+
+55. DELETE /assistent/delete
+   名称: 删除系统报告
+   描述: 功能：删除以及生成的系统报告，前置接口： /assistent/get
+
+56. GET    /v2/storage/overview
+   名称: 获取磁盘分配总览
+   描述: 获取系统中所有磁盘、存储池和卷的分配结构概览。
+
+57. GET    /v2/disk/GetOverview
+   名称: 获取磁盘插槽总览
+   描述: 获取所有硬盘插槽的状态信息（包括插槽编号、磁盘状态等）。
+
+58. POST   /v2/storage/create/volume
+   名称: 创建卷或存储池
+   描述: 创建新的逻辑卷或存储池。
+
+59. GET    /v2/storage/create/volume
+   名称: 获取创建资源信息
+   描述: 获取创建卷或存储池所需的资源信息（可用磁盘、可用存储池等）。
+
+60. DELETE /v2/storage/delete/{role}/{uuid}
+   名称: 删除卷或存储池
+   描述: 删除指定的卷或存储池。**需要用户密码验证**。删除存储池前需先删除其下的所有卷。
+
+61. POST   /v2/storage/volumeOccupyAction
+   名称: 卷容量统计操作
+   描述: 开始或关闭卷容量占用统计。
+
+62. POST   /v2/storage/volumeFormatting
+   名称: 卷格式化
+   描述: 格式化指定卷。**需要用户密码验证**。
+
+63. PUT    /v2/storage/defragment/{uuid}
+   名称: 碎片整理
+   描述: 对指定卷执行碎片整理操作。
+
+64. POST   /v2/storage/EditVolumeRemindConfig
+   名称: 编辑卷容量预警配置
+   描述: 设置卷容量预警阈值。
+
+65. POST   /v2/storage/edit/volume/{uuid}
+   名称: 编辑卷或存储池
+   描述: 修改卷或存储池的配置信息。
+
+66. GET    /v2/storage/edit/volume/{uuid}
+   名称: 获取卷或存储池信息
+   描述: 获取指定卷或存储池的详细信息。
+
+67. GET    /v2/storage/ssd/trim/{uuid}
+   名称: 获取SSD TRIM信息
+   描述: 获取指定卷的SSD TRIM配置信息。
+
+68. POST   /v2/storage/ssd/trim/{uuid}
+   名称: 设置SSD TRIM
+   描述: 设置指定卷的SSD TRIM计划任务。
+
+69. GET    /v2/storage/volumeOccupyStatusAll
+   名称: 获取全部卷容量占用情况
+   描述: 获取指定卷的全部容量使用详情（包含子项）。
+
+70. GET    /v2/storage/volumeOccupyStatus
+   名称: 获取卷容量占用情况
+   描述: 获取指定卷的容量使用详情。
+
+71. GET    /v2/storage/GetVolumeRemindConfig
+   名称: 获取卷容量预警配置
+   描述: 获取当前卷容量预警配置。
+
+72. GET    /v2/storage/list/volume
+   名称: 获取卷或存储池列表
+   描述: 获取系统中所有卷或存储池的列表信息。
+
+73. GET    /v2/storage/status
+   名称: 获取存储状态
+   描述: 获取系统中是否存在卷或存储池的状态。
+
+74. POST   /v2/storage/compression/{uuid}
+   名称: 设置卷压缩
+   描述: 设置指定卷的压缩功能。
+
+75. GET    /v2/storage/VgMonitor
+   名称: VG监控
+   描述: 处理卷组事件监控（内部接口）。
+
+76. POST   /v2/storage/StopDataScrubbing
+   名称: 停止Data Scrubbing
+   描述: 停止正在运行的数据校验任务。
+
+77. POST   /v2/storage/create/pool
+   名称: 创建卷或存储池
+   描述: 创建新的逻辑卷或存储池。
+
+78. GET    /v2/storage/create/pool
+   名称: 获取创建资源信息
+   描述: 获取创建卷或存储池所需的资源信息（可用磁盘、可用存储池等）。
+
+79. POST   /v2/VgMonitor
+   名称: 同步状态监控通知_6.0
+   描述: sock文件路径：<span class="colour" style="color:rgb(68, 140, 39)">/var/api/TerVgMonitor.sock</span>
+<span class="colour" style="color:rgb(68, 140, 39)">url: [http://TerVgMonitor.sock](http://TerVgMonitor.sock)</span>
+
+80. POST   /v2/storage/EnableQuota
+   名称: 启用Btrfs配额
+   描述: 为Btrfs文件系统的卷启用或禁用配额功能。
+
+81. POST   /v2/storage/MountPool/{role}/{uuid}
+   名称: 挂载存储池
+   描述: 挂载可用池或已损坏的存储池。
+
+82. GET    /v2/storage/MountPool/{role}/{uuid}
+   名称: 获取挂载信息
+   描述: 获取可挂载存储池的顺序和逻辑卷顺序信息。
+
+83. GET    /v2/storage/CheckQuota
+   名称: 检查Btrfs配额状态
+   描述: 检查Btrfs卷的配额是否已启用。
+
+84. POST   /v2/storage/CheckMdInfo/{md}
+   名称: 检查mdadm信息
+   描述: 检查指定md设备的RAID阵列信息。
+
+85. POST   /v2/storage/CheckCapacity
+   名称: 检查卷容量预警
+   描述: 检查所有卷的容量并发送预警通知。
+
+86. POST   /v2/storage/CheckAvailablePool/{disk}
+   名称: 检测可用存储池
+   描述: 检测指定磁盘上是否存在可用的或已损坏的存储池。
+
+87. POST   /v2/storage/edit/{role}/{uuid}
+   名称: 编辑卷或存储池
+   描述: 修改卷或存储池的配置信息。
+
+88. POST   /v2/storage/StorageDescription/{uuid}
+   名称: 编辑存储池描述
+   描述: 修改存储池的描述信息。
+
+89. GET    /v2/storage/GetDataScrubbingConf
+   名称: 获取Data Scrubbing配置
+   描述: 获取RAID阵列的数据校验配置。
+
+90. POST   /v2/storage/StatusForDeleting/{role}
+   名称: 获取删除状态
+   描述: 检查是否有卷或存储池正在被删除。
+
+91. GET    /v2/storage/edit/pool/{uuid}
+   名称: 获取卷或存储池信息
+   描述: 获取指定卷或存储池的详细信息。
+
+92. GET    /v2/storage/list/storagePool
+   名称: 获取卷或存储池列表
+   描述: 获取系统中所有卷或存储池的列表信息。
+
+93. GET    /v2/storage/GetRaidSpeedOrBitmap
+   名称: 获取阵列同步速度及Bitmap
+   描述: 获取RAID阵列的同步速度和Bitmap状态。
+
+94. POST   /v2/storage/SetDataScrubbing
+   名称: 设置Data Scrubbing
+   描述: 设置RAID阵列的数据校验计划任务。
+
+95. POST   /v2/storage/SetRaidSpeedOrBitmap
+   名称: 设置阵列同步速度及Bitmap
+   描述: 设置RAID阵列的同步速度和Bitmap开关。
+
+96. POST   /v2/disk/setting
+   名称: 修改磁盘设置
+   描述: 设置磁盘缓存开关、坏块通知、SMART报告等功能。
+
+97. GET    /v2/disk/setting
+   名称: 获取磁盘设置
+   描述: 获取磁盘缓存、坏块通知、SMART报告等设置状态。
+
+98. POST   /v2/disk/smart_test/schedule/{id}/stop
+   名称: 停止SMART测试任务
+   描述: 停止正在执行的SMART测试任务。
+
+99. POST   /v2/disk/benchmark/stop
+   名称: 停止性能测试
+   描述: 停止指定磁盘的性能测试。
+
+100. POST   /v2/disk/smart_test/schedule
+   名称: 创建SMART测试任务
+   描述: 创建新的SMART测试计划任务。
+
+101. GET    /v2/disk/smart_test/schedule
+   名称: 获取SMART测试任务列表
+   描述: 获取所有已配置的SMART测试计划任务列表。
+
+102. POST   /v2/disk/InitSysDisk
+   名称: 初始化系统盘
+   描述: 初始化目标磁盘作为系统盘。
+
+103. DELETE /v2/disk/smart_test/schedule/{id}
+   名称: 删除SMART测试任务
+   描述: 删除指定的SMART测试计划任务。
+
+104. DELETE /v2/disk/DelSysDisk
+   名称: 删除系统盘
+   描述: 删除指定的系统盘。**需要用户密码验证**。
+
+105. PUT    /v1/encrypt/{action}/{name}/{password}
+   名称: 加密存储设备
+   描述: 存储设备工具接口：加密或插入加密的USB设备（内部接口）。
+
+106. POST   /v2/disk/UmountDisk/{name}
+   名称: 卸载硬盘
+   描述: 卸载指定硬盘分区。
+
+107. POST   /v2/disk/activation/enable
+   名称: 启用磁盘
+   描述: 启用已移除的磁盘，使其重新可用。
+
+108. GET    /v2/disk/ExportIhmLog
+   名称: 导出IHM日志
+   描述: 导出IronWolf健康管理日志文件。
+
+109. GET    /v2/disk/ExportOverview
+   名称: 导出SMART信息
+   描述: 导出指定磁盘的SMART详细信息报告。
+
+110. GET    /v2/disk/disk_log/export
+   名称: 导出磁盘日志
+   描述: 导出磁盘事件日志为CSV文件。
+
+111. POST   /v2/disk/sec_erase/start
+   名称: 开始安全擦除
+   描述: 对指定磁盘执行安全擦除操作。**需要用户密码验证**。擦除将清除磁盘上的所有数据。
+
+112. POST   /v2/disk/benchmark/start
+   名称: 开始性能测试
+   描述: 开始对指定磁盘进行读写性能测试。
+
+113. POST   /v2/disk/format/start
+   名称: 开始抹除磁盘
+   描述: 格式化抹除指定磁盘。**需要用户密码验证**。
+
+114. POST   /v2/disk/ManualTest
+   名称: 手动测试IHM
+   描述: 对指定磁盘执行手动IHM测试。
+
+115. POST   /v2/disk/smart_test/schedule/{id}/exec
+   名称: 执行SMART测试任务
+   描述: 立即执行指定的SMART测试计划任务。
+
+116. POST   /v2/disk/MountDisk/{name}
+   名称: 挂载硬盘
+   描述: 挂载指定硬盘分区。
+
+117. POST   /v2/disk/AddSysDisk
+   名称: 新增系统盘
+   描述: 将指定磁盘添加为新的系统盘。
+
+118. PUT    /v1/notice/{name}
+   名称: 新磁盘通知
+   描述: 存储设备工具接口：检测到新磁盘时发送通知（内部接口，无需认证）。
+
+119. PUT    /v2/disk/UpdatePartPerms
+   名称: 更新分区权限列表
+   描述: 更新硬盘分区的用户访问权限设置。
+
+120. POST   /v1/update_mount_status
+   名称: 更新挂载状态
+   描述: 存储设备工具接口：更新设备的手动挂载状态（内部接口）。
+
+121. PUT    /v1/{name}/{fs}
+   名称: 格式化存储设备
+   描述: 存储设备工具接口：格式化USB设备为指定文件系统（内部接口）。
+
+122. GET    /v2/disk/CheckSysDisk
+   名称: 检查磁盘是否符合系统盘条件
+   描述: 判断指定磁盘是否符合作为系统盘的条件要求。
+
+123. POST   /v2/disk/disk_log/delete
+   名称: 清除磁盘日志
+   描述: 清除所有磁盘事件日志记录。
+
+124. PUT    /v1/active/{uuid}
+   名称: 激活弹出的USB设备
+   描述: 存储设备工具接口：激活已弹出的USB设备（内部接口）。
+
+125. POST   /v2/disk/DiskScan
+   名称: 磁盘坏块扫描
+   描述: 开始或停止磁盘坏块扫描。
+
+126. PUT    /v1/{name}
+   名称: 磁盘自动挂载
+   描述: 存储设备工具接口：自动插入挂载存储设备（内部接口，无需认证）。
+
+127. DELETE /v1/{name}/{remove}
+   名称: 移除存储设备
+   描述: 存储设备工具接口：移除存储设备（内部接口）。
+
+128. POST   /v2/disk/activation/disable
+   名称: 移除磁盘
+   描述: 移除指定磁盘。**需要用户密码验证**。移除后磁盘将不可用。
+
+129. POST   /v2/disk/smart_test/schedule/{id}/edit
+   名称: 编辑SMART测试任务
+   描述: 修改指定的SMART测试计划任务配置。
+
+130. GET    /v2/disk/IhmInfoList
+   名称: 获取IHM信息列表
+   描述: 获取IronWolf健康管理(IHM)信息列表。
+
+131. GET    /v2/disk/GetPartPerms
+   名称: 获取分区权限列表
+   描述: 获取指定硬盘分区的用户访问权限设置。
+
+132. GET    /v1/part_perms
+   名称: 获取分区权限列表
+   描述: 存储设备工具接口：获取硬盘分区权限列表（内部接口）。
+
+133. PUT    /v1/part_perms
+   名称: 设置分区权限
+   描述: 存储设备工具接口：设置硬盘分区权限（内部接口）。
+
+134. GET    /v2/disk/benchmark/status
+   名称: 获取性能测试状态
+   描述: 获取指定磁盘的性能测试进度和结果。
+
+135. GET    /v2/disk/GetDiskDetailData
+   名称: 获取指定磁盘SMART详细信息
+   描述: 获取指定磁盘的SMART详细信息，包括各项属性值。
+
+136. GET    /v2/disk/GetDiskCapabilities
+   名称: 获取指定磁盘功能
+   描述: 获取指定磁盘支持的功能特性，如是否支持SMART、是否可做系统盘等。
+
+137. GET    /v2/disk/GetDiskOption
+   名称: 获取硬盘下拉选项
+   描述: 获取可用硬盘的下拉选择列表。
+
+138. GET    /v2/disk/GetDiskAllocations
+   名称: 获取硬盘分配信息
+   描述: 获取硬盘在存储池、热备盘、SSD缓存中的分配使用情况。
+
+139. GET    /v2/disk/GetDiskListData
+   名称: 获取硬盘列表数据
+   描述: 获取系统中所有硬盘的详细信息列表，包括SMART信息、分区信息等。
+
+140. GET    /v2/disk/GetDiskStatus
+   名称: 获取硬盘状态
+   描述: 获取所有硬盘的健康状态、温度、通电时长等状态信息。
+
+141. GET    /v2/disk/guidanceInfo
+   名称: 获取磁盘引导信息
+   描述: 获取磁盘引导信息，包括可用磁盘用途建议。
+
+142. GET    /v2/disk/disk_log
+   名称: 获取磁盘日志列表
+   描述: 获取磁盘相关事件的日志记录列表。
+
+143. GET    /v2/disk/GetDiskListSpeedData
+   名称: 获取磁盘速度数据
+   描述: 获取所有硬盘的读写速度数据。
+
+144. GET    /v2/disk/GetSysDiskLists
+   名称: 获取系统盘列表
+   描述: 获取当前系统盘列表及其状态信息。
+
+145. POST   /v2/disk/MigrateSysDisk
+   名称: 迁移系统盘
+   描述: 将系统盘数据迁移到目标磁盘。
+
+146. POST   /v2/virtualdisk/IscsiAction
+   名称: iSCSI操作
+   描述: 对已登录的iSCSI Target执行断开或联机操作。
+
+147. POST   /v2/virtualdisk/RemoveIscsi
+   名称: 删除iSCSI连接
+   描述: 删除与指定Target的连接。
+
+148. POST   /v2/virtualdisk/ClientLunRemove
+   名称: 卸载LUN
+   描述: 卸载指定的LUN设备。
+
+149. POST   /v2/virtualdisk/MountLun
+   名称: 挂载LUN
+   描述: 挂载指定的LUN设备到系统。
+
+150. POST   /v2/virtualdisk/FormattingMountLun
+   名称: 格式化LUN
+   描述: 格式化指定的LUN设备。
+
+151. POST   /v2/virtualdisk/IscsiLogin
+   名称: 登录iSCSI Target
+   描述: 使用CHAP认证登录到指定的iSCSI Target。
+
+152. GET    /v2/virtualdisk/GetLunList
+   名称: 获取LUN列表
+   描述: 获取指定Target下的所有LUN信息。
+
+153. GET    /v2/virtualdisk/GetTargetInfo
+   名称: 获取Target信息
+   描述: 根据IP和端口获取iSCSI Target列表信息。
+
+154. GET    /v2/virtualdisk/GetTargetAttr
+   名称: 获取Target认证信息
+   描述: 获取指定Target的CHAP认证信息。
+
+155. GET    /v2/virtualdisk/GetIscsidStatus
+   名称: 获取iSCSI服务状态
+   描述: 获取iSCSI服务的运行状态。
+
+156. GET    /v2/virtualdisk/GetIscsiInfo
+   名称: 获取虚拟磁盘信息
+   描述: 获取已登录的iSCSI Target和LUN信息。
+
+157. POST   /v2/virtualdisk/SetIscsidStatus
+   名称: 设置iSCSI服务状态
+   描述: 启动或停止iSCSI服务。
+
+158. GET    /v2/extStorageDevice/DownloadSecretKey
+   名称: 下载密钥文件
+   描述: 下载加密USB设备的密钥文件。
+
+159. POST   /v2/extStorageDevice/EditUsbLabel
+   名称: 修改USB卷标
+   描述: 修改USB分区的卷标名称。仅支持ext2/ext3/ext4/ntfs/vfat/exfat文件系统。
+
+160. POST   /v2/extStorageDevice/EncryptDevice
+   名称: 加密USB设备
+   描述: 对USB设备进行加密处理。
+
+161. POST   /v2/extStorageDevice/UnmountDevice
+   名称: 卸载USB设备
+   描述: 卸载指定的USB存储设备。
+
+162. POST   /v2/extStorageDevice/UsbAclAll
+   名称: 批量获取USB访问权限
+   描述: 批量获取多个USB分区的用户访问权限。
+
+163. POST   /v2/extStorageDevice/SetUsbAclAll
+   名称: 批量设置USB访问权限
+   描述: 批量设置多个USB分区的用户访问权限。
+
+164. POST   /v2/extStorageDevice/MountedDevice
+   名称: 挂载加密USB设备
+   描述: 使用密码或密钥文件挂载加密的USB设备。password和file参数二选一，不可同时为空。
+
+165. POST   /v2/extStorageDevice/FormattingDevice
+   名称: 格式化USB设备
+   描述: 格式化指定的USB存储设备为指定文件系统。支持ext4、ntfs、vfat、exfat文件系统。格式化会清除设备上所有数据。
+
+166. POST   /v2/extStorageDevice/CheckUsbCapacity
+   名称: 检查USB容量
+   描述: 检查USB设备容量并发送容量预警通知。
+
+167. GET    /v2/extStorageDevice/IsFormating
+   名称: 检查格式化状态
+   描述: 检查指定设备是否正在格式化中。
+
+168. POST   /v2/extStorageDevice/EditUsbRemindConfig
+   名称: 编辑USB容量预警配置
+   描述: 设置USB设备容量预警阈值。
+
+169. GET    /v2/extStorageDevice/GetUsbRemindConfig
+   名称: 获取USB容量预警配置
+   描述: 获取当前USB设备容量预警配置。返回预警开关状态和预警阈值比例。
+
+170. GET    /v2/extStorageDevice/DeviceList
+   名称: 获取USB设备列表
+   描述: 获取所有已连接的USB存储设备列表。
+
+171. GET    /v2/extStorageDevice/Process
+   名称: 获取加密进度
+   描述: 获取USB设备加密操作的进度。
+
+172. POST   /v2/extStorageDevice/ObtainSecretKey
+   名称: 获取密钥文件路径
+   描述: 获取加密USB设备的密钥文件下载路径。验证用户密码后返回密钥文件路径，用于DownloadSecretKey接口下载。
+
+173. POST   /v2/hotsparedisk/ModifyArray
+   名称: 修改热备盘阵列关联
+   描述: 修改热备盘所关联的RAID阵列。
+
+174. POST   /v2/hotsparedisk/CreateHotSpareDisk
+   名称: 创建热备盘
+   描述: 将指定磁盘设置为热备盘，并关联到指定的RAID阵列。
+
+175. POST   /v2/hotsparedisk/DelHotSpare
+   名称: 删除热备盘
+   描述: 取消指定磁盘的热备盘配置。
+
+176. GET    /v2/hotsparedisk/GetHotSpareList
+   名称: 获取热备盘列表
+   描述: 获取当前已配置为热备盘的磁盘列表。
+
+177. GET    /v2/hotsparedisk/GetRaidHotSpare
+   名称: 获取阵列列表
+   描述: 获取系统中所有支持热备功能的RAID阵列列表。
+
+178. POST   /v2/lvmCache/FixLvmCache
+   名称: 修复LVM缓存
+   描述: 修复损坏的LVM缓存阵列。
+
+179. POST   /v2/lvmCache/CreateCacheLv
+   名称: 创建SSD缓存
+   描述: 使用SSD磁盘为指定卷创建读写缓存，提升存储性能。
+
+180. POST   /v2/lvmCache/DeleteCacheLv
+   名称: 删除SSD缓存
+   描述: 删除指定的LVM缓存。**需要用户密码验证**。
+
+181. GET    /v2/lvmCache/GetLvmCacheSort
+   名称: 获取LVM缓存排序
+   描述: 获取下一个可用的LVM缓存排序编号。
+
+182. GET    /v2/lvmCache/CacheLvsInfo
+   名称: 获取SSD缓存列表
+   描述: 获取系统中所有LVM缓存（Hyper Cache）的详细信息列表。
+
+183. GET    /v2/lvmCache/GetVolumeList
+   名称: 获取卷列表
+   描述: 获取系统中所有可配置SSD缓存的卷列表。
+
+184. GET    /v2/lvmCache/CacheInfo/{uuid}
+   名称: 获取指定SSD缓存信息
+   描述: 根据UUID获取指定卷的SSD缓存详细信息。
+
+185. GET    /v2/lvmCache/GetMaxResidueCacheSize
+   名称: 获取最大剩余可设置缓存大小
+   描述: 获取指定卷可设置的最大缓存大小。
+
+186. GET    /v2/lvmCache/FreeSSDs
+   名称: 获取空闲SSD列表
+   描述: 获取所有可用于创建LVM缓存的空闲SSD磁盘列表。
+
+【提示管理】- 共 2 个接口
+--------------------------------------------------------------------------------
+
+1. GET    /v2/desktop/getTips
+   名称: 获取应用提示状态
+   描述: 获取Beta版本提示的显示状态
+
+2. POST   /v2/desktop/setTips
+   名称: 设置应用提示状态
+   描述: 设置Beta版本提示为已显示状态
+
+【桌面总览】- 共 2 个接口
+--------------------------------------------------------------------------------
+
+1. GET    /v2/desktop/overviewLocation
+   名称: 获取桌面总览位置信息
+   描述: 获取用户桌面总览模块的位置和显示配置
+
+2. POST   /v2/desktop/overviewLocation
+   名称: 设置桌面总览位置信息【由于加密 无法进一步测试】
+   描述: 设置桌面总览模块的位置配置
+
+【欢迎页】- 共 2 个接口
+--------------------------------------------------------------------------------
+
+1. GET    /v2/welcome
+   名称: 获取登录欢迎页配置
+   描述: 获取登录页面的标题、描述等配置信息
+
+2. GET    /v2/welcome/advancedSetting
+   名称: 获取用户高级设置
+   描述: 获取用户高级配置信息，包括密码策略和家目录设置
+
+【用户协议】- 共 2 个接口
+--------------------------------------------------------------------------------
+
+1. GET    /v2/desktop/eula
+   名称: 获取用户协议
+   描述: 获取最终用户许可协议（EULA）内容
+
+2. PUT    /v2/desktop/eula
+   名称: 同意用户协议
+   描述: 用户同意最终用户许可协议（EULA）
+
+【系统信息】- 共 1 个接口
+--------------------------------------------------------------------------------
+
+1. GET    /v2/desktop/IsBeta
+   名称: 检查是否为Beta版本
+   描述: 检查当前系统是否为Beta版本
+
+【系统提示】- 共 2 个接口
+--------------------------------------------------------------------------------
+
+1. GET    /v2/system/prompt/{id}
+   名称: 获取提示状态【未找到接口，无法填写id】
+   描述: 获取指定提示ID的显示状态
+
+2. POST   /v2/system/prompt
+   名称: 设置提示状态
+   描述: 将指定提示标记为已显示
+
+【调试模式】- 共 2 个接口
+--------------------------------------------------------------------------------
+
+1. POST   /desktop/setDebugModel
+   名称: 设置调试模式
+   描述: 开启、关闭或配置调试模式。调试模式用于收集系统日志以便问题诊断
+
+2. GET    /assistent/download
+   名称: 下载系统报告
+   描述: 功能：下载已生成的系统报告，前置接口1. /assistent/generate 生成系统报告，2. /assistent/get 获取生成的系统报告信息（主要是logfile)
+
+接口返回zip文件下载流
