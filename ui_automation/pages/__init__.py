@@ -4,11 +4,11 @@ ui_automation/pages 包
 
 目录结构：
 ├── base_page.py          - 页面基类（核心元素操作 + Helpers 集成）
-├── example_page.py       - 旧版示例（向后兼容）
 ├── locators/             - 定位器集中管理
 │   ├── common_locators.py
-│   ├── login_page_locators.py
-│   └── dashboard_page_locators.py
+│   ├── tos_login_locators.py
+│   ├── tos_navbar_locators.py
+│   └── tos_desktop_locators.py
 ├── components/           - 可复用 UI 组件
 │   ├── base_component.py
 │   ├── header_component.py
@@ -17,9 +17,10 @@ ui_automation/pages 包
 │   ├── wait_helpers.py
 │   ├── action_helpers.py
 │   └── validation_helpers.py
-└── pages/                - 业务页面对象（新结构）
-    ├── login_page.py
-    └── dashboard_page.py
+└── pages/                - 业务页面对象
+    ├── tos_login_page.py
+    ├── tos_navbar_page.py
+    └── tos_desktop_page.py
 """
 
 # 基类
@@ -27,8 +28,6 @@ from ui_automation.pages.base_page import BasePage
 
 # 定位器
 from ui_automation.pages.locators.common_locators import CommonLocators
-from ui_automation.pages.locators.login_page_locators import LoginPageLocators
-from ui_automation.pages.locators.dashboard_page_locators import DashboardPageLocators
 
 # 组件
 from ui_automation.pages.components.base_component import BaseComponent
@@ -40,17 +39,16 @@ from ui_automation.pages.helpers.wait_helpers import WaitHelpers
 from ui_automation.pages.helpers.action_helpers import ActionHelpers
 from ui_automation.pages.helpers.validation_helpers import ValidationHelpers
 
-# 业务页面（新结构）
-from ui_automation.pages.pages.login_page import LoginPage
-from ui_automation.pages.pages.dashboard_page import DashboardPage
+# 业务页面
+from ui_automation.pages.pages.tos_login_page import TosLoginPage
+from ui_automation.pages.pages.tos_navbar_page import TosNavbarPage
+from ui_automation.pages.pages.tos_desktop_page import TosDesktopPage
 
 __all__ = [
     # 基类
     "BasePage",
     # 定位器
     "CommonLocators",
-    "LoginPageLocators",
-    "DashboardPageLocators",
     # 组件
     "BaseComponent",
     "HeaderComponent",
@@ -60,6 +58,7 @@ __all__ = [
     "ActionHelpers",
     "ValidationHelpers",
     # 业务页面
-    "LoginPage",
-    "DashboardPage",
+    "TosLoginPage",
+    "TosNavbarPage",
+    "TosDesktopPage",
 ]

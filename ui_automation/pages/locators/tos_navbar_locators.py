@@ -64,6 +64,3 @@ class TosNavbarLocators:
     # ========== Tooltip ==========
     TOOLTIP_POPPER = (By.CSS_SELECTOR, "div.el-tooltip__popper")
 
-    # ========== 通用设置（可能在"开始"菜单内或控制面板内）==========
-    # 注意：用户提到"通用设置"，可能需要先点击"开始"再找
-    GENERAL_SETTINGS = (By.CSS_SELECTOR, "div.container-list .app-item img[src*='general'], div.container-list .app-item img[src*='setting']")
