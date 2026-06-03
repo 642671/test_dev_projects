@@ -1,0 +1,701 @@
+2026-06-03 23:00:32.461 | INFO     | ui_conftest | 测试环境 URL: http://192.168.64.7:8181
+2026-06-03 23:00:32.462 | INFO     | smoke_conftest | [冒烟测试] 开始: test_edit_user_info_and_save
+2026-06-03 23:00:32.462 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:00:33.303 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:00:33.303 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:00:33.304 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:00:34.070 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:00:37.081 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:00:37.081 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:00:37.082 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:00:37.082 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:00:37.784 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:00:37.784 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:00:37.785 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:00:37.791 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:00:37.808 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:00:37.898 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:00:37.898 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:00:37.898 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:00:37.903 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:00:37.956 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:00:37.970 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:00:37.970 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:00:37.970 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:00:37.978 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:00:37.978 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:00:37.978 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:00:37.982 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:00:37.995 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:00:38.069 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:00:38.070 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:00:38.070 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:00:38.076 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:00:38.081 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:00:38.081 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:00:38.085 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:00:43.089 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:00:43.097 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:00:46.101 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:00:46.101 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:00:46.111 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:00:47.900 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:00:47.900 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:00:47.916 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:00:50.949 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:00:53.957 | INFO     | TosUserSettingsPage | 点击 Tab: 用户信息
+2026-06-03 23:00:53.958 | INFO     | BasePage | 点击元素: ('xpath', "//div[@class='tab-slider-item' and text()='用户信息']")
+2026-06-03 23:01:03.984 | ERROR    | BasePage | 等待元素可点击超时: ('xpath', "//div[@class='tab-slider-item' and text()='用户信息']")
+2026-06-03 23:01:04.255 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/click_timeout_20260603_230103_984632.png
+2026-06-03 23:01:04.535 | ERROR    | conftest | 测试失败，截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/FAIL_test_edit_user_info_and_save_20260603_230104.png
+2026-06-03 23:01:04.792 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/user_settings_test_end_20260603_230104_536220.png
+2026-06-03 23:01:04.897 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:01:04.898 | INFO     | smoke_conftest | [冒烟测试] 结束: test_edit_user_info_and_save
+2026-06-03 23:03:00.289 | INFO     | ui_conftest | 测试环境 URL: http://192.168.64.7:8181
+2026-06-03 23:03:00.290 | INFO     | smoke_conftest | [冒烟测试] 开始: test_edit_user_info_and_save
+2026-06-03 23:03:00.290 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:03:01.424 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:03:01.425 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:03:01.425 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:03:01.493 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:03:04.502 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:03:04.502 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:03:04.503 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:03:04.503 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:03:05.585 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:03:05.585 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:03:05.585 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:03:05.588 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:03:05.600 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:03:05.673 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:03:05.674 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:03:05.674 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:03:05.679 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:03:05.727 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:03:05.736 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:03:05.736 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:03:05.736 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:03:05.741 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:03:05.741 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:03:05.741 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:03:05.748 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:03:05.758 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:03:05.820 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:03:05.820 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:03:05.820 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:03:05.827 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:03:05.831 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:03:05.831 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:03:05.833 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:03:10.838 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:03:10.848 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:03:13.853 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:03:13.853 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:03:13.860 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:03:15.636 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:03:15.636 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:03:15.647 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:03:18.689 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:03:21.696 | INFO     | TosUserSettingsPage | 点击 Tab: 用户信息
+2026-06-03 23:03:21.697 | INFO     | BasePage | 点击元素: ('xpath', "//div[@class='tab-slider-item' and text()='用户信息']")
+2026-06-03 23:03:31.735 | ERROR    | BasePage | 等待元素可点击超时: ('xpath', "//div[@class='tab-slider-item' and text()='用户信息']")
+2026-06-03 23:03:32.032 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/click_timeout_20260603_230331_736695.png
+2026-06-03 23:03:32.354 | ERROR    | conftest | 测试失败，截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/FAIL_test_edit_user_info_and_save_20260603_230332.png
+2026-06-03 23:03:32.621 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/user_settings_test_end_20260603_230332_354836.png
+2026-06-03 23:03:32.722 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:03:32.723 | INFO     | smoke_conftest | [冒烟测试] 结束: test_edit_user_info_and_save
+2026-06-03 23:05:14.694 | INFO     | ui_conftest | 测试环境 URL: http://192.168.64.7:8181
+2026-06-03 23:05:14.695 | INFO     | smoke_conftest | [冒烟测试] 开始: test_edit_user_info_and_save
+2026-06-03 23:05:14.695 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:05:15.819 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:05:15.820 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:05:15.820 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:05:15.891 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:05:18.903 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:05:18.903 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:05:18.903 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:05:18.903 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:05:20.314 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:05:20.314 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:05:20.314 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:05:20.317 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:05:20.328 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:05:20.397 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:05:20.397 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:05:20.397 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:05:20.400 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:05:20.443 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:05:20.452 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:05:20.452 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:05:20.452 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:05:20.458 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:05:20.458 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:05:20.458 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:05:20.463 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:05:20.470 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:05:20.529 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:05:20.529 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:05:20.529 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:05:20.534 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:05:20.538 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:05:20.538 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:05:20.540 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:05:25.548 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:05:25.554 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:05:28.555 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:05:28.555 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:05:28.561 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:05:30.343 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:05:30.344 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:05:30.355 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:05:33.392 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:05:36.398 | DEBUG    | BasePage | 等待元素可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']"), 超时: 10s
+2026-06-03 23:05:36.410 | DEBUG    | BasePage | 元素已可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']")
+2026-06-03 23:05:38.411 | INFO     | TosUserSettingsPage | 编辑用户信息: 描述='ui自动化冒烟测试', 邮箱='1240676024@qq.com', 电话='14776426718'
+2026-06-03 23:05:38.411 | INFO     | TosUserSettingsPage | 输入描述: ui自动化冒烟测试
+2026-06-03 23:05:38.970 | INFO     | TosUserSettingsPage | 输入密保邮箱: 1240676024@qq.com
+2026-06-03 23:05:39.537 | INFO     | TosUserSettingsPage | 输入电话号码: 14776426718
+2026-06-03 23:05:40.089 | INFO     | TosUserSettingsPage | 点击应用按钮
+2026-06-03 23:05:40.090 | DEBUG    | BasePage | 查找元素: ('css selector', 'button.button.emphasis'), 超时: 10s
+2026-06-03 23:05:40.100 | DEBUG    | BasePage | 元素已找到: ('css selector', 'button.button.emphasis')
+2026-06-03 23:05:43.106 | DEBUG    | BasePage | 等待元素可见: ('xpath', "//*[contains(text(),'成功')]"), 超时: 10s
+2026-06-03 23:05:53.403 | ERROR    | BasePage | 等待元素可见超时: ('xpath', "//*[contains(text(),'成功')]")
+2026-06-03 23:05:53.701 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/wait_visible_timeout_20260603_230553_403505.png
+2026-06-03 23:05:53.701 | WARNING  | TosUserSettingsPage | 未检测到'设置成功!'提示
+2026-06-03 23:05:54.003 | ERROR    | conftest | 测试失败，截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/FAIL_test_edit_user_info_and_save_20260603_230553.png
+2026-06-03 23:05:54.282 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/user_settings_test_end_20260603_230554_003743.png
+2026-06-03 23:05:54.385 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:05:54.385 | INFO     | smoke_conftest | [冒烟测试] 结束: test_edit_user_info_and_save
+2026-06-03 23:06:23.876 | INFO     | ui_conftest | 测试环境 URL: http://192.168.64.7:8181
+2026-06-03 23:06:23.877 | INFO     | smoke_conftest | [冒烟测试] 开始: test_edit_user_info_and_save
+2026-06-03 23:06:23.877 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:06:24.735 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:06:24.735 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:06:24.735 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:06:25.424 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:06:28.434 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:06:28.434 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:06:28.435 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:06:28.435 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:06:29.103 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:06:29.103 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:06:29.103 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:06:29.107 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:06:29.121 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:06:29.188 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:06:29.189 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:06:29.189 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:06:29.194 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:06:29.237 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:06:29.250 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:06:29.250 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:06:29.250 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:06:29.257 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:06:29.257 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:06:29.257 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:06:29.261 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:06:29.268 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:06:29.324 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:06:29.324 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:06:29.324 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:06:29.330 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:06:29.335 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:06:29.335 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:06:29.338 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:06:34.345 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:06:34.350 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:06:37.354 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:06:37.355 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:06:37.363 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:06:39.137 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:06:39.137 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:06:39.144 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:06:42.189 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:06:45.199 | DEBUG    | BasePage | 等待元素可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']"), 超时: 10s
+2026-06-03 23:06:45.206 | DEBUG    | BasePage | 元素已可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']")
+2026-06-03 23:06:47.211 | INFO     | TosUserSettingsPage | 编辑用户信息: 描述='ui自动化冒烟测试', 邮箱='1240676024@qq.com', 电话='14776426718'
+2026-06-03 23:06:47.212 | INFO     | TosUserSettingsPage | 输入描述: ui自动化冒烟测试
+2026-06-03 23:06:47.774 | INFO     | TosUserSettingsPage | 输入密保邮箱: 1240676024@qq.com
+2026-06-03 23:06:48.337 | INFO     | TosUserSettingsPage | 输入电话号码: 14776426718
+2026-06-03 23:06:48.906 | INFO     | TosUserSettingsPage | 点击应用按钮
+2026-06-03 23:06:48.906 | DEBUG    | BasePage | 查找元素: ('css selector', 'button.button.emphasis'), 超时: 10s
+2026-06-03 23:06:48.912 | DEBUG    | BasePage | 元素已找到: ('css selector', 'button.button.emphasis')
+2026-06-03 23:06:51.916 | DEBUG    | BasePage | 等待元素可见: ('xpath', "//*[contains(text(),'成功')]"), 超时: 10s
+2026-06-03 23:07:02.171 | ERROR    | BasePage | 等待元素可见超时: ('xpath', "//*[contains(text(),'成功')]")
+2026-06-03 23:07:02.548 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/wait_visible_timeout_20260603_230702_172342.png
+2026-06-03 23:07:02.548 | WARNING  | TosUserSettingsPage | 未检测到'设置成功!'提示
+2026-06-03 23:07:02.958 | ERROR    | conftest | 测试失败，截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/FAIL_test_edit_user_info_and_save_20260603_230702.png
+2026-06-03 23:07:03.262 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/user_settings_test_end_20260603_230702_959565.png
+2026-06-03 23:07:03.377 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:07:03.377 | INFO     | smoke_conftest | [冒烟测试] 结束: test_edit_user_info_and_save
+2026-06-03 23:09:38.693 | INFO     | ui_conftest | 测试环境 URL: http://192.168.64.7:8181
+2026-06-03 23:09:38.693 | INFO     | smoke_conftest | [冒烟测试] 开始: test_edit_user_info_and_save
+2026-06-03 23:09:38.693 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:09:39.726 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:09:39.727 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:09:39.727 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:09:39.797 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:09:42.806 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:09:42.806 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:09:42.806 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:09:42.806 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:09:44.257 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:09:44.257 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:09:44.257 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:09:44.259 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:09:44.271 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:09:44.340 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:09:44.340 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:09:44.340 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:09:44.344 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:09:44.386 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:09:44.399 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:09:44.399 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:09:44.399 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:09:44.406 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:09:44.406 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:09:44.406 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:09:44.410 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:09:44.417 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:09:44.473 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:09:44.473 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:09:44.473 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:09:44.479 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:09:44.482 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:09:44.482 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:09:44.484 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:09:49.492 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:09:49.497 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:09:52.503 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:09:52.503 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:09:52.510 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:09:54.290 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:09:54.290 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:09:54.301 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:09:57.340 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:10:00.343 | DEBUG    | BasePage | 等待元素可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']"), 超时: 10s
+2026-06-03 23:10:00.363 | DEBUG    | BasePage | 元素已可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']")
+2026-06-03 23:10:02.368 | INFO     | TosUserSettingsPage | 编辑用户信息: 描述='ui自动化冒烟测试', 邮箱='1240676024@qq.com', 电话='14776426718'
+2026-06-03 23:10:02.368 | INFO     | TosUserSettingsPage | 输入描述: ui自动化冒烟测试
+2026-06-03 23:10:02.928 | INFO     | TosUserSettingsPage | 输入密保邮箱: 1240676024@qq.com
+2026-06-03 23:10:03.490 | INFO     | TosUserSettingsPage | 输入电话号码: 14776426718
+2026-06-03 23:10:04.043 | INFO     | TosUserSettingsPage | 点击应用按钮
+2026-06-03 23:10:04.043 | DEBUG    | BasePage | 查找元素: ('css selector', 'button.button.emphasis'), 超时: 10s
+2026-06-03 23:10:04.051 | DEBUG    | BasePage | 元素已找到: ('css selector', 'button.button.emphasis')
+2026-06-03 23:10:10.126 | WARNING  | TosUserSettingsPage | 未检测到成功提示
+2026-06-03 23:10:10.456 | ERROR    | conftest | 测试失败，截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/FAIL_test_edit_user_info_and_save_20260603_231010.png
+2026-06-03 23:10:10.745 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/user_settings_test_end_20260603_231010_457379.png
+2026-06-03 23:10:10.850 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:10:10.850 | INFO     | smoke_conftest | [冒烟测试] 结束: test_edit_user_info_and_save
+2026-06-03 23:12:49.851 | INFO     | ui_conftest | 测试环境 URL: http://192.168.64.7:8181
+2026-06-03 23:12:49.852 | INFO     | smoke_conftest | [冒烟测试] 开始: test_edit_user_info_and_save
+2026-06-03 23:12:49.852 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:12:50.873 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:12:50.874 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:12:50.874 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:12:50.947 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:12:53.959 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:12:53.959 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:12:53.959 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:12:53.960 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:12:55.051 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:12:55.051 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:12:55.051 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:12:55.053 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:12:55.066 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:12:55.142 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:12:55.142 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:12:55.142 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:12:55.148 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:12:55.194 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:12:55.202 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:12:55.202 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:12:55.202 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:12:55.212 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:12:55.212 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:12:55.212 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:12:55.216 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:12:55.224 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:12:55.291 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:12:55.291 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:12:55.291 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:12:55.297 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:12:55.302 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:12:55.302 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:12:55.307 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:13:00.316 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:13:00.324 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:13:03.327 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:13:03.328 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:13:03.336 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:13:05.116 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:13:05.116 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:13:05.140 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:13:08.179 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:13:11.186 | DEBUG    | BasePage | 等待元素可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']"), 超时: 10s
+2026-06-03 23:13:11.201 | DEBUG    | BasePage | 元素已可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']")
+2026-06-03 23:13:13.205 | INFO     | TosUserSettingsPage | 编辑用户信息: 描述='ui自动化冒烟测试', 邮箱='1240676024@qq.com', 电话='14776426718'
+2026-06-03 23:13:13.206 | INFO     | TosUserSettingsPage | 输入描述: ui自动化冒烟测试
+2026-06-03 23:13:13.768 | INFO     | TosUserSettingsPage | 输入密保邮箱: 1240676024@qq.com
+2026-06-03 23:13:14.325 | INFO     | TosUserSettingsPage | 输入电话号码: 14776426718
+2026-06-03 23:13:14.884 | INFO     | TosUserSettingsPage | 点击应用按钮
+2026-06-03 23:13:14.884 | DEBUG    | BasePage | 查找元素: ('css selector', 'button.button.emphasis'), 超时: 10s
+2026-06-03 23:13:14.892 | DEBUG    | BasePage | 元素已找到: ('css selector', 'button.button.emphasis')
+2026-06-03 23:13:15.728 | INFO     | TosUserSettingsPage | 检测到成功提示（页面源码中）
+2026-06-03 23:13:16.046 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/after_edit_user_info_success_20260603_231315_728987.png
+2026-06-03 23:13:16.046 | INFO     | TestTosUserSettings | TC_SETTINGS_006 通过：编辑用户信息并保存成功，'设置成功!'提示已出现
+2026-06-03 23:13:16.316 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/user_settings_test_end_20260603_231316_048698.png
+2026-06-03 23:13:16.416 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:13:16.416 | INFO     | smoke_conftest | [冒烟测试] 结束: test_edit_user_info_and_save
+2026-06-03 23:17:47.159 | INFO     | ui_conftest | 测试环境 URL: http://192.168.64.7:8181
+2026-06-03 23:17:47.159 | INFO     | smoke_conftest | [冒烟测试] 开始: test_edit_user_info_and_save
+2026-06-03 23:17:47.160 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:17:48.240 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:17:48.242 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:17:48.242 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:17:48.288 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:17:51.301 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:17:51.301 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:17:51.301 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:17:51.301 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:17:52.113 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:17:52.113 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:17:52.113 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:17:52.117 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:17:52.132 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:17:52.219 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:17:52.219 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:17:52.219 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:17:52.225 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:17:52.284 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:17:52.294 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:17:52.294 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:17:52.294 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:17:52.303 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:17:52.303 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:17:52.303 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:17:52.307 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:17:52.319 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:17:52.388 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:17:52.389 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:17:52.389 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:17:52.394 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:17:52.400 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:17:52.400 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:17:52.405 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:17:57.411 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:17:57.427 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:18:00.431 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:18:00.436 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:18:00.444 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:18:02.224 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:18:02.224 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:18:02.235 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:18:05.269 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:18:08.280 | DEBUG    | BasePage | 等待元素可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']"), 超时: 10s
+2026-06-03 23:18:08.293 | DEBUG    | BasePage | 元素已可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']")
+2026-06-03 23:18:10.297 | INFO     | TosUserSettingsPage | 编辑用户信息: 描述='ui自动化冒烟测试', 邮箱='1240676024@qq.com', 电话='14776426718'
+2026-06-03 23:18:10.298 | INFO     | TosUserSettingsPage | 输入描述: ui自动化冒烟测试
+2026-06-03 23:18:10.858 | INFO     | TosUserSettingsPage | 输入密保邮箱: 1240676024@qq.com
+2026-06-03 23:18:11.425 | INFO     | TosUserSettingsPage | 输入电话号码: 14776426718
+2026-06-03 23:18:11.985 | INFO     | TosUserSettingsPage | 点击应用按钮
+2026-06-03 23:18:11.985 | DEBUG    | BasePage | 查找元素: ('css selector', 'button.button.emphasis'), 超时: 10s
+2026-06-03 23:18:11.992 | DEBUG    | BasePage | 元素已找到: ('css selector', 'button.button.emphasis')
+2026-06-03 23:18:17.885 | WARNING  | TosUserSettingsPage | 未检测到成功提示
+2026-06-03 23:18:18.199 | ERROR    | conftest | 测试失败，截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/FAIL_test_edit_user_info_and_save_20260603_231817.png
+2026-06-03 23:18:18.485 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/user_settings_test_end_20260603_231818_199920.png
+2026-06-03 23:18:18.587 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:18:18.587 | INFO     | smoke_conftest | [冒烟测试] 结束: test_edit_user_info_and_save
+2026-06-03 23:18:19.152 | INFO     | smoke_conftest | [冒烟测试] 开始: test_other_tab_check_and_apply
+2026-06-03 23:18:19.152 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:18:20.468 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:18:20.469 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:18:20.469 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:18:20.512 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:18:23.518 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:18:23.518 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:18:23.518 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:18:23.518 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:18:25.087 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:18:25.088 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:18:25.088 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:18:25.092 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:18:25.104 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:18:25.175 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:18:25.175 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:18:25.175 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:18:25.180 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:18:25.230 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:18:25.240 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:18:25.241 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:18:25.241 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:18:25.250 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:18:25.250 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:18:25.250 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:18:25.254 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:18:25.263 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:18:25.319 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:18:25.319 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:18:25.319 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:18:25.325 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:18:25.331 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:18:25.331 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:18:25.333 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:18:30.340 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:18:30.346 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:18:33.348 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:18:33.348 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:18:33.356 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:18:35.136 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:18:35.136 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:18:35.152 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:18:38.184 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:18:41.192 | INFO     | TosUserSettingsPage | 点击 Tab: 其它
+2026-06-03 23:18:41.192 | INFO     | BasePage | 点击元素: ('xpath', "//div[contains(@class,'tab-slider-item') and contains(text(),'其它')]")
+2026-06-03 23:18:41.228 | INFO     | BasePage | 元素点击成功: ('xpath', "//div[contains(@class,'tab-slider-item') and contains(text(),'其它')]")
+2026-06-03 23:18:44.238 | INFO     | TosUserSettingsPage | 勾选'其它' Tab 所有复选框
+2026-06-03 23:18:44.276 | INFO     | TosUserSettingsPage | '其它' Tab 复选框数量: 3
+2026-06-03 23:18:44.297 | INFO     | TosUserSettingsPage |   勾选第 1 个复选框
+2026-06-03 23:18:44.623 | INFO     | TosUserSettingsPage |   勾选第 2 个复选框
+2026-06-03 23:18:44.957 | INFO     | TosUserSettingsPage |   勾选第 3 个复选框
+2026-06-03 23:18:46.267 | INFO     | TosUserSettingsPage | 点击应用按钮
+2026-06-03 23:18:46.267 | DEBUG    | BasePage | 查找元素: ('css selector', 'button.button.emphasis'), 超时: 10s
+2026-06-03 23:18:46.276 | DEBUG    | BasePage | 元素已找到: ('css selector', 'button.button.emphasis')
+2026-06-03 23:18:47.109 | INFO     | TosUserSettingsPage | 检测到成功提示（页面源码中）
+2026-06-03 23:18:47.441 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/after_other_tab_check_apply_20260603_231847_109288.png
+2026-06-03 23:18:47.441 | INFO     | TestTosUserSettings | TC_SETTINGS_007 通过：其它 Tab 勾选并应用成功，'操作成功!'提示已出现
+2026-06-03 23:18:47.729 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/user_settings_test_end_20260603_231847_443183.png
+2026-06-03 23:18:47.829 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:18:47.830 | INFO     | smoke_conftest | [冒烟测试] 结束: test_other_tab_check_and_apply
+2026-06-03 23:19:51.729 | INFO     | ui_conftest | 测试环境 URL: http://192.168.64.7:8181
+2026-06-03 23:19:51.730 | INFO     | smoke_conftest | [冒烟测试] 开始: test_edit_user_info_and_save
+2026-06-03 23:19:51.730 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:19:52.713 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:19:52.714 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:19:52.714 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:19:52.757 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:19:55.769 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:19:55.769 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:19:55.769 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:19:55.769 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:19:56.820 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:19:56.820 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:19:56.820 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:19:56.823 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:19:56.836 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:19:56.906 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:19:56.906 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:19:56.907 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:19:56.911 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:19:56.956 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:19:56.969 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:19:56.969 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:19:56.969 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:19:56.977 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:19:56.977 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:19:56.977 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:19:56.980 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:19:56.986 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:19:57.047 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:19:57.047 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:19:57.047 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:19:57.051 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:19:57.054 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:19:57.054 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:19:57.056 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:20:02.063 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:20:02.069 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:20:05.073 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:20:05.073 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:20:05.077 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:20:06.867 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:20:06.867 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:20:06.875 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:20:09.913 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:20:12.918 | DEBUG    | BasePage | 等待元素可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']"), 超时: 10s
+2026-06-03 23:20:12.932 | DEBUG    | BasePage | 元素已可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']")
+2026-06-03 23:20:14.937 | INFO     | TosUserSettingsPage | 编辑用户信息: 描述='ui自动化冒烟测试_232014', 邮箱='1240676024@qq.com', 电话='14776426718'
+2026-06-03 23:20:14.937 | INFO     | TosUserSettingsPage | 输入描述: ui自动化冒烟测试_232014
+2026-06-03 23:20:15.503 | INFO     | TosUserSettingsPage | 输入密保邮箱: 1240676024@qq.com
+2026-06-03 23:20:16.062 | INFO     | TosUserSettingsPage | 输入电话号码: 14776426718
+2026-06-03 23:20:16.615 | INFO     | TosUserSettingsPage | 点击应用按钮
+2026-06-03 23:20:16.615 | DEBUG    | BasePage | 查找元素: ('css selector', 'button.button.emphasis'), 超时: 10s
+2026-06-03 23:20:16.622 | DEBUG    | BasePage | 元素已找到: ('css selector', 'button.button.emphasis')
+2026-06-03 23:20:22.528 | WARNING  | TosUserSettingsPage | 未检测到成功提示
+2026-06-03 23:20:22.870 | ERROR    | conftest | 测试失败，截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/FAIL_test_edit_user_info_and_save_20260603_232022.png
+2026-06-03 23:20:23.165 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/user_settings_test_end_20260603_232022_871402.png
+2026-06-03 23:20:23.271 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:20:23.271 | INFO     | smoke_conftest | [冒烟测试] 结束: test_edit_user_info_and_save
+2026-06-03 23:20:23.687 | INFO     | smoke_conftest | [冒烟测试] 开始: test_other_tab_check_and_apply
+2026-06-03 23:20:23.687 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:20:25.192 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:20:25.192 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:20:25.193 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:20:25.226 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:20:28.233 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:20:28.233 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:20:28.233 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:20:28.233 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:20:29.555 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:20:29.555 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:20:29.555 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:20:29.560 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:20:29.571 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:20:29.639 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:20:29.639 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:20:29.639 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:20:29.644 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:20:29.691 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:20:29.700 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:20:29.700 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:20:29.700 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:20:29.709 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:20:29.709 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:20:29.709 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:20:29.714 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:20:29.721 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:20:29.779 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:20:29.779 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:20:29.779 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:20:29.784 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:20:29.787 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:20:29.788 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:20:29.790 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:20:34.799 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:20:34.804 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:20:37.809 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:20:37.810 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:20:37.816 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:20:39.589 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:20:39.589 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:20:39.596 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:20:42.625 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:20:45.630 | INFO     | TosUserSettingsPage | 点击 Tab: 其它
+2026-06-03 23:20:45.631 | INFO     | BasePage | 点击元素: ('xpath', "//div[contains(@class,'tab-slider-item') and contains(text(),'其它')]")
+2026-06-03 23:20:45.665 | INFO     | BasePage | 元素点击成功: ('xpath', "//div[contains(@class,'tab-slider-item') and contains(text(),'其它')]")
+2026-06-03 23:20:48.669 | INFO     | TosUserSettingsPage | 勾选'其它' Tab 所有复选框
+2026-06-03 23:20:48.702 | INFO     | TosUserSettingsPage | '其它' Tab 复选框数量: 3
+2026-06-03 23:20:49.712 | INFO     | TosUserSettingsPage | 点击应用按钮
+2026-06-03 23:20:49.713 | DEBUG    | BasePage | 查找元素: ('css selector', 'button.button.emphasis'), 超时: 10s
+2026-06-03 23:20:49.722 | DEBUG    | BasePage | 元素已找到: ('css selector', 'button.button.emphasis')
+2026-06-03 23:20:55.648 | WARNING  | TosUserSettingsPage | 未检测到成功提示
+2026-06-03 23:20:55.922 | ERROR    | conftest | 测试失败，截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/FAIL_test_other_tab_check_and_apply_20260603_232055.png
+2026-06-03 23:20:56.179 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/user_settings_test_end_20260603_232055_923382.png
+2026-06-03 23:20:56.285 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:20:56.285 | INFO     | smoke_conftest | [冒烟测试] 结束: test_other_tab_check_and_apply
+2026-06-03 23:21:29.879 | INFO     | ui_conftest | 测试环境 URL: http://192.168.64.7:8181
+2026-06-03 23:21:29.879 | INFO     | smoke_conftest | [冒烟测试] 开始: test_edit_user_info_and_save
+2026-06-03 23:21:29.879 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:21:31.505 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:21:31.506 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:21:31.506 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:21:31.546 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:21:34.554 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:21:34.554 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:21:34.554 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:21:34.554 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:21:36.220 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:21:36.220 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:21:36.220 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:21:36.224 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:21:36.236 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:21:36.305 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:21:36.305 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:21:36.305 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:21:36.310 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:21:36.355 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:21:36.371 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:21:36.371 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:21:36.371 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:21:36.378 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:21:36.378 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:21:36.378 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:21:36.381 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:21:36.387 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:21:36.444 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:21:36.444 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:21:36.444 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:21:36.449 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:21:36.453 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:21:36.453 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:21:36.455 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:21:41.462 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:21:41.467 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:21:44.471 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:21:44.473 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:21:44.480 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:21:46.260 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:21:46.260 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:21:46.269 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:21:49.310 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:21:52.316 | DEBUG    | BasePage | 等待元素可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']"), 超时: 10s
+2026-06-03 23:21:52.327 | DEBUG    | BasePage | 元素已可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']")
+2026-06-03 23:21:54.330 | INFO     | TosUserSettingsPage | 编辑用户信息: 描述='ui自动化冒烟测试_232154', 邮箱='1240676024@qq.com', 电话='14776426718'
+2026-06-03 23:21:54.331 | INFO     | TosUserSettingsPage | 输入描述: ui自动化冒烟测试_232154
+2026-06-03 23:21:54.908 | INFO     | TosUserSettingsPage | 输入密保邮箱: 1240676024@qq.com
+2026-06-03 23:21:55.459 | INFO     | TosUserSettingsPage | 输入电话号码: 14776426718
+2026-06-03 23:21:56.024 | INFO     | TosUserSettingsPage | 点击应用按钮
+2026-06-03 23:21:56.024 | DEBUG    | BasePage | 查找元素: ('css selector', 'button.button.emphasis'), 超时: 10s
+2026-06-03 23:21:56.033 | DEBUG    | BasePage | 元素已找到: ('css selector', 'button.button.emphasis')
+2026-06-03 23:22:01.959 | WARNING  | TosUserSettingsPage | 未检测到成功提示
+2026-06-03 23:22:02.258 | ERROR    | conftest | 测试失败，截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/FAIL_test_edit_user_info_and_save_20260603_232201.png
+2026-06-03 23:22:02.519 | INFO     | BasePage | 截图已保存: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/evidence/user_settings_test_end_20260603_232202_258382.png
+2026-06-03 23:22:02.620 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:22:02.620 | INFO     | smoke_conftest | [冒烟测试] 结束: test_edit_user_info_and_save
+2026-06-03 23:23:26.768 | INFO     | ui_conftest | 测试环境 URL: http://192.168.64.7:8181
+2026-06-03 23:23:26.768 | INFO     | smoke_conftest | [冒烟测试] 开始: test_edit_user_info_and_save
+2026-06-03 23:23:26.768 | INFO     | ui_conftest | 初始化浏览器: type=chrome, headless=False
+2026-06-03 23:23:28.294 | INFO     | ui_conftest | 浏览器已启动: chrome
+2026-06-03 23:23:28.294 | INFO     | TosLoginPage | 打开 TOS 登录页面: http://192.168.64.7:8181
+2026-06-03 23:23:28.294 | INFO     | BasePage | 打开页面: http://192.168.64.7:8181
+2026-06-03 23:23:28.326 | INFO     | BasePage | 页面已打开: http://192.168.64.7:8181
+2026-06-03 23:23:31.333 | DEBUG    | DataLoader | 加载 YAML 数据: /Users/miaoqi/Desktop/test_dev_projects/ui_automation/testcases/smoke/../../testdata/tos_login_data.yaml
+2026-06-03 23:23:31.333 | INFO     | TosLoginPage | 执行登录: 用户=test, 保持登录=False
+2026-06-03 23:23:31.333 | INFO     | TosLoginPage | 输入用户名: test
+2026-06-03 23:23:31.334 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 15s
+2026-06-03 23:23:32.580 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:23:32.580 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 内容: 'test'
+2026-06-03 23:23:32.580 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='用户名']"), 超时: 10s
+2026-06-03 23:23:32.583 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='用户名']")
+2026-06-03 23:23:32.596 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:23:32.670 | INFO     | BasePage | 文本输入成功: 'test'
+2026-06-03 23:23:32.670 | INFO     | TosLoginPage | 点击下一步（第一步）
+2026-06-03 23:23:32.670 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:23:32.674 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:23:32.718 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:23:32.728 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:23:32.728 | INFO     | TosLoginPage | 输入密码
+2026-06-03 23:23:32.728 | DEBUG    | BasePage | 等待元素可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:23:32.732 | DEBUG    | BasePage | 元素已可见: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:23:32.732 | INFO     | BasePage | 输入文本到元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 内容: 'Admin123'
+2026-06-03 23:23:32.732 | DEBUG    | BasePage | 查找元素: ('css selector', "input.Xinput-input__inner[placeholder='密码']"), 超时: 10s
+2026-06-03 23:23:32.734 | DEBUG    | BasePage | 元素已找到: ('css selector', "input.Xinput-input__inner[placeholder='密码']")
+2026-06-03 23:23:32.743 | DEBUG    | BasePage | 已清空输入框
+2026-06-03 23:23:32.804 | INFO     | BasePage | 文本输入成功: 'Admin123'
+2026-06-03 23:23:32.805 | INFO     | TosLoginPage | 取消勾选保持登录
+2026-06-03 23:23:32.805 | DEBUG    | BasePage | 查找元素: ('css selector', 'input.input_check'), 超时: 5s
+2026-06-03 23:23:32.810 | DEBUG    | BasePage | 元素已找到: ('css selector', 'input.input_check')
+2026-06-03 23:23:32.815 | INFO     | TosLoginPage | 点击下一步（第二步/登录）
+2026-06-03 23:23:32.815 | DEBUG    | BasePage | 查找元素: ('css selector', 'i.iconfont.iconright'), 超时: 10s
+2026-06-03 23:23:32.818 | DEBUG    | BasePage | 元素已找到: ('css selector', 'i.iconfont.iconright')
+2026-06-03 23:23:37.823 | INFO     | TosLoginPage | 验证登录是否成功...
+2026-06-03 23:23:37.829 | INFO     | TosLoginPage | 登录成功：URL 已变为 http://192.168.64.7:8181/tos/#/desktop
+2026-06-03 23:23:40.832 | INFO     | TosDesktopPage | 在桌面空白区域执行右键操作
+2026-06-03 23:23:40.832 | DEBUG    | BasePage | 查找元素: ('css selector', 'div.desktop_icons'), 超时: 10s
+2026-06-03 23:23:40.838 | DEBUG    | BasePage | 元素已找到: ('css selector', 'div.desktop_icons')
+2026-06-03 23:23:42.613 | INFO     | TosDesktopPage | 点击右键菜单项: 用户设置
+2026-06-03 23:23:42.613 | DEBUG    | BasePage | 查找元素: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']"), 超时: 5s
+2026-06-03 23:23:42.618 | DEBUG    | BasePage | 元素已找到: ('xpath', "//ul[contains(@class,'context-menu-list')]//li[contains(@class,'context-menu-item')]//span[@class='name' and text()='用户设置']")
+2026-06-03 23:23:45.650 | INFO     | TosDesktopPage | 已点击用户设置
+2026-06-03 23:23:48.659 | DEBUG    | BasePage | 等待元素可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']"), 超时: 10s
+2026-06-03 23:23:48.667 | DEBUG    | BasePage | 元素已可见: ('xpath', "//li[contains(@class,'tab-list')]//span[@class='tab-list-title' and text()='账号']")
+2026-06-03 23:23:50.672 | INFO     | TosUserSettingsPage | 编辑用户信息: 描述='ui自动化冒烟测试_232350', 邮箱='1240676024@qq.com', 电话='14776426718'
+2026-06-03 23:23:50.672 | INFO     | TosUserSettingsPage | 输入描述: ui自动化冒烟测试_232350
+2026-06-03 23:23:51.235 | INFO     | TosUserSettingsPage | 输入密保邮箱: 1240676024@qq.com
+2026-06-03 23:23:51.803 | INFO     | TosUserSettingsPage | 输入电话号码: 14776426718
+2026-06-03 23:23:52.380 | INFO     | TosUserSettingsPage | 点击应用按钮
+2026-06-03 23:23:52.380 | DEBUG    | BasePage | 查找元素: ('css selector', 'button.button.emphasis'), 超时: 10s
+2026-06-03 23:23:52.386 | DEBUG    | BasePage | 元素已找到: ('css selector', 'button.button.emphasis')
+2026-06-03 23:23:52.909 | ERROR    | BasePage | 截图保存失败: HTTPConnectionPool(host='localhost', port=52871): Max retries exceeded with url: /session/735b47e4011e5492a13473068c8e7418/screenshot (Caused by NewConnectionError("HTTPConnection(host='localhost', port=52871): Failed to establish a new connection: [Errno 61] Connection refused"))
+2026-06-03 23:23:52.919 | INFO     | ui_conftest | 浏览器已关闭
+2026-06-03 23:23:52.919 | INFO     | smoke_conftest | [冒烟测试] 结束: test_edit_user_info_and_save

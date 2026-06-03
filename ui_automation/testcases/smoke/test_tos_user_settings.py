@@ -145,3 +145,74 @@ class TestTosUserSettings:
         self.settings.take_screenshot("tab_user_info")
         
         logger.info("TC_SETTINGS_005 通过：Tab 切换正常")
+
+    def test_edit_user_info_and_save(self, driver, base_url):
+        """
+        用例：编辑用户信息（描述、邮箱、电话）并保存
+
+        用例编号: TC_SETTINGS_006
+        模块: TOS桌面-用户设置-用户信息
+        前置条件: 已打开用户设置，在"用户信息" Tab
+        操作步骤:
+            1. 在描述输入框输入"ui自动化冒烟测试"
+            2. 在密保邮箱输入框输入"1240676024@qq.com"
+            3. 在电话号码输入框输入"14776426718"
+            4. 点击"应用"按钮
+        预期结果: 出现"设置成功!"的绿色气泡提示
+        """
+        # 确保用户设置已加载（默认就在"用户信息" Tab）
+        assert self.settings.is_settings_loaded(), "用户设置界面未加载"
+        time.sleep(2)
+        
+        # 编辑用户信息并保存（描述加时间戳确保每次值不同）
+        from datetime import datetime
+        timestamp = datetime.now().strftime("%H%M%S")
+        self.settings.edit_user_info(
+            description=f"ui自动化冒烟测试_{timestamp}",
+            email="1240676024@qq.com",
+            phone="14776426718"
+        )
+        
+        # 验证成功提示
+        assert self.settings.is_success_toast_visible(), \
+            "编辑用户信息后应出现'设置成功!'提示"
+        
+        self.settings.take_screenshot("after_edit_user_info_success")
+        logger.info("TC_SETTINGS_006 通过：编辑用户信息并保存成功，'设置成功!'提示已出现")
+
+    def test_other_tab_check_and_apply(self, driver, base_url):
+        """
+        用例：其它 Tab 复选框操作并应用
+
+        用例编号: TC_SETTINGS_007
+        模块: TOS桌面-用户设置-其它
+        前置条件: 已打开用户设置
+        操作步骤:
+            1. 点击"其它" Tab
+            2. 先取消所有已勾选的复选框 → 点击"应用" → 验证成功提示
+            3. 再勾选所有复选框 → 点击"应用" → 验证成功提示
+        预期结果: 两次操作都出现"操作成功!"的绿色气泡提示
+        """
+        # 切换到"其它" Tab
+        self.settings.click_tab_other()
+        time.sleep(2)
+        
+        # 第一步：取消所有勾选并应用
+        self.settings.uncheck_all_other_checkboxes()
+        time.sleep(1)
+        self.settings.click_apply()
+        assert self.settings.is_success_toast_visible(), \
+            "取消勾选后点击应用，应出现'操作成功!'提示"
+        self.settings.take_screenshot("after_uncheck_all_apply")
+        logger.info("TC_SETTINGS_007 步骤1通过：取消所有勾选并应用成功")
+        
+        time.sleep(2)  # 等待 toast 消失
+        
+        # 第二步：勾选所有复选框并应用
+        self.settings.check_all_other_checkboxes()
+        time.sleep(1)
+        self.settings.click_apply()
+        assert self.settings.is_success_toast_visible(), \
+            "勾选复选框后点击应用，应出现'操作成功!'提示"
+        self.settings.take_screenshot("after_check_all_apply")
+        logger.info("TC_SETTINGS_007 步骤2通过：勾选所有并应用成功")
