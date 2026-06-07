@@ -1,0 +1,25 @@
+{
+  "volcano_engine": {
+    "api_key": "ark-b505c5f4-6dbd-4dc3-abc4-79f4a7eabe79-008a8",
+    "base_url": "https://ark.cn-beijing.volces.com/api/coding/v3"
+  },
+  "proxy": {
+    "listen_host": "0.0.0.0",
+    "listen_port": 443,
+    "target_domain": "api.minimax.chat",
+    "cert_file": "certs/minimax_cert.pem",
+    "key_file": "certs/minimax_key.pem"
+  },
+  "model_mapping": {
+    "glm-5.1": "glm-5.1",
+    "doubao-seed-2.0-code": "doubao-seed-2.0-code",
+    "minimax-latest": "minimax-latest",
+    "MiniMax-M1": "doubao-seed-2.0-code",
+    "abab7-chat": "glm-5.1",
+    "abab6.5s-chat": "doubao-seed-2.0-code",
+    "abab6.5-chat": "doubao-seed-2.0-code",
+    "abab5.5-chat": "minimax-latest"
+  },
+  "default_fallback_model": "doubao-seed-2.0-code",
+  "reasoning_effort": "medium"
+}
