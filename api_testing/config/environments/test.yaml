@@ -1,0 +1,15 @@
+# 接口测试 - 测试环境配置
+env_name: "测试环境"
+
+# 接口基础地址（TOS API）
+base_url: "http://192.168.64.7:8181/api/v1"
+
+# 请求超时时间（秒）
+timeout: 30
+
+# 认证 Token（登录后动态获取，初始为空）
+token: ""
+
+# 请求头默认配置
+headers:
+  Content-Type: "application/json"

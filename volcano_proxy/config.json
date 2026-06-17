@@ -1,24 +1,29 @@
 {
-  "volcano_engine": {
+  "_comment": "火山引擎 Coding Plan 反向代理",
+  "upstream": {
     "api_key": "ark-b505c5f4-6dbd-4dc3-abc4-79f4a7eabe79-008a8",
-    "base_url": "https://ark.cn-beijing.volces.com/api/coding/v3"
+    "base_url": "https://ark.cn-beijing.volces.com/api/coding/v3",
+    "strip_v1_prefix": true
   },
   "proxy": {
     "listen_host": "0.0.0.0",
     "listen_port": 443,
-    "target_domain": "api.minimax.chat",
-    "cert_file": "certs/minimax_cert.pem",
-    "key_file": "certs/minimax_key.pem"
+    "target_domain": "api.moonshot.cn",
+    "cert_file": "certs/kimi_cert.pem",
+    "key_file": "certs/kimi_key.pem"
   },
   "model_mapping": {
     "glm-5.1": "glm-5.1",
     "doubao-seed-2.0-code": "doubao-seed-2.0-code",
     "minimax-latest": "minimax-latest",
-    "MiniMax-M1": "doubao-seed-2.0-code",
-    "abab7-chat": "glm-5.1",
-    "abab6.5s-chat": "doubao-seed-2.0-code",
-    "abab6.5-chat": "doubao-seed-2.0-code",
-    "abab5.5-chat": "minimax-latest"
+    "Kimi-for-coding": "glm-5.1",
+    "kimi-for-coding": "glm-5.1",
+    "kimi-k2": "glm-5.1",
+    "kimi-latest": "glm-5.1",
+    "moonshot-v1-8k": "doubao-seed-2.0-code",
+    "moonshot-v1-32k": "doubao-seed-2.0-code",
+    "moonshot-v1-128k": "glm-5.1",
+    "moonshot-v1-auto": "doubao-seed-2.0-code"
   },
   "default_fallback_model": "doubao-seed-2.0-code",
   "reasoning_effort": "medium"

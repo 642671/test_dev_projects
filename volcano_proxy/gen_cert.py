@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-为 api.minimax.chat 生成自签名 SSL 证书
-用于本地 MITM 代理拦截 Qoder 发往 MiniMax 的 HTTPS 请求
+为 api.moonshot.cn 生成自签名 SSL 证书
+用于本地 MITM 代理拦截 Qoder 发往 Kimi 的 HTTPS 请求
 """
 
 import os
@@ -9,9 +9,9 @@ import sys
 import subprocess
 
 CERTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "certs")
-DOMAIN = "api.minimax.chat"
-CERT_FILE = os.path.join(CERTS_DIR, "minimax_cert.pem")
-KEY_FILE = os.path.join(CERTS_DIR, "minimax_key.pem")
+DOMAIN = "api.moonshot.cn"
+CERT_FILE = os.path.join(CERTS_DIR, "kimi_cert.pem")
+KEY_FILE = os.path.join(CERTS_DIR, "kimi_key.pem")
 
 
 def generate_cert():

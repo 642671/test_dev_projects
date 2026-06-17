@@ -12,7 +12,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PID_FILE="$SCRIPT_DIR/proxy.pid"
 HOSTS_FILE="/etc/hosts"
-TARGET_DOMAIN="api.minimax.chat"
+TARGET_DOMAIN="api.moonshot.cn"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -63,7 +63,7 @@ if [ "$1" = "--clean" ]; then
     fi
 
     # 移除系统证书
-    if [ -f "$SCRIPT_DIR/certs/minimax_cert.pem" ]; then
+    if [ -f "$SCRIPT_DIR/certs/kimi_cert.pem" ]; then
         echo -e "  ${YELLOW}[*] 正在移除系统信任证书...${NC}"
         python3 "$SCRIPT_DIR/gen_cert.py" uninstall 2>/dev/null || true
     fi

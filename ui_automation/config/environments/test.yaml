@@ -1,0 +1,16 @@
+# UI 自动化 - 测试环境配置
+env_name: "测试环境"
+
+# TOS 访问地址
+base_url: "http://192.168.64.7:8181"
+
+# 登录账号
+username: "test"
+password: "Admin123"
+
+# 浏览器配置
+browser:
+  type: "chrome"
+  headless: false
+  implicit_wait: 10
+  page_load_timeout: 30

@@ -7,6 +7,10 @@ import os
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+# 优先加载 ui_automation 模块目录（确保 config.settings 取到模块私有配置）
+_MODULE_DIR = os.path.join(os.path.dirname(__file__), '..')
+if os.path.abspath(_MODULE_DIR) not in sys.path:
+    sys.path.insert(0, os.path.abspath(_MODULE_DIR))
 from config.settings import settings
 from common.logger import get_logger
 from common.data_loader import load_yaml_data

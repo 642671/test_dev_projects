@@ -1,0 +1,16 @@
+# UI 自动化 - 开发环境配置
+env_name: "开发环境"
+
+# TOS 访问地址
+base_url: "http://localhost:8181"
+
+# 登录账号
+username: "dev_user"
+password: "dev_password"
+
+# 浏览器配置
+browser:
+  type: "chrome"
+  headless: false
+  implicit_wait: 10
+  page_load_timeout: 30

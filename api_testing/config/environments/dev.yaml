@@ -1,0 +1,9 @@
+# 接口测试 - 开发环境配置
+env_name: "开发环境"
+
+base_url: "http://localhost:8181/api/v1"
+timeout: 30
+token: ""
+
+headers:
+  Content-Type: "application/json"

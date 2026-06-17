@@ -13,7 +13,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PID_FILE="$SCRIPT_DIR/proxy.pid"
 LOG_FILE="$SCRIPT_DIR/proxy.log"
 HOSTS_FILE="/etc/hosts"
-TARGET_DOMAIN="api.minimax.chat"
+TARGET_DOMAIN="api.moonshot.cn"
 
 # 颜色输出
 RED='\033[0;31m'
@@ -37,7 +37,7 @@ fi
 
 # Step 1: 检查证书
 echo -e "${YELLOW}[1/4] 检查 SSL 证书...${NC}"
-if [ ! -f "$SCRIPT_DIR/certs/minimax_cert.pem" ]; then
+if [ ! -f "$SCRIPT_DIR/certs/kimi_cert.pem" ]; then
     echo -e "  证书不存在，正在生成..."
     python3 "$SCRIPT_DIR/gen_cert.py" gen
     echo -e "  ${YELLOW}正在安装证书到系统信任链（需要确认密码）...${NC}"

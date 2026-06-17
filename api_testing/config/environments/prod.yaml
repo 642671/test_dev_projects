@@ -1,0 +1,9 @@
+# 接口测试 - 生产环境配置
+env_name: "生产环境"
+
+base_url: "https://tos.example.com/api/v1"
+timeout: 30
+token: ""
+
+headers:
+  Content-Type: "application/json"

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-火山引擎 Coding Plan 反向代理
-拦截 Qoder 发往 api.minimax.chat 的请求，转发到火山引擎
+DeepSeek / 火山引擎 反向代理
+拦截 Qoder 发往 api.moonshot.cn (Kimi) 的请求，转发到上游 API（DeepSeek/火山引擎）
 
 用法:
   sudo python3 proxy.py                    # 前台运行（需要 sudo 监听 443 端口）
@@ -12,6 +12,7 @@ import json
 import logging
 import os
 import signal
+import socket
 import ssl
 import sys
 import time
@@ -81,13 +82,14 @@ class ProxyHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def _proxy_request(self, method):
-        """核心代理逻辑：拦截请求 → 修改 → 转发到火山引擎"""
+        """核心代理逻辑：拦截请求 → 修改 → 转发到上游 API"""
 
         config = self.config
-        volcano_base_url = config["volcano_engine"]["base_url"]
-        volcano_api_key = config["volcano_engine"]["api_key"]
+        upstream_config = config.get("upstream", config.get("volcano_engine", {}))
+        upstream_base_url = upstream_config["base_url"]
+        upstream_api_key = upstream_config["api_key"]
         model_mapping = config.get("model_mapping", {})
-        fallback_model = config.get("default_fallback_model", "doubao-seed-2.0-code")
+        fallback_model = config.get("default_fallback_model", "deepseek-chat")
         reasoning_effort = config.get("reasoning_effort", "medium")
 
         # 读取请求体
@@ -98,17 +100,37 @@ class ProxyHandler(BaseHTTPRequestHandler):
         original_path = self.path
         logger.info(f"━━━ 收到请求: {method} {original_path}")
 
-        # 构造火山引擎目标 URL
-        # 将 /v1/chat/completions 映射到火山引擎的对应路径
+        # ============================================================
+        # GET /v1/models → 返回模拟模型列表（让 Qoder 看到自定义模型名）
+        if method == "GET" and original_path.rstrip("/") in ("/v1/models", "/models"):
+            logger.info("  → 拦截模型列表请求，返回模拟数据")
+            mock_models = {
+                "object": "list",
+                "data": [
+                    {"id": m, "object": "model", "created": 1700000000, "owned_by": "volcano-proxy"}
+                    for m in model_mapping.keys()
+                ]
+            }
+            mock_body = json.dumps(mock_models).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(mock_body)))
+            self.end_headers()
+            self.wfile.write(mock_body)
+            logger.info(f"  ✓ 返回 {len(model_mapping)} 个模拟模型")
+            return
+
+        # 构造上游目标 URL
+        # 火山引擎 base_url 已含 /v3，需剥离 /v1 前缀
+        # DeepSeek 标准 OpenAI 格式需保留 /v1 前缀
         target_path = original_path
-        if target_path.startswith("/v1/"):
-            # 火山引擎 OpenAI 兼容端点的 base_url 已包含 /v3
-            # 所以路径应该去掉 /v1 前缀
-            target_path = original_path[3:]  # 去掉 /v1，保留 /chat/completions
-        elif not target_path.startswith("/"):
+        strip_v1 = upstream_config.get("strip_v1_prefix", True)
+        if strip_v1 and target_path.startswith("/v1/"):
+            target_path = target_path[3:]  # 去掉 /v1，保留 /chat/completions
+        if not target_path.startswith("/"):
             target_path = "/" + target_path
 
-        target_url = volcano_base_url + target_path
+        target_url = upstream_base_url + target_path
 
         # 修改请求体：替换模型名和推理程度
         modified_body = body
@@ -158,8 +180,8 @@ class ProxyHandler(BaseHTTPRequestHandler):
         logger.info(f"  原始 api-key: {original_api_key}")
         logger.info(f"  原始 x-api-key: {original_x_api_key}")
 
-        # 只设置火山引擎所需的 Bearer 认证头
-        headers["Authorization"] = f"Bearer {volcano_api_key}"
+        # 设置上游 API 所需的 Bearer 认证头
+        headers["Authorization"] = f"Bearer {upstream_api_key}"
 
         # 发送转发请求
         try:
@@ -190,8 +212,10 @@ class ProxyHandler(BaseHTTPRequestHandler):
             if is_streaming:
                 self.send_header("Transfer-Encoding", "chunked")
                 self.end_headers()
+                all_chunks = b""
                 for chunk in resp.iter_content(chunk_size=None, decode_unicode=False):
                     if chunk:
+                        all_chunks += chunk
                         # HTTP chunked encoding
                         chunk_bytes = chunk
                         self.wfile.write(
@@ -200,11 +224,24 @@ class ProxyHandler(BaseHTTPRequestHandler):
                         self.wfile.flush()
                 self.wfile.write(b"0\r\n\r\n")
                 self.wfile.flush()
+                # 记录流式响应内容（前500字符）
+                try:
+                    body_preview = all_chunks.decode("utf-8", errors="replace")[:500]
+                    logger.info(f"  流式响应内容(前500字): {body_preview}")
+                except Exception:
+                    pass
             else:
                 content = resp.content
+
                 self.send_header("Content-Length", str(len(content)))
                 self.end_headers()
                 self.wfile.write(content)
+                # 记录非流式响应内容（前500字符）
+                try:
+                    body_preview = content.decode("utf-8", errors="replace")[:500]
+                    logger.info(f"  响应内容(前500字): {body_preview}")
+                except Exception:
+                    pass
 
             logger.info(f"  ✓ 响应完成 (HTTP {resp.status_code})")
 
@@ -246,8 +283,8 @@ class HealthCheckHandler(BaseHTTPRequestHandler):
         if self.path == "/health":
             body = json.dumps({
                 "status": "running",
-                "proxy": "volcano-engine-coding-plan",
-                "target": "api.minimax.chat → ark.cn-beijing.volces.com",
+                "proxy": "deepseek-upstream-proxy",
+                "target": "api.moonshot.cn → api.deepseek.com",
             }).encode()
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
@@ -301,9 +338,10 @@ def main():
         sys.exit(1)
 
     # 检查 API Key
-    api_key = config["volcano_engine"]["api_key"]
-    if api_key == "YOUR_VOLCANO_ENGINE_API_KEY_HERE":
-        logger.error("[✗] 请先在 config.json 中填写你的火山引擎 API Key!")
+    upstream_config = config.get("upstream", config.get("volcano_engine", {}))
+    api_key = upstream_config["api_key"]
+    if "YOUR" in api_key.upper() or "HERE" in api_key.upper():
+        logger.error("[✗] 请先在 config.json 的 upstream.api_key 中填写你的 DeepSeek API Key!")
         sys.exit(1)
 
     # 设置处理器配置
@@ -311,12 +349,13 @@ def main():
 
     # 打印映射信息
     print()
+    upstream_base_url = upstream_config["base_url"]
     print("=" * 60)
-    print("  🔥 火山引擎 Coding Plan 反向代理")
+    print("  🔥 DeepSeek 上游反向代理")
     print("=" * 60)
     print(f"  拦截域名:  {proxy_config['target_domain']}")
     print(f"  监听端口:  {listen_port}")
-    print(f"  转发目标:  {config['volcano_engine']['base_url']}")
+    print(f"  转发目标:  {upstream_base_url}")
     print(f"  推理程度:  {config.get('reasoning_effort', 'medium')}")
     print()
     print("  模型映射表:")
@@ -328,8 +367,14 @@ def main():
     print("  " + "-" * 50)
     print()
 
-    # 创建 HTTPS 服务器
-    server = HTTPServer((listen_host, listen_port), ProxyHandler)
+    # 创建支持 IPv4+IPv6 双栈的 HTTPS 服务器
+    class DualStackHTTPServer(HTTPServer):
+        address_family = socket.AF_INET6
+        def server_bind(self):
+            # macOS 要求在 bind 之前设置 IPV6_V6ONLY
+            self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
+            super().server_bind()
+    server = DualStackHTTPServer(("::" , listen_port), ProxyHandler)
 
     # 配置 SSL
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)

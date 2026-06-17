@@ -1,0 +1,16 @@
+# UI 自动化 - 生产环境配置
+env_name: "生产环境"
+
+# TOS 访问地址
+base_url: "https://tos.example.com"
+
+# 登录账号
+username: "prod_user"
+password: "prod_password"
+
+# 浏览器配置（生产环境使用无头模式）
+browser:
+  type: "chrome"
+  headless: true
+  implicit_wait: 10
+  page_load_timeout: 30
