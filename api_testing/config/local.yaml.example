@@ -1,0 +1,37 @@
+# ============================================================
+# 接口测试 - 本地覆盖配置模板
+# ============================================================
+# 使用方法：
+#   1. 复制本文件为 local.yaml（在同目录下）
+#   2. 修改 local.yaml 中的配置项为你本机的值
+#   3. local.yaml 已被 .gitignore 排除，不会提交到 Git
+#
+#   Mac:   cp api_testing/config/local.yaml.example api_testing/config/local.yaml
+#   Win:   Copy-Item api_testing\config\local.yaml.example api_testing\config\local.yaml
+#
+# 覆盖规则：
+#   - 先加载 environments/{TEST_ENV}.yaml 作为基础配置
+#   - 再用本文件中的值进行深度合并覆盖
+#   - 只需填写你想覆盖的项，不需要全部列出
+# ============================================================
+
+# --- 最常用的覆盖项 ---
+
+# API 基础地址（家里/公司不同）
+# Mac（家里）示例：
+#   base_url: "http://localhost:8181/api/v1"
+# Windows（公司）示例：
+#   base_url: "http://192.168.64.7:8181/api/v1"
+# base_url: "http://localhost:8181/api/v1"
+
+# --- 其他可选覆盖项（按需取消注释）---
+
+# 请求超时时间（秒）
+# timeout: 60
+
+# 认证 Token
+# token: "your_token_here"
+
+# 请求头覆盖
+# headers:
+#   Authorization: "Bearer your_token"

@@ -3,16 +3,21 @@
 UI 自动化模块专属配置管理器：
 - 读取本模块 config/environments/ 目录下的 YAML 配置文件
 - 支持通过环境变量 TEST_ENV 切换环境（默认 test）
+- 支持 local.yaml 本地覆盖（被 .gitignore 排除，不同步到 Git）
 - 模块内使用：from config.settings import settings
 """
 
 import os
 import yaml
+from common.config_utils import deep_merge
 
 
 class Settings:
     """
     UI 自动化模块配置管理类
+
+    配置加载优先级（后者覆盖前者）：
+        environments/{env}.yaml  →  config/local.yaml
 
     Usage:
         from config.settings import settings
@@ -29,7 +34,12 @@ class Settings:
         self._config = self._load_config()
 
     def _load_config(self) -> dict:
-        """加载对应环境的 YAML 配置文件（路径相对于本文件所在目录）"""
+        """
+        加载配置文件，支持 local.yaml 本地覆盖：
+        1. 加载 environments/{env}.yaml 作为基础配置
+        2. 如果 config/local.yaml 存在，则深合并覆盖基础配置
+        """
+        # 步骤 1：加载环境 YAML
         config_dir = os.path.join(os.path.dirname(__file__), "environments")
         config_file = os.path.join(config_dir, f"{self.env}.yaml")
 
@@ -39,7 +49,16 @@ class Settings:
             )
 
         with open(config_file, "r", encoding="utf-8") as f:
-            return yaml.safe_load(f) or {}
+            config = yaml.safe_load(f) or {}
+
+        # 步骤 2：加载 local.yaml 覆盖（如果存在）
+        local_file = os.path.join(os.path.dirname(__file__), "local.yaml")
+        if os.path.exists(local_file):
+            with open(local_file, "r", encoding="utf-8") as f:
+                local_config = yaml.safe_load(f) or {}
+            config = deep_merge(config, local_config)
+
+        return config
 
     @property
     def base_url(self) -> str:
