@@ -56,4 +56,4 @@ Windows 环境使用 `py -m` 调用 Python/pip。PowerShell 不使用 Bash 的 `
 
 ## Git 状态说明
 
-当前使用 `win` 分支，工作区处于目录迁移尚未提交的状态。已停用的 `tos_api_cli_tester` 保存在本地 `archives/inactive_projects/`，不进入提交；目录重建应拆分为多个主题明确的提交，具体步骤见目录重建方案。
+目录重建已经提交完成，`win` 与 `main` 以本次同步后的同一提交为准。已停用的 `tos_api_cli_tester` 保存在本地 `archives/inactive_projects/`，不进入提交；完整迁移记录见目录重建方案。
