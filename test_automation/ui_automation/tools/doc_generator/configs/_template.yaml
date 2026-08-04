@@ -1,0 +1,44 @@
+# UI自动化测试链路配置模板
+# 
+# 使用说明：
+# 1. 复制此文件为新的配置文件（如 my_chain.yaml）
+# 2. 填写链路信息和步骤
+# 3. 运行生成器生成文档
+
+# 链路名称
+chain_name: "测试链路名称"
+
+# 环境信息
+environment:
+  url: "http://192.168.64.7:8181"
+  env_name: "测试环境"
+
+# 环境准备说明
+preparation: |
+  1. 确保系统可访问
+  2. 准备测试账号
+  3. 清除浏览器缓存
+
+# 变量定义（可在步骤中通过 ${variable_name} 引用）
+variables:
+  username: "test"
+  password: "Admin123"
+
+# 操作步骤
+steps:
+  - name: "步骤名称"
+    description: "操作描述"
+    page: "页面对象类名"  # 如 TosLoginPage
+    action: "方法名"       # 如 input_username
+    args: []              # 方法参数列表，支持 ${variable} 占位符
+    expected: "预期结果"
+    wait_after: 2         # 操作后等待秒数（可选）
+
+  # 示例步骤：
+  # - name: "打开登录页面"
+  #   description: "在浏览器中打开TOS登录页面"
+  #   page: "TosLoginPage"
+  #   action: "open_login_page"
+  #   args: ["${environment.url}"]
+  #   expected: "页面正常加载，显示用户名输入框"
+  #   wait_after: 3

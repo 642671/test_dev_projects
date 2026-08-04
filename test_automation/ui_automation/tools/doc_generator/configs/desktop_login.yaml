@@ -1,0 +1,81 @@
+# TOS桌面登录链路配置
+# 生成"初始化配置超级用户"的UI自动化文档
+
+chain_name: "TOS登录链路"
+
+environment:
+  url: "http://192.168.64.7:8181"
+  env_name: "测试环境"
+
+preparation: |
+  1. 确保TOS系统可访问
+  2. 准备管理员账号：test / Admin123
+  3. 清除浏览器缓存和Cookie
+
+variables:
+  username: "test"
+  password: "Admin123"
+
+steps:
+  # 第一步：打开登录页面
+  - name: "打开登录页面"
+    description: "在浏览器中打开TOS登录页面"
+    page: "TosLoginPage"
+    action: "open_login_page"
+    args: ["${environment.url}"]
+    expected: "页面正常加载，显示用户名输入框和下一步按钮"
+    wait_after: 3
+
+  # 第二步：输入用户名
+  - name: "输入用户名"
+    description: "在用户名输入框输入管理员账号"
+    page: "TosLoginPage"
+    action: "input_username"
+    args: ["${username}"]
+    expected: "用户名输入框显示已输入的内容"
+    wait_after: 1
+
+  # 第三步：点击第一步的下一步
+  - name: "点击第一步下一步"
+    description: "点击右箭头图标进入密码输入步骤"
+    page: "TosLoginPage"
+    action: "click_next_step1"
+    args: []
+    expected: "页面切换到密码输入界面，显示密码输入框"
+    wait_after: 2
+
+  # 第四步：输入密码
+  - name: "输入密码"
+    description: "在密码输入框输入管理员密码"
+    page: "TosLoginPage"
+    action: "input_password"
+    args: ["${password}"]
+    expected: "密码输入框显示掩码字符（圆点或星号）"
+    wait_after: 1
+
+  # 第五步：取消勾选保持登录
+  - name: "取消勾选保持登录"
+    description: "确保保持登录复选框未勾选"
+    page: "TosLoginPage"
+    action: "uncheck_keep_login"
+    args: []
+    expected: "保持登录复选框处于未勾选状态"
+    wait_after: 1
+
+  # 第六步：点击登录
+  - name: "点击登录"
+    description: "点击下一步按钮完成登录"
+    page: "TosLoginPage"
+    action: "click_next_step2"
+    args: []
+    expected: "登录成功，页面跳转到TOS桌面"
+    wait_after: 5
+
+  # 第七步：验证登录成功
+  - name: "验证登录成功"
+    description: "检查是否成功进入桌面页面"
+    page: "TosLoginPage"
+    action: "is_login_successful"
+    args: []
+    expected: "URL包含desktop关键字，页面标题显示TNAS"
+    wait_after: 2

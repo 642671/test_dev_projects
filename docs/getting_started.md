@@ -32,12 +32,12 @@ export TEST_ENV=test
 
 ### UI 自动化测试
 ```bash
-pytest ui_automation/testcases/ -m ui -v
+py -m pytest test_automation/ui_automation/testcases/ -m ui -v
 ```
 
 ### 接口测试
 ```bash
-pytest api_testing/testcases/ -m api -v
+py -m pytest test_automation/api_testing/testcases/ -m api -v
 ```
 
 ### 所有测试
@@ -62,7 +62,7 @@ python example_usage.py
 brew install k6
 
 # 运行示例脚本
-k6 run performance/scripts/example_load_test.js
+k6 run test_automation/performance/scripts/example_load_test.js
 ```
 
 ## 家↔公司 同步工作流

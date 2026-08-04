@@ -1,0 +1,723 @@
+﻿用例ID,所属模块,接口名称,优先级,用例标题,前置条件,请求方法,接口地址,请求头部(Headers),请求参数(Query/Body),操作步骤,预期结果(响应码+响应体关键字段),备注
+API_LOGIN_001,用户管理,用户登录,P0,验证正确邮箱密码登录成功,"1. 系统已创建测试账号admin@qq.com
+2. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": ""admin@qq.com"",
+  ""password"": ""Admin@123""
+}","1. 构造登录请求
+2. 设置请求头及请求参数
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""token"": ""非空"",
+    ""userId"": 大于0,
+    ""expireTime"": 符合时间戳格式
+  }
+}",无
+API_LOGIN_002,用户管理,用户登录,P0,验证邮箱为空登录失败,"1. 系统已创建测试账号
+2. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": """",
+  ""password"": ""Admin@123""
+}","1. 构造登录请求
+2. email设置为空字符串
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 10001,
+  ""message"": ""email is required""
+}",必填校验
+API_LOGIN_003,用户管理,用户登录,P0,验证密码为空登录失败,"1. 系统已创建测试账号
+2. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": ""admin@qq.com"",
+  ""password"": """"
+}","1. 构造登录请求
+2. password设置为空字符串
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 10002,
+  ""message"": ""password is required""
+}",必填校验
+API_LOGIN_004,用户管理,用户登录,P1,验证邮箱格式错误登录失败,"1. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": ""admin@qq"",
+  ""password"": ""Admin@123""
+}","1. 构造登录请求
+2. email设置为无效邮箱格式
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 10003,
+  ""message"": ""invalid email format""
+}",参数格式校验
+API_LOGIN_005,用户管理,用户登录,P0,验证错误密码登录失败,"1. 系统已创建测试账号admin@qq.com
+2. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": ""admin@qq.com"",
+  ""password"": ""Wrong@123""
+}","1. 构造登录请求
+2. password设置为错误密码
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：401
+{
+  ""code"": 10004,
+  ""message"": ""invalid email or password""
+}",业务异常
+API_LOGIN_006,用户管理,用户登录,P0,验证不存在的邮箱登录失败,"1. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": ""notexist@qq.com"",
+  ""password"": ""Admin@123""
+}","1. 构造登录请求
+2. email设置为不存在的邮箱
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：401
+{
+  ""code"": 10004,
+  ""message"": ""invalid email or password""
+}",业务异常
+API_LOGIN_007,用户管理,用户登录,P0,验证缺少email参数登录失败,"1. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""password"": ""Admin@123""
+}","1. 构造登录请求
+2. 请求体中不包含email字段
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 10001,
+  ""message"": ""email is required""
+}",必填校验
+API_LOGIN_008,用户管理,用户登录,P0,验证缺少password参数登录失败,"1. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": ""admin@qq.com""
+}","1. 构造登录请求
+2. 请求体中不包含password字段
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 10002,
+  ""message"": ""password is required""
+}",必填校验
+API_LOGIN_009,用户管理,用户登录,P1,验证邮箱参数类型为数字登录失败,"1. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": 123456,
+  ""password"": ""Admin@123""
+}","1. 构造登录请求
+2. email设置为数字类型
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 10005,
+  ""message"": ""email must be a string""
+}",参数类型校验
+API_LOGIN_010,用户管理,用户登录,P1,验证密码参数类型为数字登录失败,"1. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": ""admin@qq.com"",
+  ""password"": 123456
+}","1. 构造登录请求
+2. password设置为数字类型
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 10006,
+  ""message"": ""password must be a string""
+}",参数类型校验
+API_LOGIN_011,用户管理,用户登录,P2,验证邮箱包含SQL注入字符,"1. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": ""admin' OR '1'='1"",
+  ""password"": ""Admin@123""
+}","1. 构造登录请求
+2. email设置为SQL注入字符
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 10003,
+  ""message"": ""invalid email format""
+}",安全测试
+API_LOGIN_012,用户管理,用户登录,P2,验证邮箱包含XSS脚本,"1. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": ""<script>alert('xss')</script>@qq.com"",
+  ""password"": ""Admin@123""
+}","1. 构造登录请求
+2. email设置为XSS脚本
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 10003,
+  ""message"": ""invalid email format""
+}",安全测试
+API_LOGIN_013,用户管理,用户登录,P2,验证请求体为空对象登录失败,"1. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{}","1. 构造登录请求
+2. 请求体设置为空对象
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 10001,
+  ""message"": ""email is required""
+}",接口健壮性
+API_LOGIN_014,用户管理,用户登录,P1,验证请求体包含多余字段登录成功,"1. 系统已创建测试账号admin@qq.com
+2. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": ""admin@qq.com"",
+  ""password"": ""Admin@123"",
+  ""extraField"": ""test""
+}","1. 构造登录请求
+2. 请求体中包含多余字段
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""token"": ""非空"",
+    ""userId"": 大于0,
+    ""expireTime"": 符合时间戳格式
+  }
+}",接口健壮性
+API_LOGIN_015,用户管理,用户登录,P2,验证密码包含特殊字符登录,"1. 系统已创建含特殊字符密码的测试账号
+2. 用户未登录",POST,/api/user/login,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""email"": ""special@qq.com"",
+  ""password"": ""P@$$w0rd!@#""
+}","1. 构造登录请求
+2. password设置为含特殊字符的密码
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""token"": ""非空"",
+    ""userId"": 大于0,
+    ""expireTime"": 符合时间戳格式
+  }
+}",边界值
+API_POOL_001,存储管理,创建存储池,P0,验证正确参数创建存储池成功,"1. 系统存在可用磁盘disk-001和disk-002
+2. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""test-pool-01"",
+  ""diskIds"": [""disk-001"", ""disk-002""],
+  ""raidLevel"": ""raid5""
+}","1. 构造创建存储池请求
+2. 设置请求头及请求参数
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""poolId"": ""符合UUID格式"",
+    ""status"": ""非空"",
+    ""capacity"": 大于0
+  }
+}",无
+API_POOL_002,存储管理,创建存储池,P0,验证存储池名称为空创建失败,"1. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": """",
+  ""diskIds"": [""disk-001"", ""disk-002""],
+  ""raidLevel"": ""raid5""
+}","1. 构造创建存储池请求
+2. name设置为空字符串
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 20001,
+  ""message"": ""name is required""
+}",必填校验
+API_POOL_003,存储管理,创建存储池,P0,验证缺少diskIds参数创建失败,"1. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""test-pool-01"",
+  ""raidLevel"": ""raid5""
+}","1. 构造创建存储池请求
+2. 请求体中不包含diskIds字段
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 20002,
+  ""message"": ""diskIds is required""
+}",必填校验
+API_POOL_004,存储管理,创建存储池,P0,验证缺少raidLevel参数创建失败,"1. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""test-pool-01"",
+  ""diskIds"": [""disk-001"", ""disk-002""]
+}","1. 构造创建存储池请求
+2. 请求体中不包含raidLevel字段
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 20003,
+  ""message"": ""raidLevel is required""
+}",必填校验
+API_POOL_005,存储管理,创建存储池,P0,验证存储池名称长度为1字符创建成功,"1. 系统存在可用磁盘
+2. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""a"",
+  ""diskIds"": [""disk-001"", ""disk-002""],
+  ""raidLevel"": ""raid0""
+}","1. 构造创建存储池请求
+2. name设置为1个字符
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""poolId"": ""符合UUID格式"",
+    ""status"": ""非空"",
+    ""capacity"": 大于0
+  }
+}",边界值-最小值
+API_POOL_006,存储管理,创建存储池,P0,验证存储池名称长度为32字符创建成功,"1. 系统存在可用磁盘
+2. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""abcdefghijklmnopqrstuvwxyz123456"",
+  ""diskIds"": [""disk-001"", ""disk-002""],
+  ""raidLevel"": ""raid1""
+}","1. 构造创建存储池请求
+2. name设置为32个字符
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""poolId"": ""符合UUID格式"",
+    ""status"": ""非空"",
+    ""capacity"": 大于0
+  }
+}",边界值-最大值
+API_POOL_007,存储管理,创建存储池,P1,验证存储池名称长度为33字符创建失败,"1. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""abcdefghijklmnopqrstuvwxyz1234567"",
+  ""diskIds"": [""disk-001"", ""disk-002""],
+  ""raidLevel"": ""raid5""
+}","1. 构造创建存储池请求
+2. name设置为33个字符
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 20004,
+  ""message"": ""name length must be between 1 and 32""
+}",边界值-超最大值
+API_POOL_008,存储管理,创建存储池,P0,验证raidLevel为无效枚举值创建失败,"1. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""test-pool-01"",
+  ""diskIds"": [""disk-001"", ""disk-002""],
+  ""raidLevel"": ""raid10""
+}","1. 构造创建存储池请求
+2. raidLevel设置为无效枚举值raid10
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 20005,
+  ""message"": ""invalid raidLevel, must be raid0, raid1 or raid5""
+}",枚举值校验
+API_POOL_009,存储管理,创建存储池,P0,验证diskIds为空数组创建失败,"1. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""test-pool-01"",
+  ""diskIds"": [],
+  ""raidLevel"": ""raid5""
+}","1. 构造创建存储池请求
+2. diskIds设置为空数组
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 20006,
+  ""message"": ""diskIds must contain at least one disk""
+}",参数校验
+API_POOL_010,存储管理,创建存储池,P0,验证重复存储池名称创建失败,"1. 系统已创建名为test-pool-01的存储池
+2. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""test-pool-01"",
+  ""diskIds"": [""disk-003"", ""disk-004""],
+  ""raidLevel"": ""raid5""
+}","1. 构造创建存储池请求
+2. name设置为已存在的存储池名称
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：409
+{
+  ""code"": 20007,
+  ""message"": ""storage pool name already exists""
+}",业务异常-重复创建
+API_POOL_011,存储管理,创建存储池,P0,验证使用已占用的磁盘创建失败,"1. 磁盘disk-001已被其他存储池占用
+2. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""test-pool-02"",
+  ""diskIds"": [""disk-001"", ""disk-005""],
+  ""raidLevel"": ""raid1""
+}","1. 构造创建存储池请求
+2. diskIds中包含已被占用的磁盘
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 20008,
+  ""message"": ""disk disk-001 is already in use""
+}",业务异常-资源冲突
+API_POOL_012,存储管理,创建存储池,P1,验证raidLevel参数类型为数字创建失败,"1. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""test-pool-01"",
+  ""diskIds"": [""disk-001"", ""disk-002""],
+  ""raidLevel"": 1
+}","1. 构造创建存储池请求
+2. raidLevel设置为数字类型
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 20009,
+  ""message"": ""raidLevel must be a string""
+}",参数类型校验
+API_POOL_013,存储管理,创建存储池,P1,验证diskIds参数类型为字符串创建失败,"1. 用户已登录且具备存储管理权限",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""name"": ""test-pool-01"",
+  ""diskIds"": ""disk-001"",
+  ""raidLevel"": ""raid5""
+}","1. 构造创建存储池请求
+2. diskIds设置为字符串类型而非数组
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 20010,
+  ""message"": ""diskIds must be an array""
+}",参数类型校验
+API_POOL_014,存储管理,创建存储池,P0,验证Token缺失创建失败,"1. 用户未登录",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json""
+}","{
+  ""name"": ""test-pool-01"",
+  ""diskIds"": [""disk-001"", ""disk-002""],
+  ""raidLevel"": ""raid5""
+}","1. 构造创建存储池请求
+2. 请求头中不包含Authorization字段
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：401
+{
+  ""code"": 40001,
+  ""message"": ""unauthorized, token is required""
+}",权限校验
+API_POOL_015,存储管理,创建存储池,P0,验证Token失效创建失败,"1. 用户使用已过期Token",POST,/api/storage/pool,"{
+  ""Content-Type"": ""application/json"",
+  ""Authorization"": ""Bearer expired_token_12345""
+}","{
+  ""name"": ""test-pool-01"",
+  ""diskIds"": [""disk-001"", ""disk-002""],
+  ""raidLevel"": ""raid5""
+}","1. 构造创建存储池请求
+2. Authorization设置为已失效的Token
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：401
+{
+  ""code"": 40002,
+  ""message"": ""invalid or expired token""
+}",权限校验
+API_VOL_001,存储管理,获取卷列表,P0,验证正确参数获取卷列表成功,"1. 系统中存在存储卷数据
+2. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": 1,
+  ""pageSize"": 20
+}","1. 构造获取卷列表请求
+2. 设置请求头及请求参数
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""totalCount"": 大于等于0,
+    ""volumes"": []或包含volumeId、name、size、status的数组
+  }
+}",无
+API_VOL_002,存储管理,获取卷列表,P0,验证使用默认参数获取卷列表成功,"1. 系统中存在存储卷数据
+2. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{}","1. 构造获取卷列表请求
+2. 不传递任何查询参数
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""totalCount"": 大于等于0,
+    ""volumes"": []或包含volumeId、name、size、status的数组
+  }
+}",默认参数
+API_VOL_003,存储管理,获取卷列表,P1,验证page参数为0获取失败,"1. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": 0,
+  ""pageSize"": 20
+}","1. 构造获取卷列表请求
+2. page设置为0
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 30001,
+  ""message"": ""page must be greater than 0""
+}",边界值-最小值
+API_VOL_004,存储管理,获取卷列表,P0,验证pageSize为1获取成功,"1. 系统中存在存储卷数据
+2. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": 1,
+  ""pageSize"": 1
+}","1. 构造获取卷列表请求
+2. pageSize设置为1
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""totalCount"": 大于等于0,
+    ""volumes"": 数组长度小于等于1
+  }
+}",边界值-最小值
+API_VOL_005,存储管理,获取卷列表,P0,验证pageSize为100获取成功,"1. 系统中存在存储卷数据
+2. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": 1,
+  ""pageSize"": 100
+}","1. 构造获取卷列表请求
+2. pageSize设置为最大值100
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""totalCount"": 大于等于0,
+    ""volumes"": 数组长度小于等于100
+  }
+}",边界值-最大值
+API_VOL_006,存储管理,获取卷列表,P1,验证pageSize为101获取失败,"1. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": 1,
+  ""pageSize"": 101
+}","1. 构造获取卷列表请求
+2. pageSize设置为101超过最大值
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 30002,
+  ""message"": ""pageSize must be between 1 and 100""
+}",边界值-超最大值
+API_VOL_007,存储管理,获取卷列表,P1,验证page参数为字符串类型获取失败,"1. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": ""abc"",
+  ""pageSize"": 20
+}","1. 构造获取卷列表请求
+2. page设置为字符串类型
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 30003,
+  ""message"": ""page must be a number""
+}",参数类型校验
+API_VOL_008,存储管理,获取卷列表,P1,验证pageSize参数为字符串类型获取失败,"1. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": 1,
+  ""pageSize"": ""twenty""
+}","1. 构造获取卷列表请求
+2. pageSize设置为字符串类型
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 30004,
+  ""message"": ""pageSize must be a number""
+}",参数类型校验
+API_VOL_009,存储管理,获取卷列表,P0,验证使用有效poolId过滤获取成功,"1. 系统中存在指定存储池的卷数据
+2. 用户已登录且具备存储查看权限
+3. 已知有效poolId",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": 1,
+  ""pageSize"": 20,
+  ""poolId"": ""550e8400-e29b-41d4-a716-446655440000""
+}","1. 构造获取卷列表请求
+2. poolId设置为有效的UUID
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""totalCount"": 大于等于0,
+    ""volumes"": 数组中所有volume的poolId与请求一致
+  }
+}",过滤条件
+API_VOL_010,存储管理,获取卷列表,P1,验证poolId格式错误获取失败,"1. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": 1,
+  ""pageSize"": 20,
+  ""poolId"": ""invalid-pool-id""
+}","1. 构造获取卷列表请求
+2. poolId设置为无效UUID格式
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 30005,
+  ""message"": ""invalid poolId format""
+}",UUID格式校验
+API_VOL_011,存储管理,获取卷列表,P1,验证查询不存在的poolId返回空列表,"1. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": 1,
+  ""pageSize"": 20,
+  ""poolId"": ""00000000-0000-0000-0000-000000000000""
+}","1. 构造获取卷列表请求
+2. poolId设置为不存在但格式正确的UUID
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：200
+{
+  ""code"": 0,
+  ""message"": ""success"",
+  ""data"": {
+    ""totalCount"": 0,
+    ""volumes"": []
+  }
+}",业务异常-资源不存在
+API_VOL_012,存储管理,获取卷列表,P0,验证Token缺失获取失败,"1. 用户未登录",GET,/api/storage/volume/list,"{}","{
+  ""page"": 1,
+  ""pageSize"": 20
+}","1. 构造获取卷列表请求
+2. 请求头中不包含Authorization字段
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：401
+{
+  ""code"": 40001,
+  ""message"": ""unauthorized, token is required""
+}",权限校验
+API_VOL_013,存储管理,获取卷列表,P0,验证Token失效获取失败,"1. 用户使用已过期Token",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer expired_token_12345""
+}","{
+  ""page"": 1,
+  ""pageSize"": 20
+}","1. 构造获取卷列表请求
+2. Authorization设置为已失效的Token
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：401
+{
+  ""code"": 40002,
+  ""message"": ""invalid or expired token""
+}",权限校验
+API_VOL_014,存储管理,获取卷列表,P2,验证page参数为负数获取失败,"1. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": -1,
+  ""pageSize"": 20
+}","1. 构造获取卷列表请求
+2. page设置为负数
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 30001,
+  ""message"": ""page must be greater than 0""
+}",边界值-负数
+API_VOL_015,存储管理,获取卷列表,P2,验证pageSize为负数获取失败,"1. 用户已登录且具备存储查看权限",GET,/api/storage/volume/list,"{
+  ""Authorization"": ""Bearer ${token}""
+}","{
+  ""page"": 1,
+  ""pageSize"": -1
+}","1. 构造获取卷列表请求
+2. pageSize设置为负数
+3. 发送请求
+4. 查看接口响应
+5. 校验响应结果","HTTP Status：400
+{
+  ""code"": 30002,
+  ""message"": ""pageSize must be between 1 and 100""
+}",边界值-负数

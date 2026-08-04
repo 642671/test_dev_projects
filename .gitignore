@@ -60,9 +60,9 @@ Thumbs.db
 # ===========================================================
 
 # UI 自动化失败截图和报告（每次运行自动生成）
-ui_automation/reports/screenshots/
-ui_automation/reports/*.html
-ui_automation/reports/*.json
+test_automation/ui_automation/reports/screenshots/
+test_automation/ui_automation/reports/*.html
+test_automation/ui_automation/reports/*.json
 
 # 日志文件（运行产物，按需同步）
 # 如需同步历史日志可注释掉下面两行
@@ -73,6 +73,29 @@ logs/*.log
 # === 以下内容全部同步（报告、日志、截图、产出）===
 # ===========================================================
 # 注意：如果截图/报告文件太大导致 push 慢，可以取消下面的注释来排除
-# ui_automation/evidence/screenshots/*.png
+# test_automation/ui_automation/evidence/screenshots/*.png
 # reports/html/
 # reports/allure/
+
+# ===========================================================
+# === 临时文件归档（不提交到 Git）===
+# ===========================================================
+archives/
+verify_screenshots/
+temp_scripts/
+
+# Node.js 依赖
+node_modules/
+
+# 本地编辑器状态
+.obsidian/
+
+# 非工程生成资产
+itachi-v2-run/
+itachi-validate.json
+
+# 个人素材（用户本地维护，勿动）
+miaoqi/
+
+# 存储管理安装包仅本地保留；版本目录说明可正常提交
+storagemanager/**/*.deb

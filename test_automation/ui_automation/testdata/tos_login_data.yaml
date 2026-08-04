@@ -1,0 +1,46 @@
+# TOS 登录测试数据 (参数化版本)
+# 用于 @pytest.mark.parametrize 数据驱动测试
+
+test_cases:
+  - case_id: "TC_LOGIN_001"
+    description: "勾选保持登录登录成功"
+    username: "test"
+    password: "Admin123"
+    keep_login: true
+    expected_result: "success"
+
+  - case_id: "TC_LOGIN_002"
+    description: "不勾选保持登录登录成功"
+    username: "test"
+    password: "Admin123"
+    keep_login: false
+    expected_result: "success"
+
+  - case_id: "TC_LOGIN_003"
+    description: "错误密码登录失败"
+    username: "test"
+    password: "WrongPassword"
+    keep_login: false
+    expected_result: "failure"
+
+  - case_id: "TC_LOGIN_004"
+    description: "空用户名登录失败"
+    username: ""
+    password: "Admin123"
+    keep_login: false
+    expected_result: "failure"
+
+  - case_id: "TC_LOGIN_005"
+    description: "空密码登录失败"
+    username: "test"
+    password: ""
+    keep_login: false
+    expected_result: "failure"
+
+# 登录成功验证 (保留向后兼容)
+valid_login:
+  username: "test"
+  password: "Admin123"
+
+login_success:
+  expected_welcome_contains: "您好"

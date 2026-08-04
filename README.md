@@ -1,122 +1,59 @@
-# 测试自动化工作区
+# 存储管理重构测试工作区
 
-## 项目简介
+本仓库当前以**存储管理应用重构测试**为中心，主要维护接口测试设计真源、Apifox 配套资产、pytest 自动化代码、批处理工具和项目文档。
 
-综合测试自动化框架，涵盖 Web UI 自动化、接口测试、性能测试、测试用例生成等多个模块，支持家↔公司多地协同开发工作流。
+## 核心资产
 
-## 目录结构
+| 路径 | 职责 |
+|---|---|
+| `storagemanager/` | 存储管理应用重构及版本资产；当前业务中心，`.deb` 仅本地保留 |
+| `接口测试用例/` | 接口测试核心交付物：Excel 真源、Apifox 脚本、变量追踪和执行规划 |
+| `test_automation/` | pytest 自动化体系：API、UI、性能测试及公共模块 |
+| `tools/` | 正式、可复用的工具 |
+| `docs/` | 项目文档唯一正式入口 |
+| `temp_scripts/` | 历史批处理工作台；本地只读参考，不作为正式工具入口 |
+| `archives/` | 历史备份和清理快照 |
 
-```
-test_dev_projects/
-├── README.md                    # 项目说明文档
-├── .gitignore                   # Git 忽略规则
-├── requirements.txt             # Python 依赖
-├── pytest.ini                   # pytest 配置
-├── conftest.py                  # pytest 全局 fixture
-├── config/                      # 配置模块
-│   ├── settings.py              # 全局配置管理
-│   └── environments/            # 多环境配置
-│       ├── dev.yaml
-│       ├── test.yaml
-│       └── prod.yaml
-├── ui_automation/               # Web UI 自动化测试
-│   ├── pages/                   # Page Object 页面对象
-│   ├── testcases/               # UI 测试用例
-│   ├── testdata/                # UI 测试数据
-│   └── evidence/                # 截图/录屏证据
-├── api_testing/                 # 接口测试
-│   ├── api_client/              # API 客户端封装
-│   ├── testcases/               # 接口测试用例
-│   └── testdata/                # 接口测试数据
-├── performance/                 # 性能测试
-│   ├── scripts/                 # 性能测试脚本
-│   └── reports/                 # 性能测试报告
-├── testcase_generator/          # 测试用例生成器
-│   ├── generator.py             # 生成器核心逻辑
-│   └── templates/               # 用例模板
-├── common/                      # 公共工具模块
-│   ├── logger.py                # 日志工具
-│   ├── file_handler.py          # 文件处理工具
-│   └── report_utils.py          # 报告生成工具
-└── docs/                        # 文档目录
-    └── getting_started.md       # 快速入门指南
-```
+完整现状见：
 
-## 快速开始
+- `docs/guides/01_项目目录说明.md`
+- `docs/guides/15_项目综合状态报告_20260804.md`
+- `docs/guides/17_项目目录重建方案_20260804.md`
 
-### 1. 克隆仓库
+## 当前接口测试基线
 
-```bash
-git clone <仓库地址>
-cd test_dev_projects
+- Excel 真源：`接口测试用例/单个接口测试用例/存储管理单接口测试用例.xlsx`
+- 规模：8 个 Sheet、124 个接口分组、2825 条用例。
+- 九维体检：2026-08-04 修复后为 0 问题。
+- Apifox：修复前名称/存在性对账为 2704 = 2704；现有对账脚本不比较请求内容。
+
+## 常用命令
+
+```powershell
+# 九维结构体检
+node tools\api_case_pipeline\all_sheet_check.js
+
+# Excel 与 Apifox 名称/存在性对账（需要 Apifox CLI 和项目权限）
+node tools\api_case_pipeline\reverse_check.js
+
+# pytest 全部测试
+py -m pytest
+
+# 仅接口自动化
+py -m pytest test_automation\api_testing\testcases
 ```
 
-### 2. 创建虚拟环境并安装依赖
+Windows 环境使用 `py -m` 调用 Python/pip。PowerShell 不使用 Bash 的 `&&` 语法。
 
-```bash
-python -m venv venv
-source venv/bin/activate  # macOS/Linux
-# venv\Scripts\activate   # Windows
+## 工作约束
 
-pip install -r requirements.txt
-```
+- Excel 是接口测试设计真源；真实执行结果禁止推测填写。
+- Apifox 写入前必须先读取目标资源、使用 CLI Schema 校验，并在写入后回读验证。
+- `temp_scripts/`、`archives/`、`node_modules/` 和本地编辑器状态不提交。
+- `miaoqi/` 是个人素材，不移动、不修改、不提交。
+- 目录重建期间禁止未经检查直接执行 `git add .`。
+- 破坏性测试和存储管理应用代码修改需要用户单独授权。
 
-### 3. 运行测试
+## Git 状态说明
 
-```bash
-# 运行所有测试
-pytest
-
-# 运行冒烟测试
-pytest -m smoke
-
-# 运行接口测试
-pytest -m api
-
-# 运行 UI 自动化测试
-pytest -m ui
-
-# 并行运行测试
-pytest -n auto
-```
-
-## 模块说明
-
-| 模块 | 说明 |
-|------|------|
-| `config/` | 全局配置管理，支持多环境切换（dev/test/prod） |
-| `ui_automation/` | 基于 Selenium 的 Web UI 自动化测试，采用 Page Object 模式 |
-| `api_testing/` | 基于 Requests 的接口自动化测试 |
-| `performance/` | 性能测试脚本与报告 |
-| `testcase_generator/` | 自动化测试用例生成工具 |
-| `common/` | 公共工具：日志、文件处理、报告生成等 |
-| `docs/` | 项目文档 |
-
-## 同步工作流（家↔公司）
-
-本项目通过 Git 远程仓库实现多地协同：
-
-```bash
-# 开始工作前 - 拉取最新代码
-git pull origin main
-
-# 完成工作后 - 提交并推送
-git add .
-git commit -m "feat: 描述你的修改"
-git push origin main
-```
-
-**工作流建议：**
-- 每次开始工作前先 `git pull` 同步最新代码
-- 工作结束后及时 `commit` 和 `push`
-- 使用有意义的 commit message，便于追踪变更
-- 遇到冲突时优先保留最新的改动
-
-## 技术栈
-
-- **测试框架**: pytest
-- **UI 自动化**: Selenium WebDriver
-- **接口测试**: Requests
-- **数据处理**: PyYAML, openpyxl
-- **日志**: Loguru
-- **报告**: pytest-html, Allure
+当前使用 `win` 分支，工作区处于目录迁移尚未提交的状态。已停用的 `tos_api_cli_tester` 保存在本地 `archives/inactive_projects/`，不进入提交；目录重建应拆分为多个主题明确的提交，具体步骤见目录重建方案。

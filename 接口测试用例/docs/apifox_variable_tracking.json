@@ -1,0 +1,2028 @@
+{
+  "meta": {
+    "project": "TOS 单接口测试",
+    "apifox_project_id": "7536053",
+    "generated_at": "2026-07-20",
+    "description": "Apifox 变量全链路追踪：生成接口→变量→使用接口 的完整映射，供测试用例自动生成使用"
+  },
+  "variables": {
+    "auth": {
+      "RSA_PUBLIC_KEY": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/welcome",
+          "summary": "获取登录欢迎页配置"
+        },
+        "source_field": "响应头 X-Rsa-Token",
+        "scope": "environment",
+        "meaning": "RSA 公钥，用于密码加密脚本",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/login",
+            "usage": "前置脚本：密码 RSA 加密"
+          }
+        ]
+      },
+      "X-Csrf-Token": {
+        "generated_by": [
+          {
+            "method": "POST",
+            "path": "/v2/login",
+            "summary": "普通用户登录"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/logout",
+            "summary": "退出登录（篡改第10/30位覆盖）"
+          }
+        ],
+        "source_field": "登录后置脚本提取；登出后置脚本篡改后覆盖（用于后续负向测试）",
+        "scope": "environment",
+        "meaning": "CSRF 防护令牌（登出后被篡改，仅「已失效」/「不一致」场景引用原值）",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "几乎所有需要认证的接口",
+            "usage": "Header 中引用 {{X-Csrf-Token}}"
+          }
+        ]
+      },
+      "Cookie": {
+        "generated_by": {
+          "method": "POST",
+          "path": "/v2/login",
+          "summary": "普通用户登录"
+        },
+        "source_field": "拼接：X-Csrf-Token + TMSESSNAME + tos_current_username + userName + loginStatus=true",
+        "scope": "environment",
+        "meaning": "完整 Cookie 会话凭证",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "几乎所有需要认证的接口",
+            "usage": "Header 中引用 {{Cookie}}"
+          }
+        ]
+      },
+      "expired_Cookie": {
+        "generated_by": {
+          "method": "POST",
+          "path": "/v2/logout",
+          "summary": "退出登录"
+        },
+        "source_field": "登出前的 Cookie 快照备份",
+        "scope": "environment",
+        "meaning": "已失效的完整 Cookie（登出作废/闲置超时等价）",
+        "script": "19_logout_capture_expired.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "负向测试用例",
+            "usage": "「已失效凭证」场景 Header"
+          }
+        ]
+      },
+      "expired_X-Csrf-Token": {
+        "generated_by": {
+          "method": "POST",
+          "path": "/v2/logout",
+          "summary": "退出登录"
+        },
+        "source_field": "登出前的 X-Csrf-Token 原始值备份（未被篡改）",
+        "scope": "environment",
+        "meaning": "已失效的 CSRF 令牌原始备份",
+        "script": "19_logout_capture_expired.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "负向测试用例",
+            "usage": "「已失效凭证」场景 Header 中引用"
+          }
+        ]
+      },
+      "wrong_X-Csrf-Token": {
+        "generated_by": {
+          "method": "POST",
+          "path": "/v2/logout",
+          "summary": "退出登录"
+        },
+        "source_field": "在已篡改的 X-Csrf-Token 基础上再改第20/40位",
+        "scope": "environment",
+        "meaning": "篡改链终值（原始→新X-Csrf-Token→wrong），用于「token不一致」场景",
+        "script": "19_logout_capture_expired.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "负向测试用例",
+            "usage": "「token 不一致」场景 Header 中引用"
+          }
+        ]
+      },
+      "X-Curpass-Token": {
+        "generated_by": {
+          "method": "POST",
+          "path": "/v2/otp/verify_pwd",
+          "summary": "验证用户密码（生成X-Curpass-Token变量）"
+        },
+        "source_field": "加密脚本处理后生成",
+        "scope": "environment",
+        "meaning": "密码验证令牌，用于敏感操作身份确认",
+        "consumed_by": [
+          {
+            "method": "DELETE",
+            "path": "/v2/storage/delete/pool/{uuid}",
+            "usage": "Header"
+          },
+          {
+            "method": "DELETE",
+            "path": "/v2/storage/delete/volume/{uuid}",
+            "usage": "Header"
+          },
+          {
+            "method": "DELETE",
+            "path": "/v2/disk/DelSysDisk",
+            "usage": "Header"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/disk/sec_erase/start",
+            "usage": "Header"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/disk/format/start",
+            "usage": "Header"
+          }
+        ]
+      }
+    },
+    "volume": {
+      "lv{N}_uuid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/list/volume",
+          "summary": "获取卷列表"
+        },
+        "source_field": "volume.uuid，按 sort 排序，sort-1 零基映射（sort=1→lv0）",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个卷的 UUID",
+        "script": "02_sync_volume_uuid.js",
+        "consumed_by": [
+          {
+            "method": "GET",
+            "path": "/v2/storage/edit/volume/{uuid}",
+            "usage": "路径参数 {{lv0_uuid}}"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/storage/edit/volume/{uuid}",
+            "usage": "路径参数 {{lv6_uuid}}"
+          },
+          {
+            "method": "GET",
+            "path": "/v2/storage/volumeOccupyStatus",
+            "usage": "路径参数 {{lv5_uuid}}"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/storage/volumeOccupyAction",
+            "usage": "请求体 {{lv0_uuid}}"
+          },
+          {
+            "method": "GET",
+            "path": "/v2/storage/volumeOccupyStatusAll",
+            "usage": "路径参数 {{lv0_uuid}}"
+          },
+          {
+            "method": "GET",
+            "path": "/v2/storage/ssd/trim/{uuid}",
+            "usage": "路径参数 {{lv6_uuid}}"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/storage/ssd/trim/{uuid}",
+            "usage": "路径参数 {{lv5_uuid}}"
+          },
+          {
+            "method": "GET",
+            "path": "/v2/storage/defragment/{uuid}",
+            "usage": "路径参数 {{lv6_uuid}}"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/storage/compression/{uuid}",
+            "usage": "路径参数 {{lv1_uuid}}"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/storage/volumeFormatting",
+            "usage": "路径参数 {{lv1_uuid}}"
+          },
+          {
+            "method": "DELETE",
+            "path": "/v2/storage/delete/volume/{uuid}",
+            "usage": "路径参数 {{lv1_uuid}}"
+          }
+        ]
+      },
+      "lv{N}_filesystem": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/list/volume"
+        },
+        "source_field": "volume.filesystem",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个卷的文件系统类型（btrfs/ext4/xfs）",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本中使用",
+            "usage": "前置脚本：文件系统默认值"
+          }
+        ]
+      },
+      "lv_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/list/volume"
+        },
+        "source_field": "volumes.length",
+        "scope": "moduleVariables",
+        "meaning": "卷总数",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本中使用",
+            "usage": "循环控制"
+          }
+        ]
+      },
+      "lv{N}_mnt_path": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/edit/volume/{uuid}",
+          "summary": "获取卷信息"
+        },
+        "source_field": "data.mntpath，按 data.name 动态命名",
+        "scope": "environment",
+        "meaning": "第 N 个卷的挂载路径",
+        "script": "04_edit_volume_mntpath.js",
+        "consumed_by": []
+      },
+      "lv{N}_sort": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/edit/volume/{uuid}",
+          "summary": "获取卷信息"
+        },
+        "source_field": "data.sort，按 data.name 动态命名（如 lv0_sort = 1）",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个卷的 sort 编号",
+        "script": "04_edit_volume_mntpath.js",
+        "consumed_by": []
+      }
+    },
+    "volume_create": {
+      "variable_group": "cv_",
+      "generated_by": {
+        "method": "GET",
+        "path": "/v2/storage/create/volume",
+        "summary": "获取创建卷资源信息"
+      },
+      "scope": "moduleVariables",
+      "script": "03_create_volume_resources.js",
+      "variables": {
+        "cv_disk_list": {
+          "meaning": "空闲磁盘列表（JSON）"
+        },
+        "cv_disk_0_path": {
+          "meaning": "第1块空闲磁盘设备路径"
+        },
+        "cv_disk_0_name": {
+          "meaning": "第1块空闲磁盘名称"
+        },
+        "cv_disk_1_path": {
+          "meaning": "第2块空闲磁盘设备路径"
+        },
+        "cv_disk_1_name": {
+          "meaning": "第2块空闲磁盘名称"
+        },
+        "cv_disk_2_path": {
+          "meaning": "第3块空闲磁盘设备路径"
+        },
+        "cv_disk_2_name": {
+          "meaning": "第3块空闲磁盘名称"
+        },
+        "cv_pool_list": {
+          "meaning": "可选存储池列表（JSON）"
+        },
+        "cv_vg{N}_name": {
+          "meaning": "存储池名称（如 cv_vg0_name）"
+        },
+        "cv_vg{N}_free_kb": {
+          "meaning": "存储池剩余空间（KB）"
+        },
+        "cv_vg{N}_free_gb": {
+          "meaning": "存储池剩余空间（GB）"
+        },
+        "cv_selected_pool_name": {
+          "meaning": "默认选中的存储池名"
+        },
+        "cv_selected_pool_free_gb": {
+          "meaning": "默认池剩余容量（GB）"
+        },
+        "cv_new_pool_name": {
+          "meaning": "新存储池自动命名（mode=0时）"
+        },
+        "cv_new_pool_sort": {
+          "meaning": "新存储池 sort 编号"
+        },
+        "cv_new_volume_sort": {
+          "meaning": "自动生成的卷 sort 编号"
+        },
+        "cv_xfs_available": {
+          "meaning": "XFS 是否可用（布尔）"
+        },
+        "cv_fs_options": {
+          "meaning": "可选文件系统列表（JSON）"
+        },
+        "cv_filesystem": {
+          "meaning": "默认文件系统（btrfs）"
+        }
+      },
+      "consumed_by": [
+        {
+          "method": "POST",
+          "path": "/v2/storage/create/volume",
+          "usage": "请求体：device、pool、filesystem 等参数"
+        }
+      ]
+    },
+    "pool": {
+      "vg{N}_uuid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/list/storagePool",
+          "summary": "获取存储池列表"
+        },
+        "source_field": "pool.uuid，按 sort 排序，sort-1 零基映射",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个存储池的 UUID",
+        "script": "05_sync_pool_uuid.js",
+        "consumed_by": [
+          {
+            "method": "GET",
+            "path": "/v2/storage/edit/pool/{uuid}",
+            "usage": "路径参数 {{vg0_uuid}}"
+          },
+          {
+            "method": "GET",
+            "path": "/v2/storage/CheckAddDisk",
+            "usage": "路径参数 {{vg0_uuid}}"
+          }
+        ]
+      },
+      "vg_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/list/storagePool"
+        },
+        "source_field": "storagePools.length",
+        "scope": "moduleVariables",
+        "meaning": "存储池总数",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本中使用",
+            "usage": "循环控制"
+          }
+        ]
+      },
+      "avail_{poolName}_uuid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/list/storagePool"
+        },
+        "source_field": "pool.uuid（health === 999 的可用池）",
+        "scope": "moduleVariables",
+        "meaning": "健康存储池的 UUID",
+        "script": "06_pool_health_status.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/storage/CheckAvailablePool/{disk}",
+            "usage": "检测可用池/损坏池"
+          }
+        ]
+      },
+      "avail_{poolName}_disk": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/list/storagePool"
+        },
+        "source_field": "p.decated_required_disk[0].device 去掉 /dev/ 前缀（如 sda）",
+        "scope": "moduleVariables",
+        "meaning": "健康存储池的磁盘设备名",
+        "script": "06_pool_health_status.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/storage/CheckAvailablePool/{disk}",
+            "usage": "路径参数 disk"
+          }
+        ]
+      },
+      "corrupt_{poolName}_uuid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/list/storagePool"
+        },
+        "source_field": "pool.uuid（health === 0 的损坏池）",
+        "scope": "moduleVariables",
+        "meaning": "损坏存储池的 UUID",
+        "script": "06_pool_health_status.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/storage/CheckAvailablePool/{disk}",
+            "usage": "检测可用池/损坏池"
+          }
+        ]
+      },
+      "corrupt_{poolName}_disk": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/list/storagePool"
+        },
+        "source_field": "p.decated_required_disk[0].device 去掉 /dev/ 前缀（如 sda）",
+        "scope": "moduleVariables",
+        "meaning": "损坏存储池的磁盘设备名",
+        "script": "06_pool_health_status.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/storage/CheckAvailablePool/{disk}",
+            "usage": "路径参数 disk"
+          }
+        ]
+      }
+    },
+    "pool_edit": {
+      "vg{N}_raid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/edit/pool/{uuid}",
+          "summary": "获取存储池信息"
+        },
+        "source_field": "pvs[0]（如 /dev/md1）",
+        "scope": "moduleVariables",
+        "meaning": "存储池的 RAID 设备路径",
+        "script": "07_sync_pool_raid.js",
+        "consumed_by": [
+          {
+            "method": "GET",
+            "path": "/v2/storage/GetRaidSpeedOrBitmap",
+            "usage": "路径参数 {{vg0_raid}}"
+          },
+          {
+            "method": "GET",
+            "path": "/v2/storage/GetDataScrubbingConf",
+            "usage": "路径参数 {{vg2_raid}}"
+          }
+        ]
+      },
+      "vg{N}_md": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/edit/pool/{uuid}"
+        },
+        "source_field": "volumes[].raidname[0]（如 md0）",
+        "scope": "moduleVariables",
+        "meaning": "存储池的 md 设备名",
+        "script": "07_sync_pool_raid.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/storage/CheckMdInfo/{md}",
+            "usage": "路径参数 {{vg0_md}}"
+          }
+        ]
+      },
+      "vg_raid_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/edit/pool/{uuid}"
+        },
+        "scope": "moduleVariables",
+        "meaning": "RAID 设备数量",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "循环控制/条件判断"
+          }
+        ]
+      },
+      "vg_md_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/edit/pool/{uuid}"
+        },
+        "scope": "moduleVariables",
+        "meaning": "md 设备数量",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "循环控制/条件判断"
+          }
+        ]
+      },
+      "vg{N}_check_disk": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/storage/edit/pool/{uuid}"
+        },
+        "source_field": "data.free_disk[].device 逗号拼接",
+        "scope": "environment",
+        "meaning": "存储池空闲磁盘列表",
+        "script": "08_pool_check_disk.js",
+        "consumed_by": []
+      }
+    },
+    "pool_create": {
+      "variable_group": "cp_",
+      "generated_by": {
+        "method": "GET",
+        "path": "/v2/storage/create/pool",
+        "summary": "获取创建池资源信息"
+      },
+      "scope": "moduleVariables",
+      "script": "09_create_pool_resources.js",
+      "variables": {
+        "cp_disk_list": {
+          "meaning": "空闲磁盘完整列表（JSON）"
+        },
+        "cp_disk_count": {
+          "meaning": "空闲磁盘总数"
+        },
+        "cp_disk_{N}_path": {
+          "meaning": "第 N 块空闲磁盘设备路径"
+        },
+        "cp_disk_{N}_name": {
+          "meaning": "第 N 块空闲磁盘名称"
+        },
+        "cp_disk_{N}_type": {
+          "meaning": "磁盘类型（ssd/normal/nvme）"
+        },
+        "cp_disk_{N}_capacity": {
+          "meaning": "容量文本"
+        },
+        "cp_disk_{N}_slot": {
+          "meaning": "槽位号"
+        },
+        "cp_new_pool_show_name": {
+          "meaning": "新池显示名称"
+        },
+        "cp_new_pool_sort": {
+          "meaning": "新池 sort 编号"
+        },
+        "cp_new_pool_uuid": {
+          "meaning": "新池 UUID（创建前一般为空）"
+        },
+        "cp_new_pool_description": {
+          "meaning": "新池描述"
+        },
+        "cp_new_pool_compression": {
+          "meaning": "新池压缩设置"
+        },
+        "cp_new_pool_vg_name": {
+          "meaning": "推导的 vg 名"
+        }
+      },
+      "consumed_by": [
+        {
+          "method": "POST",
+          "path": "/v2/storage/create/pool",
+          "usage": "请求体：disks、level 等参数"
+        }
+      ]
+    },
+    "disk": {
+      "cap_disk{N}": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption",
+          "summary": "获取硬盘下拉选项"
+        },
+        "source_field": "d.device 去掉 /dev/ 前缀（如 sda）",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个磁盘设备名（CheckAvailablePool 专用）",
+        "script": "10_sync_cap_disk.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/storage/CheckAvailablePool/{disk}",
+            "usage": "路径参数 {{cap_disk0}}"
+          }
+        ]
+      },
+      "cap_disk_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption"
+        },
+        "scope": "moduleVariables",
+        "meaning": "磁盘总数",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "循环控制"
+          }
+        ]
+      },
+      "disk{N}_device": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption"
+        },
+        "source_field": "d.device（如 /dev/sda），索引从 1 起",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个磁盘的设备路径",
+        "script": "11_sync_disk_list.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/disk/benchmark/start",
+            "usage": "query 参数 device"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/disk/format/start",
+            "usage": "query 参数 device"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/disk/sec_erase/start",
+            "usage": "query 参数 device"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/disk/smart_test/schedule",
+            "usage": "请求体 disks"
+          },
+          {
+            "method": "GET",
+            "path": "/v2/disk/GetDiskDetailData",
+            "usage": "query 参数 device"
+          }
+        ]
+      },
+      "disk{N}": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption"
+        },
+        "source_field": "d.name（如 HDD1）",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个磁盘的名称",
+        "script": "11_sync_disk_list.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "测试校验/参考信息",
+            "usage": "磁盘名称标识参考"
+          }
+        ]
+      },
+      "disk_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption"
+        },
+        "scope": "moduleVariables",
+        "meaning": "磁盘总数",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "循环控制"
+          }
+        ]
+      },
+      "disk_list": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption"
+        },
+        "scope": "moduleVariables",
+        "meaning": "完整磁盘列表（JSON）",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "数据参考/查找匹配"
+          }
+        ]
+      }
+    },
+    "disk_detail": {
+      "diskN_model": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskDetailData",
+          "summary": "获取指定磁盘SMART详细信息"
+        },
+        "source_field": "data.model，通过 device 反查索引 N 后写入",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个磁盘的型号",
+        "script": "12_disk_detail_info.js",
+        "consumed_by": []
+      },
+      "diskN_serial": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskDetailData"
+        },
+        "source_field": "data.serial",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个磁盘的序列号（唯一标识）",
+        "script": "12_disk_detail_info.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "测试校验中使用",
+            "usage": "磁盘身份验证/断言匹配"
+          }
+        ]
+      },
+      "diskN_type": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskDetailData"
+        },
+        "source_field": "data.type",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个磁盘的类型",
+        "script": "12_disk_detail_info.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "测试校验中使用",
+            "usage": "磁盘类型断言匹配"
+          }
+        ]
+      },
+      "diskN_capacity": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskDetailData"
+        },
+        "source_field": "data.factory_capacity",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个磁盘的出厂容量",
+        "script": "12_disk_detail_info.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "测试校验中使用",
+            "usage": "磁盘容量断言匹配"
+          }
+        ]
+      },
+      "diskN_slot": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskDetailData"
+        },
+        "source_field": "data.slot",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个磁盘的槽位号",
+        "script": "12_disk_detail_info.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "测试校验中使用",
+            "usage": "磁盘槽位断言匹配"
+          }
+        ]
+      }
+    },
+    "hotspare": {
+      "hs{N}_device": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/hotsparedisk/GetAvailableDiskList",
+          "summary": "可热备的空闲磁盘"
+        },
+        "source_field": "data[].device（如 /dev/sdzb），按热备可用顺序编号，从 1 起",
+        "scope": "moduleVariables",
+        "meaning": "第 N 块可热备磁盘的设备路径",
+        "script": "16_hotspare_disk_list.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/hotsparedisk/CreateHotSpareDisk",
+            "usage": "请求体 devices 数组（如 [hs1_device]）"
+          }
+        ]
+      },
+      "hs{N}_name": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/hotsparedisk/GetAvailableDiskList"
+        },
+        "source_field": "data[].name",
+        "scope": "moduleVariables",
+        "meaning": "第 N 块可热备磁盘的名称",
+        "script": "16_hotspare_disk_list.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "测试校验/参考信息",
+            "usage": "磁盘标识参考"
+          }
+        ]
+      },
+      "hs_disk_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/hotsparedisk/GetAvailableDiskList"
+        },
+        "scope": "moduleVariables",
+        "meaning": "可热备空闲磁盘总数",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "循环控制"
+          }
+        ]
+      },
+      "hs{N}_vg": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/hotsparedisk/GetRaidHotSpare",
+          "summary": "获取阵列列表"
+        },
+        "source_field": "data[].vgs（如 vg0、vg1），按数组顺序编号，从 1 起",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个支持热备的存储池名称",
+        "script": "17_hotspare_raid_list.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/hotsparedisk/CreateHotSpareDisk",
+            "usage": "请求体 raids 数组（如 [hs1_vg]）"
+          }
+        ]
+      },
+      "hs_vg_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/hotsparedisk/GetRaidHotSpare"
+        },
+        "scope": "moduleVariables",
+        "meaning": "支持热备的存储池总数",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "循环控制"
+          }
+        ]
+      },
+      "hs_vg_list": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/hotsparedisk/GetRaidHotSpare"
+        },
+        "source_field": "JSON 数组",
+        "scope": "moduleVariables",
+        "meaning": "支持热备的存储池名称列表（JSON）",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "参考"
+          }
+        ]
+      },
+      "hsp{N}_device": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/hotsparedisk/GetHotSpareList",
+          "summary": "获取热备盘列表"
+        },
+        "source_field": "data[].device（如 /dev/sdh），按数组顺序编号，从 1 起",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个已有热备盘的设备路径",
+        "script": "18_hotspare_list.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/hotsparedisk/DelHotSpare",
+            "usage": "删除热备盘的 device 参数"
+          }
+        ]
+      },
+      "hsp{N}_blk": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/hotsparedisk/GetHotSpareList"
+        },
+        "source_field": "data[].device_name（如 sdl）",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个已有热备盘的 blk 设备名",
+        "script": "18_hotspare_list.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/hotsparedisk/ModifyArray",
+            "usage": "请求体 blk 参数"
+          }
+        ]
+      },
+      "hsp_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/hotsparedisk/GetHotSpareList"
+        },
+        "scope": "moduleVariables",
+        "meaning": "已有热备盘总数",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "循环控制"
+          }
+        ]
+      }
+    },
+    "ihm": {
+      "Ihm{N}_device": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/IhmInfoList",
+          "summary": "获取IHM信息列表"
+        },
+        "source_field": "d.device（如 /dev/sde），索引从 1 起",
+        "scope": "moduleVariables",
+        "meaning": "第 N 块可执行健康扫描磁盘的设备路径",
+        "script": "15_ihm_info_list.js",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/disk/ManualTest",
+            "usage": "device 参数（手动测试IHM）"
+          },
+          {
+            "method": "GET",
+            "path": "/v2/disk/ExportIhmLog",
+            "usage": "query 参数 device（导出IHM日志）"
+          }
+        ]
+      },
+      "Ihm{N}_name": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/IhmInfoList"
+        },
+        "source_field": "d.name（如 HDD1）",
+        "scope": "moduleVariables",
+        "meaning": "第 N 块 IHM 磁盘的名称",
+        "script": "15_ihm_info_list.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "测试校验/参考信息",
+            "usage": "磁盘标识参考"
+          }
+        ]
+      },
+      "Ihm{N}_model": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/IhmInfoList"
+        },
+        "source_field": "d.model（如 ST2000VN004-2E4164）",
+        "scope": "moduleVariables",
+        "meaning": "第 N 块 IHM 磁盘的型号",
+        "script": "15_ihm_info_list.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "测试校验/参考信息",
+            "usage": "磁盘型号参考"
+          }
+        ]
+      },
+      "Ihm{N}_health": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/IhmInfoList"
+        },
+        "source_field": "d.health（如 Healthy）",
+        "scope": "moduleVariables",
+        "meaning": "第 N 块 IHM 磁盘的健康状态",
+        "script": "15_ihm_info_list.js",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "测试校验/参考信息",
+            "usage": "健康状态参考"
+          }
+        ]
+      },
+      "Ihm_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/IhmInfoList"
+        },
+        "source_field": "disks.length",
+        "scope": "moduleVariables",
+        "meaning": "可执行健康扫描的磁盘总数",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "循环控制"
+          }
+        ]
+      },
+      "Ihm_disk_list": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/IhmInfoList"
+        },
+        "source_field": "完整列表 JSON（name/device/model/drive_type/health/capacity）",
+        "scope": "moduleVariables",
+        "meaning": "IHM 磁盘完整列表",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "数据参考/查找匹配"
+          }
+        ]
+      }
+    },
+    "smart": {
+      "diskN_smart_id": {
+        "generated_by": [
+          {
+            "method": "GET",
+            "path": "/v2/disk/smart_test/schedule",
+            "summary": "获取SMART测试任务列表"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/disk/smart_test/schedule",
+            "summary": "创建SMART测试任务"
+          }
+        ],
+        "source_field": "item.id 或 data.id，通过 disks 字段反查索引 N",
+        "scope": "moduleVariables",
+        "meaning": "第 N 个磁盘的 SMART 测试任务 ID",
+        "scripts": [
+          "13_smart_schedule.js",
+          "14_smart_create.js"
+        ],
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/disk/smart_test/schedule/{id}/stop",
+            "usage": "路径参数 {{disk1_smart_id}}"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/disk/smart_test/schedule/{id}/exec",
+            "usage": "路径参数 {{disk1_smart_id}}"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/disk/smart_test/schedule/{id}/edit",
+            "usage": "路径参数 {{disk1_smart_id}}"
+          },
+          {
+            "method": "DELETE",
+            "path": "/v2/disk/smart_test/schedule/{id}",
+            "usage": "路径参数 {{disk1_smart_id}}"
+          }
+        ]
+      },
+      "smart_task_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/smart_test/schedule"
+        },
+        "scope": "moduleVariables",
+        "meaning": "SMART 任务总数",
+        "consumed_by": [
+          {
+            "method": "*",
+            "path": "脚本内部使用",
+            "usage": "循环控制/条件判断"
+          }
+        ]
+      }
+    },
+    "usb": {
+      "usb{N}_name": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/extStorageDevice/DeviceList",
+          "summary": "获取USB设备列表"
+        },
+        "source_field": "item.name（如 sdg）",
+        "scope": "moduleVariables",
+        "script": "20_usb_device_list.js",
+        "meaning": "第N个USB设备名（IsFormating/FormattingDevice 的 name 参数）",
+        "consumed_by": [
+          {
+            "method": "GET",
+            "path": "/v2/extStorageDevice/IsFormating"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/extStorageDevice/FormattingDevice"
+          }
+        ]
+      },
+      "usb{N}_device": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/extStorageDevice/DeviceList",
+          "summary": "获取USB设备列表"
+        },
+        "source_field": "item.device_name",
+        "scope": "moduleVariables",
+        "script": "20_usb_device_list.js",
+        "meaning": "第N个USB设备路径（MountedDevice 的 device 参数）",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/extStorageDevice/MountedDevice"
+          }
+        ]
+      },
+      "usb{N}_z{M}": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/extStorageDevice/DeviceList",
+          "summary": "获取USB设备列表"
+        },
+        "source_field": "item.zone_name[]（如 sdb1）",
+        "scope": "moduleVariables",
+        "script": "20_usb_device_list.js",
+        "meaning": "第N个USB设备第M个分区名（EditUsbLabel/FormattingDevice 分区场景；用例引用为 usb1_z1/usb1_z2）",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/extStorageDevice/EditUsbLabel"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/extStorageDevice/FormattingDevice"
+          }
+        ]
+      },
+      "usb{N}_s{M}": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/extStorageDevice/DeviceList",
+          "summary": "获取USB设备列表"
+        },
+        "source_field": "shared_folders[].shared_name",
+        "scope": "moduleVariables",
+        "script": "20_usb_device_list.js",
+        "meaning": "第N个USB设备第M个共享文件夹名（UsbAclAll/SetUsbAclAll 的 folder_names 参数）",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/extStorageDevice/UsbAclAll"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/extStorageDevice/SetUsbAclAll"
+          }
+        ]
+      },
+      "usb{N}_mnt/umnt/fmt": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/extStorageDevice/DeviceList",
+          "summary": "获取USB设备列表"
+        },
+        "source_field": "shared_folders[].device_name 按 status(1挂载/2未挂载/3格式化中) 逗号拼接",
+        "scope": "moduleVariables",
+        "script": "20_usb_device_list.js",
+        "meaning": "第N个USB设备 已挂载/未挂载/格式化中 分区列表（供状态类场景构造参数）",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/extStorageDevice/UnmountDevice"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/extStorageDevice/FormattingDevice"
+          }
+        ]
+      },
+      "usb_count": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/extStorageDevice/DeviceList",
+          "summary": "获取USB设备列表"
+        },
+        "source_field": "items.length",
+        "scope": "moduleVariables",
+        "script": "20_usb_device_list.js",
+        "meaning": "USB设备总数（脚本内部与断言用）"
+      },
+      "usb_key_data": {
+        "generated_by": {
+          "method": "POST",
+          "path": "/v2/extStorageDevice/ObtainSecretKey",
+          "summary": "获取密钥文件路径"
+        },
+        "source_field": "data（兼容字符串/对象多字段）",
+        "scope": "moduleVariables",
+        "script": "21_usb_obtain_key.js",
+        "meaning": "Base64密钥文件路径（DownloadSecretKey 的 data 参数）",
+        "consumed_by": [
+          {
+            "method": "GET",
+            "path": "/v2/extStorageDevice/DownloadSecretKey"
+          }
+        ]
+      }
+    },
+    "usb_peripheral": {
+      "usb_disk_device/name": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption",
+          "summary": "获取硬盘下拉选项"
+        },
+        "source_field": "type/interface 含 usb 的第一块设备",
+        "scope": "moduleVariables",
+        "script": "25_disk_usb_classify.js",
+        "meaning": "第一块USB磁盘的 device/name（挂载/卸载/移除/启用/坏块扫描等磁盘模块接口）",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/disk/MountDisk/{name}"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/disk/UmountDisk/{name}"
+          }
+        ]
+      },
+      "usb_sata_device/model/serial": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption",
+          "summary": "获取硬盘下拉选项"
+        },
+        "source_field": "USB 且含 sata/ata 的设备",
+        "scope": "moduleVariables",
+        "script": "25_disk_usb_classify.js",
+        "meaning": "USB接口中的SATA盘三要素（GetDiskDetailData、SMART任务创建/编辑）",
+        "consumed_by": [
+          {
+            "method": "GET",
+            "path": "/v2/disk/GetDiskDetailData"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/disk/smart_test/schedule"
+          }
+        ]
+      },
+      "usb_nvme_device/model/serial": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption",
+          "summary": "获取硬盘下拉选项"
+        },
+        "source_field": "USB 且含 nvme 的设备",
+        "scope": "moduleVariables",
+        "script": "25_disk_usb_classify.js",
+        "meaning": "USB接口中的NVMe盘三要素"
+      },
+      "usb_other_device/model/serial": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption",
+          "summary": "获取硬盘下拉选项"
+        },
+        "source_field": "USB 且非SATA/NVMe 的设备",
+        "scope": "moduleVariables",
+        "script": "25_disk_usb_classify.js",
+        "meaning": "USB其他类型设备三要素"
+      },
+      "sdtf_device/model/serial": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption",
+          "summary": "获取硬盘下拉选项"
+        },
+        "source_field": "含 sd/mmc/tf/sdtf/card 的设备",
+        "scope": "moduleVariables",
+        "script": "25_disk_usb_classify.js",
+        "meaning": "SD/TF卡三要素（SMART不支持/安全擦除/新增系统盘失败场景）",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/disk/sec_erase/start"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/disk/AddSysDisk"
+          }
+        ]
+      },
+      "usb_ssd_device": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/disk/GetDiskOption",
+          "summary": "获取硬盘下拉选项"
+        },
+        "source_field": "取 usb_sata/usb_other/usb_disk 优先级",
+        "scope": "moduleVariables",
+        "script": "25_disk_usb_classify.js",
+        "meaning": "USB中的SSD路径（HyperCache 候选盘场景）",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/lvmCache/CreateCacheLv"
+          }
+        ]
+      }
+    },
+    "hypercache": {
+      "hc{N}_uuid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/lvmCache/CacheLvsInfo",
+          "summary": "获取SSD缓存列表"
+        },
+        "source_field": "lv_uuid/uuid/cache_uuid",
+        "scope": "moduleVariables",
+        "script": "22_hc_cache_list.js",
+        "meaning": "第N个缓存逻辑卷UUID（DeleteCacheLv 的 lv_uuid）",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/lvmCache/DeleteCacheLv"
+          }
+        ]
+      },
+      "hc_md1_uuid / hc_md5_uuid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/lvmCache/CacheLvsInfo",
+          "summary": "获取SSD缓存列表"
+        },
+        "source_field": "状态=降阶 且 RAID级别=1/5",
+        "scope": "moduleVariables",
+        "script": "22_hc_cache_list.js",
+        "meaning": "降阶RAID1/RAID5缓存阵列UUID（FixLvmCache 的 md_uuid）",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/lvmCache/FixLvmCache"
+          }
+        ]
+      },
+      "hc_md_ok_uuid / hc_md_ok0_uuid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/lvmCache/CacheLvsInfo",
+          "summary": "获取SSD缓存列表"
+        },
+        "source_field": "状态=正常 且 RAID级别=1/0",
+        "scope": "moduleVariables",
+        "script": "22_hc_cache_list.js",
+        "meaning": "正常状态RAID1/RAID0缓存阵列UUID（正常阵列修复失败场景）"
+      },
+      "hc_md_bad1_uuid / hc_md_bad0_uuid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/lvmCache/CacheLvsInfo",
+          "summary": "获取SSD缓存列表"
+        },
+        "source_field": "状态=损坏 且 RAID级别=1/0",
+        "scope": "moduleVariables",
+        "script": "22_hc_cache_list.js",
+        "meaning": "损坏状态RAID1/RAID0缓存阵列UUID（损坏阵列修复失败场景）"
+      },
+      "hc_md_repair_uuid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/lvmCache/CacheLvsInfo",
+          "summary": "获取SSD缓存列表"
+        },
+        "source_field": "状态=修复中",
+        "scope": "moduleVariables",
+        "script": "22_hc_cache_list.js",
+        "meaning": "修复中缓存阵列UUID（修复中互斥场景）"
+      },
+      "hc_md_mix_uuid / hc_md_ssd_uuid / hc_md_nvme_uuid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/lvmCache/CacheLvsInfo",
+          "summary": "获取SSD缓存列表"
+        },
+        "source_field": "磁盘类型 混合SSD+NVMe / 仅SSD / 仅NVMe",
+        "scope": "moduleVariables",
+        "script": "22_hc_cache_list.js",
+        "meaning": "按盘类型组合分类的缓存阵列UUID（修复盘类型场景）"
+      },
+      "creating_hc_uuid / deleted_hc_uuid": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/lvmCache/CacheLvsInfo",
+          "summary": "获取SSD缓存列表"
+        },
+        "source_field": "状态=创建中/已删除",
+        "scope": "moduleVariables",
+        "script": "22_hc_cache_list.js",
+        "meaning": "创建中/已删除缓存UUID（任务互斥/已删除缓存场景）"
+      },
+      "hc_lv_path / hc_lv_cached": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/lvmCache/GetVolumeList",
+          "summary": "获取可加速卷列表"
+        },
+        "source_field": "首条正常可加速卷路径 / 状态含cache的卷路径",
+        "scope": "moduleVariables",
+        "script": "23_hc_volume_list.js",
+        "meaning": "可加速卷路径（CreateCacheLv 的 main_lv）/已有缓存卷路径（创建失败场景）",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/lvmCache/CreateCacheLv"
+          }
+        ]
+      },
+      "corrupt_lv_path / unmount_lv_path / big_lv_path": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/lvmCache/GetVolumeList",
+          "summary": "获取可加速卷列表"
+        },
+        "source_field": "状态损坏/未挂载/容量>1TB 的卷路径",
+        "scope": "moduleVariables",
+        "script": "23_hc_volume_list.js",
+        "meaning": "损坏/未挂载/大容量卷路径（创建缓存失败场景）"
+      },
+      "hc_cand_ssd / hc_cand_ssd2 / hc_cand_ssd3": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/lvmCache/FreeSSDs",
+          "summary": "获取空闲SSD列表"
+        },
+        "source_field": "SSD类型设备路径按序",
+        "scope": "moduleVariables",
+        "script": "24_hc_free_ssds.js",
+        "meaning": "候选SSD设备路径（CreateCacheLv 的 fast_devices / FixLvmCache 的 disk_list）",
+        "consumed_by": [
+          {
+            "method": "POST",
+            "path": "/v2/lvmCache/CreateCacheLv"
+          },
+          {
+            "method": "POST",
+            "path": "/v2/lvmCache/FixLvmCache"
+          }
+        ]
+      },
+      "hc_cand_nvme / hc_cand_hdd": {
+        "generated_by": {
+          "method": "GET",
+          "path": "/v2/lvmCache/FreeSSDs",
+          "summary": "获取空闲SSD列表"
+        },
+        "source_field": "NVMe/HDD类型设备路径",
+        "scope": "moduleVariables",
+        "script": "24_hc_free_ssds.js",
+        "meaning": "候选NVMe/HDD设备路径（类型不匹配失败场景）"
+      }
+    }
+  },
+  "execution_order": {
+    "description": "接口测试用例执行时的依赖顺序，必须先执行变量生成接口，再执行使用接口",
+    "steps": [
+      {
+        "order": 1,
+        "path": "GET /v2/welcome",
+        "produces": [
+          "RSA_PUBLIC_KEY"
+        ],
+        "note": "登录前置"
+      },
+      {
+        "order": 2,
+        "path": "POST /v2/login",
+        "produces": [
+          "Cookie",
+          "X-Csrf-Token"
+        ],
+        "note": "认证基础"
+      },
+      {
+        "order": "L2",
+        "path": "POST /v2/logout",
+        "produces": [
+          "expired_Cookie",
+          "expired_X-Csrf-Token",
+          "wrong_X-Csrf-Token"
+        ],
+        "note": "凭证失效变量（负向测试前置）"
+      },
+      {
+        "order": 3,
+        "path": "POST /v2/otp/verify_pwd",
+        "produces": [
+          "X-Curpass-Token"
+        ],
+        "note": "敏感操作密码验证"
+      },
+      {
+        "order": 4,
+        "path": "GET /v2/storage/list/storagePool",
+        "produces": [
+          "vg{N}_uuid",
+          "vg_count",
+          "avail_*",
+          "corrupt_*"
+        ],
+        "note": "存储池同步"
+      },
+      {
+        "order": 5,
+        "path": "GET /v2/storage/list/volume",
+        "produces": [
+          "lv{N}_uuid",
+          "lv{N}_filesystem",
+          "lv_count"
+        ],
+        "note": "卷同步"
+      },
+      {
+        "order": 6,
+        "path": "GET /v2/disk/GetDiskOption",
+        "produces": [
+          "cap_disk{N}",
+          "disk{N}_device",
+          "disk{N}",
+          "disk_count"
+        ],
+        "note": "磁盘同步"
+      },
+      {
+        "order": 7,
+        "path": "GET /v2/storage/edit/pool/{uuid}",
+        "produces": [
+          "vg{N}_raid",
+          "vg{N}_md",
+          "vg{N}_check_disk"
+        ],
+        "note": "存储池详情"
+      },
+      {
+        "order": 8,
+        "path": "GET /v2/storage/edit/volume/{uuid}",
+        "produces": [
+          "lv{N}_mnt_path",
+          "lv{N}_sort"
+        ],
+        "note": "卷详情"
+      },
+      {
+        "order": 9,
+        "path": "GET /v2/disk/GetDiskDetailData",
+        "produces": [
+          "diskN_model",
+          "diskN_serial",
+          "diskN_type",
+          "diskN_capacity",
+          "diskN_slot"
+        ],
+        "note": "磁盘详情"
+      },
+      {
+        "order": 10,
+        "path": "GET /v2/storage/create/volume",
+        "produces": [
+          "cv_*"
+        ],
+        "note": "创建卷资源"
+      },
+      {
+        "order": 11,
+        "path": "GET /v2/storage/create/pool",
+        "produces": [
+          "cp_*"
+        ],
+        "note": "创建池资源"
+      },
+      {
+        "order": 12,
+        "path": "GET /v2/disk/smart_test/schedule",
+        "produces": [
+          "diskN_smart_id",
+          "smart_task_count"
+        ],
+        "note": "SMART 任务同步"
+      },
+      {
+        "order": 13,
+        "path": "GET /v2/disk/IhmInfoList",
+        "produces": [
+          "Ihm{N}_device",
+          "Ihm{N}_name",
+          "Ihm{N}_model",
+          "Ihm{N}_health",
+          "Ihm_count",
+          "Ihm_disk_list"
+        ],
+        "note": "IHM 健康扫描磁盘同步"
+      },
+      {
+        "order": 14,
+        "path": "GET /v2/hotsparedisk/GetAvailableDiskList",
+        "produces": [
+          "hs{N}_device",
+          "hs{N}_name",
+          "hs_disk_count"
+        ],
+        "note": "热备磁盘同步"
+      },
+      {
+        "order": 15,
+        "path": "GET /v2/hotsparedisk/GetRaidHotSpare",
+        "produces": [
+          "hs{N}_vg",
+          "hs_vg_count",
+          "hs_vg_list"
+        ],
+        "note": "热备存储池同步"
+      },
+      {
+        "order": 16,
+        "path": "GET /v2/hotsparedisk/GetHotSpareList",
+        "produces": [
+          "hsp{N}_device",
+          "hsp{N}_blk",
+          "hsp_count"
+        ],
+        "note": "已有热备盘同步"
+      }
+    ]
+  },
+  "scripts": {
+    "directory": "D:\\test_dev_projects\\接口测试用例\\apifox_scripts\\",
+    "files": [
+      {
+        "file": "01_auth_login.js",
+        "interface": "POST /v2/login",
+        "produces": [
+          "Cookie",
+          "X-Csrf-Token"
+        ]
+      },
+      {
+        "file": "02_sync_volume_uuid.js",
+        "interface": "GET /v2/storage/list/volume",
+        "produces": [
+          "lv{N}_uuid",
+          "lv{N}_filesystem",
+          "lv_count"
+        ]
+      },
+      {
+        "file": "03_create_volume_resources.js",
+        "interface": "GET /v2/storage/create/volume",
+        "produces": [
+          "cv_*"
+        ]
+      },
+      {
+        "file": "04_edit_volume_mntpath.js",
+        "interface": "GET /v2/storage/edit/volume/{uuid}",
+        "produces": [
+          "lv{N}_mnt_path",
+          "lv{N}_sort"
+        ]
+      },
+      {
+        "file": "05_sync_pool_uuid.js",
+        "interface": "GET /v2/storage/list/storagePool",
+        "produces": [
+          "vg{N}_uuid",
+          "vg_count"
+        ]
+      },
+      {
+        "file": "06_pool_health_status.js",
+        "interface": "GET /v2/storage/list/storagePool",
+        "produces": [
+          "avail_*",
+          "corrupt_*"
+        ]
+      },
+      {
+        "file": "07_sync_pool_raid.js",
+        "interface": "GET /v2/storage/edit/pool/{uuid}",
+        "produces": [
+          "vg{N}_raid",
+          "vg{N}_md"
+        ]
+      },
+      {
+        "file": "08_pool_check_disk.js",
+        "interface": "GET /v2/storage/edit/pool/{uuid}",
+        "produces": [
+          "vg{N}_check_disk"
+        ]
+      },
+      {
+        "file": "09_create_pool_resources.js",
+        "interface": "GET /v2/storage/create/pool",
+        "produces": [
+          "cp_*"
+        ]
+      },
+      {
+        "file": "10_sync_cap_disk.js",
+        "interface": "GET /v2/disk/GetDiskOption",
+        "produces": [
+          "cap_disk{N}",
+          "cap_disk_count"
+        ]
+      },
+      {
+        "file": "11_sync_disk_list.js",
+        "interface": "GET /v2/disk/GetDiskOption",
+        "produces": [
+          "disk{N}_device",
+          "disk{N}",
+          "disk_count"
+        ]
+      },
+      {
+        "file": "12_disk_detail_info.js",
+        "interface": "GET /v2/disk/GetDiskDetailData",
+        "produces": [
+          "diskN_model",
+          "diskN_serial",
+          "diskN_type",
+          "diskN_capacity",
+          "diskN_slot"
+        ]
+      },
+      {
+        "file": "13_smart_schedule.js",
+        "interface": "GET /v2/disk/smart_test/schedule",
+        "produces": [
+          "diskN_smart_id",
+          "smart_task_count"
+        ]
+      },
+      {
+        "file": "14_smart_create.js",
+        "interface": "POST /v2/disk/smart_test/schedule",
+        "produces": [
+          "diskN_smart_id"
+        ]
+      },
+      {
+        "file": "15_ihm_info_list.js",
+        "interface": "GET /v2/disk/IhmInfoList",
+        "produces": [
+          "Ihm{N}_device",
+          "Ihm{N}_name",
+          "Ihm{N}_model",
+          "Ihm{N}_health",
+          "Ihm_count",
+          "Ihm_disk_list"
+        ]
+      },
+      {
+        "file": "16_hotspare_disk_list.js",
+        "interface": "GET /v2/hotsparedisk/GetAvailableDiskList",
+        "produces": [
+          "hs{N}_device",
+          "hs{N}_name",
+          "hs_disk_count"
+        ]
+      },
+      {
+        "file": "17_hotspare_raid_list.js",
+        "interface": "GET /v2/hotsparedisk/GetRaidHotSpare",
+        "produces": [
+          "hs{N}_vg",
+          "hs_vg_count",
+          "hs_vg_list"
+        ]
+      },
+      {
+        "file": "18_hotspare_list.js",
+        "interface": "GET /v2/hotsparedisk/GetHotSpareList",
+        "produces": [
+          "hsp{N}_device",
+          "hsp{N}_blk",
+          "hsp_count"
+        ]
+      },
+      {
+        "file": "19_logout_capture_expired.js",
+        "interface": "POST /v2/logout",
+        "produces": [
+          "expired_Cookie",
+          "expired_X-Csrf-Token",
+          "wrong_X-Csrf-Token"
+        ]
+      },
+      {
+        "file": "20_usb_device_list.js",
+        "interface": "GET /v2/extStorageDevice/DeviceList",
+        "produces": [
+          "usb{N}_name",
+          "usb{N}_device",
+          "usb{N}_z{M}",
+          "usb{N}_s{M}",
+          "usb{N}_mnt",
+          "usb{N}_umnt",
+          "usb{N}_fmt",
+          "usb_count"
+        ]
+      },
+      {
+        "file": "21_usb_obtain_key.js",
+        "interface": "POST /v2/extStorageDevice/ObtainSecretKey",
+        "produces": [
+          "usb_key_data"
+        ]
+      },
+      {
+        "file": "22_hc_cache_list.js",
+        "interface": "GET /v2/lvmCache/CacheLvsInfo",
+        "produces": [
+          "hc{N}_uuid",
+          "hc_md1_uuid",
+          "hc_md5_uuid",
+          "hc_md_ok_uuid",
+          "hc_md_ok0_uuid",
+          "hc_md_bad1_uuid",
+          "hc_md_bad0_uuid",
+          "hc_md_repair_uuid",
+          "hc_md_mix_uuid",
+          "hc_md_ssd_uuid",
+          "hc_md_nvme_uuid",
+          "creating_hc_uuid",
+          "deleted_hc_uuid"
+        ]
+      },
+      {
+        "file": "23_hc_volume_list.js",
+        "interface": "GET /v2/lvmCache/GetVolumeList",
+        "produces": [
+          "hc_lv_path",
+          "hc_lv_cached",
+          "corrupt_lv_path",
+          "unmount_lv_path",
+          "big_lv_path"
+        ]
+      },
+      {
+        "file": "24_hc_free_ssds.js",
+        "interface": "GET /v2/lvmCache/FreeSSDs",
+        "produces": [
+          "hc_cand_ssd",
+          "hc_cand_ssd2",
+          "hc_cand_ssd3",
+          "hc_cand_nvme",
+          "hc_cand_hdd"
+        ]
+      },
+      {
+        "file": "25_disk_usb_classify.js",
+        "interface": "GET /v2/disk/GetDiskOption",
+        "produces": [
+          "usb_disk_device",
+          "usb_disk_name",
+          "usb_sata_device/model/serial",
+          "usb_nvme_device/model/serial",
+          "usb_other_device/model/serial",
+          "sdtf_device/model/serial",
+          "usb_ssd_device"
+        ]
+      }
+    ]
+  },
+  "environment_variables": {
+    "description": "以下变量依赖真实硬件/网络环境，没有接口后置脚本自动产出，须在 Apifox 环境变量中手工配置（USB/SD外设 device/model/serial 已由 25_disk_usb_classify.js 从 GetDiskOption 自动产出）",
+    "items": [
+      {
+        "name": "iscsi_lan_ip",
+        "desc": "同网段iSCSI服务端IP（B机）"
+      },
+      {
+        "name": "wan_target_iqn",
+        "desc": "不同网段Target的IQN"
+      },
+      {
+        "name": "iscsi_single_target",
+        "desc": "不允许多重连接的Target IQN"
+      },
+      {
+        "name": "iscsi_multi_target",
+        "desc": "允许多重连接的Target IQN"
+      },
+      {
+        "name": "deleted_target_iqn",
+        "desc": "已删除虚拟磁盘的IQN"
+      },
+      {
+        "name": "other_lunid",
+        "desc": "另一Target下已连接虚拟磁盘的LUN编号"
+      },
+      {
+        "name": "warn_disk",
+        "desc": "SMART状态为警告的磁盘路径"
+      },
+      {
+        "name": "error_disk",
+        "desc": "SMART状态为错误的磁盘路径"
+      },
+      {
+        "name": "locked_disk",
+        "desc": "锁定状态的磁盘路径"
+      },
+      {
+        "name": "removed_disk",
+        "desc": "已移除的磁盘路径"
+      },
+      {
+        "name": "4kn_disk",
+        "desc": "4KN类型磁盘路径"
+      },
+      {
+        "name": "mounted_disk",
+        "desc": "已挂载的磁盘路径"
+      },
+      {
+        "name": "pool_disk",
+        "desc": "已用于存储池的磁盘路径"
+      },
+      {
+        "name": "sys_disk",
+        "desc": "系统盘路径"
+      },
+      {
+        "name": "small_disk",
+        "desc": "容量小于要求的磁盘路径"
+      },
+      {
+        "name": "cache_disk",
+        "desc": "已用于缓存阵列的磁盘路径"
+      },
+      {
+        "name": "repair_disk",
+        "desc": "已用于修复缓存阵列的磁盘路径"
+      },
+      {
+        "name": "usb_ssd_device",
+        "desc": "USB设备中的SSD路径"
+      },
+      {
+        "name": "wrong_X-Curpass-Token",
+        "desc": "由verify_pwd后置脚本或手工配置的错误密码令牌"
+      },
+      {
+        "name": "X-Curpass-Token",
+        "desc": "由POST /v2/otp/verify_pwd产出"
+      },
+      {
+        "name": "usb1_umnt_share",
+        "desc": "未挂载USB的共享文件夹名（未挂载获取权限失败场景；亦可由20脚本 usb{N}_umnt 未挂载分区名配合构造）"
+      },
+      {
+        "name": "removed_usb",
+        "desc": "已被安全移除的USB设备分区名（已移除设备卸载失败场景）"
+      },
+      {
+        "name": "usb1_encrypted_share",
+        "desc": "已加密USB的共享文件夹名（未挂载加密获取权限失败场景）"
+      }
+    ]
+  }
+}

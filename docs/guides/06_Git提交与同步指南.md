@@ -41,10 +41,10 @@ git push origin main
 
 ```bash
 # 只提交某个文件
-git add ui_automation/testcases/smoke/test_tos_login.py
+git add test_automation/ui_automation/testcases/smoke/test_tos_login.py
 
 # 提交某个目录下的所有变更
-git add ui_automation/pages/
+git add test_automation/ui_automation/pages/
 
 # 然后提交并推送
 git commit -m "更新登录页面的 Page 对象"

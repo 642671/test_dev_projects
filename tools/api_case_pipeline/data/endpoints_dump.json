@@ -1,0 +1,1682 @@
+[
+ {
+  "id": 484618538,
+  "name": "16 创建卷",
+  "method": "post",
+  "path": "/v2/storage/create/volume",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 484618555,
+  "name": "09-卷 启用Btrfs配额",
+  "method": "post",
+  "path": "/v2/storage/EnableQuota",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 484618578,
+  "name": "13 修改磁盘设置",
+  "method": "post",
+  "path": "/v2/disk/setting",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618628,
+  "name": "11 iSCSI操作",
+  "method": "post",
+  "path": "/v2/virtualdisk/IscsiAction",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618640,
+  "name": "下载密钥文件",
+  "method": "get",
+  "path": "/v2/extStorageDevice/DownloadSecretKey",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 484618655,
+  "name": "05 修改热备盘阵列关联",
+  "method": "post",
+  "path": "/v2/hotsparedisk/ModifyArray",
+  "status": "released",
+  "folderId": 90465464
+ },
+ {
+  "id": 484618660,
+  "name": "修复LVM缓存",
+  "method": "post",
+  "path": "/v2/lvmCache/FixLvmCache",
+  "status": "released",
+  "folderId": 90465465
+ },
+ {
+  "id": 484618536,
+  "name": "01 获取磁盘插槽总览",
+  "method": "get",
+  "path": "/v2/disk/GetOverview",
+  "status": "released",
+  "folderId": 90465458
+ },
+ {
+  "id": 484618537,
+  "name": "02 获取磁盘分配总览",
+  "method": "get",
+  "path": "/v2/storage/overview",
+  "status": "released",
+  "folderId": 90465458
+ },
+ {
+  "id": 484618539,
+  "name": "17 删除卷",
+  "method": "delete",
+  "path": "/v2/storage/delete/volume/{uuid}",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 445699375,
+  "name": "关闭双因素认证",
+  "method": "post",
+  "path": "/otp/enable_twice",
+  "status": "developing",
+  "folderId": 83453909
+ },
+ {
+  "id": 445699386,
+  "name": "获取调试模式信息",
+  "method": "get",
+  "path": "/desktop/getDebugModel",
+  "status": "released",
+  "folderId": 83453910
+ },
+ {
+  "id": 484618556,
+  "name": "07 检测硬盘存储池系统分区是否匹配（执行任务弹窗点击下一步）",
+  "method": "get",
+  "path": "/v2/storage/CheckAddDisk",
+  "status": "developing",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699393,
+  "name": "初始化桌面配置",
+  "method": "get",
+  "path": "/v2/desktop/init",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 444448836,
+  "name": "00 获取-语言变量",
+  "method": "get",
+  "path": "/v2/lang/tos",
+  "status": "tested",
+  "folderId": 83226816
+ },
+ {
+  "id": 484618579,
+  "name": "18 停止SMART测试任务",
+  "method": "post",
+  "path": "/v2/disk/smart_test/schedule/{id}/stop",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618629,
+  "name": "12 删除iSCSI连接",
+  "method": "post",
+  "path": "/v2/virtualdisk/RemoveIscsi",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618641,
+  "name": "修改USB卷标",
+  "method": "post",
+  "path": "/v2/extStorageDevice/EditUsbLabel",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 484618656,
+  "name": "03 创建热备盘",
+  "method": "post",
+  "path": "/v2/hotsparedisk/CreateHotSpareDisk",
+  "status": "released",
+  "folderId": 90465464
+ },
+ {
+  "id": 446012581,
+  "name": "关闭订阅消息",
+  "method": "put",
+  "path": "/subscribe/close",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618661,
+  "name": "创建SSD缓存",
+  "method": "post",
+  "path": "/v2/lvmCache/CreateCacheLv",
+  "status": "released",
+  "folderId": 90465465
+ },
+ {
+  "id": 445353304,
+  "name": "是否已被初始化",
+  "method": "get",
+  "path": "/v2/Initialise/IsInitialise",
+  "status": "tested",
+  "folderId": 83390252
+ },
+ {
+  "id": 484618540,
+  "name": "06 卷容量统计操作（前置1）",
+  "method": "post",
+  "path": "/v2/storage/volumeOccupyAction",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 445699376,
+  "name": "删除受信设备",
+  "method": "delete",
+  "path": "/otp/del_device",
+  "status": "developing",
+  "folderId": 83453909
+ },
+ {
+  "id": 445699387,
+  "name": "设置调试模式",
+  "method": "post",
+  "path": "/desktop/setDebugModel",
+  "status": "released",
+  "folderId": 83453910
+ },
+ {
+  "id": 484618557,
+  "name": "08-卷 检查Btrfs配额状态",
+  "method": "get",
+  "path": "/v2/storage/CheckQuota",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699394,
+  "name": "删除最近访问记录",
+  "method": "delete",
+  "path": "/v2/desktop/recentlyVisited/{id}",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618580,
+  "name": "27 停止性能测试",
+  "method": "post",
+  "path": "/v2/disk/benchmark/stop",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618630,
+  "name": "09 卸载LUN",
+  "method": "post",
+  "path": "/v2/virtualdisk/ClientLunRemove",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618642,
+  "name": "加密USB设备",
+  "method": "post",
+  "path": "/v2/extStorageDevice/EncryptDevice",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 484618657,
+  "name": "04 删除热备盘",
+  "method": "post",
+  "path": "/v2/hotsparedisk/DelHotSpare",
+  "status": "released",
+  "folderId": 90465464
+ },
+ {
+  "id": 446012582,
+  "name": "删除单条消息",
+  "method": "delete",
+  "path": "/delete/{id}",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618662,
+  "name": "删除SSD缓存",
+  "method": "post",
+  "path": "/v2/lvmCache/DeleteCacheLv",
+  "status": "released",
+  "folderId": 90465465
+ },
+ {
+  "id": 445618862,
+  "name": "03 获取-登录状态-已登录",
+  "method": "get",
+  "path": "/v2/login/state",
+  "status": "tested",
+  "folderId": 83226816
+ },
+ {
+  "id": 484613013,
+  "name": "05 获取-登录状态-已登出",
+  "method": "get",
+  "path": "/v2/login/state",
+  "status": "tested",
+  "folderId": 83226816
+ },
+ {
+  "id": 484618541,
+  "name": "15 卷格式化",
+  "method": "post",
+  "path": "/v2/storage/volumeFormatting",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 445699377,
+  "name": "完成OTP绑定",
+  "method": "post",
+  "path": "/otp/finish",
+  "status": "developing",
+  "folderId": 83453909
+ },
+ {
+  "id": 445699388,
+  "name": "生成系统报告",
+  "method": "post",
+  "path": "/assistent/generate",
+  "status": "released",
+  "folderId": 83453910
+ },
+ {
+  "id": 445699395,
+  "name": "同意用户协议",
+  "method": "put",
+  "path": "/v2/desktop/eula",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618581,
+  "name": "15 创建SMART测试任务",
+  "method": "post",
+  "path": "/v2/disk/smart_test/schedule",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618631,
+  "name": "10 挂载LUN",
+  "method": "post",
+  "path": "/v2/virtualdisk/MountLun",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618643,
+  "name": "卸载USB设备",
+  "method": "post",
+  "path": "/v2/extStorageDevice/UnmountDevice",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 484618558,
+  "name": "06 检查卷容量预警",
+  "method": "post",
+  "path": "/v2/storage/CheckCapacity",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 484618658,
+  "name": "02 获取热备盘列表",
+  "method": "get",
+  "path": "/v2/hotsparedisk/GetHotSpareList",
+  "status": "released",
+  "folderId": 90465464
+ },
+ {
+  "id": 446012583,
+  "name": "删除所有消息",
+  "method": "delete",
+  "path": "/delete_all",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618663,
+  "name": "获取LVM缓存排序",
+  "method": "get",
+  "path": "/v2/lvmCache/GetLvmCacheSort",
+  "status": "released",
+  "folderId": 90465465
+ },
+ {
+  "id": 445699378,
+  "name": "忘记OTP密钥",
+  "method": "post",
+  "path": "/otp/forgot",
+  "status": "developing",
+  "folderId": 83453909
+ },
+ {
+  "id": 445699389,
+  "name": "生成报告进度",
+  "method": "post",
+  "path": "/assistent/process",
+  "status": "released",
+  "folderId": 83453910
+ },
+ {
+  "id": 445699396,
+  "name": "处理快捷连接",
+  "method": "post",
+  "path": "/v2/desktop/quickConnection",
+  "status": "testing",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618582,
+  "name": "36 初始化系统盘",
+  "method": "post",
+  "path": "/v2/disk/InitSysDisk",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618559,
+  "name": "10 获取删除状态",
+  "method": "post",
+  "path": "/v2/storage/StatusForDeleting/{role}",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 484618632,
+  "name": "08 格式化LUN",
+  "method": "post",
+  "path": "/v2/virtualdisk/FormattingMountLun",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618644,
+  "name": "批量获取USB访问权限",
+  "method": "post",
+  "path": "/v2/extStorageDevice/UsbAclAll",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 484618659,
+  "name": "01 获取阵列列表",
+  "method": "get",
+  "path": "/v2/hotsparedisk/GetRaidHotSpare",
+  "status": "released",
+  "folderId": 90465464
+ },
+ {
+  "id": 446012584,
+  "name": "忽略订阅消息",
+  "method": "put",
+  "path": "/subscribe/ignore",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618664,
+  "name": "获取SSD缓存列表",
+  "method": "get",
+  "path": "/v2/lvmCache/CacheLvsInfo",
+  "status": "released",
+  "folderId": 90465465
+ },
+ {
+  "id": 492267088,
+  "name": "获取X-Csrf-Token",
+  "method": "get",
+  "path": "/tos/",
+  "status": "developing",
+  "folderId": 83390252
+ },
+ {
+  "id": 484618542,
+  "name": "12 碎片整理",
+  "method": "get",
+  "path": "/v2/storage/defragment/{uuid}",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 489440012,
+  "name": "可热备的空闲磁盘（未找到）",
+  "method": "get",
+  "path": "/v2/hotsparedisk/GetAvailableDiskList",
+  "status": "released",
+  "folderId": 90465464
+ },
+ {
+  "id": 445699379,
+  "name": "检查用户是否启用双因素认证",
+  "method": "post",
+  "path": "/otp/is_twice",
+  "status": "developing",
+  "folderId": 83453909
+ },
+ {
+  "id": 445699390,
+  "name": "获取生成系统报告信息",
+  "method": "post",
+  "path": "/assistent/get",
+  "status": "released",
+  "folderId": 83453910
+ },
+ {
+  "id": 445699397,
+  "name": "处理桌面应用【由于加密，无法进一步测试】",
+  "method": "post",
+  "path": "/v2/desktop/DealDesktopApp",
+  "status": "released",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618583,
+  "name": "19 删除SMART测试任务",
+  "method": "delete",
+  "path": "/v2/disk/smart_test/schedule/{id}",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618560,
+  "name": "01 获取存储池列表",
+  "method": "get",
+  "path": "/v2/storage/list/storagePool",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 484618633,
+  "name": "07 登录iSCSI Target",
+  "method": "post",
+  "path": "/v2/virtualdisk/IscsiLogin",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618645,
+  "name": "批量设置USB访问权限",
+  "method": "post",
+  "path": "/v2/extStorageDevice/SetUsbAclAll",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 446012585,
+  "name": "批量标记消息已读",
+  "method": "put",
+  "path": "/batch/read",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618665,
+  "name": "获取卷列表",
+  "method": "get",
+  "path": "/v2/lvmCache/GetVolumeList",
+  "status": "released",
+  "folderId": 90465465
+ },
+ {
+  "id": 484618543,
+  "name": "13 编辑卷",
+  "method": "post",
+  "path": "/v2/storage/edit/volume/{uuid}",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 484618544,
+  "name": "10 编辑卷容量预警配置",
+  "method": "post",
+  "path": "/v2/storage/EditVolumeRemindConfig",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 445699380,
+  "name": "绑定邮箱地址",
+  "method": "post",
+  "path": "/otp/bind_email",
+  "status": "developing",
+  "folderId": 83453909
+ },
+ {
+  "id": 445699391,
+  "name": "下载系统报告",
+  "method": "get",
+  "path": "/assistent/download",
+  "status": "released",
+  "folderId": 83453910
+ },
+ {
+  "id": 445699398,
+  "name": "批量设置应用显示状态",
+  "method": "post",
+  "path": "/v2/desktop/batchshowState",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618584,
+  "name": "36 删除系统盘",
+  "method": "delete",
+  "path": "/v2/disk/DelSysDisk",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618634,
+  "name": "06 获取LUN列表",
+  "method": "get",
+  "path": "/v2/virtualdisk/GetLunList",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618646,
+  "name": "挂载加密USB设备",
+  "method": "post",
+  "path": "/v2/extStorageDevice/MountedDevice",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 446012586,
+  "name": "插入消息",
+  "method": "post",
+  "path": "/insert",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618666,
+  "name": "获取指定SSD缓存信息",
+  "method": "get",
+  "path": "/v2/lvmCache/CacheInfo/{uuid}",
+  "status": "released",
+  "folderId": 90465465
+ },
+ {
+  "id": 484618561,
+  "name": "20 设置阵列同步速度及Bitmap",
+  "method": "post",
+  "path": "/v2/storage/SetRaidSpeedOrBitmap",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 444448838,
+  "name": "01 获取-登录标题样式",
+  "method": "get",
+  "path": "/v2/welcome",
+  "status": "tested",
+  "folderId": 83226816
+ },
+ {
+  "id": 484618545,
+  "name": "08 获取SSD TRIM信息",
+  "method": "get",
+  "path": "/v2/storage/ssd/trim/{uuid}",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 445699381,
+  "name": "获取OTP绑定二维码",
+  "method": "get",
+  "path": "/otp/qrbind",
+  "status": "developing",
+  "folderId": 83453909
+ },
+ {
+  "id": 445699392,
+  "name": "删除系统报告",
+  "method": "delete",
+  "path": "/assistent/delete",
+  "status": "released",
+  "folderId": 83453910
+ },
+ {
+  "id": 484618562,
+  "name": "03 获取创建池资源信息",
+  "method": "get",
+  "path": "/v2/storage/create/pool",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699399,
+  "name": "显示应用",
+  "method": "put",
+  "path": "/v2/desktop/show",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618585,
+  "name": "加密存储设备",
+  "method": "put",
+  "path": "/v1/encrypt/{action}/{name}/{password}",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618635,
+  "name": "04 获取Target信息",
+  "method": "get",
+  "path": "/v2/virtualdisk/GetTargetInfo",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618647,
+  "name": "格式化USB设备",
+  "method": "post",
+  "path": "/v2/extStorageDevice/FormattingDevice",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 446012587,
+  "name": "标记所有消息已读",
+  "method": "put",
+  "path": "/read/all",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618667,
+  "name": "获取最大剩余可设置缓存大小",
+  "method": "get",
+  "path": "/v2/lvmCache/GetMaxResidueCacheSize",
+  "status": "released",
+  "folderId": 90465465
+ },
+ {
+  "id": 484618546,
+  "name": "07 获取全部卷容量占用情况（后置1）",
+  "method": "get",
+  "path": "/v2/storage/volumeOccupyStatusAll",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 445699382,
+  "name": "获取OTP配置信息",
+  "method": "get",
+  "path": "/otp/info",
+  "status": "developing",
+  "folderId": 83453909
+ },
+ {
+  "id": 484618563,
+  "name": "21 创建存储池",
+  "method": "post",
+  "path": "/v2/storage/create/pool",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699400,
+  "name": "检查内核版本",
+  "method": "get",
+  "path": "/v2/desktop/kernelVersion/pass",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618586,
+  "name": "21 卸载硬盘",
+  "method": "post",
+  "path": "/v2/disk/UmountDisk/{name}",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618636,
+  "name": "05 获取Target认证信息",
+  "method": "get",
+  "path": "/v2/virtualdisk/GetTargetAttr",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618648,
+  "name": "检查USB容量",
+  "method": "post",
+  "path": "/v2/extStorageDevice/CheckUsbCapacity",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 444448839,
+  "name": "02 用户登录",
+  "method": "post",
+  "path": "/v2/login",
+  "status": "tested",
+  "folderId": 83226816
+ },
+ {
+  "id": 446012588,
+  "name": "标记消息已读",
+  "method": "put",
+  "path": "/read/{id}",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618668,
+  "name": "获取空闲SSD列表",
+  "method": "get",
+  "path": "/v2/lvmCache/FreeSSDs",
+  "status": "released",
+  "folderId": 90465465
+ },
+ {
+  "id": 488937587,
+  "name": "普通用户登录",
+  "method": "post",
+  "path": "/v2/login",
+  "status": "tested",
+  "folderId": 83226816
+ },
+ {
+  "id": 484618547,
+  "name": "03 获取创建卷资源信息",
+  "method": "get",
+  "path": "/v2/storage/create/volume",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 445699383,
+  "name": "获取受信设备列表",
+  "method": "get",
+  "path": "/otp/devices",
+  "status": "developing",
+  "folderId": 83453909
+ },
+ {
+  "id": 445699401,
+  "name": "检查是否为Beta版本",
+  "method": "get",
+  "path": "/v2/desktop/IsBeta",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618587,
+  "name": "23 启用磁盘",
+  "method": "post",
+  "path": "/v2/disk/activation/enable",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618564,
+  "name": "02 获取存储池信息（获取存储池raid与check_disk）",
+  "method": "get",
+  "path": "/v2/storage/edit/pool/{uuid}",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 484618637,
+  "name": "01 获取iSCSI服务状态",
+  "method": "get",
+  "path": "/v2/virtualdisk/GetIscsidStatus",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618649,
+  "name": "检查格式化状态",
+  "method": "get",
+  "path": "/v2/extStorageDevice/IsFormating",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 446012589,
+  "name": "注册消息配置文件",
+  "method": "put",
+  "path": "/app/config/register",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 445699384,
+  "name": "验证OTP验证码",
+  "method": "post",
+  "path": "/otp/checkcode",
+  "status": "developing",
+  "folderId": 83453909
+ },
+ {
+  "id": 484618565,
+  "name": "11 设置Data Scrubbing",
+  "method": "post",
+  "path": "/v2/storage/SetDataScrubbing",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699402,
+  "name": "获取导航栏列表",
+  "method": "get",
+  "path": "/v2/desktop/list",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618588,
+  "name": "38 导出IHM日志",
+  "method": "get",
+  "path": "/v2/disk/ExportIhmLog",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618638,
+  "name": "03 获取虚拟磁盘信息",
+  "method": "get",
+  "path": "/v2/virtualdisk/GetIscsiInfo",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618650,
+  "name": "编辑USB容量预警配置",
+  "method": "post",
+  "path": "/v2/extStorageDevice/EditUsbRemindConfig",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 446012590,
+  "name": "监控系统状态",
+  "method": "get",
+  "path": "/monitorSystemStatus",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618548,
+  "name": "09 获取卷信息（提取lv0_mnt_path ）",
+  "method": "get",
+  "path": "/v2/storage/edit/volume/{uuid}",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 484566857,
+  "name": "04 退出登录",
+  "method": "put",
+  "path": "/v2/logout",
+  "status": "developing",
+  "folderId": 83226816
+ },
+ {
+  "id": 445699385,
+  "name": "验证用户密码",
+  "method": "post",
+  "path": "/otp/verify_pwd",
+  "status": "developing",
+  "folderId": 83453909
+ },
+ {
+  "id": 484618566,
+  "name": "05 获取Data Scrubbing配置",
+  "method": "get",
+  "path": "/v2/storage/GetDataScrubbingConf",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699403,
+  "name": "获取应用提示状态",
+  "method": "get",
+  "path": "/v2/desktop/getTips",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618589,
+  "name": "10 导出SMART信息",
+  "method": "get",
+  "path": "/v2/disk/ExportOverview",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618639,
+  "name": "02 设置iSCSI服务状态",
+  "method": "post",
+  "path": "/v2/virtualdisk/SetIscsidStatus",
+  "status": "released",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618651,
+  "name": "获取USB容量预警配置",
+  "method": "get",
+  "path": "/v2/extStorageDevice/GetUsbRemindConfig",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 446012591,
+  "name": "获取消息中心版本",
+  "method": "get",
+  "path": "/version",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618549,
+  "name": "01 获取卷列表",
+  "method": "get",
+  "path": "/v2/storage/list/volume",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 484618550,
+  "name": "05 获取卷容量占用情况（使用详情）",
+  "method": "get",
+  "path": "/v2/storage/volumeOccupyStatus",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 484618567,
+  "name": "04 获取阵列同步速度及Bitmap",
+  "method": "get",
+  "path": "/v2/storage/GetRaidSpeedOrBitmap",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699404,
+  "name": "获取提示状态【未找到接口，无法填写id】",
+  "method": "get",
+  "path": "/v2/system/prompt/{id}",
+  "status": "released",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618590,
+  "name": "09 导出磁盘日志",
+  "method": "get",
+  "path": "/v2/disk/disk_log/export",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 486444920,
+  "name": "验证用户密码（生成X-Curpass-Token变量）",
+  "method": "post",
+  "path": "/v2/otp/verify_pwd",
+  "status": "developing",
+  "folderId": 83226816
+ },
+ {
+  "id": 484618652,
+  "name": "获取USB设备列表",
+  "method": "get",
+  "path": "/v2/extStorageDevice/DeviceList",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 446012592,
+  "name": "获取消息中心配置",
+  "method": "get",
+  "path": "/settings",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 489221849,
+  "name": "00 ISCSI 获取所有数据",
+  "method": "get",
+  "path": "/v2/proxy/iSCSIManager/Select",
+  "status": "developing",
+  "folderId": 90465462
+ },
+ {
+  "id": 484618551,
+  "name": "02 获取卷容量预警配置",
+  "method": "get",
+  "path": "/v2/storage/GetVolumeRemindConfig",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 484618568,
+  "name": "12 停止Data Scrubbing",
+  "method": "post",
+  "path": "/v2/storage/StopDataScrubbing",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699405,
+  "name": "获取最近访问列表",
+  "method": "get",
+  "path": "/v2/desktop/recentlyVisited",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618591,
+  "name": "28 开始安全擦除",
+  "method": "post",
+  "path": "/v2/disk/sec_erase/start",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 488955762,
+  "name": "验证普通用户密码（生成X-Curpass-Token变量）",
+  "method": "post",
+  "path": "/v2/otp/verify_pwd",
+  "status": "developing",
+  "folderId": 83226816
+ },
+ {
+  "id": 484618653,
+  "name": "获取加密进度",
+  "method": "get",
+  "path": "/v2/extStorageDevice/Process",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 446012593,
+  "name": "获取消息列表",
+  "method": "get",
+  "path": "/list",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618552,
+  "name": "04 获取存储状态",
+  "method": "get",
+  "path": "/v2/storage/status",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 484618569,
+  "name": "19 检查mdadm信息",
+  "method": "post",
+  "path": "/v2/storage/CheckMdInfo/{md}",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699406,
+  "name": "获取桌面应用列表",
+  "method": "get",
+  "path": "/v2/desktop/listDesktop",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618592,
+  "name": "26 开始性能测试",
+  "method": "post",
+  "path": "/v2/disk/benchmark/start",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618654,
+  "name": "获取密钥文件路径",
+  "method": "post",
+  "path": "/v2/extStorageDevice/ObtainSecretKey",
+  "status": "released",
+  "folderId": 90465463
+ },
+ {
+  "id": 446012594,
+  "name": "获取消息配置语言包",
+  "method": "get",
+  "path": "/app/config/language",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618570,
+  "name": "16 挂载存储池（挂载无响应）",
+  "method": "post",
+  "path": "/v2/storage/MountPool/{role}/{uuid}",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 484618553,
+  "name": "11 设置SSD TRIM",
+  "method": "post",
+  "path": "/v2/storage/ssd/trim/{uuid}",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 445699407,
+  "name": "获取桌面总览位置信息",
+  "method": "get",
+  "path": "/v2/desktop/overviewLocation",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618593,
+  "name": "29 开始抹除磁盘",
+  "method": "post",
+  "path": "/v2/disk/format/start",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 446012595,
+  "name": "获取订阅消息列表",
+  "method": "get",
+  "path": "/subscribe/list",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618554,
+  "name": "14 设置卷压缩",
+  "method": "post",
+  "path": "/v2/storage/compression/{uuid}",
+  "status": "released",
+  "folderId": 90465459
+ },
+ {
+  "id": 484618571,
+  "name": "18 编辑存储池",
+  "method": "post",
+  "path": "/v2/storage/edit/pool/{uuid}",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699408,
+  "name": "获取桌面排序配置",
+  "method": "get",
+  "path": "/v2/desktop/getSort/{id}",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618594,
+  "name": "37 手动测试IHM",
+  "method": "post",
+  "path": "/v2/disk/ManualTest",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 446012596,
+  "name": "获取订阅消息静态资源",
+  "method": "get",
+  "path": "/static/subscribe/{path}",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 445699409,
+  "name": "获取桌面模块【由于加密，无法进一步测试】",
+  "method": "post",
+  "path": "/v2/desktop/module",
+  "status": "released",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618595,
+  "name": "17 执行SMART测试任务",
+  "method": "post",
+  "path": "/v2/disk/smart_test/schedule/{id}/exec",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618572,
+  "name": "15 获取挂载信息",
+  "method": "get",
+  "path": "/v2/storage/MountPool/{role}/{uuid}",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 446012597,
+  "name": "解除注册消息配置",
+  "method": "put",
+  "path": "/app/config/unregister",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618573,
+  "name": "同步状态监控通知_6.0（已弃用）",
+  "method": "post",
+  "path": "/v2/VgMonitor",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699410,
+  "name": "获取用户协议",
+  "method": "get",
+  "path": "/v2/desktop/eula",
+  "status": "exception",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618596,
+  "name": "20 挂载硬盘",
+  "method": "post",
+  "path": "/v2/disk/MountDisk/{name}",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 446012598,
+  "name": "设置消息中心配置",
+  "method": "post",
+  "path": "/settings",
+  "status": "released",
+  "folderId": 83512680
+ },
+ {
+  "id": 484618574,
+  "name": "VG监控（内部接口）",
+  "method": "get",
+  "path": "/v2/storage/VgMonitor",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699411,
+  "name": "获取用户高级设置",
+  "method": "get",
+  "path": "/v2/welcome/advancedSetting",
+  "status": "testing",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618597,
+  "name": "34 新增系统盘",
+  "method": "post",
+  "path": "/v2/disk/AddSysDisk",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618575,
+  "name": "13 编辑存储池描述",
+  "method": "post",
+  "path": "/v2/storage/StorageDescription/{uuid}",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699412,
+  "name": "获取登录欢迎页配置",
+  "method": "get",
+  "path": "/v2/welcome",
+  "status": "exception",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618598,
+  "name": "新磁盘通知",
+  "method": "put",
+  "path": "/v1/notice/{name}",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 445699413,
+  "name": "设置应用提示状态",
+  "method": "post",
+  "path": "/v2/desktop/setTips",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618599,
+  "name": "更新分区权限列表",
+  "method": "put",
+  "path": "/v2/disk/UpdatePartPerms",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618576,
+  "name": "14 检测可用存储池（变量取磁盘01）",
+  "method": "post",
+  "path": "/v2/storage/CheckAvailablePool/{disk}",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 484618577,
+  "name": "17 删除存储池",
+  "method": "delete",
+  "path": "/v2/storage/delete/pool/{uuid}",
+  "status": "released",
+  "folderId": 90465460
+ },
+ {
+  "id": 445699414,
+  "name": "设置应用显示状态",
+  "method": "post",
+  "path": "/v2/desktop/showState",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618600,
+  "name": "更新挂载状态（内部接口）",
+  "method": "post",
+  "path": "/v1/update_mount_status",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 445699415,
+  "name": "设置提示状态",
+  "method": "post",
+  "path": "/v2/system/prompt",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618601,
+  "name": "格式化存储设备",
+  "method": "put",
+  "path": "/v1/{name}/{fs}",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 445699416,
+  "name": "设置最近访问",
+  "method": "post",
+  "path": "/v2/desktop/recentlyVisited",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618602,
+  "name": "33 检查磁盘是否符合系统盘条件",
+  "method": "get",
+  "path": "/v2/disk/CheckSysDisk",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 445699417,
+  "name": "设置最近访问返回数量",
+  "method": "get",
+  "path": "/v2/desktop/recentlyVisitedQuantity/{quantity}",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618603,
+  "name": "30 清除磁盘日志",
+  "method": "post",
+  "path": "/v2/disk/disk_log/delete",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 445699418,
+  "name": "设置桌面总览位置信息【由于加密 无法进一步测试】",
+  "method": "post",
+  "path": "/v2/desktop/overviewLocation",
+  "status": "released",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618604,
+  "name": "激活弹出的USB设备",
+  "method": "put",
+  "path": "/v1/active/{uuid}",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 445699419,
+  "name": "设置桌面排序配置",
+  "method": "post",
+  "path": "/v2/desktop/setSort/{id}",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618605,
+  "name": "24 磁盘坏块扫描",
+  "method": "post",
+  "path": "/v2/disk/DiskScan",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 445699420,
+  "name": "隐藏应用",
+  "method": "put",
+  "path": "/v2/desktop/hide",
+  "status": "tested",
+  "folderId": 83453911
+ },
+ {
+  "id": 484618606,
+  "name": "磁盘自动挂载（未找到）",
+  "method": "put",
+  "path": "/v1/{name}",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618607,
+  "name": "移除存储设备",
+  "method": "delete",
+  "path": "/v1/{name}/{remove}",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618608,
+  "name": "22 移除磁盘",
+  "method": "post",
+  "path": "/v2/disk/activation/disable",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618609,
+  "name": "16 编辑SMART测试任务",
+  "method": "post",
+  "path": "/v2/disk/smart_test/schedule/{id}/edit",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618610,
+  "name": "11 获取IHM信息列表",
+  "method": "get",
+  "path": "/v2/disk/IhmInfoList",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618611,
+  "name": "14 获取SMART测试任务列表",
+  "method": "get",
+  "path": "/v2/disk/smart_test/schedule",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618612,
+  "name": "获取分区权限列表",
+  "method": "get",
+  "path": "/v2/disk/GetPartPerms",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618613,
+  "name": "获取分区权限列表",
+  "method": "get",
+  "path": "/v1/part_perms",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618614,
+  "name": "25 获取性能测试状态",
+  "method": "get",
+  "path": "/v2/disk/benchmark/status",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618615,
+  "name": "04 获取指定磁盘SMART详细信息",
+  "method": "get",
+  "path": "/v2/disk/GetDiskDetailData",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618616,
+  "name": "06 获取指定磁盘功能",
+  "method": "get",
+  "path": "/v2/disk/GetDiskCapabilities",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618617,
+  "name": "01 获取硬盘下拉选项",
+  "method": "get",
+  "path": "/v2/disk/GetDiskOption",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618618,
+  "name": "05 获取硬盘分配信息",
+  "method": "get",
+  "path": "/v2/disk/GetDiskAllocations",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618619,
+  "name": "02 获取硬盘列表数据",
+  "method": "get",
+  "path": "/v2/disk/GetDiskListData",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618620,
+  "name": "03 获取硬盘状态",
+  "method": "get",
+  "path": "/v2/disk/GetDiskStatus",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618621,
+  "name": "07 获取磁盘引导信息",
+  "method": "get",
+  "path": "/v2/disk/guidanceInfo",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618622,
+  "name": "08 获取磁盘日志列表",
+  "method": "get",
+  "path": "/v2/disk/disk_log",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618623,
+  "name": "12 获取磁盘设置",
+  "method": "get",
+  "path": "/v2/disk/setting",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618624,
+  "name": "31 获取磁盘速度数据",
+  "method": "get",
+  "path": "/v2/disk/GetDiskListSpeedData",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618625,
+  "name": "32 获取系统盘列表（返回全部的磁盘）",
+  "method": "get",
+  "path": "/v2/disk/GetSysDiskLists",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618626,
+  "name": "设置分区权限（内部接口）",
+  "method": "put",
+  "path": "/v1/part_perms",
+  "status": "released",
+  "folderId": 90465461
+ },
+ {
+  "id": 484618627,
+  "name": "35 迁移系统盘",
+  "method": "post",
+  "path": "/v2/disk/MigrateSysDisk",
+  "status": "released",
+  "folderId": 90465461
+ }
+]

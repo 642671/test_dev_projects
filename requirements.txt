@@ -22,3 +22,6 @@ pytest-rerunfailures>=14.0
 
 # 工具
 python-dotenv>=1.0
+
+# 文档生成
+python-docx>=1.1.0
