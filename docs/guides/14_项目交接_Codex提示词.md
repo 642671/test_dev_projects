@@ -32,7 +32,7 @@ test_dev_projects/
 │   └── 测试执行/                               ← 执行批规划
 ├── test_automation/           ← pytest 自动化体系（conftest + api_testing + ui_automation）
 ├── temp_scripts/              ← 批处理工具链（对账/体检/生成/修复，约 5000 脚本，只读参考）
-├── docs/guides/               ← 编号文档体系 01-17
+├── docs/guides/               ← 编号文档体系 01-18
 ├── storagemanager/            ← 存储管理应用重构版本资产（当前业务中心）
 ├── archives/scripts_legacy/   ← 本地历史一次性脚本归档（Git 忽略）
 ├── archives/                  ← 历史备份
@@ -341,6 +341,7 @@ py -m pip install <包名>                               # 安装依赖
 | 15 | `15_项目综合状态报告_20260804.md` | 脚本实测状态与风险 |
 | 16 | `16_Apifox_MCP_CLI接入研究_20260804.md` | Apifox 接入方案 |
 | 17 | `17_项目目录重建方案_20260804.md` | 目录重建目标与迁移步骤 |
+| **18** | **`18_项目当前记忆与交接_20260805.md`** | **当前最高优先级记忆、协作约定与最新状态** |
 
 ---
 
