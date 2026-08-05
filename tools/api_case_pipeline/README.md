@@ -53,3 +53,15 @@ python tools\api_case_pipeline\apply_excel_reconcile_repairs.py
 ```
 
 `prepare_reconcile_repairs.js` 根据 2026-08-05 完整对账基线生成 Apifox 用例更新载荷和 Excel 精确改单，不直接写入 Apifox，也不直接保存 Excel。`apply_excel_reconcile_repairs.py` 只会在单元格当前值仍与计划前值一致时写入；重复执行为零修改。Apifox 载荷必须先通过 CLI Schema 校验，并且只能写入报告指定的 AI 分支，写入后必须回读验证。
+
+## Excel 换行规范化
+
+```powershell
+# 只读统计
+python tools\api_case_pipeline\normalize_excel_linebreaks.py
+
+# 创建本地备份并在 XLSX/XML 层规范化
+python tools\api_case_pipeline\normalize_excel_linebreaks.py --apply
+```
+
+该工具把单元格共享字符串中的 CR/CRLF 规范成 LF，解决 Codex 工作簿预览显示 `_x000D_`、而 WPS 显示正常换行的差异。工具直接修改 `xl/sharedStrings.xml`，不调用 WPS、Excel 或 openpyxl 保存工作簿；执行后会验证 ZIP 和全部异常单元格，并拒绝覆盖已有但内容不同的备份。
