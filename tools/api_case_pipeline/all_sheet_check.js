@@ -47,7 +47,10 @@ for (const sn of SHEETS) {
         if (!c(5).trim()) issues.push(row + ' 优先级空');
         if (!c(6).trim()) issues.push(row + ' 请求类型空');
         if (!c(7).trim()) issues.push(row + ' 请求头空');
-        else if (!c(7).toLowerCase().includes('content-type') && !/缺少\s*Content-Type|不携带\s*Content-Type/i.test(c9)) {
+        // GET/HEAD 没有请求体时不要求 Content-Type；认证头仍由“请求头空”规则覆盖。
+        else if (!/^(GET|HEAD)$/i.test(c(6).trim()) &&
+                 !c(7).toLowerCase().includes('content-type') &&
+                 !/缺少\s*Content-Type|不携带\s*Content-Type/i.test(c9)) {
             issues.push(row + ' 请求头缺Content-Type');
         }
         if (!c(8).trim()) issues.push(row + ' 请求参数空');

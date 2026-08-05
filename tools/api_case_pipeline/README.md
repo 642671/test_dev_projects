@@ -44,3 +44,12 @@ node tools\api_case_pipeline\reconcile_excel_apifox.js --refresh
 - `docs/reports/data/apifox_excel_reconcile_YYYYMMDD.json`：全部映射、缺失、额外接口/用例和内容问题。
 
 确定性检查包括端点映射、用例名称/数量、分类、结构化请求头、参数名存在性，以及两侧均可解析时的 JSON 请求体精确比较。查询参数和表单参数的值、自然语言前置条件、步骤和预期结果不能自动证明语义相同；工具只报告可识别断言覆盖，最终变更仍需人工确认。
+
+## 2026-08-05 对账修复复现
+
+```powershell
+node tools\api_case_pipeline\prepare_reconcile_repairs.js
+python tools\api_case_pipeline\apply_excel_reconcile_repairs.py
+```
+
+`prepare_reconcile_repairs.js` 根据 2026-08-05 完整对账基线生成 Apifox 用例更新载荷和 Excel 精确改单，不直接写入 Apifox，也不直接保存 Excel。`apply_excel_reconcile_repairs.py` 只会在单元格当前值仍与计划前值一致时写入；重复执行为零修改。Apifox 载荷必须先通过 CLI Schema 校验，并且只能写入报告指定的 AI 分支，写入后必须回读验证。

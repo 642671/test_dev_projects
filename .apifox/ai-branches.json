@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-23T02:49:39.962Z",
+  "updatedAt": "2026-08-05T05:55:03.719Z",
   "projects": {
     "8122217": {
       "branches": {
@@ -83,6 +83,20 @@
           "isArchived": false,
           "fetchedAt": "2026-07-23T02:49:39.962Z",
           "lastKnownStatus": "MERGED"
+        },
+        "8459871": {
+          "projectId": 8122217,
+          "branchId": 8459871,
+          "name": "ai/20260805-from-main-storage-reconcile",
+          "branchKind": "ai",
+          "branchType": "SPRINT",
+          "sourceBranchId": 7879358,
+          "isAiBranch": true,
+          "isAiWritableBranch": true,
+          "automationLifecycleStatus": "ACTIVE",
+          "isArchived": false,
+          "fetchedAt": "2026-08-05T05:55:03.719Z",
+          "lastKnownStatus": "ACTIVE"
         }
       },
       "lastGuardError": {
@@ -92,12 +106,6 @@
         "createdAt": "2026-07-17T02:33:09.025Z"
       },
       "recentEvents": [
-        {
-          "type": "branch_recorded",
-          "projectId": 8122217,
-          "branchId": 8394026,
-          "createdAt": "2026-07-23T01:06:56.708Z"
-        },
         {
           "type": "branch_recorded",
           "projectId": 8122217,
@@ -151,6 +159,13 @@
           "projectId": 8122217,
           "branchId": 8394026,
           "createdAt": "2026-07-23T02:49:39.962Z"
+        },
+        {
+          "type": "branch_recorded",
+          "projectId": 8122217,
+          "branchId": 8459871,
+          "sourceBranchId": 7879358,
+          "createdAt": "2026-08-05T05:55:03.719Z"
         }
       ]
     }
@@ -327,6 +342,13 @@
       "projectId": 8122217,
       "branchId": 8394026,
       "createdAt": "2026-07-23T02:49:39.962Z"
+    },
+    {
+      "type": "branch_recorded",
+      "projectId": 8122217,
+      "branchId": 8459871,
+      "sourceBranchId": 7879358,
+      "createdAt": "2026-08-05T05:55:03.719Z"
     }
   ]
 }
