@@ -1,0 +1,18 @@
+{
+  "projectId": 8122217,
+  "branch": "main",
+  "moduleId": 7536053,
+  "excel": "接口测试用例/单个接口测试用例/存储管理单接口测试用例.xlsx",
+  "snapshot": "temp_scripts/apifox_storage_baseline.apifox.json",
+  "methodErrorPattern": "错误的请求类型|请求方法错误|方法错误",
+  "sheets": [
+    { "sheet": "概要", "folderName": "概要", "folderId": 90465458 },
+    { "sheet": "卷", "folderName": "卷", "folderId": 90465459 },
+    { "sheet": "存储池", "folderName": "存储池", "folderId": 90465460 },
+    { "sheet": "热备盘", "folderName": "热备盘", "folderId": 90465464 },
+    { "sheet": "磁盘", "folderName": "磁盘", "folderId": 90465461 },
+    { "sheet": "虚拟磁盘", "folderName": "虚拟磁盘", "folderId": 90465462 },
+    { "sheet": "HyperCache", "folderName": "Hyper Cache", "folderId": 90465465 },
+    { "sheet": "USB设备", "folderName": "USB 设备", "folderId": 90465463 }
+  ]
+}

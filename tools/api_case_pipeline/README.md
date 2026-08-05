@@ -26,3 +26,21 @@ node tools\api_case_pipeline\reverse_check.js
 
 写入 Apifox 前必须使用 `cli-schema get` 和 `cli-schema validate`，并在写入后回读资源。
 
+## Excel ↔ Apifox 完整只读对账
+
+```powershell
+# 使用已有的本地快照
+node tools\api_case_pipeline\reconcile_excel_apifox.js
+
+# 先从 Apifox main 只读导出最新原生快照，再生成报告
+node tools\api_case_pipeline\reconcile_excel_apifox.js --refresh
+```
+
+该工具使用 `config/storage_scope.json` 定义 Excel 真源、Apifox 项目、分支和 8 个存储管理目录。Apifox 原生快照写入 Git 忽略的 `temp_scripts/`，不会提交，也不会修改远端项目。
+
+报告输出：
+
+- `docs/reports/Apifox_Excel完整对账_YYYYMMDD.md`：人工审阅摘要与主要明细。
+- `docs/reports/data/apifox_excel_reconcile_YYYYMMDD.json`：全部映射、缺失、额外接口/用例和内容问题。
+
+确定性检查包括端点映射、用例名称/数量、分类、结构化请求头、参数名存在性，以及两侧均可解析时的 JSON 请求体精确比较。查询参数和表单参数的值、自然语言前置条件、步骤和预期结果不能自动证明语义相同；工具只报告可识别断言覆盖，最终变更仍需人工确认。
