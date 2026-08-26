@@ -1,0 +1,8 @@
+timestamp=2026-08-18T05:55:48.5377202Z
+verifiedPrefix=C:\Program Files\WindowsApps\OpenAI.Codex_26.810.7004.0_x64__2p2nqsd0c76g0\
+targetCount=5
+target=ChatGPT:7564:C:\Program Files\WindowsApps\OpenAI.Codex_26.810.7004.0_x64__2p2nqsd0c76g0\app\ChatGPT.exe
+target=ChatGPT:12416:C:\Program Files\WindowsApps\OpenAI.Codex_26.810.7004.0_x64__2p2nqsd0c76g0\app\ChatGPT.exe
+target=ChatGPT:19412:C:\Program Files\WindowsApps\OpenAI.Codex_26.810.7004.0_x64__2p2nqsd0c76g0\app\ChatGPT.exe
+target=ChatGPT:23868:C:\Program Files\WindowsApps\OpenAI.Codex_26.810.7004.0_x64__2p2nqsd0c76g0\app\ChatGPT.exe
+target=codex:7024:C:\Program Files\WindowsApps\OpenAI.Codex_26.810.7004.0_x64__2p2nqsd0c76g0\app\resources\codex.exe

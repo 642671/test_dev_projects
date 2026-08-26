@@ -1,0 +1,293 @@
+{
+  "generatedAt": "2026-08-12T08:35:56.470Z",
+  "imageCount": 41,
+  "items": [
+    {
+      "index": 1,
+      "image": "81a9ad8e-8e61-4213-9dc8-8881bcc6190b.jpg",
+      "markdown": "01-81a9ad8e-8e61-4213-9dc8-8881bcc6190b.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 2,
+      "image": "6443467a-6d47-4de4-a59f-02131a0b6718.jpg",
+      "markdown": "02-6443467a-6d47-4de4-a59f-02131a0b6718.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 3,
+      "image": "dd358ff1-98d1-47f3-8abf-72eb78d85ffd.jpg",
+      "markdown": "03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 4,
+      "image": "b9ae027c-ca75-4089-b9bc-7f73f114e6e6.jpg",
+      "markdown": "04-b9ae027c-ca75-4089-b9bc-7f73f114e6e6.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 5,
+      "image": "a4579389-9e42-47d1-bf34-9ec58cac3351.jpg",
+      "markdown": "05-a4579389-9e42-47d1-bf34-9ec58cac3351.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 6,
+      "image": "d7981fff-5d6b-4c5d-935f-299af65123e2.jpg",
+      "markdown": "06-d7981fff-5d6b-4c5d-935f-299af65123e2.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 7,
+      "image": "ed675dce-0979-409a-bac3-4d40172333d5.jpg",
+      "markdown": "07-ed675dce-0979-409a-bac3-4d40172333d5.md",
+      "hasJson": true,
+      "uncertainty": 3
+    },
+    {
+      "index": 8,
+      "image": "26e65aa5-4276-4857-9946-0e85b5bd3df8.jpg",
+      "markdown": "08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 9,
+      "image": "61037bdd-d93a-4a97-b54e-9d30b8be2331.jpg",
+      "markdown": "09-61037bdd-d93a-4a97-b54e-9d30b8be2331.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 10,
+      "image": "78967a92-02ff-48b7-a1b6-c0a2636f2012.jpg",
+      "markdown": "10-78967a92-02ff-48b7-a1b6-c0a2636f2012.md",
+      "hasJson": true,
+      "uncertainty": 1
+    },
+    {
+      "index": 11,
+      "image": "8b0abca5-ed73-4888-8e1c-fc42b2710709.jpg",
+      "markdown": "11-8b0abca5-ed73-4888-8e1c-fc42b2710709.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 12,
+      "image": "5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.jpg",
+      "markdown": "12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 13,
+      "image": "3c9a87aa-1501-46fc-ac4d-b49a89a0457c.jpg",
+      "markdown": "13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 14,
+      "image": "1516fa47-c454-4b42-96ab-e8ab4459f6cc.jpg",
+      "markdown": "14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 15,
+      "image": "13dd8922-0e6d-4afd-bc70-466c678b1f7b.jpg",
+      "markdown": "15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 16,
+      "image": "89f05588-07ea-49f5-8f3d-60af512858ed.jpg",
+      "markdown": "16-89f05588-07ea-49f5-8f3d-60af512858ed.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 17,
+      "image": "d9dd0814-da2f-47eb-8ddb-9866445b925f.jpg",
+      "markdown": "17-d9dd0814-da2f-47eb-8ddb-9866445b925f.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 18,
+      "image": "2df17964-1903-482f-918d-2fa34eae7a03.jpg",
+      "markdown": "18-2df17964-1903-482f-918d-2fa34eae7a03.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 19,
+      "image": "8f63a966-c79c-4103-9e6c-464618f53454.jpg",
+      "markdown": "19-8f63a966-c79c-4103-9e6c-464618f53454.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 20,
+      "image": "96927e65-857c-4b1b-bf25-94a0852caf9a.jpg",
+      "markdown": "20-96927e65-857c-4b1b-bf25-94a0852caf9a.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 21,
+      "image": "aa984c4d-6417-4a99-9859-840d3d2a9f56.jpg",
+      "markdown": "21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 22,
+      "image": "b521b1ea-2206-47cd-ba97-19b1ee77e3ba.jpg",
+      "markdown": "22-b521b1ea-2206-47cd-ba97-19b1ee77e3ba.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 23,
+      "image": "7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.jpg",
+      "markdown": "23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 24,
+      "image": "640523e1-4bc9-4cf4-b54b-67ab0d864a8e.jpg",
+      "markdown": "24-640523e1-4bc9-4cf4-b54b-67ab0d864a8e.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 25,
+      "image": "777475e1-607b-4580-8c27-fc4357976975.jpg",
+      "markdown": "25-777475e1-607b-4580-8c27-fc4357976975.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 26,
+      "image": "69ee09fe-5e07-4101-b74b-3bcc82423763.jpg",
+      "markdown": "26-69ee09fe-5e07-4101-b74b-3bcc82423763.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 27,
+      "image": "f28e9f43-05dd-4f48-86c9-78da84019465.jpg",
+      "markdown": "27-f28e9f43-05dd-4f48-86c9-78da84019465.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 28,
+      "image": "91e968dd-4bc8-4770-82e0-4bbd03ee2599.jpg",
+      "markdown": "28-91e968dd-4bc8-4770-82e0-4bbd03ee2599.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 29,
+      "image": "6ca46601-3d84-4b4c-a26e-4f19295ffcb6.jpg",
+      "markdown": "29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 30,
+      "image": "b561e007-e0e7-449f-82f0-4e83961d05d2.jpg",
+      "markdown": "30-b561e007-e0e7-449f-82f0-4e83961d05d2.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 31,
+      "image": "e85cdc61-70d6-4b33-be67-8f4694ddcb12.jpg",
+      "markdown": "31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 32,
+      "image": "b9986875-2918-4d7d-b885-650f8912cff7.jpg",
+      "markdown": "32-b9986875-2918-4d7d-b885-650f8912cff7.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 33,
+      "image": "6824b9cb-1a45-47ab-8869-3ea110daabd1.jpg",
+      "markdown": "33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md",
+      "hasJson": true,
+      "uncertainty": 1
+    },
+    {
+      "index": 34,
+      "image": "2195c391-b20f-4cb4-a27e-0a8c66671777.jpg",
+      "markdown": "34-2195c391-b20f-4cb4-a27e-0a8c66671777.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 35,
+      "image": "53fe3cd4-05c6-4c93-85d0-419f99073d20.jpg",
+      "markdown": "35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 36,
+      "image": "a00eee17-39d1-46c8-94de-dc1fe609154f.jpg",
+      "markdown": "36-a00eee17-39d1-46c8-94de-dc1fe609154f.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 37,
+      "image": "937ede40-ffb1-4028-bea8-0654ecf64f29.jpg",
+      "markdown": "37-937ede40-ffb1-4028-bea8-0654ecf64f29.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 38,
+      "image": "43405f65-0e15-4557-9305-c3f4f147fd07.jpg",
+      "markdown": "38-43405f65-0e15-4557-9305-c3f4f147fd07.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 39,
+      "image": "2589d08e-98eb-4a16-a9ee-be749dd965a9.jpg",
+      "markdown": "39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md",
+      "hasJson": false,
+      "uncertainty": -1
+    },
+    {
+      "index": 40,
+      "image": "179794e5-2412-4b9b-b486-ae01f6f11bf9.jpg",
+      "markdown": "40-179794e5-2412-4b9b-b486-ae01f6f11bf9.md",
+      "hasJson": true,
+      "uncertainty": 0
+    },
+    {
+      "index": 41,
+      "image": "e3fa48d1-e876-4b04-8aaa-3e15282233a9.jpg",
+      "markdown": "41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md",
+      "hasJson": false,
+      "uncertainty": -1
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\aa984c4d-6417-4a99-9859-840d3d2a9f56.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "A photo of a computer screen displaying a software test suite and verification commands document for RAID functionality, formatted as a Markdown document with a table of test cases.",
+    "ocr": {
+      "full_text": "7.1新增功能与测试用例对照表 测试用例 测试用例 测试用例\n01_测试用例 / _06_RAID / 测试用例\n验证命令\ncat /proc/mdstat && mdadm --detail /dev/mdX # md 状态\nparted /dev/sdX print # 分区检查\ncat /sys/block/mdX/md/component_size # 对齐检查\ncat /proc/sys/dev/raid/speed_limit_max # RAID 速度\necho check > /sys/block/mdX/md/sync_action # 数据清理\n测试用例\n编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注\nRAID-001 RAID 全级别 RAID 创建/删除 P0 按级别准备空闲盘 依次创建 RAID0/1/5/6/10/TRAID→验证→删除 ① /proc/mdstat 可见 md; ② mdadm --detail Clean; ③ 删除后 md 消失 src/core/traid/\nRAID-002 RAID RAID 修复任务化 P0 RAID1/RAID5 池 拔盘→degraded→插入替换→发起修复→查任务; 修复中再拔盘 ① running→verifying→success; ② 修复完 Clean; ③ 修复中拔盘→任务失败 raid_repair_command.go\nRAID-003 RAID 修复中断 → 重启恢复 P0 RAID 池修复中 发起修复→等 5s→kill -9→重启→查任务 ① 从 checkpoint 恢复; ② 不重复执行已完成步骤\nRAID-004 RAID 热备盘自动故障转移 P0 RAID1+热备盘 拔 RAID1 成员盘→等待热备接管→检查 md ① 热备自动加入 RAID; ② md 自动 rebuild; ③ 前端显示进度; ④ degraded 告警 test_comprehensive.py\nRAID-005 RAID 非降阶状态 SpareMissing 无副作用 P0 RAID Clean 状态 模拟 SparesMissing→观察热备操作 ① 非降阶不应有多余热备操作; ② 7.1 无条件调用 hotspare 确认无副作用 7.0 fix d4d127b\nRAID-006 RAID 分区不重量 + 512K 对齐 P0 可创建 RAID 创建 RAID→检查分区表+对齐 ① 分区不重叠; ② 512K 边界对齐; ③ grow --size=max 后对齐正确 7.0 fix ed0dddb + fa6ccdc\nRAID-007 RAID RAID 速度+Bitmap 操作 P1 已有 RAID Get/Set 速度→设置/取消 bitmap ① GetRaidSpeed 正确; ② SetRaidSpeed 生效; ③ bitmap 不影响 RAID\nRAID-008 RAID mdadm-monitor 修复中关蜂鸣器 P1 RAID degraded 触发 degraded→发起修复→检查蜂鸣器 ① 修复开始后蜂鸣器关闭; ② 降阶池修复中蜂鸣器不持续响 7.0 fix daa4ed8 + 3cf8ddc\nRAID-009 RAID 多阵列修复进度独立不跳变 P1 2+ RAID 阵列 同时/依次触发修复→观察前端进度 ① 各阵列进度独立显示; ② 不从一个阵列跳到另一个 7.0 fix 3a3107c\nRAID-010 RAID 整盘分区格式化正确查询目标阵列 p2 P1 非 md9 阵列 创建非 md9 RAID→触发盘格式化→检查 mdops mdops 查询的是目标阵列成员 p2, 不是 md9 7.0 fix 7335d5f\n激活 Windows\n转到“设置”以激活 Windows。\n1 条反向链接 834 个词 2,634 个字符 2026/8/11 10:05",
+      "lines": [
+        {
+          "text": "7.1新增功能与测试用例对照表 测试用例 测试用例 测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "01_测试用例 / _06_RAID / 测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "验证命令",
+          "language": "zh"
+        },
+        {
+          "text": "cat /proc/mdstat && mdadm --detail /dev/mdX # md 状态",
+          "language": "en"
+        },
+        {
+          "text": "parted /dev/sdX print # 分区检查",
+          "language": "en"
+        },
+        {
+          "text": "cat /sys/block/mdX/md/component_size # 对齐检查",
+          "language": "en"
+        },
+        {
+          "text": "cat /proc/sys/dev/raid/speed_limit_max # RAID 速度",
+          "language": "en"
+        },
+        {
+          "text": "echo check > /sys/block/mdX/md/sync_action # 数据清理",
+          "language": "en"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注",
+          "language": "zh"
+        },
+        {
+          "text": "RAID-001 RAID 全级别 RAID 创建/删除 P0 按级别准备空闲盘 依次创建 RAID0/1/5/6/10/TRAID→验证→删除 ① /proc/mdstat 可见 md; ② mdadm --detail Clean; ③ 删除后 md 消失 src/core/traid/",
+          "language": "zh"
+        },
+        {
+          "text": "RAID-002 RAID RAID 修复任务化 P0 RAID1/RAID5 池 拔盘→degraded→插入替换→发起修复→查任务; 修复中再拔盘 ① running→verifying→success; ② 修复完 Clean; ③ 修复中拔盘→任务失败 raid_repair_command.go",
+          "language": "zh"
+        },
+        {
+          "text": "RAID-003 RAID 修复中断 → 重启恢复 P0 RAID 池修复中 发起修复→等 5s→kill -9→重启→查任务 ① 从 checkpoint 恢复; ② 不重复执行已完成步骤",
+          "language": "zh"
+        },
+        {
+          "text": "RAID-004 RAID 热备盘自动故障转移 P0 RAID1+热备盘 拔 RAID1 成员盘→等待热备接管→检查 md ① 热备自动加入 RAID; ② md 自动 rebuild; ③ 前端显示进度; ④ degraded 告警 test_comprehensive.py",
+          "language": "zh"
+        },
+        {
+          "text": "RAID-005 RAID 非降阶状态 SpareMissing 无副作用 P0 RAID Clean 状态 模拟 SparesMissing→观察热备操作 ① 非降阶不应有多余热备操作; ② 7.1 无条件调用 hotspare 确认无副作用 7.0 fix d4d127b",
+          "language": "zh"
+        },
+        {
+          "text": "RAID-006 RAID 分区不重量 + 512K 对齐 P0 可创建 RAID 创建 RAID→检查分区表+对齐 ① 分区不重叠; ② 512K 边界对齐; ③ grow --size=max 后对齐正确 7.0 fix ed0dddb + fa6ccdc",
+          "language": "zh"
+        },
+        {
+          "text": "RAID-007 RAID RAID 速度+Bitmap 操作 P1 已有 RAID Get/Set 速度→设置/取消 bitmap ① GetRaidSpeed 正确; ② SetRaidSpeed 生效; ③ bitmap 不影响 RAID",
+          "language": "zh"
+        },
+        {
+          "text": "RAID-008 RAID mdadm-monitor 修复中关蜂鸣器 P1 RAID degraded 触发 degraded→发起修复→检查蜂鸣器 ① 修复开始后蜂鸣器关闭; ② 降阶池修复中蜂鸣器不持续响 7.0 fix daa4ed8 + 3cf8ddc",
+          "language": "zh"
+        },
+        {
+          "text": "RAID-009 RAID 多阵列修复进度独立不跳变 P1 2+ RAID 阵列 同时/依次触发修复→观察前端进度 ① 各阵列进度独立显示; ② 不从一个阵列跳到另一个 7.0 fix 3a3107c",
+          "language": "zh"
+        },
+        {
+          "text": "RAID-010 RAID 整盘分区格式化正确查询目标阵列 p2 P1 非 md9 阵列 创建非 md9 RAID→触发盘格式化→检查 mdops mdops 查询的是目标阵列成员 p2, 不是 md9 7.0 fix 7335d5f",
+          "language": "zh"
+        },
+        {
+          "text": "激活 Windows",
+          "language": "zh"
+        },
+        {
+          "text": "转到“设置”以激活 Windows。",
+          "language": "zh"
+        },
+        {
+          "text": "1 条反向链接 834 个词 2,634 个字符 2026/8/11 10:05",
+          "language": "zh"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "title",
+          "reading_order": 1,
+          "text": "验证命令"
+        },
+        {
+          "type": "code",
+          "reading_order": 2,
+          "text": "cat /proc/mdstat && mdadm --detail /dev/mdX # md 状态\nparted /dev/sdX print # 分区检查\ncat /sys/block/mdX/md/component_size # 对齐检查\ncat /proc/sys/dev/raid/speed_limit_max # RAID 速度\necho check > /sys/block/mdX/md/sync_action # 数据清理"
+        },
+        {
+          "type": "title",
+          "reading_order": 3,
+          "text": "测试用例"
+        },
+        {
+          "type": "table",
+          "reading_order": 4,
+          "text": "编号 | 模块 | 标题 | 优先级 | 前置条件 | 输入数据 | 预期结果 | 验证结果 | 备注\nRAID-001 | RAID | 全级别 RAID 创建/删除 | P0 | 按级别准备空闲盘 | 依次创建 RAID0/1/5/6/10/TRAID→验证→删除 | ① /proc/mdstat 可见 md; ② mdadm --detail Clean; ③ 删除后 md 消失 | | src/core/traid/\nRAID-002 | RAID | RAID 修复任务化 | P0 | RAID1/RAID5 池 | 拔盘→degraded→插入替换→发起修复→查任务; 修复中再拔盘 | ① running→verifying→success; ② 修复完 Clean; ③ 修复中拔盘→任务失败 | | raid_repair_command.go\nRAID-003 | RAID | 修复中断 → 重启恢复 | P0 | RAID 池修复中 | 发起修复→等 5s→kill -9→重启→查任务 | ① 从 checkpoint 恢复; ② 不重复执行已完成步骤 | |\nRAID-004 | RAID | 热备盘自动故障转移 | P0 | RAID1+热备盘 | 拔 RAID1 成员盘→等待热备接管→检查 md | ① 热备自动加入 RAID; ② md 自动 rebuild; ③ 前端显示进度; ④ degraded 告警 | | test_comprehensive.py\nRAID-005 | RAID | 非降阶状态 SpareMissing 无副作用 | P0 | RAID Clean 状态 | 模拟 SparesMissing→观察热备操作 | ① 非降阶不应有多余热备操作; ② 7.1 无条件调用 hotspare 确认无副作用 | | 7.0 fix d4d127b\nRAID-006 | RAID | 分区不重量 + 512K 对齐 | P0 | 可创建 RAID | 创建 RAID→检查分区表+对齐 | ① 分区不重叠; ② 512K 边界对齐; ③ grow --size=max 后对齐正确 | | 7.0 fix ed0dddb + fa6ccdc\nRAID-007 | RAID | RAID 速度+Bitmap 操作 | P1 | 已有 RAID | Get/Set 速度→设置/取消 bitmap | ① GetRaidSpeed 正确; ② SetRaidSpeed 生效; ③ bitmap 不影响 RAID | |\nRAID-008 | RAID | mdadm-monitor 修复中关蜂鸣器 | P1 | RAID degraded | 触发 degraded→发起修复→检查蜂鸣器 | ① 修复开始后蜂鸣器关闭; ② 降阶池修复中蜂鸣器不持续响 | | 7.0 fix daa4ed8 + 3cf8ddc\nRAID-009 | RAID | 多阵列修复进度独立不跳变 | P1 | 2+ RAID 阵列 | 同时/依次触发修复→观察前端进度 | ① 各阵列进度独立显示; ② 不从一个阵列跳到另一个 | | 7.0 fix 3a3107c\nRAID-010 | RAID | 整盘分区格式化正确查询目标阵列 p2 | P1 | 非 md9 阵列 | 创建非 md9 RAID→触发盘格式化→检查 mdops | mdops 查询的是目标阵列成员 p2, 不是 md9 | | 7.0 fix 7335d5f"
+        },
+        {
+          "type": "other",
+          "reading_order": 5,
+          "text": "激活 Windows\n转到“设置”以激活 Windows。\n1 条反向链接 834 个词 2,634 个字符 2026/8/11 10:05"
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "computer screen showing a test document in a markdown editor",
+      "intent": "document test cases and verification commands for RAID storage functionality",
+      "entities": [
+        {
+          "name": "RAID-001",
+          "type": "test_case_id",
+          "evidence": "RAID-001"
+        },
+        {
+          "name": "RAID-002",
+          "type": "test_case_id",
+          "evidence": "RAID-002"
+        },
+        {
+          "name": "RAID-003",
+          "type": "test_case_id",
+          "evidence": "RAID-003"
+        },
+        {
+          "name": "RAID-004",
+          "type": "test_case_id",
+          "evidence": "RAID-004"
+        },
+        {
+          "name": "RAID-005",
+          "type": "test_case_id",
+          "evidence": "RAID-005"
+        },
+        {
+          "name": "RAID-006",
+          "type": "test_case_id",
+          "evidence": "RAID-006"
+        },
+        {
+          "name": "RAID-007",
+          "type": "test_case_id",
+          "evidence": "RAID-007"
+        },
+        {
+          "name": "RAID-008",
+          "type": "test_case_id",
+          "evidence": "RAID-008"
+        },
+        {
+          "name": "RAID-009",
+          "type": "test_case_id",
+          "evidence": "RAID-009"
+        },
+        {
+          "name": "RAID-010",
+          "type": "test_case_id",
+          "evidence": "RAID-010"
+        }
+      ],
+      "relations": [
+        {
+          "subject": "RAID-001",
+          "predicate": "has_priority",
+          "object": "P0"
+        },
+        {
+          "subject": "RAID-007",
+          "predicate": "has_priority",
+          "object": "P1"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "light gray",
+        "white",
+        "dark gray",
+        "red",
+        "orange"
+      ],
+      "style": "Markdown editor GUI with dark and light panels, photographed from a physical monitor",
+      "notes": [
+        "The photo is taken at an angle showing a monitor display.",
+        "Red and orange status icons indicate P0 and P1 priority tags.",
+        "Windows activation watermark is visible on the lower right."
+      ]
+    },
+    "uncertainty": []
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:57:45.135Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 34.226,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 3932,
+      "totalTokenCount": 8276,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        },
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        }
+      ],
+      "thoughtsTokenCount": 3153,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 34.227
+      }
+    ],
+    "warnings": []
+  }
+}

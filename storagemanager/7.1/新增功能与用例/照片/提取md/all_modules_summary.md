@@ -1,0 +1,227 @@
+# TOS 7.1 Photo Extraction - All Modules
+
+> Scope: 41 local JPG images; one Markdown document per image. Cropped areas are marked and not guessed.
+
+## Completeness
+
+| Item | Result |
+| --- | --- |
+| Images | 41 |
+| Single-image Markdown | 41 |
+| Unique case IDs | 137 |
+| Locatable priorities | P0 67; P1 68; P2 19 |
+
+## Module Array
+
+| Module | Image numbers | Visible case IDs | Documents |
+| --- | --- | --- | --- |
+| api-compat | 33 | API-001, API-002, API-003, API-004, API-005 | [33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md](33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md) |
+| config | 31 | CFG-001, CFG-002, CFG-003, CFG-004, CFG-005, CFG-006 | [31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md](31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md) |
+| context | 19 | CTX-001, CTX-002, CTX-003, CTX-004, CTX-005, CTX-006 | [19-8f63a966-c79c-4103-9e6c-464618f53454.md](19-8f63a966-c79c-4103-9e6c-464618f53454.md) |
+| device-identity | 13, 14 | FC-001, FC-002, FC-003, FC-004, FC-005, FC-006, DI-001, DI-002, DI-003, DI-004, VC-001, VC-002, VC-003, VC-004, VC-005 | [13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md](13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md)<br>[14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md](14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md) |
+| disk | 27 | DISK-001, DISK-002, DISK-003, DISK-005, DISK-006, DISK-007, DISK-008, DISK-009, LOCKED-001 | [27-f28e9f43-05dd-4f48-86c9-78da84019465.md](27-f28e9f43-05dd-4f48-86c9-78da84019465.md) |
+| flashcache-identity | 13 | FC-001, FC-002, FC-003, FC-004, FC-005, FC-006, DI-001, DI-002, DI-003, DI-004 | [13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md](13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md) |
+| hotspare-identity | 12 | ID-001, ID-002, ID-003, ID-004, ID-005, ID-006, ID-007 | [12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md](12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md) |
+| identity-warning | 16 | HW-001, WARN-001, WARN-002, WARN-003 | [16-89f05588-07ea-49f5-8f3d-60af512858ed.md](16-89f05588-07ea-49f5-8f3d-60af512858ed.md) |
+| iscsi | 34, 38, 39 | ISCSI-001, ISCSI-002, ISCSI-003, ISCSI-004, ISCSI-005, ISCSI-006 | [34-2195c391-b20f-4cb4-a27e-0a8c66671777.md](34-2195c391-b20f-4cb4-a27e-0a8c66671777.md)<br>[38-43405f65-0e15-4557-9305-c3f4f147fd07.md](38-43405f65-0e15-4557-9305-c3f4f147fd07.md)<br>[39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md](39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md) |
+| nas-binding | 15, 16 | VC-001, VC-002, VC-003, VC-004, VC-005, VC-006, HW-001, WARN-001, WARN-002, WARN-003 | [15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md](15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md)<br>[16-89f05588-07ea-49f5-8f3d-60af512858ed.md](16-89f05588-07ea-49f5-8f3d-60af512858ed.md) |
+| pool | 08, 32 | POOL-001, POOL-017, POOL-002, POOL-003, POOL-004, POOL-005, POOL-006, POOL-007, POOL-008, POOL-009, POOL-010, POOL-011, POOL-012, POOL-013, POOL-014, POOL-015, POOL-016 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md)<br>[32-b9986875-2918-4d7d-b885-650f8912cff7.md](32-b9986875-2918-4d7d-b885-650f8912cff7.md) |
+| raid | 06, 07, 18, 20, 21, 24 | RAID-001, RAID-002, RAID-003, RAID-004, RAID-005, RAID-006, RAID-007, RAID-008, RAID-009, RAID-010 | [06-d7981fff-5d6b-4c5d-935f-299af65123e2.md](06-d7981fff-5d6b-4c5d-935f-299af65123e2.md)<br>[07-ed675dce-0979-409a-bac3-4d40172333d5.md](07-ed675dce-0979-409a-bac3-4d40172333d5.md)<br>[18-2df17964-1903-482f-918d-2fa34eae7a03.md](18-2df17964-1903-482f-918d-2fa34eae7a03.md)<br>[20-96927e65-857c-4b1b-bf25-94a0852caf9a.md](20-96927e65-857c-4b1b-bf25-94a0852caf9a.md)<br>[21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md)<br>[24-640523e1-4bc9-4cf4-b54b-67ab0d864a8e.md](24-640523e1-4bc9-4cf4-b54b-67ab0d864a8e.md) |
+| section-only | 04, 26, 28 | section text only | [04-b9ae027c-ca75-4089-b9bc-7f73f114e6e6.md](04-b9ae027c-ca75-4089-b9bc-7f73f114e6e6.md)<br>[26-69ee09fe-5e07-4101-b74b-3bcc82423763.md](26-69ee09fe-5e07-4101-b74b-3bcc82423763.md)<br>[28-91e968dd-4bc8-4770-82e0-4bbd03ee2599.md](28-91e968dd-4bc8-4770-82e0-4bbd03ee2599.md) |
+| security | 01, 29 | SEC-001, SEC-002, SEC-003, SEC-004, SEC-005, SEC-006, ACL-001 | [01-81a9ad8e-8e61-4213-9dc8-8881bcc6190b.md](01-81a9ad8e-8e61-4213-9dc8-8881bcc6190b.md)<br>[29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md](29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md) |
+| ssd-cache | 10, 36, 37 | CACHE-001, CACHE-002, CACHE-003, CACHE-004 | [10-78967a92-02ff-48b7-a1b6-c0a2636f2012.md](10-78967a92-02ff-48b7-a1b6-c0a2636f2012.md)<br>[36-a00eee17-39d1-46c8-94de-dc1fe609154f.md](36-a00eee17-39d1-46c8-94de-dc1fe609154f.md)<br>[37-937ede40-ffb1-4028-bea8-0654ecf64f29.md](37-937ede40-ffb1-4028-bea8-0654ecf64f29.md) |
+| system-disk | 23 | SYS-001, SYS-002, SYS-003, SYS-004 | [23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md](23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md) |
+| task-state | 03 | TASK-001, TASK-002, TASK-004, TASK-005, TASK-006, TASK-008 | [03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md](03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md) |
+| upgrade-robust | 35 | UPGRADE-001, UPGRADE-002, ROBUST-001, ROBUST-002, ROBUST-003, ROBUST-004, ROBUST-005 | [35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md](35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md) |
+| usb-esata | 02, 11, 17, 22, 40, 41 | HOTPLUG-001, HOTPLUG-002, HOTPLUG-003, USB-001, USB-002, USB-003, USB-004 | [02-6443467a-6d47-4de4-a59f-02131a0b6718.md](02-6443467a-6d47-4de4-a59f-02131a0b6718.md)<br>[11-8b0abca5-ed73-4888-8e1c-fc42b2710709.md](11-8b0abca5-ed73-4888-8e1c-fc42b2710709.md)<br>[17-d9dd0814-da2f-47eb-8ddb-9866445b925f.md](17-d9dd0814-da2f-47eb-8ddb-9866445b925f.md)<br>[22-b521b1ea-2206-47cd-ba97-19b1ee77e3ba.md](22-b521b1ea-2206-47cd-ba97-19b1ee77e3ba.md)<br>[40-179794e5-2412-4b9b-b486-ae01f6f11bf9.md](40-179794e5-2412-4b9b-b486-ae01f6f11bf9.md)<br>[41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md](41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md) |
+| volume | 05, 09, 30 | VOL-001, FORMAT-002, VOL-002, VOL-003, VOL-007, VOL-008, VOL-009, VOL-010, VOL-011, VOL-012, FORMAT-001 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md)<br>[09-61037bdd-d93a-4a97-b54e-9d30b8be2331.md](09-61037bdd-d93a-4a97-b54e-9d30b8be2331.md)<br>[30-b561e007-e0e7-449f-82f0-4e83961d05d2.md](30-b561e007-e0e7-449f-82f0-4e83961d05d2.md) |
+| volume-drift | 14, 15 | DI-001, DI-002, DI-003, DI-004, VC-001, VC-002, VC-003, VC-004, VC-005, VC-006, HW-001 | [14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md](14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md)<br>[15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md](15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md) |
+| watermark | 25 | WM-001, WM-002, WM-003, WM-004, WM-005 | [25-777475e1-607b-4580-8c27-fc4357976975.md](25-777475e1-607b-4580-8c27-fc4357976975.md) |
+
+## Image Index
+
+| No. | Document | Visible IDs/section |
+| --- | --- | --- |
+| 01 | [01-81a9ad8e-8e61-4213-9dc8-8881bcc6190b.md](01-81a9ad8e-8e61-4213-9dc8-8881bcc6190b.md) | SEC-001, SEC-002, SEC-003, SEC-004, SEC-005, SEC-006, ACL-001 |
+| 02 | [02-6443467a-6d47-4de4-a59f-02131a0b6718.md](02-6443467a-6d47-4de4-a59f-02131a0b6718.md) | 图片原文提取：6443467a-6d47-4de4-a59f-02131a0b6718 |
+| 03 | [03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md](03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md) | TASK-001, TASK-002, TASK-004, TASK-005, TASK-006, TASK-008 |
+| 04 | [04-b9ae027c-ca75-4089-b9bc-7f73f114e6e6.md](04-b9ae027c-ca75-4089-b9bc-7f73f114e6e6.md) | 图片原文提取：b9ae027c-ca75-4089-b9bc-7f73f114e6e6 |
+| 05 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) | VOL-001, FORMAT-002, VOL-002, VOL-003, VOL-007, VOL-008, VOL-009, VOL-010, VOL-011, VOL-012, FORMAT-001 |
+| 06 | [06-d7981fff-5d6b-4c5d-935f-299af65123e2.md](06-d7981fff-5d6b-4c5d-935f-299af65123e2.md) | 图片原文提取：d7981fff-5d6b-4c5d-935f-299af65123e2 |
+| 07 | [07-ed675dce-0979-409a-bac3-4d40172333d5.md](07-ed675dce-0979-409a-bac3-4d40172333d5.md) | Image 07: ed675dce-0979-409a-bac3-4d40172333d5.jpg |
+| 08 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) | POOL-001, POOL-017, POOL-002, POOL-003, POOL-004, POOL-005, POOL-006, POOL-007, POOL-008, POOL-009, POOL-010, POOL-011, POOL-012, POOL-013, POOL-014, POOL-015, POOL-016 |
+| 09 | [09-61037bdd-d93a-4a97-b54e-9d30b8be2331.md](09-61037bdd-d93a-4a97-b54e-9d30b8be2331.md) | 图片原文提取：61037bdd-d93a-4a97-b54e-9d30b8be2331 |
+| 10 | [10-78967a92-02ff-48b7-a1b6-c0a2636f2012.md](10-78967a92-02ff-48b7-a1b6-c0a2636f2012.md) | Image 10: 78967a92-02ff-48b7-a1b6-c0a2636f2012.jpg |
+| 11 | [11-8b0abca5-ed73-4888-8e1c-fc42b2710709.md](11-8b0abca5-ed73-4888-8e1c-fc42b2710709.md) | 图片原文提取：8b0abca5-ed73-4888-8e1c-fc42b2710709 |
+| 12 | [12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md](12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md) | ID-001, ID-002, ID-003, ID-004, ID-005, ID-006, ID-007 |
+| 13 | [13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md](13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md) | FC-001, FC-002, FC-003, FC-004, FC-005, FC-006, DI-001, DI-002, DI-003, DI-004 |
+| 14 | [14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md](14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md) | DI-001, DI-002, DI-003, DI-004, VC-001, VC-002, VC-003, VC-004, VC-005 |
+| 15 | [15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md](15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md) | VC-001, VC-002, VC-003, VC-004, VC-005, VC-006, HW-001 |
+| 16 | [16-89f05588-07ea-49f5-8f3d-60af512858ed.md](16-89f05588-07ea-49f5-8f3d-60af512858ed.md) | HW-001, WARN-001, WARN-002, WARN-003 |
+| 17 | [17-d9dd0814-da2f-47eb-8ddb-9866445b925f.md](17-d9dd0814-da2f-47eb-8ddb-9866445b925f.md) | 图片原文提取：d9dd0814-da2f-47eb-8ddb-9866445b925f |
+| 18 | [18-2df17964-1903-482f-918d-2fa34eae7a03.md](18-2df17964-1903-482f-918d-2fa34eae7a03.md) | Image 18: 2df17964-1903-482f-918d-2fa34eae7a03.jpg |
+| 19 | [19-8f63a966-c79c-4103-9e6c-464618f53454.md](19-8f63a966-c79c-4103-9e6c-464618f53454.md) | CTX-001, CTX-002, CTX-003, CTX-004, CTX-005, CTX-006 |
+| 20 | [20-96927e65-857c-4b1b-bf25-94a0852caf9a.md](20-96927e65-857c-4b1b-bf25-94a0852caf9a.md) | 图片原文提取：96927e65-857c-4b1b-bf25-94a0852caf9a |
+| 21 | [21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md) | RAID-001, RAID-002, RAID-003, RAID-004, RAID-005, RAID-006, RAID-007, RAID-008, RAID-009, RAID-010 |
+| 22 | [22-b521b1ea-2206-47cd-ba97-19b1ee77e3ba.md](22-b521b1ea-2206-47cd-ba97-19b1ee77e3ba.md) | Image 22: b521b1ea-2206-47cd-ba97-19b1ee77e3ba.jpg |
+| 23 | [23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md](23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md) | SYS-001, SYS-002, SYS-003, SYS-004 |
+| 24 | [24-640523e1-4bc9-4cf4-b54b-67ab0d864a8e.md](24-640523e1-4bc9-4cf4-b54b-67ab0d864a8e.md) | 图片原文提取：640523e1-4bc9-4cf4-b54b-67ab0d864a8e |
+| 25 | [25-777475e1-607b-4580-8c27-fc4357976975.md](25-777475e1-607b-4580-8c27-fc4357976975.md) | WM-001, WM-002, WM-003, WM-004, WM-005 |
+| 26 | [26-69ee09fe-5e07-4101-b74b-3bcc82423763.md](26-69ee09fe-5e07-4101-b74b-3bcc82423763.md) | Image 26: 69ee09fe-5e07-4101-b74b-3bcc82423763.jpg |
+| 27 | [27-f28e9f43-05dd-4f48-86c9-78da84019465.md](27-f28e9f43-05dd-4f48-86c9-78da84019465.md) | DISK-001, DISK-002, DISK-003, DISK-005, DISK-006, DISK-007, DISK-008, DISK-009, LOCKED-001 |
+| 28 | [28-91e968dd-4bc8-4770-82e0-4bbd03ee2599.md](28-91e968dd-4bc8-4770-82e0-4bbd03ee2599.md) | 图片原文提取：91e968dd-4bc8-4770-82e0-4bbd03ee2599 |
+| 29 | [29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md](29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md) | SEC-001, SEC-002, SEC-003, SEC-004, SEC-005, SEC-006, ACL-001 |
+| 30 | [30-b561e007-e0e7-449f-82f0-4e83961d05d2.md](30-b561e007-e0e7-449f-82f0-4e83961d05d2.md) | Image 30: b561e007-e0e7-449f-82f0-4e83961d05d2.jpg |
+| 31 | [31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md](31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md) | CFG-001, CFG-002, CFG-003, CFG-004, CFG-005, CFG-006 |
+| 32 | [32-b9986875-2918-4d7d-b885-650f8912cff7.md](32-b9986875-2918-4d7d-b885-650f8912cff7.md) | 图片原文提取：b9986875-2918-4d7d-b885-650f8912cff7 |
+| 33 | [33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md](33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md) | API-001, API-002, API-003, API-004, API-005 |
+| 34 | [34-2195c391-b20f-4cb4-a27e-0a8c66671777.md](34-2195c391-b20f-4cb4-a27e-0a8c66671777.md) | Image 34: 2195c391-b20f-4cb4-a27e-0a8c66671777.jpg |
+| 35 | [35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md](35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md) | UPGRADE-001, UPGRADE-002, ROBUST-001, ROBUST-002, ROBUST-003, ROBUST-004, ROBUST-005 |
+| 36 | [36-a00eee17-39d1-46c8-94de-dc1fe609154f.md](36-a00eee17-39d1-46c8-94de-dc1fe609154f.md) | 图片原文提取：a00eee17-39d1-46c8-94de-dc1fe609154f |
+| 37 | [37-937ede40-ffb1-4028-bea8-0654ecf64f29.md](37-937ede40-ffb1-4028-bea8-0654ecf64f29.md) | CACHE-001, CACHE-002, CACHE-003, CACHE-004 |
+| 38 | [38-43405f65-0e15-4557-9305-c3f4f147fd07.md](38-43405f65-0e15-4557-9305-c3f4f147fd07.md) | 图片原文提取：43405f65-0e15-4557-9305-c3f4f147fd07 |
+| 39 | [39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md](39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md) | ISCSI-001, ISCSI-002, ISCSI-003, ISCSI-004, ISCSI-005, ISCSI-006 |
+| 40 | [40-179794e5-2412-4b9b-b486-ae01f6f11bf9.md](40-179794e5-2412-4b9b-b486-ae01f6f11bf9.md) | Image 40: 179794e5-2412-4b9b-b486-ae01f6f11bf9.jpg |
+| 41 | [41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md](41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md) | HOTPLUG-001, HOTPLUG-002, HOTPLUG-003, USB-001, USB-002, USB-003, USB-004 |
+
+## Case ID List
+
+| ID | Priority | Source |
+| --- | --- | --- |
+| ACL-001 | P1 | [29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md](29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md) |
+| API-001 | P0 | [33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md](33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md) |
+| API-002 | P1 | [33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md](33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md) |
+| API-003 | P1 | [33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md](33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md) |
+| API-004 | P1 | [33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md](33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md) |
+| API-005 | P2 | [33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md](33-6824b9cb-1a45-47ab-8869-3ea110daabd1.md) |
+| CACHE-001 | P1 | [37-937ede40-ffb1-4028-bea8-0654ecf64f29.md](37-937ede40-ffb1-4028-bea8-0654ecf64f29.md) |
+| CACHE-002 | P1 | [37-937ede40-ffb1-4028-bea8-0654ecf64f29.md](37-937ede40-ffb1-4028-bea8-0654ecf64f29.md) |
+| CACHE-003 | P0 | [37-937ede40-ffb1-4028-bea8-0654ecf64f29.md](37-937ede40-ffb1-4028-bea8-0654ecf64f29.md) |
+| CACHE-004 | P1 | [37-937ede40-ffb1-4028-bea8-0654ecf64f29.md](37-937ede40-ffb1-4028-bea8-0654ecf64f29.md) |
+| CFG-001 | P0 | [31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md](31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md) |
+| CFG-002 | P1 | [31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md](31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md) |
+| CFG-003 | P1 | [31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md](31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md) |
+| CFG-004 | P1 | [31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md](31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md) |
+| CFG-005 | P0 | [31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md](31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md) |
+| CFG-006 | P1 | [31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md](31-e85cdc61-70d6-4b33-be67-8f4694ddcb12.md) |
+| CTX-001 | P0 | [19-8f63a966-c79c-4103-9e6c-464618f53454.md](19-8f63a966-c79c-4103-9e6c-464618f53454.md) |
+| CTX-002 | P0 | [19-8f63a966-c79c-4103-9e6c-464618f53454.md](19-8f63a966-c79c-4103-9e6c-464618f53454.md) |
+| CTX-003 | P1 | [19-8f63a966-c79c-4103-9e6c-464618f53454.md](19-8f63a966-c79c-4103-9e6c-464618f53454.md) |
+| CTX-004 | P0 | [19-8f63a966-c79c-4103-9e6c-464618f53454.md](19-8f63a966-c79c-4103-9e6c-464618f53454.md) |
+| CTX-005 | P0 | [19-8f63a966-c79c-4103-9e6c-464618f53454.md](19-8f63a966-c79c-4103-9e6c-464618f53454.md) |
+| CTX-006 | P1 | [19-8f63a966-c79c-4103-9e6c-464618f53454.md](19-8f63a966-c79c-4103-9e6c-464618f53454.md) |
+| DI-001 | P0 | [14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md](14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md) |
+| DI-002 | P0 | [14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md](14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md) |
+| DI-003 | P2 | [14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md](14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md) |
+| DI-004 | P2 | [14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md](14-1516fa47-c454-4b42-96ab-e8ab4459f6cc.md) |
+| DISK-001 | P0 | [27-f28e9f43-05dd-4f48-86c9-78da84019465.md](27-f28e9f43-05dd-4f48-86c9-78da84019465.md) |
+| DISK-002 | P1 | [27-f28e9f43-05dd-4f48-86c9-78da84019465.md](27-f28e9f43-05dd-4f48-86c9-78da84019465.md) |
+| DISK-003 | P1 | [27-f28e9f43-05dd-4f48-86c9-78da84019465.md](27-f28e9f43-05dd-4f48-86c9-78da84019465.md) |
+| DISK-005 | P0 | [27-f28e9f43-05dd-4f48-86c9-78da84019465.md](27-f28e9f43-05dd-4f48-86c9-78da84019465.md) |
+| DISK-006 | P0 | [27-f28e9f43-05dd-4f48-86c9-78da84019465.md](27-f28e9f43-05dd-4f48-86c9-78da84019465.md) |
+| DISK-007 | P0 | [27-f28e9f43-05dd-4f48-86c9-78da84019465.md](27-f28e9f43-05dd-4f48-86c9-78da84019465.md) |
+| DISK-008 | P1 | [27-f28e9f43-05dd-4f48-86c9-78da84019465.md](27-f28e9f43-05dd-4f48-86c9-78da84019465.md) |
+| DISK-009 | P1 | [27-f28e9f43-05dd-4f48-86c9-78da84019465.md](27-f28e9f43-05dd-4f48-86c9-78da84019465.md) |
+| FC-001 | P0 | [13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md](13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md) |
+| FC-002 | P0 | [13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md](13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md) |
+| FC-003 | P1 | [13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md](13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md) |
+| FC-004 | P1 | [13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md](13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md) |
+| FC-005 | P2 | [13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md](13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md) |
+| FC-006 | P2 | [13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md](13-3c9a87aa-1501-46fc-ac4d-b49a89a0457c.md) |
+| FORMAT-001 | P0 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) |
+| FORMAT-002 | P0 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) |
+| HOTPLUG-001 | P1 | [41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md](41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md) |
+| HOTPLUG-002 | P1 | [41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md](41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md) |
+| HOTPLUG-003 | P2 | [41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md](41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md) |
+| HW-001 | P0 | [16-89f05588-07ea-49f5-8f3d-60af512858ed.md](16-89f05588-07ea-49f5-8f3d-60af512858ed.md) |
+| ID-001 | P0 | [12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md](12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md) |
+| ID-002 | P0 | [12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md](12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md) |
+| ID-003 | P0 | [12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md](12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md) |
+| ID-004 | P1 | [12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md](12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md) |
+| ID-005 | P0 | [12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md](12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md) |
+| ID-006 | P1 | [12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md](12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md) |
+| ID-007 | P2 | [12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md](12-5f9aeda0-b5b3-40fa-bd3f-3ab6f46c9e56.md) |
+| ISCSI-001 | P1 | [39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md](39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md) |
+| ISCSI-002 | P0 | [39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md](39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md) |
+| ISCSI-003 | P1 | [39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md](39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md) |
+| ISCSI-004 | P1 | [39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md](39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md) |
+| ISCSI-005 | P2 | [39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md](39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md) |
+| ISCSI-006 | P1 | [39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md](39-2589d08e-98eb-4a16-a9ee-be749dd965a9.md) |
+| LOCKED-001 | P0 | [27-f28e9f43-05dd-4f48-86c9-78da84019465.md](27-f28e9f43-05dd-4f48-86c9-78da84019465.md) |
+| POOL-001 | P0 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-002 | P1 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-003 | P1 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-004 | P1 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-005 | P1 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-006 | P0 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-007 | P0 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-008 | P1 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-009 | P1 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-010 | P1 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-011 | P1 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-012 | P0 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-013 | P0 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-014 | P1 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-015 | P0 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-016 | P1 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| POOL-017 | P1 | [08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md](08-26e65aa5-4276-4857-9946-0e85b5bd3df8.md) |
+| RAID-001 | P0 | [21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md) |
+| RAID-002 | P0 | [21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md) |
+| RAID-003 | P0 | [21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md) |
+| RAID-004 | P0 | [21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md) |
+| RAID-005 | P0 | [21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md) |
+| RAID-006 | P0 | [21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md) |
+| RAID-007 | P1 | [21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md) |
+| RAID-008 | P1 | [21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md) |
+| RAID-009 | P1 | [21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md) |
+| RAID-010 | P1 | [21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md](21-aa984c4d-6417-4a99-9859-840d3d2a9f56.md) |
+| ROBUST-001 | P0 | [35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md](35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md) |
+| ROBUST-002 | P0 | [35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md](35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md) |
+| ROBUST-003 | P1 | [35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md](35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md) |
+| ROBUST-004 | P1 | [35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md](35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md) |
+| ROBUST-005 | P1 | [35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md](35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md) |
+| SEC-001 | P1 | [29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md](29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md) |
+| SEC-002 | P1 | [29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md](29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md) |
+| SEC-003 | P2 | [29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md](29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md) |
+| SEC-004 | P0 | [29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md](29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md) |
+| SEC-005 | P0 | [29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md](29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md) |
+| SEC-006 | P2 | [29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md](29-6ca46601-3d84-4b4c-a26e-4f19295ffcb6.md) |
+| SYS-001 | P0 | [23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md](23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md) |
+| SYS-002 | P0 | [23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md](23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md) |
+| SYS-003 | P0 | [23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md](23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md) |
+| SYS-004 | P1 | [23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md](23-7cfa1ff1-b1d8-4d65-b2d1-87f4bcf945e4.md) |
+| TASK-001 | P0 | [03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md](03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md) |
+| TASK-002 | P0 | [03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md](03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md) |
+| TASK-004 | P0 | [03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md](03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md) |
+| TASK-005 | P1 | [03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md](03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md) |
+| TASK-006 | P1 | [03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md](03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md) |
+| TASK-008 | P0 | [03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md](03-dd358ff1-98d1-47f3-8abf-72eb78d85ffd.md) |
+| UPGRADE-001 | P0 | [35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md](35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md) |
+| UPGRADE-002 | P0 | [35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md](35-53fe3cd4-05c6-4c93-85d0-419f99073d20.md) |
+| USB-001 | P0 | [41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md](41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md) |
+| USB-002 | P1 | [41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md](41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md) |
+| USB-003 | P2 | [41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md](41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md) |
+| USB-004 | P1 | [41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md](41-e3fa48d1-e876-4b04-8aaa-3e15282233a9.md) |
+| VC-001 | P0 | [15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md](15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md) |
+| VC-002 | P0 | [15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md](15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md) |
+| VC-003 | P0 | [15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md](15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md) |
+| VC-004 | P1 | [15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md](15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md) |
+| VC-005 | P0 | [15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md](15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md) |
+| VC-006 | P2 | [15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md](15-13dd8922-0e6d-4afd-bc70-466c678b1f7b.md) |
+| VOL-001 | P0 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) |
+| VOL-002 | P1 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) |
+| VOL-003 | P1 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) |
+| VOL-007 | P1 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) |
+| VOL-008 | P1 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) |
+| VOL-009 | P1 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) |
+| VOL-010 | P1 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) |
+| VOL-011 | P1 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) |
+| VOL-012 | P1 | [05-a4579389-9e42-47d1-bf34-9ec58cac3351.md](05-a4579389-9e42-47d1-bf34-9ec58cac3351.md) |
+| WARN-001 | P1 | [16-89f05588-07ea-49f5-8f3d-60af512858ed.md](16-89f05588-07ea-49f5-8f3d-60af512858ed.md) |
+| WARN-002 | P2 | [16-89f05588-07ea-49f5-8f3d-60af512858ed.md](16-89f05588-07ea-49f5-8f3d-60af512858ed.md) |
+| WARN-003 | P2 | [16-89f05588-07ea-49f5-8f3d-60af512858ed.md](16-89f05588-07ea-49f5-8f3d-60af512858ed.md) |
+| WM-001 | P2 | [25-777475e1-607b-4580-8c27-fc4357976975.md](25-777475e1-607b-4580-8c27-fc4357976975.md) |
+| WM-002 | P1 | [25-777475e1-607b-4580-8c27-fc4357976975.md](25-777475e1-607b-4580-8c27-fc4357976975.md) |
+| WM-003 | P0 | [25-777475e1-607b-4580-8c27-fc4357976975.md](25-777475e1-607b-4580-8c27-fc4357976975.md) |
+| WM-004 | P0 | [25-777475e1-607b-4580-8c27-fc4357976975.md](25-777475e1-607b-4580-8c27-fc4357976975.md) |
+| WM-005 | P1 | [25-777475e1-607b-4580-8c27-fc4357976975.md](25-777475e1-607b-4580-8c27-fc4357976975.md) |

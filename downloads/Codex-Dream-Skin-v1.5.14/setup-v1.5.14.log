@@ -1,0 +1,248 @@
+﻿2026-08-18 13:59:55.036   Log opened. (Time zone: UTC+08:00)
+2026-08-18 13:59:55.036   Setup version: Inno Setup version 6.7.1
+2026-08-18 13:59:55.036   Original Setup EXE: D:\test_dev_projects\downloads\Codex-Dream-Skin-v1.5.14\CodexDreamSkin-Setup-v1.5.14.exe
+2026-08-18 13:59:55.036   Setup command line: /SL5="$51200,23281023,1143296,D:\test_dev_projects\downloads\Codex-Dream-Skin-v1.5.14\CodexDreamSkin-Setup-v1.5.14.exe" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /LOG=D:\test_dev_projects\downloads\Codex-Dream-Skin-v1.5.14\setup-v1.5.14.log
+2026-08-18 13:59:55.036   Windows version: 10.0.22631
+2026-08-18 13:59:55.037   Windows architecture: x64 (64-bit)
+2026-08-18 13:59:55.037   Machine types supported by system: x86 x64
+2026-08-18 13:59:55.037   User privileges: None
+2026-08-18 13:59:55.040   Administrative install mode: No
+2026-08-18 13:59:55.040   Install mode root key: HKEY_CURRENT_USER
+2026-08-18 13:59:55.040   64-bit install mode: No
+2026-08-18 13:59:55.040   RedirectionGuard status for current process: Enabled in enforcing mode
+2026-08-18 13:59:55.042   Created temporary directory: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp
+2026-08-18 13:59:55.357   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\setup-bootstrap.ps1
+2026-08-18 13:59:55.358   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\VERSION
+2026-08-18 13:59:55.359   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\assets\codex-dream-skin.ico
+2026-08-18 13:59:55.364   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\assets\dream-reference.jpg
+2026-08-18 13:59:55.378   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\assets\dream-skin.css
+2026-08-18 13:59:55.380   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\assets\renderer-inject.js
+2026-08-18 13:59:55.383   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\assets\safe-css-policy.json
+2026-08-18 13:59:55.384   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\assets\safe-css-validator.mjs
+2026-08-18 13:59:55.386   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\assets\selectors.json
+2026-08-18 13:59:55.387   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\assets\theme-package-validator.mjs
+2026-08-18 13:59:55.389   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\assets\theme.json
+2026-08-18 13:59:55.390   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\presets\preset-gothic-void-crusade\background.jpg
+2026-08-18 13:59:55.403   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\presets\preset-gothic-void-crusade\theme.json
+2026-08-18 13:59:55.404   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\runtime\node\LICENSE
+2026-08-18 13:59:55.408   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\runtime\node\node.exe
+2026-08-18 13:59:58.009   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\apply-community-theme.ps1
+2026-08-18 13:59:58.011   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\check-update.ps1
+2026-08-18 13:59:58.011   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\common-windows.ps1
+2026-08-18 13:59:58.014   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\config-utf8.ps1
+2026-08-18 13:59:58.017   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\image-metadata.mjs
+2026-08-18 13:59:58.019   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\injector.mjs
+2026-08-18 13:59:58.023   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\install-dream-skin.ps1
+2026-08-18 13:59:58.024   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\localization-windows.ps1
+2026-08-18 13:59:58.025   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\restore-dream-skin.ps1
+2026-08-18 13:59:58.032   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\start-dream-skin.ps1
+2026-08-18 13:59:58.035   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\theme-windows.ps1
+2026-08-18 13:59:58.049   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\tray-dream-skin.ps1
+2026-08-18 13:59:58.051   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\validate-safe-css-file.mjs
+2026-08-18 13:59:58.052   Extracting temporary file: C:\Users\twm\AppData\Local\Temp\is-A082TYCCGY.tmp\payload\scripts\verify-dream-skin.ps1
+2026-08-18 14:00:15.987   Starting the installation process.
+2026-08-18 14:00:15.990   Creating directory: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin
+2026-08-18 14:00:15.995   Directory for uninstall files: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin
+2026-08-18 14:00:15.995   Creating new uninstall log: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\unins000.dat
+2026-08-18 14:00:16.009   -- File entry --
+2026-08-18 14:00:16.009   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\unins000.exe
+2026-08-18 14:00:16.019   Time stamp of our file: 2026-08-18 13:59:54.714
+2026-08-18 14:00:16.019   Installing the file.
+2026-08-18 14:00:16.029   Successfully installed the file.
+2026-08-18 14:00:16.029   -- File entry --
+2026-08-18 14:00:16.029   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\setup-bootstrap.ps1
+2026-08-18 14:00:16.029   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:16.029   Installing the file.
+2026-08-18 14:00:16.033   Successfully installed the file.
+2026-08-18 14:00:16.033   -- File entry --
+2026-08-18 14:00:16.033   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\LICENSE.txt
+2026-08-18 14:00:16.034   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:16.034   Installing the file.
+2026-08-18 14:00:18.757   Successfully installed the file.
+2026-08-18 14:00:18.757   -- File entry --
+2026-08-18 14:00:18.757   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\NOTICE.md
+2026-08-18 14:00:18.758   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:18.758   Installing the file.
+2026-08-18 14:00:18.760   Successfully installed the file.
+2026-08-18 14:00:18.760   -- File entry --
+2026-08-18 14:00:18.760   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\VERSION
+2026-08-18 14:00:18.761   Time stamp of our file: 2026-08-12 03:36:22.000
+2026-08-18 14:00:18.761   Installing the file.
+2026-08-18 14:00:18.761   Creating directory: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload
+2026-08-18 14:00:18.764   Successfully installed the file.
+2026-08-18 14:00:18.771   -- File entry --
+2026-08-18 14:00:18.771   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\assets\codex-dream-skin.ico
+2026-08-18 14:00:18.772   Time stamp of our file: 2026-08-12 03:36:26.000
+2026-08-18 14:00:18.772   Installing the file.
+2026-08-18 14:00:18.772   Creating directory: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\assets
+2026-08-18 14:00:18.786   Successfully installed the file.
+2026-08-18 14:00:18.786   -- File entry --
+2026-08-18 14:00:18.787   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\assets\dream-reference.jpg
+2026-08-18 14:00:18.787   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:18.787   Installing the file.
+2026-08-18 14:00:18.824   Successfully installed the file.
+2026-08-18 14:00:18.824   -- File entry --
+2026-08-18 14:00:18.825   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\assets\dream-skin.css
+2026-08-18 14:00:18.825   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:18.825   Installing the file.
+2026-08-18 14:00:18.838   Successfully installed the file.
+2026-08-18 14:00:18.838   -- File entry --
+2026-08-18 14:00:18.838   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\assets\renderer-inject.js
+2026-08-18 14:00:18.838   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:18.838   Installing the file.
+2026-08-18 14:00:18.841   Successfully installed the file.
+2026-08-18 14:00:18.841   -- File entry --
+2026-08-18 14:00:18.841   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\assets\safe-css-policy.json
+2026-08-18 14:00:18.842   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:18.842   Installing the file.
+2026-08-18 14:00:18.844   Successfully installed the file.
+2026-08-18 14:00:18.844   -- File entry --
+2026-08-18 14:00:18.844   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\assets\safe-css-validator.mjs
+2026-08-18 14:00:18.844   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:18.844   Installing the file.
+2026-08-18 14:00:18.847   Successfully installed the file.
+2026-08-18 14:00:18.847   -- File entry --
+2026-08-18 14:00:18.847   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\assets\selectors.json
+2026-08-18 14:00:18.847   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:18.847   Installing the file.
+2026-08-18 14:00:18.850   Successfully installed the file.
+2026-08-18 14:00:18.851   -- File entry --
+2026-08-18 14:00:18.851   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\assets\theme-package-validator.mjs
+2026-08-18 14:00:18.851   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:18.851   Installing the file.
+2026-08-18 14:00:18.853   Successfully installed the file.
+2026-08-18 14:00:18.854   -- File entry --
+2026-08-18 14:00:18.854   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\assets\theme.json
+2026-08-18 14:00:18.854   Time stamp of our file: 2026-08-12 03:36:22.000
+2026-08-18 14:00:18.854   Installing the file.
+2026-08-18 14:00:18.856   Successfully installed the file.
+2026-08-18 14:00:18.856   -- File entry --
+2026-08-18 14:00:18.857   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\presets\preset-gothic-void-crusade\background.jpg
+2026-08-18 14:00:18.857   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:18.857   Installing the file.
+2026-08-18 14:00:18.857   Creating directory: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\presets
+2026-08-18 14:00:18.858   Creating directory: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\presets\preset-gothic-void-crusade
+2026-08-18 14:00:18.871   Successfully installed the file.
+2026-08-18 14:00:18.871   -- File entry --
+2026-08-18 14:00:18.871   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\presets\preset-gothic-void-crusade\theme.json
+2026-08-18 14:00:18.872   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:18.872   Installing the file.
+2026-08-18 14:00:18.873   Successfully installed the file.
+2026-08-18 14:00:18.873   -- File entry --
+2026-08-18 14:00:18.873   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\runtime\node\LICENSE
+2026-08-18 14:00:18.873   Time stamp of our file: 2026-08-12 03:36:22.000
+2026-08-18 14:00:18.873   Installing the file.
+2026-08-18 14:00:18.874   Creating directory: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\runtime
+2026-08-18 14:00:18.874   Creating directory: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\runtime\node
+2026-08-18 14:00:18.879   Successfully installed the file.
+2026-08-18 14:00:18.879   -- File entry --
+2026-08-18 14:00:18.879   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\runtime\node\node.exe
+2026-08-18 14:00:18.879   Time stamp of our file: 2026-08-12 03:36:22.000
+2026-08-18 14:00:18.879   Installing the file.
+2026-08-18 14:00:23.709   Successfully installed the file.
+2026-08-18 14:00:23.709   -- File entry --
+2026-08-18 14:00:23.710   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\apply-community-theme.ps1
+2026-08-18 14:00:23.710   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.710   Installing the file.
+2026-08-18 14:00:23.710   Creating directory: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts
+2026-08-18 14:00:23.713   Successfully installed the file.
+2026-08-18 14:00:23.713   -- File entry --
+2026-08-18 14:00:23.713   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\check-update.ps1
+2026-08-18 14:00:23.714   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.714   Installing the file.
+2026-08-18 14:00:23.716   Successfully installed the file.
+2026-08-18 14:00:23.716   -- File entry --
+2026-08-18 14:00:23.717   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\common-windows.ps1
+2026-08-18 14:00:23.717   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.718   Installing the file.
+2026-08-18 14:00:23.726   Successfully installed the file.
+2026-08-18 14:00:23.726   -- File entry --
+2026-08-18 14:00:23.726   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\config-utf8.ps1
+2026-08-18 14:00:23.726   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.726   Installing the file.
+2026-08-18 14:00:23.729   Successfully installed the file.
+2026-08-18 14:00:23.730   -- File entry --
+2026-08-18 14:00:23.730   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\image-metadata.mjs
+2026-08-18 14:00:23.730   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.730   Installing the file.
+2026-08-18 14:00:23.733   Successfully installed the file.
+2026-08-18 14:00:23.733   -- File entry --
+2026-08-18 14:00:23.733   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\injector.mjs
+2026-08-18 14:00:23.734   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.734   Installing the file.
+2026-08-18 14:00:23.739   Successfully installed the file.
+2026-08-18 14:00:23.739   -- File entry --
+2026-08-18 14:00:23.739   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\install-dream-skin.ps1
+2026-08-18 14:00:23.739   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.740   Installing the file.
+2026-08-18 14:00:23.741   Successfully installed the file.
+2026-08-18 14:00:23.741   -- File entry --
+2026-08-18 14:00:23.742   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\localization-windows.ps1
+2026-08-18 14:00:23.742   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.742   Installing the file.
+2026-08-18 14:00:23.744   Successfully installed the file.
+2026-08-18 14:00:23.744   -- File entry --
+2026-08-18 14:00:23.744   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\restore-dream-skin.ps1
+2026-08-18 14:00:23.745   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.745   Installing the file.
+2026-08-18 14:00:23.747   Successfully installed the file.
+2026-08-18 14:00:23.747   -- File entry --
+2026-08-18 14:00:23.747   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\start-dream-skin.ps1
+2026-08-18 14:00:23.747   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.747   Installing the file.
+2026-08-18 14:00:23.754   Successfully installed the file.
+2026-08-18 14:00:23.754   -- File entry --
+2026-08-18 14:00:23.755   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\theme-windows.ps1
+2026-08-18 14:00:23.755   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.755   Installing the file.
+2026-08-18 14:00:23.760   Successfully installed the file.
+2026-08-18 14:00:23.760   -- File entry --
+2026-08-18 14:00:23.760   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\tray-dream-skin.ps1
+2026-08-18 14:00:23.761   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.761   Installing the file.
+2026-08-18 14:00:23.763   Successfully installed the file.
+2026-08-18 14:00:23.764   -- File entry --
+2026-08-18 14:00:23.764   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\validate-safe-css-file.mjs
+2026-08-18 14:00:23.764   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.764   Installing the file.
+2026-08-18 14:00:23.770   Successfully installed the file.
+2026-08-18 14:00:23.772   -- File entry --
+2026-08-18 14:00:23.772   Dest filename: C:\Users\twm\AppData\Local\Programs\CodexDreamSkin\payload\scripts\verify-dream-skin.ps1
+2026-08-18 14:00:23.773   Time stamp of our file: 2026-08-12 03:25:34.000
+2026-08-18 14:00:23.773   Installing the file.
+2026-08-18 14:00:23.775   Successfully installed the file.
+2026-08-18 14:00:23.775   -- Icon entry --
+2026-08-18 14:00:23.775   Dest filename: C:\Users\twm\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Codex Dream Skin\Codex Dream Skin.lnk
+2026-08-18 14:00:23.775   Creating directory: C:\Users\twm\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Codex Dream Skin
+2026-08-18 14:00:23.793   Creating the icon.
+2026-08-18 14:00:23.921   Successfully created the icon.
+2026-08-18 14:00:23.941   -- Registry entry --
+2026-08-18 14:00:23.941   Key: HKEY_CURRENT_USER\Software\Classes\dreamskin
+2026-08-18 14:00:23.941   Creating or opening the key.
+2026-08-18 14:00:23.942   Creating or setting the value.
+2026-08-18 14:00:23.942   Successfully created or set the value.
+2026-08-18 14:00:23.942   -- Registry entry --
+2026-08-18 14:00:23.942   Key: HKEY_CURRENT_USER\Software\Classes\dreamskin
+2026-08-18 14:00:23.942   Value name: URL Protocol
+2026-08-18 14:00:23.942   Creating or opening the key.
+2026-08-18 14:00:23.943   Creating or setting the value.
+2026-08-18 14:00:23.943   Successfully created or set the value.
+2026-08-18 14:00:23.943   -- Registry entry --
+2026-08-18 14:00:23.943   Key: HKEY_CURRENT_USER\Software\Classes\dreamskin\DefaultIcon
+2026-08-18 14:00:23.943   Creating or opening the key.
+2026-08-18 14:00:23.943   Creating or setting the value.
+2026-08-18 14:00:23.943   Successfully created or set the value.
+2026-08-18 14:00:23.943   -- Registry entry --
+2026-08-18 14:00:23.943   Key: HKEY_CURRENT_USER\Software\Classes\dreamskin\shell\open\command
+2026-08-18 14:00:23.943   Creating or opening the key.
+2026-08-18 14:00:23.944   Creating or setting the value.
+2026-08-18 14:00:23.945   Successfully created or set the value.
+2026-08-18 14:00:23.945   Saving uninstall information.
+2026-08-18 14:00:23.945   Creating new uninstall key: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall\{DCCDAF1A-9ACD-4AAB-B55B-DF17EB2CDA2E}_is1
+2026-08-18 14:00:23.945   Writing uninstall key values.
+2026-08-18 14:00:23.947   Detected previous administrative 32-bit install? No
+2026-08-18 14:00:23.947   Detected previous administrative 64-bit install? No
+2026-08-18 14:00:25.151   Installation process succeeded.
+2026-08-18 14:00:25.153   Need to restart Windows? No
+2026-08-18 14:00:25.179   Deinitializing Setup.
+2026-08-18 14:00:25.235   Log closed.

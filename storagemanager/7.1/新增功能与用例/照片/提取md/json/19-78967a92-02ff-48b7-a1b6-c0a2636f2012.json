@@ -1,0 +1,255 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\78967a92-02ff-48b7-a1b6-c0a2636f2012.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "This is a computer screen displaying a technical documentation document titled '功能说明' (Feature Description). It explains the problem of volatile device names (/dev/sdX) in Linux and describes a unique identification strategy using Serial, PTUUID, and triplet attributes to accurately identify disks across reboots.",
+    "ocr": {
+      "full_text": "测试执行顺序\n7.1新增功能与测试用例对照表\n测试用例\n测试用例\n测试用例\n测试用例\n01_测试用例 / _04_设备身份 / 测试用例\n功能说明\n这个功能解决什么问题？\nLinux 系统给每块硬盘分配的名字（如 /dev/sda 、 /dev/sdb）不是永久的。内核在启动时按发现顺序分配名字，每次重启、热插拔，同一块物理硬盘可能被分配不同的名字。比如：\n重启前：/dev/sdb → 希捷 4TB（假设为热备盘）\n重启后：/dev/sdb → 东芝 4TB（变成了另一块盘）\n如果 StorageManager 靠 /dev/sdX 这个名字来认硬盘，重启之后就可能把其他盘当成热备盘来操作，或者把热备盘当成空闲盘加到 RAID 里——这就是数据丢失的直接原因。\n这个功能做了什么？\n核心思路：不靠名字认硬盘，靠硬盘的“身份证”来认。\n每块硬盘有固定的硬件标识，不随重启变化：\n层级 身份标识 来源 可靠性\n① Serial 磁盘固件序列号，如 WD-WCC4E1234567 smartctl -i /dev/sdX ✅ 最强，绝对不会变\n② PTUUID 分区表 UUID，分区时由内核生成 blkid -s PTUUID ✅ 强，与 smartctl 无关\n③ 三元组 型号+设备名+容量 磁盘扫描时采集 ⚠️ 弱，仅兜底\n匹配时从①往③依次尝试：Serial 能匹配就直接确认身份，Serial 拿不到才试 PTUUID，再拿不到才退回旧的三元组匹配（并产生告警）。\n哪些业务场景用了这套机制？\n场景 A：判断一块盘是不是热备盘（ IsDiskInHotSpare ， hotspare/service.go:230 ）\n当系统扫描空闲盘时，需要把“已经设为热备盘的”排除掉。判断时用 Serial → PTUUID → 三元组来确认“这块盘就是配置文件里记录的那块”，而不是仅凭设备名。\n场景 B：判断一块盘是不是 Flashcache 缓存盘（ IsDiskInFlashcache ， storage/flashcache.go:50 ）",
+      "lines": [
+        {
+          "text": "测试执行顺序",
+          "language": "zh"
+        },
+        {
+          "text": "7.1新增功能与测试用例对照表",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "01_测试用例 / _04_设备身份 / 测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "功能说明",
+          "language": "zh"
+        },
+        {
+          "text": "这个功能解决什么问题？",
+          "language": "zh"
+        },
+        {
+          "text": "Linux 系统给每块硬盘分配的名字（如 /dev/sda 、 /dev/sdb）不是永久的。内核在启动时按发现顺序分配名字，每次重启、热插拔，同一块物理硬盘可能被分配不同的名字。比如：",
+          "language": "zh"
+        },
+        {
+          "text": "重启前：/dev/sdb → 希捷 4TB（假设为热备盘）",
+          "language": "zh"
+        },
+        {
+          "text": "重启后：/dev/sdb → 东芝 4TB（变成了另一块盘）",
+          "language": "zh"
+        },
+        {
+          "text": "如果 StorageManager 靠 /dev/sdX 这个名字来认硬盘，重启之后就可能把其他盘当成热备盘来操作，或者把热备盘当成空闲盘加到 RAID 里——这就是数据丢失的直接原因。",
+          "language": "zh"
+        },
+        {
+          "text": "这个功能做了什么？",
+          "language": "zh"
+        },
+        {
+          "text": "核心思路：不靠名字认硬盘，靠硬盘的“身份证”来认。",
+          "language": "zh"
+        },
+        {
+          "text": "每块硬盘有固定的硬件标识，不随重启变化：",
+          "language": "zh"
+        },
+        {
+          "text": "层级 身份标识 来源 可靠性",
+          "language": "zh"
+        },
+        {
+          "text": "① Serial 磁盘固件序列号，如 WD-WCC4E1234567 smartctl -i /dev/sdX ✅ 最强，绝对不会变",
+          "language": "zh"
+        },
+        {
+          "text": "② PTUUID 分区表 UUID，分区时由内核生成 blkid -s PTUUID ✅ 强，与 smartctl 无关",
+          "language": "zh"
+        },
+        {
+          "text": "③ 三元组 型号+设备名+容量 磁盘扫描时采集 ⚠️ 弱，仅兜底",
+          "language": "zh"
+        },
+        {
+          "text": "匹配时从①往③依次尝试：Serial 能匹配就直接确认身份，Serial 拿不到才试 PTUUID，再拿不到才退回旧的三元组匹配（并产生告警）。",
+          "language": "zh"
+        },
+        {
+          "text": "哪些业务场景用了这套机制？",
+          "language": "zh"
+        },
+        {
+          "text": "场景 A：判断一块盘是不是热备盘（ IsDiskInHotSpare ， hotspare/service.go:230 ）",
+          "language": "zh"
+        },
+        {
+          "text": "当系统扫描空闲盘时，需要把“已经设为热备盘的”排除掉。判断时用 Serial → PTUUID → 三元组来确认“这块盘就是配置文件里记录的那块”，而不是仅凭设备名。",
+          "language": "zh"
+        },
+        {
+          "text": "场景 B：判断一块盘是不是 Flashcache 缓存盘（ IsDiskInFlashcache ， storage/flashcache.go:50 ）",
+          "language": "zh"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "other",
+          "reading_order": 1,
+          "text": "测试执行顺序 7.1新增功能与测试用例对照表 测试用例 测试用例 测试用例 测试用例 01_测试用例 / _04_设备身份 / 测试用例"
+        },
+        {
+          "type": "title",
+          "reading_order": 2,
+          "text": "功能说明"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 3,
+          "text": "这个功能解决什么问题？"
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 4,
+          "text": "Linux 系统给每块硬盘分配的名字（如 /dev/sda 、 /dev/sdb）不是永久的。内核在启动时按发现顺序分配名字，每次重启、热插拔，同一块物理硬盘可能被分配不同的名字。比如：\n重启前：/dev/sdb → 希捷 4TB（假设为热备盘）\n重启后：/dev/sdb → 东芝 4TB（变成了另一块盘）\n如果 StorageManager 靠 /dev/sdX 这个名字来认硬盘，重启之后就可能把其他盘当成热备盘来操作，或者把热备盘当成空闲盘加到 RAID 里——这就是数据丢失的直接原因。"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 5,
+          "text": "这个功能做了什么？"
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 6,
+          "text": "核心思路：不靠名字认硬盘，靠硬盘的“身份证”来认。\n每块硬盘有固定的硬件标识，不随重启变化："
+        },
+        {
+          "type": "table",
+          "reading_order": 7,
+          "text": "层级 | 身份标识 | 来源 | 可靠性\n① Serial | 磁盘固件序列号，如 WD-WCC4E1234567 | smartctl -i /dev/sdX | ✅ 最强，绝对不会变\n② PTUUID | 分区表 UUID，分区时由内核生成 | blkid -s PTUUID | ✅ 强，与 smartctl 无关\n③ 三元组 | 型号+设备名+容量 | 磁盘扫描时采集 | ⚠️ 弱，仅兜底"
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 8,
+          "text": "匹配时从①往③依次尝试：Serial 能匹配就直接确认身份，Serial 拿不到才试 PTUUID，再拿不到才退回旧的三元组匹配（并产生告警）。"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 9,
+          "text": "哪些业务场景用了这套机制？"
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 10,
+          "text": "场景 A：判断一块盘是不是热备盘（ IsDiskInHotSpare ， hotspare/service.go:230 ）\n当系统扫描空闲盘时，需要把“已经设为热备盘的”排除掉。判断时用 Serial → PTUUID → 三元组来确认“这块盘就是配置文件里记录的那块”，而不是仅凭设备名。\n场景 B：判断一块盘是不是 Flashcache 缓存盘（ IsDiskInFlashcache ， storage/flashcache.go:50 ）"
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "screen_photo",
+      "intent": "Technical documentation explaining Linux disk device identification design and code usage.",
+      "entities": [
+        {
+          "name": "Serial",
+          "type": "Identifier_Type",
+          "evidence": "① Serial 磁盘固件序列号"
+        },
+        {
+          "name": "PTUUID",
+          "type": "Identifier_Type",
+          "evidence": "② PTUUID 分区表 UUID"
+        },
+        {
+          "name": "三元组",
+          "type": "Identifier_Type",
+          "evidence": "③ 三元组 型号+设备名+容量"
+        },
+        {
+          "name": "IsDiskInHotSpare",
+          "type": "Function_Name",
+          "evidence": "IsDiskInHotSpare ， hotspare/service.go:230"
+        },
+        {
+          "name": "IsDiskInFlashcache",
+          "type": "Function_Name",
+          "evidence": "IsDiskInFlashcache ， storage/flashcache.go:50"
+        }
+      ],
+      "relations": [
+        {
+          "subject": "Serial",
+          "predicate": "priority",
+          "object": "PTUUID"
+        },
+        {
+          "subject": "PTUUID",
+          "predicate": "priority",
+          "object": "三元组"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "grey",
+        "white",
+        "black"
+      ],
+      "style": "Photo of a computer screen displaying markdown formatted technical design documentation.",
+      "notes": [
+        "Image taken at an angle showing monitor bezel and screen reflection.",
+        "The bottom edge cuts off part of line '场景 B' text."
+      ]
+    },
+    "uncertainty": [
+      "Bottom line '场景 B' is partially cut off at the bottom edge of the image frame."
+    ]
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:58:37.843Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 21.34,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 2780,
+      "totalTokenCount": 4662,
+      "promptTokensDetails": [
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        }
+      ],
+      "thoughtsTokenCount": 691,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 21.342
+      }
+    ],
+    "warnings": []
+  }
+}

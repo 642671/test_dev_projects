@@ -1,0 +1,181 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\26e65aa5-4276-4857-9946-0e85b5bd3df8.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "A photograph showing a software test case documentation table titled with storage pool test cases (POOL-001 through POOL-017), outlining modules, titles, priority levels, prerequisites, input steps, expected results, and verification remarks.",
+    "ocr": {
+      "full_text": "7.1新增功能与测试用例对照表 测试用例 测试用例 01_测试用例 / _03_存储池 / 测试用例\n编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注\nPOOL-001 存储池 创建存储池（全 RAID 级别） P0 按级别准备空闲盘 依次创建 RAID0/1/5/6/10/TRAID ① pending→running→verifying→success; ② 返回 task_id; ③ lsblk 可见 md+LV; ④ 前端正确显示 pool_create_command.go\nPOOL-002 存储池 创建带卷存储池 P1 2+ 空闲磁盘 创建池时指定 create_volume: true ① 池和 LV 均正确创建; ② verifier 确认所有 LV 已挂载\nPOOL-003 存储池 重启后带卷池挂载完整性（btrfs 子卷） P1 已有含 btrfs 卷的池 确认正常挂载→重启服务→检查挂载状态 ① verifier 检查所有 LV; ② btrfs 子卷 [/@] 正确识别; ③ pool_mount_lv_incomplete 不误报 pool_mount_task.go\nPOOL-004 存储池 池扩容 P1 已有池+空闲盘 对池发起扩容，加入新磁盘 RAID 扩容正确，新磁盘加入 md 成员 pool_add_disk_command.go\nPOOL-005 存储池 池删除（含卷） P1 已有含卷的池 删除池，等待完成 ① 卷先卸载; ② 资源释放; ③ postflight 校验通过\nPOOL-006 存储池 池创建中断 → 重启恢复 P0 至少 2 块空闲盘 创建池→kill -9→重启→查询任务 ① 从 checkpoint 恢复; ② 不重复执行已完成步骤 pool_create_command.go\nPOOL-007 存储池 degraded 池挂载不误报 success P0 RAID1/RAID5 池，可拔盘 拔盘→degraded→重启或重新挂载 ① 不误报 success; ② 返回 pool_mount_needs_attention; ③ 前端正确展示 degraded pool_mount_task.go\nPOOL-008 存储池 btrfs 多子卷精确匹配 P1 btrfs 卷含多子卷 重启服务，检查 verifier 结果 verifier 精确匹配所有子卷，不遗漏不误报\nPOOL-009 存储池 池缩容 P1 已有多盘池 移除成员盘，等待 RAID reshape RAID reshape 正确完成\nPOOL-010 存储池 可用池降阶组装损坏状态覆盖 P1 RAID1 池 拔盘→degraded→可用池扫描 降阶出现损坏状态时，用\"挂载中\"覆盖 7.0 fix 32a9ccc ; pool/available.go\nPOOL-011 存储池 池操作中全局禁用删除按钮 P1 2 个以上池 对池 A 创建中→查看池 B 删除按钮 全局有池操作时，所有池的删除按钮禁用 7.0 fix 5338dfe + 4c08958\nPOOL-012 存储池 池删除后彻底校验（无残留） P0 已有池 删除池→检查 md/VG/LV ① /proc/mdstat 无残留 md; ② vgs/lvs 无残留; ③ 磁盘恢复空闲; ④ VolumeOccupyAction stop 执行 交接文档\nPOOL-013 存储池 同名卷组冲突消解（外来盘 vg0 改名） P0 ① 本机已有池 vg0; ② 插入另一台 NAS 建立过的磁盘（也是 vg0）两个同名 VG 都没有 tag 在 storage.conf 中 插入外来盘→重启 StorageManager→检查 vgs 输出两个都不登记→重启→检查 vgs ① 本机 vg0 保持不变; ② 外来 VG 被改名（如 vg3）; ③ 本机池不再误显示为\"已损坏\"; ④ /etc/lvm/backup/正确补回 pool/vg_conflict.go, commit 4a2984f9\nPOOL-014 存储池 同名卷组无法判定归属 → 跳过不改名 P1 ① 不做任何改名; ② 日志 WARN \"skip ambiguous\"; ③ 不移除任何数据 安全策略：宁可不改也不能改错\nPOOL-015 存储池 外来卷组收编为可用池 P0 ① 本机无池; ② 插入另一台 NAS 建立的磁盘 插入外来盘→重启→查看存储池列表 ① 外来 VG 被识别为\"可用\"而非\"已损坏\"; ② 用户可挂载恢复; ③ 不丢失任何数据 pool/foreign_vg.go, commit 4a2984f9\nPOOL-016 存储池 外来卷组有挂载点 → 拒绝收编 P1 外来盘在别的机器上有挂载但未正常卸载 外来盘仍有 LV 挂载→重启→检查日志 ① 日志 ERROR \"refuse to reclaim...still has mounted volumes\"; ② 不执行停用操作 双保险：/proc/mounts 检查\nPOOL-017 存储池 外来卷组成员盘被本机池占用 → 拒绝收编 P1 本机旧池仍声明拥有外来盘的成员盘 外来盘 Serial 在本机旧池中→重启→检查日志 ① 日志 ERROR \"member disk is still claimed by a local storage pool\"; ② 不执行 vgchange -an; ③ 提示用户先删旧池 防止数据冲突",
+      "lines": [
+        {
+          "text": "7.1新增功能与测试用例对照表",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "01_测试用例 / _03_存储池 / 测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-001 存储池 创建存储池（全 RAID 级别） P0 按级别准备空闲盘 依次创建 RAID0/1/5/6/10/TRAID ① pending→running→verifying→success; ② 返回 task_id; ③ lsblk 可见 md+LV; ④ 前端正确显示 pool_create_command.go",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-002 存储池 创建带卷存储池 P1 2+ 空闲磁盘 创建池时指定 create_volume: true ① 池和 LV 均正确创建; ② verifier 确认所有 LV 已挂载",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-003 存储池 重启后带卷池挂载完整性（btrfs 子卷） P1 已有含 btrfs 卷的池 确认正常挂载→重启服务→检查挂载状态 ① verifier 检查所有 LV; ② btrfs 子卷 [/@] 正确识别; ③ pool_mount_lv_incomplete 不误报 pool_mount_task.go",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-004 存储池 池扩容 P1 已有池+空闲盘 对池发起扩容，加入新磁盘 RAID 扩容正确，新磁盘加入 md 成员 pool_add_disk_command.go",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-005 存储池 池删除（含卷） P1 已有含卷的池 删除池，等待完成 ① 卷先卸载; ② 资源释放; ③ postflight 校验通过",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-006 存储池 池创建中断 → 重启恢复 P0 至少 2 块空闲盘 创建池→kill -9→重启→查询任务 ① 从 checkpoint 恢复; ② 不重复执行已完成步骤 pool_create_command.go",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-007 存储池 degraded 池挂载不误报 success P0 RAID1/RAID5 池，可拔盘 拔盘→degraded→重启或重新挂载 ① 不误报 success; ② 返回 pool_mount_needs_attention; ③ 前端正确展示 degraded pool_mount_task.go",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-008 存储池 btrfs 多子卷精确匹配 P1 btrfs 卷含多子卷 重启服务，检查 verifier 结果 verifier 精确匹配所有子卷，不遗漏不误报",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-009 存储池 池缩容 P1 已有多盘池 移除成员盘，等待 RAID reshape RAID reshape 正确完成",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-010 存储池 可用池降阶组装损坏状态覆盖 P1 RAID1 池 拔盘→degraded→可用池扫描 降阶出现损坏状态时，用\"挂载中\"覆盖 7.0 fix 32a9ccc ; pool/available.go",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-011 存储池 池操作中全局禁用删除按钮 P1 2 个以上池 对池 A 创建中→查看池 B 删除按钮 全局有池操作时，所有池的删除按钮禁用 7.0 fix 5338dfe + 4c08958",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-012 存储池 池删除后彻底校验（无残留） P0 已有池 删除池→检查 md/VG/LV ① /proc/mdstat 无残留 md; ② vgs/lvs 无残留; ③ 磁盘恢复空闲; ④ VolumeOccupyAction stop 执行 交接文档",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-013 存储池 同名卷组冲突消解（外来盘 vg0 改名） P0 ① 本机已有池 vg0; ② 插入另一台 NAS 建立过的磁盘（也是 vg0）两个同名 VG 都没有 tag 在 storage.conf 中 插入外来盘→重启 StorageManager→检查 vgs 输出两个都不登记→重启→检查 vgs ① 本机 vg0 保持不变; ② 外来 VG 被改名（如 vg3）; ③ 本机池不再误显示为\"已损坏\"; ④ /etc/lvm/backup/正确补回 pool/vg_conflict.go, commit 4a2984f9",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-014 存储池 同名卷组无法判定归属 → 跳过不改名 P1 ① 不做任何改名; ② 日志 WARN \"skip ambiguous\"; ③ 不移除任何数据 安全策略：宁可不改也不能改错",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-015 存储池 外来卷组收编为可用池 P0 ① 本机无池; ② 插入另一台 NAS 建立的磁盘 插入外来盘→重启→查看存储池列表 ① 外来 VG 被识别为\"可用\"而非\"已损坏\"; ② 用户可挂载恢复; ③ 不丢失任何数据 pool/foreign_vg.go, commit 4a2984f9",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-016 存储池 外来卷组有挂载点 → 拒绝收编 P1 外来盘在别的机器上有挂载但未正常卸载 外来盘仍有 LV 挂载→重启→检查日志 ① 日志 ERROR \"refuse to reclaim...still has mounted volumes\"; ② 不执行停用操作 双保险：/proc/mounts 检查",
+          "language": "zh"
+        },
+        {
+          "text": "POOL-017 存储池 外来卷组成员盘被本机池占用 → 拒绝收编 P1 本机旧池仍声明拥有外来盘的成员盘 外来盘 Serial 在本机旧池中→重启→检查日志 ① 日志 ERROR \"member disk is still claimed by a local storage pool\"; ② 不执行 vgchange -an; ③ 提示用户先删旧池 防止数据冲突",
+          "language": "zh"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "title",
+          "reading_order": 1,
+          "text": "7.1新增功能与测试用例对照表 / 01_测试用例 / _03_存储池 / 测试用例"
+        },
+        {
+          "type": "table",
+          "reading_order": 2,
+          "text": "测试用例表格（包含 编号、模块、标题、优先级、前置条件、输入数据、预期结果、验证结果、备注 等列）"
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "computer_screen",
+      "intent": "software_testing_documentation",
+      "entities": [
+        {
+          "name": "POOL-001 - POOL-017",
+          "type": "test_case_id",
+          "evidence": "编号列"
+        },
+        {
+          "name": "存储池",
+          "type": "module_name",
+          "evidence": "模块列"
+        }
+      ],
+      "relations": [
+        {
+          "subject": "POOL-001",
+          "predicate": "tests",
+          "object": "创建存储池（全 RAID 级别）"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "grey",
+        "white",
+        "black"
+      ],
+      "style": "photograph_of_screen",
+      "notes": [
+        "Moire patterns and screen reflection visible on top left and right edges",
+        "Windows activation watermark on lower right corner"
+      ]
+    },
+    "uncertainty": []
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:58:50.588Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 23.992,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 3283,
+      "totalTokenCount": 6358,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        },
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        }
+      ],
+      "thoughtsTokenCount": 1884,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 23.994
+      }
+    ],
+    "warnings": []
+  }
+}

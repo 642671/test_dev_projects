@@ -1,0 +1,19 @@
+{
+  "imagesInSourceDir": 41,
+  "moduleFiles": 10,
+  "uniqueCaseIds": 137,
+  "rowsByModule": {
+    "security": 7,
+    "api-config": 11,
+    "task-state": 12,
+    "device-identity": 36,
+    "pool-raid": 27,
+    "volume-format": 11,
+    "cache-watermark": 9,
+    "external": 7,
+    "iscsi": 6,
+    "system-upgrade": 11
+  },
+  "missingRows": [],
+  "allTablesHaveHeader": true
+}

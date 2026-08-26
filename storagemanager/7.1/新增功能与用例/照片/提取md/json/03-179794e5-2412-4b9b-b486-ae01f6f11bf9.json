@@ -1,0 +1,207 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\179794e5-2412-4b9b-b486-ae01f6f11bf9.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "A screenshot of a software documentation page regarding USB / eSATA external storage test cases, listing functional descriptions, changes made, reference documents, and test case tables.",
+    "ocr": {
+      "full_text": "01_测试用例 / _16_USB_eSATA / 测试用例\n测试用例\nUSB / eSATA 外接存储测试用例\n功能说明\n7.1 USB 格式化接入任务状态机。热插拔改为拓扑快照模式（4s 防抖+版本号）。修复了 lsblk 阻塞和 umountUsb 异步竞态。\n做了什么\n• USB 格式化任务化：全文件系统（vfat/ext4/exfat/ntfs/hfs+），running→verifying→success\n• 热插拔 4s 防抖→RefreshDiskTopology()→快照版本号递增，接口响应 ~0.3ms 不阻塞\n• formatData sync.Map 内存查询替代 lsblk 阻塞磁盘列表（7.0 fix 77cf142）\n• umountUsb 异步竞态修复：连续 5 次格式化切换 FS 不报 \"partitions in use\"（7.0 fix a4e105e）\n• ntfs/vfat 权限正确设置 gid=allusers+770（7.0 fix bb1b2c9）\n• 外接设备 Shell 旁路窗口：走 Go exec.CommandContext，不走 sh -c\n参考文档\n• 代码: src/service/extstoragedevice/, src/service/disk/pool/free_disk.go\n• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.7\n• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md\n测试用例\n编号 模块 标题 优先级 前置条件 输入数据 预期结果",
+      "lines": [
+        {
+          "text": "01_测试用例 / _16_USB_eSATA / 测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "USB / eSATA 外接存储测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "功能说明",
+          "language": "zh"
+        },
+        {
+          "text": "7.1 USB 格式化接入任务状态机。热插拔改为拓扑快照模式（4s 防抖+版本号）。修复了 lsblk 阻塞和 umountUsb 异步竞态。",
+          "language": "zh"
+        },
+        {
+          "text": "做了什么",
+          "language": "zh"
+        },
+        {
+          "text": "• USB 格式化任务化：全文件系统（vfat/ext4/exfat/ntfs/hfs+），running→verifying→success",
+          "language": "zh"
+        },
+        {
+          "text": "• 热插拔 4s 防抖→RefreshDiskTopology()→快照版本号递增，接口响应 ~0.3ms 不阻塞",
+          "language": "zh"
+        },
+        {
+          "text": "• formatData sync.Map 内存查询替代 lsblk 阻塞磁盘列表（7.0 fix 77cf142）",
+          "language": "zh"
+        },
+        {
+          "text": "• umountUsb 异步竞态修复：连续 5 次格式化切换 FS 不报 \"partitions in use\"（7.0 fix a4e105e）",
+          "language": "zh"
+        },
+        {
+          "text": "• ntfs/vfat 权限正确设置 gid=allusers+770（7.0 fix bb1b2c9）",
+          "language": "zh"
+        },
+        {
+          "text": "• 外接设备 Shell 旁路窗口：走 Go exec.CommandContext，不走 sh -c",
+          "language": "zh"
+        },
+        {
+          "text": "参考文档",
+          "language": "zh"
+        },
+        {
+          "text": "• 代码: src/service/extstoragedevice/, src/service/disk/pool/free_disk.go",
+          "language": "zh"
+        },
+        {
+          "text": "• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.7",
+          "language": "zh"
+        },
+        {
+          "text": "• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果",
+          "language": "zh"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "title",
+          "reading_order": 1,
+          "text": "测试用例"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 2,
+          "text": "USB / eSATA 外接存储测试用例"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 3,
+          "text": "功能说明"
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 4,
+          "text": "7.1 USB 格式化接入任务状态机。热插拔改为拓扑快照模式（4s 防抖+版本号）。修复了 lsblk 阻塞和 umountUsb 异步竞态。"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 5,
+          "text": "做了什么"
+        },
+        {
+          "type": "list",
+          "reading_order": 6,
+          "text": "• USB 格式化任务化：全文件系统（vfat/ext4/exfat/ntfs/hfs+），running→verifying→success\n• 热插拔 4s 防抖→RefreshDiskTopology()→快照版本号递增，接口响应 ~0.3ms 不阻塞\n• formatData sync.Map 内存查询替代 lsblk 阻塞磁盘列表（7.0 fix 77cf142）\n• umountUsb 异步竞态修复：连续 5 次格式化切换 FS 不报 \"partitions in use\"（7.0 fix a4e105e）\n• ntfs/vfat 权限正确设置 gid=allusers+770（7.0 fix bb1b2c9）\n• 外接设备 Shell 旁路窗口：走 Go exec.CommandContext，不走 sh -c"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 7,
+          "text": "参考文档"
+        },
+        {
+          "type": "list",
+          "reading_order": 8,
+          "text": "• 代码: src/service/extstoragedevice/, src/service/disk/pool/free_disk.go\n• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.7\n• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 9,
+          "text": "测试用例"
+        },
+        {
+          "type": "table",
+          "reading_order": 10,
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果"
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "computer screen capture",
+      "intent": "documenting test specs and code change logs for storage functionality",
+      "entities": [
+        {
+          "name": "USB / eSATA 外接存储测试用例",
+          "type": "document_title"
+        },
+        {
+          "name": "lsblk",
+          "type": "command"
+        },
+        {
+          "name": "umountUsb",
+          "type": "function"
+        },
+        {
+          "name": "RefreshDiskTopology()",
+          "type": "function"
+        },
+        {
+          "name": "exec.CommandContext",
+          "type": "function"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "grey",
+        "white",
+        "black"
+      ],
+      "style": "digital document screenshot",
+      "notes": [
+        "Taken off a computer display with slight moire pattern and reflection."
+      ]
+    },
+    "uncertainty": []
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:58:02.162Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 18.867,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 1568,
+      "totalTokenCount": 4671,
+      "promptTokensDetails": [
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        }
+      ],
+      "thoughtsTokenCount": 1912,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 18.87
+      }
+    ],
+    "warnings": []
+  }
+}

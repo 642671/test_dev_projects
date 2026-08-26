@@ -1,0 +1,60 @@
+{
+  "totalExcel": 93,
+  "totalApifox": 93,
+  "missingCount": 0,
+  "extraCount": 0,
+  "missing": [],
+  "extra": [],
+  "perEndpoint": [
+    {
+      "path": "/update/version",
+      "excel": 6,
+      "apifox": 6
+    },
+    {
+      "path": "/systemStatus/CPUMonitor",
+      "excel": 6,
+      "apifox": 6
+    },
+    {
+      "path": "/systemStatus/NasProcessorInfo",
+      "excel": 8,
+      "apifox": 8
+    },
+    {
+      "path": "/systemStatus/MemoryMonitor",
+      "excel": 6,
+      "apifox": 6
+    },
+    {
+      "path": "/systemStatus/NetSpeedMonitor",
+      "excel": 6,
+      "apifox": 6
+    },
+    {
+      "path": "/resource/show",
+      "excel": 6,
+      "apifox": 6
+    },
+    {
+      "path": "/schedule/{id}/log",
+      "excel": 16,
+      "apifox": 16
+    },
+    {
+      "path": "/schedule",
+      "excel": 8,
+      "apifox": 8
+    },
+    {
+      "path": "/msgcenter/read/{id}",
+      "excel": 17,
+      "apifox": 17
+    },
+    {
+      "path": "/msgcenter/list",
+      "excel": 14,
+      "apifox": 14
+    }
+  ]
+}

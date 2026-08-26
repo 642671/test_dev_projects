@@ -4,5 +4,27 @@
   },
   "dependencies": {
     "pptxgenjs": "^4.0.1"
-  }
+  },
+  "name": "test_dev_projects",
+  "version": "1.0.0",
+  "description": "本仓库当前以**存储管理应用重构测试**为中心，主要维护接口测试设计真源、Apifox 配套资产、pytest 自动化代码、批处理工具和项目文档。",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/642671/test_dev_projects.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/642671/test_dev_projects/issues"
+  },
+  "homepage": "https://github.com/642671/test_dev_projects#readme"
 }

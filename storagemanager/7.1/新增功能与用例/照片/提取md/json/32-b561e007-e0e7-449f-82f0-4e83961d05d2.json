@@ -1,0 +1,221 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\b561e007-e0e7-449f-82f0-4e83961d05d2.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "The image is a photo of a screen displaying a technical document titled \"测试用例\" (Test Cases) and \"配置管理测试用例\" (Configuration Management Test Cases). It outlines feature explanations, implemented changes, reference documentation, and a table describing three \"drift\" scenarios.",
+    "ocr": {
+      "full_text": "测试用例\n配置管理测试用例\n功能说明\n7.1 新增配置原子写入（防断电空文件）、taskdb 硬件指纹绑定（防跨 NAS 移植误操作）、volume.conf 漂移语义定义。\n做了什么\n• 配置原子写入: temp+Sync+Rename+0750 目录权限，kill -9 不产生空文件/截断文件\n• taskdb 硬件指纹绑定: 系统盘 MD 成员指纹记录在 storage_task_meta，跨 NAS 移植后旧任务标记 hardware_instance_changed\n• volume.conf 语义: 正常拔盘≠drift; MntPath 为空/btrfs 未挂载/ext4 挂载失败才是 drift\n• 配置删除前自动备份+审计日志+多次确认\n参考文档\n• 代码: src/service/disk/store/, src/service/task/binding.go\n• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.11\n• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §4\n三种 drift 场景\n场景 触发条件 预期\nMntPath 为空 挂载配置丢失 标记为 drift\nbtrfs 未挂载 子卷不在挂载表 标记为 drift\next4 挂载失败 文件系统损坏 标记为 drift",
+      "lines": [
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "配置管理测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "功能说明",
+          "language": "zh"
+        },
+        {
+          "text": "7.1 新增配置原子写入（防断电空文件）、taskdb 硬件指纹绑定（防跨 NAS 移植误操作）、volume.conf 漂移语义定义。",
+          "language": "zh"
+        },
+        {
+          "text": "做了什么",
+          "language": "zh"
+        },
+        {
+          "text": "• 配置原子写入: temp+Sync+Rename+0750 目录权限，kill -9 不产生空文件/截断文件",
+          "language": "zh"
+        },
+        {
+          "text": "• taskdb 硬件指纹绑定: 系统盘 MD 成员指纹记录在 storage_task_meta，跨 NAS 移植后旧任务标记 hardware_instance_changed",
+          "language": "zh"
+        },
+        {
+          "text": "• volume.conf 语义: 正常拔盘≠drift; MntPath 为空/btrfs 未挂载/ext4 挂载失败才是 drift",
+          "language": "zh"
+        },
+        {
+          "text": "• 配置删除前自动备份+审计日志+多次确认",
+          "language": "zh"
+        },
+        {
+          "text": "参考文档",
+          "language": "zh"
+        },
+        {
+          "text": "• 代码: src/service/disk/store/, src/service/task/binding.go",
+          "language": "zh"
+        },
+        {
+          "text": "• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.11",
+          "language": "zh"
+        },
+        {
+          "text": "• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §4",
+          "language": "zh"
+        },
+        {
+          "text": "三种 drift 场景",
+          "language": "zh"
+        },
+        {
+          "text": "场景 触发条件 预期",
+          "language": "zh"
+        },
+        {
+          "text": "MntPath 为空 挂载配置丢失 标记为 drift",
+          "language": "zh"
+        },
+        {
+          "text": "btrfs 未挂载 子卷不在挂载表 标记为 drift",
+          "language": "zh"
+        },
+        {
+          "text": "ext4 挂载失败 文件系统损坏 标记为 drift",
+          "language": "zh"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "title",
+          "reading_order": 1,
+          "text": "测试用例"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 2,
+          "text": "配置管理测试用例"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 3,
+          "text": "功能说明"
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 4,
+          "text": "7.1 新增配置原子写入（防断电空文件）、taskdb 硬件指纹绑定（防跨 NAS 移植误操作）、volume.conf 漂移语义定义。"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 5,
+          "text": "做了什么"
+        },
+        {
+          "type": "list",
+          "reading_order": 6,
+          "text": "• 配置原子写入: temp+Sync+Rename+0750 目录权限，kill -9 不产生空文件/截断文件\n• taskdb 硬件指纹绑定: 系统盘 MD 成员指纹记录在 storage_task_meta，跨 NAS 移植后旧任务标记 hardware_instance_changed\n• volume.conf 语义: 正常拔盘≠drift; MntPath 为空/btrfs 未挂载/ext4 挂载失败才是 drift\n• 配置删除前自动备份+审计日志+多次确认"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 7,
+          "text": "参考文档"
+        },
+        {
+          "type": "list",
+          "reading_order": 8,
+          "text": "• 代码: src/service/disk/store/, src/service/task/binding.go\n• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.11\n• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §4"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 9,
+          "text": "三种 drift 场景"
+        },
+        {
+          "type": "table",
+          "reading_order": 10,
+          "text": "场景 | 触发条件 | 预期\nMntPath 为空 | 挂载配置丢失 | 标记为 drift\nbtrfs 未挂载 | 子卷不在挂载表 | 标记为 drift\next4 挂载失败 | 文件系统损坏 | 标记为 drift"
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "document_view",
+      "entities": [
+        {
+          "name": "7.1 新增配置原子写入",
+          "type": "feature_description"
+        },
+        {
+          "name": "taskdb 硬件指纹绑定",
+          "type": "feature_description"
+        },
+        {
+          "name": "volume.conf 漂移语义定义",
+          "type": "feature_description"
+        },
+        {
+          "name": "src/service/disk/store/",
+          "type": "code_path"
+        },
+        {
+          "name": "src/service/task/binding.go",
+          "type": "code_path"
+        },
+        {
+          "name": "05_参考资料/PRD/tgm-refactor-test-guide.md",
+          "type": "document_path"
+        }
+      ],
+      "relations": [
+        {
+          "subject": "05_参考资料/PRD/tgm-refactor-test-guide.md",
+          "predicate": "references_section",
+          "object": "§4.11"
+        },
+        {
+          "subject": "05_参考资料/PRD/7.1交接聊天记录与问题等.md",
+          "predicate": "references_section",
+          "object": "§4"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "grey",
+        "light grey"
+      ],
+      "style": "photograph of a computer screen containing technical documentation",
+      "notes": [
+        "Text is presented as plain markdown formatted software documentation with headings, bullet points, and a markdown table."
+      ]
+    },
+    "uncertainty": []
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:58:24.032Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 18.539,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 1538,
+      "totalTokenCount": 3865,
+      "promptTokensDetails": [
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        }
+      ],
+      "thoughtsTokenCount": 1136,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 18.541
+      }
+    ],
+    "warnings": []
+  }
+}

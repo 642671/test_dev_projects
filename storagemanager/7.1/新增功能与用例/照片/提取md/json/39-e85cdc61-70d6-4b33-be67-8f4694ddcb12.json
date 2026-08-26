@@ -1,0 +1,169 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\e85cdc61-70d6-4b33-be67-8f4694ddcb12.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "The image is a photo of a computer screen showing a documentation or test case table written in Chinese. It includes a table titled '三种 drift 场景' (Three drift scenarios) and a detailed test case list table titled '测试用例' with columns like test case ID, module, title, priority, pre-conditions, input data, expected results, test results, and remarks. A Windows activation watermark is visible in the bottom right corner.",
+    "ocr": {
+      "full_text": "7.1新增功能与测试用例对照表 测试用例 测试用例 01_测试用例 / _11_配置管理 / 测试用例 三种 drift 场景 场景 触发条件 预期 MntPath 为空 挂载配置丢失 标记为 drift btrfs 未挂载 子卷不在挂载表 标记为 drift ext4 挂载失败 文件系统损坏 标记为 drift 测试用例 编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注 CFG-001 配置管理 配置原子写入 (防断电空文件) P0 可触发配置写入 创建池/卷触发写入→写入中 kill -9→重启后检查 ① 不产生空文件; ② 不截断; ③ temp+Sync+Rename+0750; ④ 配置可读 store/ CFG-002 配置管理 正常拔盘不算 drift P1 已创建卷 创建卷→拔盘→重启→查 drift 报告 ① 配置存在但设备缺失≠drift; ② 不误删配置; ③ 盘插回后自动恢复 CFG-003 配置管理 volume.conf 真正 drift 检测 P1 可改 volume.conf 制造三种 drift→重启→查询报告 ① 三种均检测; ② RepairVolumeConfig 可引导修复 server/server.go:164-175 CFG-004 配置管理 配置删除恢复 (备份+审计+多次确认) P1 有失效配置 连续多次对账确认缺失→清理 ① 清理前备份; ② 审计日志记录原因; ③ 不自动删首次失败配置; ④ 多次确认才删 CFG-005 配置管理 taskdb 硬件指纹绑定 (NAS-A→B 拒绝) P0 NAS-A 已建池 NAS-A 建池→系统盘移 NAS-B→启动→查任务 ① 旧任务 hardware_instance_changed; ② md9 指纹在 storage_task_meta; ③ 需手动 taskdb-rebind 交接文档 §4 CFG-006 配置管理 存储池异步提交直接返回 task_id P1 有可用空闲盘 POST /v1/storage/pool/create →检查响应 ① 不等待完成即返回; ② 响应含 task_id; ③ 前端通过 task_id 轮询 激活 Windows 转到“设置”以激活 Windows。 3 条反向链接 641 个词 1,705 个字符 10:07 2026/8/11",
+      "lines": [
+        {
+          "text": "7.1新增功能与测试用例对照表 测试用例 测试用例 01_测试用例 / _11_配置管理 / 测试用例"
+        },
+        {
+          "text": "三种 drift 场景"
+        },
+        {
+          "text": "场景 触发条件 预期"
+        },
+        {
+          "text": "MntPath 为空 挂载配置丢失 标记为 drift"
+        },
+        {
+          "text": "btrfs 未挂载 子卷不在挂载表 标记为 drift"
+        },
+        {
+          "text": "ext4 挂载失败 文件系统损坏 标记为 drift"
+        },
+        {
+          "text": "测试用例"
+        },
+        {
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注"
+        },
+        {
+          "text": "CFG-001 配置管理 配置原子写入 (防断电空文件) P0 可触发配置写入 创建池/卷触发写入→写入中 kill -9→重启后检查 ① 不产生空文件; ② 不截断; ③ temp+Sync+Rename+0750; ④ 配置可读 store/"
+        },
+        {
+          "text": "CFG-002 配置管理 正常拔盘不算 drift P1 已创建卷 创建卷→拔盘→重启→查 drift 报告 ① 配置存在但设备缺失≠drift; ② 不误删配置; ③ 盘插回后自动恢复"
+        },
+        {
+          "text": "CFG-003 配置管理 volume.conf 真正 drift 检测 P1 可改 volume.conf 制造三种 drift→重启→查询报告 ① 三种均检测; ② RepairVolumeConfig 可引导修复 server/server.go:164-175"
+        },
+        {
+          "text": "CFG-004 配置管理 配置删除恢复 (备份+审计+多次确认) P1 有失效配置 连续多次对账确认缺失→清理 ① 清理前备份; ② 审计日志记录原因; ③ 不自动删首次失败配置; ④ 多次确认才删"
+        },
+        {
+          "text": "CFG-005 配置管理 taskdb 硬件指纹绑定 (NAS-A→B 拒绝) P0 NAS-A 已建池 NAS-A 建池→系统盘移 NAS-B→启动→查任务 ① 旧任务 hardware_instance_changed; ② md9 指纹在 storage_task_meta; ③ 需手动 taskdb-rebind 交接文档 §4"
+        },
+        {
+          "text": "CFG-006 配置管理 存储池异步提交直接返回 task_id P1 有可用空闲盘 POST /v1/storage/pool/create →检查响应 ① 不等待完成即返回; ② 响应含 task_id; ③ 前端通过 task_id 轮询"
+        },
+        {
+          "text": "激活 Windows 转到“设置”以激活 Windows。"
+        },
+        {
+          "text": "3 条反向链接 641 个词 1,705 个字符 10:07 2026/8/11"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "title",
+          "reading_order": 1,
+          "text": "三种 drift 场景"
+        },
+        {
+          "type": "table",
+          "reading_order": 2,
+          "text": "场景 触发条件 预期\nMntPath 为空 挂载配置丢失 标记为 drift\nbtrfs 未挂载 子卷不在挂载表 标记为 drift\next4 挂载失败 文件系统损坏 标记为 drift"
+        },
+        {
+          "type": "title",
+          "reading_order": 3,
+          "text": "测试用例"
+        },
+        {
+          "type": "table",
+          "reading_order": 4,
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注\nCFG-001 配置管理 配置原子写入 (防断电空文件) P0 可触发配置写入 创建池/卷触发写入→写入中 kill -9→重启后检查 ① 不产生空文件; ② 不截断; ③ temp+Sync+Rename+0750; ④ 配置可读 store/\nCFG-002 配置管理 正常拔盘不算 drift P1 已创建卷 创建卷→拔盘→重启→查 drift 报告 ① 配置存在但设备缺失≠drift; ② 不误删配置; ③ 盘插回后自动恢复\nCFG-003 配置管理 volume.conf 真正 drift 检测 P1 可改 volume.conf 制造三种 drift→重启→查询报告 ① 三种均检测; ② RepairVolumeConfig 可引导修复 server/server.go:164-175\nCFG-004 配置管理 配置删除恢复 (备份+审计+多次确认) P1 有失效配置 连续多次对账确认缺失→清理 ① 清理前备份; ② 审计日志记录原因; ③ 不自动删首次失败配置; ④ 多次确认才删\nCFG-005 配置管理 taskdb 硬件指纹绑定 (NAS-A→B 拒绝) P0 NAS-A 已建池 NAS-A 建池→系统盘移 NAS-B→启动→查任务 ① 旧任务 hardware_instance_changed; ② md9 指纹在 storage_task_meta; ③ 需手动 taskdb-rebind 交接文档 §4\nCFG-006 配置管理 存储池异步提交直接返回 task_id P1 有可用空闲盘 POST /v1/storage/pool/create →检查响应 ① 不等待完成即返回; ② 响应含 task_id; ③ 前端通过 task_id 轮询"
+        },
+        {
+          "type": "other",
+          "reading_order": 5,
+          "text": "激活 Windows 转到“设置”以激活 Windows。"
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "office_document_screen_capture",
+      "intent": "documenting_software_test_cases_and_drift_scenarios",
+      "entities": [
+        {
+          "name": "CFG-001",
+          "type": "test_case_id",
+          "evidence": "CFG-001"
+        },
+        {
+          "name": "CFG-002",
+          "type": "test_case_id",
+          "evidence": "CFG-002"
+        },
+        {
+          "name": "CFG-003",
+          "type": "test_case_id",
+          "evidence": "CFG-003"
+        },
+        {
+          "name": "CFG-004",
+          "type": "test_case_id",
+          "evidence": "CFG-004"
+        },
+        {
+          "name": "CFG-005",
+          "type": "test_case_id",
+          "evidence": "CFG-005"
+        },
+        {
+          "name": "CFG-006",
+          "type": "test_case_id",
+          "evidence": "CFG-006"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "gray",
+        "white",
+        "black"
+      ],
+      "style": "digital_screen_photo",
+      "notes": [
+        "The image shows screen glare and moire patterns from photographing a monitor.",
+        "Windows watermark present in lower right."
+      ]
+    },
+    "uncertainty": []
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:58:58.777Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 15.976,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 2044,
+      "totalTokenCount": 4149,
+      "promptTokensDetails": [
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        }
+      ],
+      "thoughtsTokenCount": 914,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 15.977
+      }
+    ],
+    "warnings": []
+  }
+}

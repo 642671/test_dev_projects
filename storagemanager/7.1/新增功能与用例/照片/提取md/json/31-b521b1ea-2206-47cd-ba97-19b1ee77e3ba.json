@@ -1,0 +1,237 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\b521b1ea-2206-47cd-ba97-19b1ee77e3ba.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "This is a document or markdown page detailing system disk test cases, feature specifications, changes made, reference documentation, and pre-checks for system disk operations.",
+    "ocr": {
+      "full_text": "01_测试用例 / _07_系统盘 / 测试用例\n测试用例\n# 系统盘测试用例\n功能说明\n7.1 系统盘新增/迁移/删除全部任务化。GRUB 安装支持 context 取消。硬件指纹绑定防止跨 NAS 移植误操作。\n做了什么\n• 系统盘迁移、删除接入任务状态机（sysdisk.go）\n• GRUB 安装 context 可取消：中途取消不会残留分区和 RAID 操作 (交接文档 §6)\n• 硬件绑定指纹：每次系统盘操作后自动刷新 md9 成员指纹，存储在 storage_task_meta\n• USB 磁盘禁止设为系统盘 (7.0 fix 57ef6a8)\n• taskdb-rebind: 系统盘从 NAS-A 移植到 NAS-B 时，旧任务标记 hardware_instance_changed，需手动确认\n参考文档\n• 代码: src/service/disk/harddisk/sysdisk.go, src/service/task/binding.go\n• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.5\n• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §6\n• 自动化: 02_自动化测试/现有用例/test_sysdisk_api.py\n⚠️ 安全前置检查\ncat /proc/mdstat | grep md9\nmdadm --detail /dev/md9 | grep -E \"State|Active|Working\"\n# md9 必须 ≥2 个有效成员！测试盘不得是 md9 成员！\n测试用例",
+      "lines": [
+        {
+          "text": "01_测试用例 / _07_系统盘 / 测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "# 系统盘测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "功能说明",
+          "language": "zh"
+        },
+        {
+          "text": "7.1 系统盘新增/迁移/删除全部任务化。GRUB 安装支持 context 取消。硬件指纹绑定防止跨 NAS 移植误操作。",
+          "language": "zh"
+        },
+        {
+          "text": "做了什么",
+          "language": "zh"
+        },
+        {
+          "text": "• 系统盘迁移、删除接入任务状态机（sysdisk.go）",
+          "language": "zh"
+        },
+        {
+          "text": "• GRUB 安装 context 可取消：中途取消不会残留分区和 RAID 操作 (交接文档 §6)",
+          "language": "zh"
+        },
+        {
+          "text": "• 硬件绑定指纹：每次系统盘操作后自动刷新 md9 成员指纹，存储在 storage_task_meta",
+          "language": "zh"
+        },
+        {
+          "text": "• USB 磁盘禁止设为系统盘 (7.0 fix 57ef6a8)",
+          "language": "zh"
+        },
+        {
+          "text": "• taskdb-rebind: 系统盘从 NAS-A 移植到 NAS-B 时，旧任务标记 hardware_instance_changed，需手动确认",
+          "language": "zh"
+        },
+        {
+          "text": "参考文档",
+          "language": "zh"
+        },
+        {
+          "text": "• 代码: src/service/disk/harddisk/sysdisk.go, src/service/task/binding.go",
+          "language": "zh"
+        },
+        {
+          "text": "• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.5",
+          "language": "zh"
+        },
+        {
+          "text": "• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §6",
+          "language": "zh"
+        },
+        {
+          "text": "• 自动化: 02_自动化测试/现有用例/test_sysdisk_api.py",
+          "language": "zh"
+        },
+        {
+          "text": "⚠️ 安全前置检查",
+          "language": "zh"
+        },
+        {
+          "text": "cat /proc/mdstat | grep md9",
+          "language": "en"
+        },
+        {
+          "text": "mdadm --detail /dev/md9 | grep -E \"State|Active|Working\"",
+          "language": "en"
+        },
+        {
+          "text": "# md9 必须 ≥2 个有效成员！测试盘不得是 md9 成员！",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "other",
+          "reading_order": 1,
+          "text": "01_测试用例 / _07_系统盘 / 测试用例"
+        },
+        {
+          "type": "title",
+          "reading_order": 2,
+          "text": "测试用例"
+        },
+        {
+          "type": "title",
+          "reading_order": 3,
+          "text": "# 系统盘测试用例"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 4,
+          "text": "功能说明"
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 5,
+          "text": "7.1 系统盘新增/迁移/删除全部任务化。GRUB 安装支持 context 取消。硬件指纹绑定防止跨 NAS 移植误操作。"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 6,
+          "text": "做了什么"
+        },
+        {
+          "type": "list",
+          "reading_order": 7,
+          "text": "• 系统盘迁移、删除接入任务状态机（sysdisk.go）\n• GRUB 安装 context 可取消：中途取消不会残留分区和 RAID 操作 (交接文档 §6)\n• 硬件绑定指纹：每次系统盘操作后自动刷新 md9 成员指纹，存储在 storage_task_meta\n• USB 磁盘禁止设为系统盘 (7.0 fix 57ef6a8)\n• taskdb-rebind: 系统盘从 NAS-A 移植到 NAS-B 时，旧任务标记 hardware_instance_changed，需手动确认"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 8,
+          "text": "参考文档"
+        },
+        {
+          "type": "list",
+          "reading_order": 9,
+          "text": "• 代码: src/service/disk/harddisk/sysdisk.go, src/service/task/binding.go\n• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.5\n• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §6\n• 自动化: 02_自动化测试/现有用例/test_sysdisk_api.py"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 10,
+          "text": "⚠️ 安全前置检查"
+        },
+        {
+          "type": "code",
+          "reading_order": 11,
+          "text": "cat /proc/mdstat | grep md9\nmdadm --detail /dev/md9 | grep -E \"State|Active|Working\"\n# md9 必须 ≥2 个有效成员！测试盘不得是 md9 成员！"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 12,
+          "text": "测试用例"
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "A photo of a computer monitor displaying technical documentation in Markdown or a knowledge base format.",
+      "intent": "To document system disk test cases, requirements, code paths, and safety pre-checks for software development/testing.",
+      "entities": [
+        {
+          "name": "sysdisk.go",
+          "type": "file_name",
+          "evidence": "src/service/disk/harddisk/sysdisk.go"
+        },
+        {
+          "name": "binding.go",
+          "type": "file_name",
+          "evidence": "src/service/task/binding.go"
+        },
+        {
+          "name": "test_sysdisk_api.py",
+          "type": "file_name",
+          "evidence": "02_自动化测试/现有用例/test_sysdisk_api.py"
+        },
+        {
+          "name": "md9",
+          "type": "device_identifier",
+          "evidence": "cat /proc/mdstat | grep md9"
+        }
+      ],
+      "relations": [
+        {
+          "subject": "sysdisk.go",
+          "predicate": "implements",
+          "object": "系统盘迁移、删除接入任务状态机"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "grey",
+        "white",
+        "black"
+      ],
+      "style": "Photo of a physical LCD monitor screen displaying software technical notes.",
+      "notes": [
+        "Moiré patterns are visible on the screen photo.",
+        "Text is rendered in a modern clean sans-serif and monospaced font for code."
+      ]
+    },
+    "uncertainty": []
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:58:04.591Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 18.866,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 2292,
+      "totalTokenCount": 4623,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        },
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        }
+      ],
+      "thoughtsTokenCount": 1140,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 18.869
+      }
+    ],
+    "warnings": []
+  }
+}

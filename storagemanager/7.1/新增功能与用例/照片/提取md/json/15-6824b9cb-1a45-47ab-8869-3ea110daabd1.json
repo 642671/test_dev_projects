@@ -1,0 +1,245 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\6824b9cb-1a45-47ab-8869-3ea110daabd1.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "This is a photo of a computer monitor displaying technical documentation and a test case table related to API compatibility and system upgrade tests (version 7.0 vs 7.1). The document includes an API endpoint list, configuration file list, and a detailed test case table.",
+    "ocr": {
+      "full_text": "测试执行顺序 7.1新增功能与测试用例对照表 测试用例 01_测试用例 / _12_接口兼容性 / 测试用例 API 端点清单 # 磁盘 /v1/storage/disk/list /v1/storage/disk/sysdisk /v1/storage/disk/free # 存储池 /v1/storage/pool/list /v1/storage/pool/create # 存储卷 /v1/storage/volume/list /v1/storage/volume/create # 外接设备 /v1/storage/extstorage/list # SSD缓存 /v1/storage/flashcache/list # 热备盘 /v1/storage/hotspare/list # iSCSI /v1/storage/virtualdisk/list # 系统盘 /v1/storage/sysdisk/status # 7.1 新增 /v1/storage/task/query /v1/storage/task/latest /health /disk/DeviceIdentityWarnings 配置文件清单 /etc/storagemanager/volume.conf /etc/storagemanager/hotspare.conf /etc/storagemanager/pool_*.conf /etc/mdadm.conf ~/.tos/config.ini 测试用例 编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注 API-001 接口兼容性 HTTP API 返回结构对比 (7.0 vs 7.1) P0 ① 7.0 NAS + 7.1 NAS 各一台 对每个端点同时请求 7.0 和 7.1，对比 JSON 结构 ① 原有端点响应 JSON 结构不变（字段名、类型、嵌套层级）；② 7.0 前端可直接对接 7.1 后端；③ 新增端点不影响旧端点 快速脚本: bash 06_工具脚本/运行框架.sh <7.0_IP> <7.1_IP> API-002 接口兼容性 RPC/proto 接口兼容 P1 ① 7.0 + 7.1 代码 diff 对比 server/proto/storage.proto 两个分支 无破坏性字段变更 API-003 接口兼容性 msgbus 消息格式兼容 P1 ① 7.0 + 7.1 NAS 监听 msgbus 消息，分别触发操作，对比消息格式 ① 消息 topic 名称不变；② 消息体字段兼容；③ 前端能正常消费 7.1 消息 API-004 接口兼容性 配置文件格式兼容 (7.0 配置 -> 7.1) P1 ① 7.0 系统上有已创建的池/卷/热备/缓存 ① 在 7.0 上创建池/卷/热备/缓存；② 备份配置；③ 升级到 7.1；④ 检查配置是否正确读取 ① 7.0 配置在 7.1 上可正确解析；② 池/卷/热备升级后正常工作；③ 无因配置格式变化导致数据丢失 API-005 接口兼容性 Swagger 注解完整性 P2 ① 服务运行中 检查 ExtStorageDeviceController(17)、LvmCacheController(10)、HotSpareDiskController(6) 的 Swagger 注解 ① 所有 handler 有 @Summary/@Router; ② Tags 分组与前端模块对应; ③ Swagger UI 可正常浏览 来源: 交付文档 $0 激活 Windows",
+      "lines": [
+        {
+          "text": "测试执行顺序",
+          "language": "zh"
+        },
+        {
+          "text": "7.1新增功能与测试用例对照表",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "01_测试用例 / _12_接口兼容性 / 测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "API 端点清单",
+          "language": "zh"
+        },
+        {
+          "text": "# 磁盘 /v1/storage/disk/list /v1/storage/disk/sysdisk /v1/storage/disk/free",
+          "language": "zh"
+        },
+        {
+          "text": "# 存储池 /v1/storage/pool/list /v1/storage/pool/create",
+          "language": "zh"
+        },
+        {
+          "text": "# 存储卷 /v1/storage/volume/list /v1/storage/volume/create",
+          "language": "zh"
+        },
+        {
+          "text": "# 外接设备 /v1/storage/extstorage/list",
+          "language": "zh"
+        },
+        {
+          "text": "# SSD缓存 /v1/storage/flashcache/list",
+          "language": "zh"
+        },
+        {
+          "text": "# 热备盘 /v1/storage/hotspare/list",
+          "language": "zh"
+        },
+        {
+          "text": "# iSCSI /v1/storage/virtualdisk/list",
+          "language": "zh"
+        },
+        {
+          "text": "# 系统盘 /v1/storage/sysdisk/status",
+          "language": "zh"
+        },
+        {
+          "text": "# 7.1 新增 /v1/storage/task/query /v1/storage/task/latest /health /disk/DeviceIdentityWarnings",
+          "language": "zh"
+        },
+        {
+          "text": "配置文件清单",
+          "language": "zh"
+        },
+        {
+          "text": "/etc/storagemanager/volume.conf /etc/storagemanager/hotspare.conf /etc/storagemanager/pool_*.conf /etc/mdadm.conf ~/.tos/config.ini",
+          "language": "en"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注",
+          "language": "zh"
+        },
+        {
+          "text": "API-001 接口兼容性 HTTP API 返回结构对比 (7.0 vs 7.1) P0 ① 7.0 NAS + 7.1 NAS 各一台 对每个端点同时请求 7.0 和 7.1，对比 JSON 结构 ① 原有端点响应 JSON 结构不变（字段名、类型、嵌套层级）；② 7.0 前端可直接对接 7.1 后端；③ 新增端点不影响旧端点 快速脚本: bash 06_工具脚本/运行框架.sh <7.0_IP> <7.1_IP>",
+          "language": "zh"
+        },
+        {
+          "text": "API-002 接口兼容性 RPC/proto 接口兼容 P1 ① 7.0 + 7.1 代码 diff 对比 server/proto/storage.proto 两个分支 无破坏性字段变更",
+          "language": "zh"
+        },
+        {
+          "text": "API-003 接口兼容性 msgbus 消息格式兼容 P1 ① 7.0 + 7.1 NAS 监听 msgbus 消息，分别触发操作，对比消息格式 ① 消息 topic 名称不变；② 消息体字段兼容；③ 前端能正常消费 7.1 消息",
+          "language": "zh"
+        },
+        {
+          "text": "API-004 接口兼容性 配置文件格式兼容 (7.0 配置 -> 7.1) P1 ① 7.0 系统上有已创建的池/卷/热备/缓存 ① 在 7.0 上创建池/卷/热备/缓存；② 备份配置；③ 升级到 7.1；④ 检查配置是否正确读取 ① 7.0 配置在 7.1 上可正确解析；② 池/卷/热备升级后正常工作；③ 无因配置格式变化导致数据丢失",
+          "language": "zh"
+        },
+        {
+          "text": "API-005 接口兼容性 Swagger 注解完整性 P2 ① 服务运行中 检查 ExtStorageDeviceController(17)、LvmCacheController(10)、HotSpareDiskController(6) 的 Swagger 注解 ① 所有 handler 有 @Summary/@Router; ② Tags 分组与前端模块对应; ③ Swagger UI 可正常浏览 来源: 交付文档 $0 激活 Windows",
+          "language": "zh"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "title",
+          "reading_order": 1,
+          "text": "API 端点清单"
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 2,
+          "text": "# 磁盘 /v1/storage/disk/list /v1/storage/disk/sysdisk /v1/storage/disk/free\n# 存储池 /v1/storage/pool/list /v1/storage/pool/create\n# 存储卷 /v1/storage/volume/list /v1/storage/volume/create\n# 外接设备 /v1/storage/extstorage/list\n# SSD缓存 /v1/storage/flashcache/list\n# 热备盘 /v1/storage/hotspare/list\n# iSCSI /v1/storage/virtualdisk/list\n# 系统盘 /v1/storage/sysdisk/status\n# 7.1 新增 /v1/storage/task/query /v1/storage/task/latest /health /disk/DeviceIdentityWarnings"
+        },
+        {
+          "type": "title",
+          "reading_order": 3,
+          "text": "配置文件清单"
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 4,
+          "text": "/etc/storagemanager/volume.conf /etc/storagemanager/hotspare.conf /etc/storagemanager/pool_*.conf /etc/mdadm.conf ~/.tos/config.ini"
+        },
+        {
+          "type": "title",
+          "reading_order": 5,
+          "text": "测试用例"
+        },
+        {
+          "type": "table",
+          "reading_order": 6,
+          "text": "编号 | 模块 | 标题 | 优先级 | 前置条件 | 输入数据 | 预期结果 | 验证结果 | 备注\nAPI-001 | 接口兼容性 | HTTP API 返回结构对比 (7.0 vs 7.1) | P0 | ① 7.0 NAS + 7.1 NAS 各一台 | 对每个端点同时请求 7.0 和 7.1，对比 JSON 结构 | ① 原有端点响应 JSON 结构不变（字段名、类型、嵌套层级）；② 7.0 前端可直接对接 7.1 后端；③ 新增端点不影响旧端点 | | 快速脚本: bash 06_工具脚本/运行框架.sh <7.0_IP> <7.1_IP>\nAPI-002 | 接口兼容性 | RPC/proto 接口兼容 | P1 | ① 7.0 + 7.1 代码 | diff 对比 server/proto/storage.proto 两个分支 | 无破坏性字段变更 | |\nAPI-003 | 接口兼容性 | msgbus 消息格式兼容 | P1 | ① 7.0 + 7.1 NAS | 监听 msgbus 消息，分别触发操作，对比消息格式 | ① 消息 topic 名称不变；② 消息体字段兼容；③ 前端能正常消费 7.1 消息 | |\nAPI-004 | 接口兼容性 | 配置文件格式兼容 (7.0 配置 -> 7.1) | P1 | ① 7.0 系统上有已创建的池/卷/热备/缓存 | ① 在 7.0 上创建池/卷/热备/缓存；② 备份配置；③ 升级到 7.1；④ 检查配置是否正确读取 | ① 7.0 配置在 7.1 上可正确解析；② 池/卷/热备升级后正常工作；③ 无因配置格式变化导致数据丢失 | |\nAPI-005 | 接口兼容性 | Swagger 注解完整性 | P2 | ① 服务运行中 | 检查 ExtStorageDeviceController(17)、LvmCacheController(10)、HotSpareDiskController(6) 的 Swagger 注解 | ① 所有 handler 有 @Summary/@Router; ② Tags 分组与前端模块对应; ③ Swagger UI 可正常浏览 | | 来源: 交付文档 $0"
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "Software development test suite and API specification document rendered in a document editor/browser on a physical monitor screen.",
+      "intent": "Documenting software API compatibility tests, configuration file locations, and test execution details between version 7.0 and version 7.1 of a NAS storage system.",
+      "entities": [
+        {
+          "name": "API-001",
+          "type": "Test Case ID",
+          "evidence": "API-001 接口兼容性 HTTP API 返回结构对比 (7.0 vs 7.1)"
+        },
+        {
+          "name": "API-002",
+          "type": "Test Case ID",
+          "evidence": "API-002 接口兼容性 RPC/proto 接口兼容"
+        },
+        {
+          "name": "API-003",
+          "type": "Test Case ID",
+          "evidence": "API-003 接口兼容性 msgbus 消息格式兼容"
+        },
+        {
+          "name": "API-004",
+          "type": "Test Case ID",
+          "evidence": "API-004 接口兼容性 配置文件格式兼容 (7.0 配置 -> 7.1)"
+        },
+        {
+          "name": "API-005",
+          "type": "Test Case ID",
+          "evidence": "API-005 接口兼容性 Swagger 注解完整性"
+        }
+      ],
+      "relations": [
+        {
+          "subject": "API-001",
+          "predicate": "has_priority",
+          "object": "P0"
+        },
+        {
+          "subject": "API-002",
+          "predicate": "has_priority",
+          "object": "P1"
+        },
+        {
+          "subject": "API-003",
+          "predicate": "has_priority",
+          "object": "P1"
+        },
+        {
+          "subject": "API-004",
+          "predicate": "has_priority",
+          "object": "P1"
+        },
+        {
+          "subject": "API-005",
+          "predicate": "has_priority",
+          "object": "P2"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "Light Gray",
+        "White",
+        "Black",
+        "Orange",
+        "Blue"
+      ],
+      "style": "Document/UI screenshot photo with mild glare and visible monitor bezels.",
+      "notes": [
+        "Photo taken at an angle showing a monitor with a light theme document editor.",
+        "Priority indicators P0, P1, P2 are highlighted in yellow/orange circle icons.",
+        "Windows desktop taskbar is visible at the bottom."
+      ]
+    },
+    "uncertainty": [
+      "Some text at the bottom right corner (e.g., Windows activation watermark / taskbar status text) is slightly obscured or blurry."
+    ]
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:57:10.150Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 29.877,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 3532,
+      "totalTokenCount": 5801,
+      "promptTokensDetails": [
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        }
+      ],
+      "thoughtsTokenCount": 1078,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 29.881
+      }
+    ],
+    "warnings": []
+  }
+}

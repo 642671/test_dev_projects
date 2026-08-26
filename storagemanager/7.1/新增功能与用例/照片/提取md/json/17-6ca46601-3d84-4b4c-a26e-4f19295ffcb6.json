@@ -1,0 +1,184 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\6ca46601-3d84-4b4c-a26e-4f19295ffcb6.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "A photo of a computer screen showing a Markdown/knowledge base document containing a security and permissions test case table (安全与权限 测试用例).",
+    "ocr": {
+      "full_text": "7.1新增功能与测试用例对照表 测试用例 01_测试用例 / 10_安全与权限 / 测试用例 参考文档 • 代码: src/core/syscmd/blockdev/, server/server.go, src/http/ • 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §2, §7 测试用例 编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注 SEC-001 安全与权限 非 admin 账号调用存储 API → 403 P1 ① 非 admin 账号 使用非 admin 账号调用存储管理 API（创建池/格式化等） ① API 返回 403；② 前端不展示管理员专属操作按钮 7.0 fix ccc3956 SEC-002 安全与权限 内部接口外部调用 → 403 P1 ① 服务运行中 直接 curl 调用内部接口（如 DiskController 内部方法） ① 返回 403；② 只有内部调用可访问 7.0 fix ffe4c1c SEC-003 安全与权限 多斜杠接口拦截 (//v1/...) P2 ① 服务运行中 访问 //v1/storage/disk/list (双斜杠) nginx 拒绝或正确路由 7.0 fix 3c4ae1c SEC-004 安全与权限 密码不泄露到命令行 (stdin 传递码) P0 ① 可创建加密卷 ① 格式化加密卷；② ps aux | grep cryptsetup 检查进程命令行 ① 密码不出现在 ps 输出中；② 密码不出现在 shell 历史中 7.1 cryptsetup 密码改 stdin SEC-005 安全与权限 避免自杀 — 服务关闭过滤自身进程 P0 ① 服务运行中 ① 连续重启服务 10 次；② 每次检查进程是否正常启动 ① 关闭服务时不会误杀自身进程；② 10 次重启全部正常；③ mdadm --monitor 不被误杀 7.0 fix 97f52ee SEC-006 安全与权限 错误码统一 (code_num=60) P2 ① 服务运行中 ① 触发各种错误场景；② 检查 HTTP 响应的 code_num ① 返回 err 时 code_num 统一为 60；② 错误信息为英文 7.0 fix ae8853b ACL-001 安全与权限 私有 ACL 调用路径验证 (不走 Shell 管道) P1 ① 服务运行中 ① 操作涉及 ACL 的功能；② 验证 ACL 调用链路 ① 存储管理正确调用私有 ACL 实现；② ACL 查询不走 Shell 管道 (7.1 收口) 来源: 交接文档 §2 激活 Windows 转到“设置”以激活 Windows。",
+      "lines": [
+        {
+          "text": "7.1新增功能与测试用例对照表",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "01_测试用例 / 10_安全与权限 / 测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "参考文档",
+          "language": "zh"
+        },
+        {
+          "text": "• 代码: src/core/syscmd/blockdev/, server/server.go, src/http/",
+          "language": "zh"
+        },
+        {
+          "text": "• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §2, §7",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注",
+          "language": "zh"
+        },
+        {
+          "text": "SEC-001 安全与权限 非 admin 账号调用存储 API → 403 P1 ① 非 admin 账号 使用非 admin 账号调用存储管理 API（创建池/格式化等） ① API 返回 403；② 前端不展示管理员专属操作按钮 7.0 fix ccc3956",
+          "language": "zh"
+        },
+        {
+          "text": "SEC-002 安全与权限 内部接口外部调用 → 403 P1 ① 服务运行中 直接 curl 调用内部接口（如 DiskController 内部方法） ① 返回 403；② 只有内部调用可访问 7.0 fix ffe4c1c",
+          "language": "zh"
+        },
+        {
+          "text": "SEC-003 安全与权限 多斜杠接口拦截 (//v1/...) P2 ① 服务运行中 访问 //v1/storage/disk/list (双斜杠) nginx 拒绝或正确路由 7.0 fix 3c4ae1c",
+          "language": "zh"
+        },
+        {
+          "text": "SEC-004 安全与权限 密码不泄露到命令行 (stdin 传递码) P0 ① 可创建加密卷 ① 格式化加密卷；② ps aux | grep cryptsetup 检查进程命令行 ① 密码不出现在 ps 输出中；② 密码不出现在 shell 历史中 7.1 cryptsetup 密码改 stdin",
+          "language": "zh"
+        },
+        {
+          "text": "SEC-005 安全与权限 避免自杀 — 服务关闭过滤自身进程 P0 ① 服务运行中 ① 连续重启服务 10 次；② 每次检查进程是否正常启动 ① 关闭服务时不会误杀自身进程；② 10 次重启全部正常；③ mdadm --monitor 不被误杀 7.0 fix 97f52ee",
+          "language": "zh"
+        },
+        {
+          "text": "SEC-006 安全与权限 错误码统一 (code_num=60) P2 ① 服务运行中 ① 触发各种错误场景；② 检查 HTTP 响应的 code_num ① 返回 err 时 code_num 统一为 60；② 错误信息为英文 7.0 fix ae8853b",
+          "language": "zh"
+        },
+        {
+          "text": "ACL-001 安全与权限 私有 ACL 调用路径验证 (不走 Shell 管道) P1 ① 服务运行中 ① 操作涉及 ACL 的功能；② 验证 ACL 调用链路 ① 存储管理正确调用私有 ACL 实现；② ACL 查询不走 Shell 管道 (7.1 收口) 来源: 交接文档 §2",
+          "language": "zh"
+        },
+        {
+          "text": "激活 Windows 转到“设置”以激活 Windows。",
+          "language": "zh"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "title",
+          "reading_order": 1,
+          "text": "01_测试用例 / 10_安全与权限 / 测试用例"
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 2,
+          "text": "参考文档\n• 代码: src/core/syscmd/blockdev/, server/server.go, src/http/\n• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §2, §7"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 3,
+          "text": "测试用例"
+        },
+        {
+          "type": "table",
+          "reading_order": 4,
+          "text": "编号 | 模块 | 标题 | 优先级 | 前置条件 | 输入数据 | 预期结果 | 验证结果 | 备注\nSEC-001 | 安全与权限 | 非 admin 账号调用存储 API → 403 | P1 | ① 非 admin 账号 | 使用非 admin 账号调用存储管理 API（创建池/格式化等） | ① API 返回 403；② 前端不展示管理员专属操作按钮 | | 7.0 fix ccc3956\nSEC-002 | 安全与权限 | 内部接口外部调用 → 403 | P1 | ① 服务运行中 | 直接 curl 调用内部接口（如 DiskController 内部方法） | ① 返回 403；② 只有内部调用可访问 | | 7.0 fix ffe4c1c\nSEC-003 | 安全与权限 | 多斜杠接口拦截 (//v1/...) | P2 | ① 服务运行中 | 访问 //v1/storage/disk/list (双斜杠) | nginx 拒绝或正确路由 | | 7.0 fix 3c4ae1c\nSEC-004 | 安全与权限 | 密码不泄露到命令行 (stdin 传递码) | P0 | ① 可创建加密卷 | ① 格式化加密卷；② ps aux | grep cryptsetup 检查进程命令行 | ① 密码不出现在 ps 输出中；② 密码不出现在 shell 历史中 | | 7.1 cryptsetup 密码改 stdin\nSEC-005 | 安全与权限 | 避免自杀 — 服务关闭过滤自身进程 | P0 | ① 服务运行中 | ① 连续重启服务 10 次；② 每次检查进程是否正常启动 | ① 关闭服务时不会误杀自身进程；② 10 次重启全部正常；③ mdadm --monitor 不被误杀 | | 7.0 fix 97f52ee\nSEC-006 | 安全与权限 | 错误码统一 (code_num=60) | P2 | ① 服务运行中 | ① 触发各种错误场景；② 检查 HTTP 响应的 code_num | ① 返回 err 时 code_num 统一为 60；② 错误信息为英文 | | 7.0 fix ae8853b\nACL-001 | 安全与权限 | 私有 ACL 调用路径验证 (不走 Shell 管道) | P1 | ① 服务运行中 | ① 操作涉及 ACL 的功能；② 验证 ACL 调用链路 | ① 存储管理正确调用私有 ACL 实现；② ACL 查询不走 Shell 管道 (7.1 收口) | | 来源: 交接文档 §2"
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "computer screen document",
+      "entities": [
+        {
+          "name": "SEC-001",
+          "type": "Test Case ID",
+          "evidence": "SEC-001"
+        },
+        {
+          "name": "SEC-002",
+          "type": "Test Case ID",
+          "evidence": "SEC-002"
+        },
+        {
+          "name": "SEC-003",
+          "type": "Test Case ID",
+          "evidence": "SEC-003"
+        },
+        {
+          "name": "SEC-004",
+          "type": "Test Case ID",
+          "evidence": "SEC-004"
+        },
+        {
+          "name": "SEC-005",
+          "type": "Test Case ID",
+          "evidence": "SEC-005"
+        },
+        {
+          "name": "SEC-006",
+          "type": "Test Case ID",
+          "evidence": "SEC-006"
+        },
+        {
+          "name": "ACL-001",
+          "type": "Test Case ID",
+          "evidence": "ACL-001"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "gray",
+        "white",
+        "black"
+      ],
+      "style": "digital photo of a computer screen",
+      "notes": [
+        "Moire patterns visible on screen",
+        "Red, orange, and green priority indicators beside P0, P1, P2 tags"
+      ]
+    },
+    "uncertainty": []
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:57:56.079Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 22.627,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 2353,
+      "totalTokenCount": 5428,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        },
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        }
+      ],
+      "thoughtsTokenCount": 1884,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 22.63
+      }
+    ],
+    "warnings": []
+  }
+}

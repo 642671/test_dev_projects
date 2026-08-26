@@ -1,0 +1,34 @@
+{
+  "images": 41,
+  "markdown": 41,
+  "uniqueCaseIds": 137,
+  "priority": {
+    "P0": 67,
+    "P1": 68,
+    "P2": 19
+  },
+  "modules": {
+    "security": 2,
+    "usb-esata": 6,
+    "task-state": 1,
+    "section-only": 3,
+    "volume": 3,
+    "raid": 6,
+    "pool": 2,
+    "ssd-cache": 3,
+    "hotspare-identity": 1,
+    "flashcache-identity": 1,
+    "device-identity": 2,
+    "volume-drift": 2,
+    "nas-binding": 2,
+    "identity-warning": 1,
+    "context": 1,
+    "system-disk": 1,
+    "watermark": 1,
+    "disk": 1,
+    "config": 1,
+    "api-compat": 1,
+    "iscsi": 3,
+    "upgrade-robust": 1
+  }
+}

@@ -1,0 +1,23 @@
+2026-08-20 15:11:11 | MONITOR_START alias=15.123 interval=10s stable_need=12s deadline=2026-08-20 18:11:11
+2026-08-20 15:11:11 | HEARTBEAT version= loader= kernel= md9=[md9 : active raid1 sdzb2[74] sdza2[73] sdb2[72] sda2[0]] efi=[BootCurrent: 0004 | BootOrder: 0004,0008,0005,0006,0007,0001 | ] rc=0
+2026-08-20 15:11:42 | HEARTBEAT version= loader= kernel= md9=[md9 : active raid1 sdzb2[74] sdza2[73] sdb2[72] sda2[0]] efi=[BootCurrent: 0004 | BootOrder: 0004,0008,0005,0006,0007,0001 | ] rc=0
+2026-08-20 15:12:13 | HEARTBEAT version= loader= kernel= md9=[md9 : active raid1 sdzb2[74] sdza2[73] sdb2[72] sda2[0]] efi=[BootCurrent: 0004 | BootOrder: 0004,0008,0005,0006,0007,0001 | ] rc=0
+2026-08-20 15:12:47 | MONITOR_START alias=15.123 interval=10s stable_need=12s deadline=2026-08-20 18:12:47
+2026-08-20 15:12:48 | HEARTBEAT version= loader= kernel= md9=[md9 : active raid1 sdzb2[74] sdza2[73] sdb2[72] sda2[0]] efi=[BootCurrent: 0004 | BootOrder: 0004,0008,0005,0006,0007,0001 | ] rc=0
+2026-08-20 15:13:21 | OFFLINE_START rc=255
+2026-08-20 15:13:57 | OFFLINE_CONTINUE gap_seconds=36 rc=255
+2026-08-20 15:14:50 | MONITOR_START alias=15.123 interval=10s stable_need=12s deadline=2026-08-20 18:14:50
+2026-08-20 15:14:56 | OFFLINE_START rc=255
+2026-08-20 15:14:56 | OFFLINE_CONTINUE gap_seconds=0 rc=255
+2026-08-20 15:16:03 | OFFLINE_CONTINUE gap_seconds=66 rc=255
+2026-08-20 15:17:03 | OFFLINE_CONTINUE gap_seconds=127 rc=255
+2026-08-20 15:18:04 | OFFLINE_CONTINUE gap_seconds=187 rc=255
+2026-08-20 15:19:04 | OFFLINE_CONTINUE gap_seconds=248 rc=255
+2026-08-20 15:20:04 | OFFLINE_CONTINUE gap_seconds=308 rc=255
+2026-08-20 15:21:05 | OFFLINE_CONTINUE gap_seconds=368 rc=255
+2026-08-20 15:22:05 | OFFLINE_CONTINUE gap_seconds=429 rc=255
+2026-08-20 15:23:06 | OFFLINE_CONTINUE gap_seconds=489 rc=255
+2026-08-20 15:24:06 | OFFLINE_CONTINUE gap_seconds=550 rc=255
+2026-08-20 15:25:06 | OFFLINE_CONTINUE gap_seconds=610 rc=255
+2026-08-20 15:26:07 | OFFLINE_CONTINUE gap_seconds=670 rc=255
+2026-08-20 15:27:07 | OFFLINE_CONTINUE gap_seconds=731 rc=255

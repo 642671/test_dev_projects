@@ -1,0 +1,192 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\89f05588-07ea-49f5-8f3d-60af512858ed.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "The image shows a computer monitor displaying a technical document containing software test cases formatted in tables. The document includes sections '五、跨 NAS 硬件指纹绑定 (模块: taskdb-rebind)' and '六、设备身份告警 API (模块: DeviceIdentityWarnings)', detailing test IDs (HW-001, WARN-001, WARN-002, WARN-003), test modules, titles, priority levels, prerequisites, inputs, expected results, validation status, and remarks.",
+    "ocr": {
+      "full_text": "五、跨 NAS 硬件指纹绑定 (模块: taskdb-rebind)\n编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注\nHW-001 taskdb-rebind 系统盘迁移到另一台 NAS -> 旧任务被拒绝 P0 ① NAS-A 上已创建存储池 (已产生任务记录)；② 记录 NAS-A 的硬件指纹 ① 将 NAS-A 系统盘装入 NAS-B；② 启动 StorageManager；③ 查看旧任务状态 ① 旧任务被标记为 failed，错误码 hardware_instance_changed；② 不会自动用 NAS-B 的硬件执行旧任务；③ 需手动执行 storagemanager-taskdb-rebind --confirm-hardware-replacement 防止跨 NAS 移植系统盘后误操作；来源：交接文档 §4\n六、设备身份告警 API (模块: DeviceIdentityWarnings)\n编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注\nWARN-001 DeviceIdentityWarnings 降级匹配产生告警并可通过 API 查询 P1 ① 构建降级匹配场景 (USB 盘 Serial 为空设为热备盘)；② 先调用 ClearIdentityWarnings 清空 ① 触发空闲盘扫描；② curl -sk https://{IP}:30000/disk/DeviceIdentityWarnings ① 返回结构化告警数组 (非 null)；② 每条告警包含 device、serial、match_type、reason、detail、time 字段；③ match_type 为 hotspare 或 flashcache API 路由: GET /disk/DeviceIdentityWarnings, 代码: http/DiskController.go:2103-2114\nWARN-002 DeviceIdentityWarnings 强匹配路径不产生告警 P2 ① 正常 SATA 盘 (有 Serial) 设为热备盘；② 先清空告警 ① 触发空闲盘扫描；② 查询告警 API 告警列表为空 (不因为没有告警就返回 null) 验证正常路径不误报\nWARN-003 DeviceIdentityWarnings 每次空闲盘扫描前自动清空上一轮告警 P2 先制造降级匹配产生 1 条告警 再触发一次正常的空闲盘扫描 (Serial 全部正常) 上一轮的告警被清空，API 返回空数组 告警是每轮扫描的结果，不是累积的\n匹配逻辑速查\n激活 Windows\n转到“设置”以激活 Windows。",
+      "lines": [
+        {
+          "text": "五、跨 NAS 硬件指纹绑定 (模块: taskdb-rebind)",
+          "language": "zh"
+        },
+        {
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注",
+          "language": "zh"
+        },
+        {
+          "text": "HW-001 taskdb-rebind 系统盘迁移到另一台 NAS -> 旧任务被拒绝 P0 ① NAS-A 上已创建存储池 (已产生任务记录)；② 记录 NAS-A 的硬件指纹 ① 将 NAS-A 系统盘装入 NAS-B；② 启动 StorageManager；③ 查看旧任务状态 ① 旧任务被标记为 failed，错误码 hardware_instance_changed；② 不会自动用 NAS-B 的硬件执行旧任务；③ 需手动执行 storagemanager-taskdb-rebind --confirm-hardware-replacement 防止跨 NAS 移植系统盘后误操作；来源：交接文档 §4",
+          "language": "zh"
+        },
+        {
+          "text": "六、设备身份告警 API (模块: DeviceIdentityWarnings)",
+          "language": "zh"
+        },
+        {
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注",
+          "language": "zh"
+        },
+        {
+          "text": "WARN-001 DeviceIdentityWarnings 降级匹配产生告警并可通过 API 查询 P1 ① 构建降级匹配场景 (USB 盘 Serial 为空设为热备盘)；② 先调用 ClearIdentityWarnings 清空 ① 触发空闲盘扫描；② curl -sk https://{IP}:30000/disk/DeviceIdentityWarnings ① 返回结构化告警数组 (非 null)；② 每条告警包含 device、serial、match_type、reason、detail、time 字段；③ match_type 为 hotspare 或 flashcache API 路由: GET /disk/DeviceIdentityWarnings, 代码: http/DiskController.go:2103-2114",
+          "language": "zh"
+        },
+        {
+          "text": "WARN-002 DeviceIdentityWarnings 强匹配路径不产生告警 P2 ① 正常 SATA 盘 (有 Serial) 设为热备盘；② 先清空告警 ① 触发空闲盘扫描；② 查询告警 API 告警列表为空 (不因为没有告警就返回 null) 验证正常路径不误报",
+          "language": "zh"
+        },
+        {
+          "text": "WARN-003 DeviceIdentityWarnings 每次空闲盘扫描前自动清空上一轮告警 P2 先制造降级匹配产生 1 条告警 再触发一次正常的空闲盘扫描 (Serial 全部正常) 上一轮的告警被清空，API 返回空数组 告警是每轮扫描的结果，不是累积的",
+          "language": "zh"
+        },
+        {
+          "text": "匹配逻辑速查",
+          "language": "zh"
+        },
+        {
+          "text": "激活 Windows",
+          "language": "zh"
+        },
+        {
+          "text": "转到“设置”以激活 Windows。",
+          "language": "zh"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "title",
+          "reading_order": 1,
+          "text": "五、跨 NAS 硬件指纹绑定 (模块: taskdb-rebind)"
+        },
+        {
+          "type": "table",
+          "reading_order": 2,
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注\nHW-001 taskdb-rebind 系统盘迁移到另一台 NAS -> 旧任务被拒绝 P0 ① NAS-A 上已创建存储池 (已产生任务记录)；② 记录 NAS-A 的硬件指纹 ① 将 NAS-A 系统盘装入 NAS-B；② 启动 StorageManager；③ 查看旧任务状态 ① 旧任务被标记为 failed，错误码 hardware_instance_changed；② 不会自动用 NAS-B 的硬件执行旧任务；③ 需手动执行 storagemanager-taskdb-rebind --confirm-hardware-replacement 防止跨 NAS 移植系统盘后误操作；来源：交接文档 §4"
+        },
+        {
+          "type": "title",
+          "reading_order": 3,
+          "text": "六、设备身份告警 API (模块: DeviceIdentityWarnings)"
+        },
+        {
+          "type": "table",
+          "reading_order": 4,
+          "text": "编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注\nWARN-001 DeviceIdentityWarnings 降级匹配产生告警并可通过 API 查询 P1 ① 构建降级匹配场景 (USB 盘 Serial 为空设为热备盘)；② 先调用 ClearIdentityWarnings 清空 ① 触发空闲盘扫描；② curl -sk https://{IP}:30000/disk/DeviceIdentityWarnings ① 返回结构化告警数组 (非 null)；② 每条告警包含 device、serial、match_type、reason、detail、time 字段；③ match_type 为 hotspare 或 flashcache API 路由: GET /disk/DeviceIdentityWarnings, 代码: http/DiskController.go:2103-2114\nWARN-002 DeviceIdentityWarnings 强匹配路径不产生告警 P2 ① 正常 SATA 盘 (有 Serial) 设为热备盘；② 先清空告警 ① 触发空闲盘扫描；② 查询告警 API 告警列表为空 (不因为没有告警就返回 null) 验证正常路径不误报\nWARN-003 DeviceIdentityWarnings 每次空闲盘扫描前自动清空上一轮告警 P2 先制造降级匹配产生 1 条告警 再触发一次正常的空闲盘扫描 (Serial 全部正常) 上一轮的告警被清空，API 返回空数组 告警是每轮扫描的结果，不是累积的"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 5,
+          "text": "匹配逻辑速查"
+        },
+        {
+          "type": "other",
+          "reading_order": 6,
+          "text": "激活 Windows\n转到“设置”以激活 Windows。"
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "computer screen document view",
+      "intent": "document test cases for system software development",
+      "entities": [
+        {
+          "name": "HW-001",
+          "type": "test_case_id",
+          "evidence": "HW-001"
+        },
+        {
+          "name": "taskdb-rebind",
+          "type": "module_name",
+          "evidence": "taskdb-rebind"
+        },
+        {
+          "name": "WARN-001",
+          "type": "test_case_id",
+          "evidence": "WARN-001"
+        },
+        {
+          "name": "WARN-002",
+          "type": "test_case_id",
+          "evidence": "WARN-002"
+        },
+        {
+          "name": "WARN-003",
+          "type": "test_case_id",
+          "evidence": "WARN-003"
+        },
+        {
+          "name": "DeviceIdentityWarnings",
+          "type": "module_name",
+          "evidence": "DeviceIdentityWarnings"
+        }
+      ],
+      "relations": [
+        {
+          "subject": "HW-001",
+          "predicate": "belongs_to_module",
+          "object": "taskdb-rebind"
+        },
+        {
+          "subject": "WARN-001",
+          "predicate": "belongs_to_module",
+          "object": "DeviceIdentityWarnings"
+        },
+        {
+          "subject": "WARN-002",
+          "predicate": "belongs_to_module",
+          "object": "DeviceIdentityWarnings"
+        },
+        {
+          "subject": "WARN-003",
+          "predicate": "belongs_to_module",
+          "object": "DeviceIdentityWarnings"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "grey",
+        "white",
+        "black"
+      ],
+      "style": "photograph of a computer screen",
+      "notes": [
+        "Visible light glare and moiré pattern on the screen surface.",
+        "Windows activation watermark present at the bottom right corner."
+      ]
+    },
+    "uncertainty": []
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:59:35.653Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 26.008,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 2653,
+      "totalTokenCount": 5833,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        },
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        }
+      ],
+      "thoughtsTokenCount": 1989,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 26.01
+      }
+    ],
+    "warnings": []
+  }
+}

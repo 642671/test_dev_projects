@@ -1,0 +1,273 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\2df17964-1903-482f-918d-2fa34eae7a03.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "A photo of a computer screen displaying software technical documentation for Context lifecycle and graceful exit test cases, detailing functional specifications, implemented changes, reference documentation, and verification shell commands.",
+    "ocr": {
+      "full_text": "测试执行顺序 7.1新增功能与测试用例对照表 测试用例 测试用例 测试用例 测试用例 测试用例 01_测试用例 / _05_Context生命周期 / 测试用例 测试用例 Context 生命周期 & 优雅退出测试用例 功能说明 7.1 把 60+ 处 context.Background() 旁路全部收口，所有 CLI 命令统一走 Go exec.CommandContext，支持取消传播和超时控制。 做了什么 • 所有 mdadm/lvm/mkfs/parted/cryptsetup/mount 外部命令通过 exec.CommandContext 执行 • 父 context 取消时，子命令自动收到 SIGKILL • 外部命令有超时机制，不会无限期阻塞 HTTP 请求 • 服务关闭时 (SIGTERM)，worker 停止接受新任务，进行中任务标记中断，30s 内退出 • 关闭服务时不会误杀自身进程或 mdadm --monitor (7.0 fix 97f52ee ) • 启动→运行→停止循环 3 次，无 goroutine/FD 泄漏 参考文档 • 代码: server/server.go, src/core/syscmd/ (blockdev, lvm, traid) • PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.10 • 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md 验证命令 ps aux | grep -E \"defunct|Z\" # 僵尸进程 curl http://localhost:6060/debug/pprof/goroutine?debug=1 # goroutine 泄漏 lsof -p $(cat /var/run/StorageManager.pid) | wc -l # FD 泄漏 ps aux | grep -E \"mdadm|mkfs|lvm\" | grep -v grep # 孤儿进程 测试用例",
+      "lines": [
+        {
+          "text": "测试执行顺序",
+          "language": "zh"
+        },
+        {
+          "text": "7.1新增功能与测试用例对照表",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "01_测试用例 / _05_Context生命周期 / 测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "Context 生命周期 & 优雅退出测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "功能说明",
+          "language": "zh"
+        },
+        {
+          "text": "7.1 把 60+ 处 context.Background() 旁路全部收口，所有 CLI 命令统一走 Go exec.CommandContext，支持取消传播和超时控制。",
+          "language": "zh"
+        },
+        {
+          "text": "做了什么",
+          "language": "zh"
+        },
+        {
+          "text": "• 所有 mdadm/lvm/mkfs/parted/cryptsetup/mount 外部命令通过 exec.CommandContext 执行",
+          "language": "zh"
+        },
+        {
+          "text": "• 父 context 取消时，子命令自动收到 SIGKILL",
+          "language": "zh"
+        },
+        {
+          "text": "• 外部命令有超时机制，不会无限期阻塞 HTTP 请求",
+          "language": "zh"
+        },
+        {
+          "text": "• 服务关闭时 (SIGTERM)，worker 停止接受新任务，进行中任务标记中断，30s 内退出",
+          "language": "zh"
+        },
+        {
+          "text": "• 关闭服务时不会误杀自身进程或 mdadm --monitor (7.0 fix 97f52ee )",
+          "language": "zh"
+        },
+        {
+          "text": "• 启动→运行→停止循环 3 次，无 goroutine/FD 泄漏",
+          "language": "zh"
+        },
+        {
+          "text": "参考文档",
+          "language": "zh"
+        },
+        {
+          "text": "• 代码: server/server.go, src/core/syscmd/ (blockdev, lvm, traid)",
+          "language": "zh"
+        },
+        {
+          "text": "• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.10",
+          "language": "zh"
+        },
+        {
+          "text": "• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md",
+          "language": "zh"
+        },
+        {
+          "text": "验证命令",
+          "language": "zh"
+        },
+        {
+          "text": "ps aux | grep -E \"defunct|Z\" # 僵尸进程",
+          "language": "zh"
+        },
+        {
+          "text": "curl http://localhost:6060/debug/pprof/goroutine?debug=1 # goroutine 泄漏",
+          "language": "zh"
+        },
+        {
+          "text": "lsof -p $(cat /var/run/StorageManager.pid) | wc -l # FD 泄漏",
+          "language": "zh"
+        },
+        {
+          "text": "ps aux | grep -E \"mdadm|mkfs|lvm\" | grep -v grep # 孤儿进程",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "other",
+          "reading_order": 1,
+          "text": "测试执行顺序 7.1新增功能与测试用例对照表 测试用例 测试用例 测试用例 测试用例 测试用例 01_测试用例 / _05_Context生命周期 / 测试用例"
+        },
+        {
+          "type": "title",
+          "reading_order": 2,
+          "text": "测试用例"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 3,
+          "text": "Context 生命周期 & 优雅退出测试用例"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 4,
+          "text": "功能说明"
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 5,
+          "text": "7.1 把 60+ 处 context.Background() 旁路全部收口，所有 CLI 命令统一走 Go exec.CommandContext，支持取消传播和超时控制。"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 6,
+          "text": "做了什么"
+        },
+        {
+          "type": "list",
+          "reading_order": 7,
+          "text": "• 所有 mdadm/lvm/mkfs/parted/cryptsetup/mount 外部命令通过 exec.CommandContext 执行\n• 父 context 取消时，子命令自动收到 SIGKILL\n• 外部命令有超时机制，不会无限期阻塞 HTTP 请求\n• 服务关闭时 (SIGTERM)，worker 停止接受新任务，进行中任务标记中断，30s 内退出\n• 关闭服务时不会误杀自身进程或 mdadm --monitor (7.0 fix 97f52ee )\n• 启动→运行→停止循环 3 次，无 goroutine/FD 泄漏"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 8,
+          "text": "参考文档"
+        },
+        {
+          "type": "list",
+          "reading_order": 9,
+          "text": "• 代码: server/server.go, src/core/syscmd/ (blockdev, lvm, traid)\n• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.10\n• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md"
+        },
+        {
+          "type": "subtitle",
+          "reading_order": 10,
+          "text": "验证命令"
+        },
+        {
+          "type": "code",
+          "reading_order": 11,
+          "text": "ps aux | grep -E \"defunct|Z\" # 僵尸进程\ncurl http://localhost:6060/debug/pprof/goroutine?debug=1 # goroutine 泄漏\nlsof -p $(cat /var/run/StorageManager.pid) | wc -l # FD 泄漏\nps aux | grep -E \"mdadm|mkfs|lvm\" | grep -v grep # 孤儿进程"
+        },
+        {
+          "type": "title",
+          "reading_order": 12,
+          "text": "测试用例"
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "screen_photo",
+      "intent": "documenting_software_test_cases",
+      "entities": [
+        {
+          "name": "Context 生命周期 & 优雅退出测试用例",
+          "type": "document_title",
+          "evidence": "Context 生命周期 & 优雅退出测试用例"
+        },
+        {
+          "name": "exec.CommandContext",
+          "type": "function_name",
+          "evidence": "exec.CommandContext"
+        },
+        {
+          "name": "StorageManager.pid",
+          "type": "file_path",
+          "evidence": "/var/run/StorageManager.pid"
+        }
+      ],
+      "relations": [
+        {
+          "subject": "Context 生命周期 & 优雅退出测试用例",
+          "predicate": "contains_section",
+          "object": "功能说明"
+        },
+        {
+          "subject": "Context 生命周期 & 优雅退出测试用例",
+          "predicate": "contains_section",
+          "object": "做了什么"
+        },
+        {
+          "subject": "Context 生命周期 & 优雅退出测试用例",
+          "predicate": "contains_section",
+          "object": "验证命令"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "#C8C8C8",
+        "#333333"
+      ],
+      "style": "Digital document on a physical LCD display screen",
+      "notes": [
+        "Moire patterns visible due to camera capturing a monitor screen",
+        "Windows OS taskbar visible at the bottom of the screen"
+      ]
+    },
+    "uncertainty": []
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:59:10.709Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 19.56,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 1911,
+      "totalTokenCount": 5029,
+      "promptTokensDetails": [
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        }
+      ],
+      "thoughtsTokenCount": 1927,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 19.563
+      }
+    ],
+    "warnings": []
+  }
+}

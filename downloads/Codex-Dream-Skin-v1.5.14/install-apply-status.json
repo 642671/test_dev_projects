@@ -1,0 +1,9 @@
+{
+    "stage":  "failed",
+    "result":  "error",
+    "message":  "检索不到变量“$LASTEXITCODE”，因为未设置该变量。",
+    "updatedAt":  "2026-08-18T05:59:54.5672973Z",
+    "themeUri":  "dreamskin://apply?version=ver_34a73ec14a33630c2578",
+    "expectedThemeId":  "cecilylove002",
+    "screenshot":  "D:\\test_dev_projects\\downloads\\Codex-Dream-Skin-v1.5.14\\codex-dream-skin-verification.png"
+}

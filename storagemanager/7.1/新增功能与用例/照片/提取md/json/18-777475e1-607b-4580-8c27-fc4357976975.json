@@ -1,0 +1,263 @@
+{
+  "image": "D:\\test_dev_projects\\storagemanager\\7.1\\新增功能与用例\\照片\\777475e1-607b-4580-8c27-fc4357976975.jpg",
+  "provider": "gemini-api",
+  "result": {
+    "summary": "A photograph of a computer monitor displaying a software design and test document written in Chinese, detailing a four-level watermark capacity management policy ('四级水位模型'), quick testing configuration commands, and a structured test case table.",
+    "ocr": {
+      "full_text": "测试执行顺序\n7.1新增功能与测试用例对照表\n测试用例\n测试用例\n测试用例\n01_测试用例 / _08_水位策略 / 测试用例\n测试用例\nx +\n• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.9\n• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §9\n四级水位模型\n水位 行为 clamp 公式\n70% 展示趋势 (仅提醒) —\n85% 主动告警 (warning) 剩余 = clamp(总量×15%, ≥100G, ≤1T)\n90% 限制高风险操作 剩余 = clamp(总量×10%, ≥50G, ≤500G)\n95% 只允许释放/只读 剩余 = clamp(总量×5%, ≥20G, ≤200G)\n快速测试 (降低阈值加速)\nsystemctl edit StorageManager.service\n# [Service]\n# Environment=\"SM_WATERMARK_TREND_PERCENT=10\"\n# Environment=\"SM_WATERMARK_ALERT_PERCENT=20\"\n# Environment=\"SM_WATERMARK_RESTRICT_PERCENT=30\"\n# Environment=\"SM_WATERMARK_CRITICAL_PERCENT=40\"\n测试用例\n编号 模块 标题 优先级 前置条件 输入数据 预期结果 验证结果 备注\nWM-001 水位策略 70% 水位趋势展示 P2 有可用池 填充池到 70%→检查前端 ① 展示趋势不阻塞操作；② 仅前端提醒，不触发告警\nWM-002 水位策略 85% 水位告警 P1 有可用池 填充池到 85%→检查通知 ① storage_watermark_alert；② 前端展示告警；③ 不阻塞操作\nWM-003 水位策略 90% 水位禁止创建新卷/扩容 P0 有可用池 填充池到 90%→尝试创建卷+扩容 ① 创建被拒 storage_watermark_restrict；② 扩容被拒；③ 已有卷正常读写\nWM-004 水位策略 95% 水位只允许只读/释放空间 P0 有可用池 填充池到 95%→尝试各种写入 ① 禁止一切写入类变更；② 只允许释放空间/卸载/诊断；③ storage_watermark_critical\nWM-005 水位策略 水位恢复 (95%→88%，限制解除) P1 池在 95% 从 95% 删数据降至 88%→尝试创建卷 ① 告警自动解除；② 限制操作恢复\n激活 Windows\n转到“设置”以激活 Windows",
+      "lines": [
+        {
+          "text": "测试执行顺序",
+          "language": "zh"
+        },
+        {
+          "text": "7.1新增功能与测试用例对照表",
+          "language": "zh"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "01_测试用例 / _08_水位策略 / 测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "• PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.9",
+          "language": "zh"
+        },
+        {
+          "text": "• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §9",
+          "language": "zh"
+        },
+        {
+          "text": "四级水位模型",
+          "language": "zh"
+        },
+        {
+          "text": "水位 行为 clamp 公式",
+          "language": "zh"
+        },
+        {
+          "text": "70% 展示趋势 (仅提醒) —",
+          "language": "zh"
+        },
+        {
+          "text": "85% 主动告警 (warning) 剩余 = clamp(总量×15%, ≥100G, ≤1T)",
+          "language": "zh"
+        },
+        {
+          "text": "90% 限制高风险操作 剩余 = clamp(总量×10%, ≥50G, ≤500G)",
+          "language": "zh"
+        },
+        {
+          "text": "95% 只允许释放/只读 剩余 = clamp(总量×5%, ≥20G, ≤200G)",
+          "language": "zh"
+        },
+        {
+          "text": "快速测试 (降低阈值加速)",
+          "language": "zh"
+        },
+        {
+          "text": "systemctl edit StorageManager.service",
+          "language": "en"
+        },
+        {
+          "text": "# [Service]",
+          "language": "en"
+        },
+        {
+          "text": "# Environment=\"SM_WATERMARK_TREND_PERCENT=10\"",
+          "language": "en"
+        },
+        {
+          "text": "# Environment=\"SM_WATERMARK_ALERT_PERCENT=20\"",
+          "language": "en"
+        },
+        {
+          "text": "# Environment=\"SM_WATERMARK_RESTRICT_PERCENT=30\"",
+          "language": "en"
+        },
+        {
+          "text": "# Environment=\"SM_WATERMARK_CRITICAL_PERCENT=40\"",
+          "language": "en"
+        },
+        {
+          "text": "测试用例",
+          "language": "zh"
+        },
+        {
+          "text": "WM-001 水位策略 70% 水位趋势展示 P2 有可用池 填充池到 70%→检查前端 ① 展示趋势不阻塞操作；② 仅前端提醒，不触发告警",
+          "language": "zh"
+        },
+        {
+          "text": "WM-002 水位策略 85% 水位告警 P1 有可用池 填充池到 85%→检查通知 ① storage_watermark_alert；② 前端展示告警；③ 不阻塞操作",
+          "language": "zh"
+        },
+        {
+          "text": "WM-003 水位策略 90% 水位禁止创建新卷/扩容 P0 有可用池 填充池到 90%→尝试创建卷+扩容 ① 创建被拒 storage_watermark_restrict；② 扩容被拒；③ 已有卷正常读写",
+          "language": "zh"
+        },
+        {
+          "text": "WM-004 水位策略 95% 水位只允许只读/释放空间 P0 有可用池 填充池到 95%→尝试各种写入 ① 禁止一切写入类变更；② 只允许释放空间/卸载/诊断；③ storage_watermark_critical",
+          "language": "zh"
+        },
+        {
+          "text": "WM-005 水位策略 水位恢复 (95%→88%，限制解除) P1 池在 95% 从 95% 删数据降至 88%→尝试创建卷 ① 告警自动解除；② 限制操作恢复",
+          "language": "zh"
+        }
+      ]
+    },
+    "layout": {
+      "regions": [
+        {
+          "type": "other",
+          "reading_order": 1,
+          "text": "Tab bar navigation items at the top of the window."
+        },
+        {
+          "type": "paragraph",
+          "reading_order": 2,
+          "text": "PRD and 交接文档 reference links: • PRD: 05_参考资料/PRD/tgm-refactor-test-guide.md §4.9\n• 交接文档: 05_参考资料/PRD/7.1交接聊天记录与问题等.md §9"
+        },
+        {
+          "type": "title",
+          "reading_order": 3,
+          "text": "四级水位模型"
+        },
+        {
+          "type": "table",
+          "reading_order": 4,
+          "text": "Table defining storage watermark thresholds (70%, 85%, 90%, 95%), behavior, and clamp calculations."
+        },
+        {
+          "type": "title",
+          "reading_order": 5,
+          "text": "快速测试 (降低阈值加速)"
+        },
+        {
+          "type": "code",
+          "reading_order": 6,
+          "text": "systemctl edit StorageManager.service\n# [Service]\n# Environment=\"SM_WATERMARK_TREND_PERCENT=10\"\n# Environment=\"SM_WATERMARK_ALERT_PERCENT=20\"\n# Environment=\"SM_WATERMARK_RESTRICT_PERCENT=30\"\n# Environment=\"SM_WATERMARK_CRITICAL_PERCENT=40\""
+        },
+        {
+          "type": "title",
+          "reading_order": 7,
+          "text": "测试用例"
+        },
+        {
+          "type": "table",
+          "reading_order": 8,
+          "text": "Test cases table (WM-001 to WM-005) covering watermark strategy verification."
+        }
+      ]
+    },
+    "semantics": {
+      "scene": "A photo of a computer screen showing software architecture documentation and test plans.",
+      "intent": "To document storage watermark capacity thresholds, quick configuration overrides, and test validation cases.",
+      "entities": [
+        {
+          "name": "StorageManager.service",
+          "type": "service_name",
+          "evidence": "systemctl edit StorageManager.service"
+        },
+        {
+          "name": "WM-001",
+          "type": "test_case_id",
+          "evidence": "WM-001"
+        },
+        {
+          "name": "WM-002",
+          "type": "test_case_id",
+          "evidence": "WM-002"
+        },
+        {
+          "name": "WM-003",
+          "type": "test_case_id",
+          "evidence": "WM-003"
+        },
+        {
+          "name": "WM-004",
+          "type": "test_case_id",
+          "evidence": "WM-004"
+        },
+        {
+          "name": "WM-005",
+          "type": "test_case_id",
+          "evidence": "WM-005"
+        }
+      ],
+      "relations": [
+        {
+          "subject": "WM-001",
+          "predicate": "tests_feature",
+          "object": "70% 水位趋势展示"
+        },
+        {
+          "subject": "WM-002",
+          "predicate": "tests_feature",
+          "object": "85% 水位告警"
+        },
+        {
+          "subject": "WM-003",
+          "predicate": "tests_feature",
+          "object": "90% 水位禁止创建新卷/扩容"
+        },
+        {
+          "subject": "WM-004",
+          "predicate": "tests_feature",
+          "object": "95% 水位只允许只读/释放空间"
+        },
+        {
+          "subject": "WM-005",
+          "predicate": "tests_feature",
+          "object": "水位恢复 (95%→88%，限制解除)"
+        }
+      ]
+    },
+    "visual": {
+      "dominant_colors": [
+        "grey",
+        "white",
+        "black"
+      ],
+      "style": "Photo of LCD monitor displaying a dark grey/light grey theme markdown viewer.",
+      "notes": [
+        "Image taken at an angle showing moiré patterns on the monitor display.",
+        "Windows activation watermark present at the bottom right corner."
+      ]
+    },
+    "uncertainty": []
+  },
+  "meta": {
+    "generatedAt": "2026-08-12T07:58:15.956Z",
+    "model": "gemini-3.6-flash",
+    "conversationId": null,
+    "durationSeconds": 19.349,
+    "usage": {
+      "promptTokenCount": 1191,
+      "candidatesTokenCount": 2758,
+      "totalTokenCount": 5142,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 127
+        },
+        {
+          "modality": "IMAGE",
+          "tokenCount": 1064
+        }
+      ],
+      "thoughtsTokenCount": 1193,
+      "serviceTier": "standard"
+    },
+    "attempts": [
+      {
+        "provider": "gemini-api",
+        "ok": true,
+        "durationSeconds": 19.351
+      }
+    ],
+    "warnings": []
+  }
+}
