@@ -1,0 +1,30 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/storage/SetRaidSpeedOrBitmap"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: json
+    content: |-
+      {
+          "raid": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "speed_status": 2,
+          "speed_min": 10,
+          "speed_max": 50,
+          "bitmap_status": true
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 25000

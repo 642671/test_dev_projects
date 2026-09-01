@@ -1,0 +1,21 @@
+$kind: http-example
+name: 无权限用户访问获取最大剩余可设置缓存大小接口
+request:
+  url: "{{baseUrl}}/v2/lvmCache/GetMaxResidueCacheSize"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{NormalUserCookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{NormalUserCsrfToken}}"
+      description: 不可为空，用户认证所需token
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 13000

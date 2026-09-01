@@ -1,0 +1,26 @@
+$kind: http-example
+name: 已连接且已卸载（有文件系统）的虚拟磁盘再次卸载失败
+request:
+  url: "{{baseUrl}}/v2/virtualdisk/ClientLunRemove"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/x-www-form-urlencoded
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: urlencoded
+    content:
+      target: iqn.tnas.terramaster.26719092407
+      lunid: "0"
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 2000

@@ -1,0 +1,80 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/smart_test/schedule/:id/edit"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+pathVariables:
+  - key: id
+    value: "{{disk1_smart_id}}"
+    description: 任务ID，必填参数需要询问用户给出
+body:
+  type: json
+  content: "{\r
+
+    \    \"id\":{{disk1_smart_id}},\r
+
+    \    \"name\": \"{{disk1_model}}\",\r
+
+    \    \"status\": 2,\r
+
+    \    \"test_type\": 0,\r
+
+    \    \"test_range\": 1,\r
+
+    \    \"disks\": \"{{disk1_device}}\",\r
+
+    \    \"enabled\": true,\r
+
+    \    \"exception_warn\": true,\r
+
+    \    \"schedule\": {\r
+
+    \        \"cycle_type\": \"Disabled\",\r
+
+    \        \"cycle_weeks_range\": \"\",\r
+
+    \        \"cycle_date\": \"\",\r
+
+    \        \"schedule_time\": \"2026-07-16\",\r
+
+    \        \"frequency_type\": \"Disabled\",\r
+
+    \        \"frequency_value\": 0,\r
+
+    \        \"hour\": 13,\r
+
+    \        \"minute\": 59\r
+
+    \    },\r
+
+    \    \"serial\": \"{{disk1_serial}}\",\r
+
+    \    \"next_run_time\": \"0001-01-01T00:00:00Z\",\r
+
+    \    \"is_running\": false,\r
+
+    \    \"disk_friendly_names\": [\r
+
+    \        \"HDD2\"\r
+
+    \    ],\r
+
+    \    \"run_immediately\": false,\r
+
+    \    \"cycle_type\": \"Disabled\",\r
+
+    \    \"cycle_weeks_range\": \"\"\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/16 编辑SMART测试任务.resources/examples
+order: 16000

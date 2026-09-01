@@ -1,0 +1,23 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/disk/sec_erase/start"
+  method: POST
+  headers:
+    - key: X-Csrf-Token
+      value: "{{expired_X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+    - key: Cookie
+      value: "{{expired_Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: Content-Type
+      value: application/json
+    - key: X-Curpass-Token
+      value: "{{X-Curpass-Token}}"
+      description: 不可为空，密码认证所需token
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 5000

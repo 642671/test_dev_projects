@@ -1,0 +1,28 @@
+$kind: http-example
+name: 选中的磁盘都在NAS中且磁盘类型不同创建存储池失败
+request:
+  url: "{{baseUrl}}/v2/storage/create/pool"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: json
+    content: |-
+      {
+          "level": "raid1",
+          "disks": ["{{cp_disk_0_path}}", "{{cp_disk_1_path}}"]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 23000

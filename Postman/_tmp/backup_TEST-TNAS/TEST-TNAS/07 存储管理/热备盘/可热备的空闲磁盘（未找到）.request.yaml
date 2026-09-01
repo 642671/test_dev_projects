@@ -1,0 +1,183 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/hotsparedisk/GetAvailableDiskList"
+method: GET
+headers:
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+scripts:
+  - type: afterResponse
+    code: "// ============================================================\r
+
+      // GET /v2/hotsparedisk/GetAvailableDiskList 后置脚本\r
+
+      // 遍历返回的空闲磁盘列表，反查已存在的 disk{N}_device，\r
+
+      // 生成 hs{N}_device / hs{N}_name（按热备可用顺序编号，从 1 起）\r
+
+      // ------------------------------------------------------------\r
+
+      // 依赖：必须先执行 GET /v2/disk/GetDiskOption（脚本 11）\r
+
+      // ============================================================\r
+
+      \r
+
+      const res = pm.response.json();\r
+
+      const data = res.data || res;\r
+
+      \r
+
+      function setOrUnset(key, val) {\r
+
+      \    if (val === undefined || val === null || val === '' || Number.isNaN(val)) {\r
+
+      \        pm.moduleVariables.unset(key);\r
+
+      \    } else {\r
+
+      \        pm.moduleVariables.set(key, val);\r
+
+      \    }\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 0. 清理所有旧的热备变量\r
+
+      // ============================================================\r
+
+      const allModuleVars = pm.moduleVariables.toObject();\r
+
+      Object.keys(allModuleVars)\r
+
+      \    .filter(k => /^hs\\d+_/.test(k))\r
+
+      \    .forEach(k => pm.moduleVariables.unset(k));\r
+
+      \r
+
+      // ============================================================\r
+
+      // 1. 标准化为数组\r
+
+      // ============================================================\r
+
+      let disks;\r
+
+      if (Array.isArray(data)) {\r
+
+      \    disks = data;\r
+
+      } else if (data && typeof data === 'object') {\r
+
+      \    disks = [data];\r
+
+      } else {\r
+
+      \    disks = [];\r
+
+      }\r
+
+      \r
+
+      if (disks.length === 0) {\r
+
+      \    console.log('无可用于热备的空闲磁盘，所有 hs 变量已清空');\r
+
+      \    pm.moduleVariables.set('hs_disk_count', 0);\r
+
+      \    return;\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 2. 遍历标记，按热备可用顺序生成 hs{N}_device / hs{N}_name\r
+
+      // ============================================================\r
+
+      let hsIndex = 0;\r
+
+      disks.forEach(d => {\r
+
+      \    const devPath = (d.device || '').trim();\r
+
+      \    if (!devPath) return;\r
+
+      \    hsIndex++;\r
+
+      \    const idx = hsIndex;  // 从 1 起\r
+
+      \    setOrUnset(`hs${idx}_device`, devPath);\r
+
+      \    setOrUnset(`hs${idx}_name`,   (d.name || '').trim());\r
+
+      \    console.log(`hs${idx}_device = ${devPath} (${d.name || ''})`);\r
+
+      });\r
+
+      \r
+
+      pm.moduleVariables.set('hs_disk_count', hsIndex);\r
+
+      \r
+
+      // ============================================================\r
+
+      // 3. 调试输出\r
+
+      // ============================================================\r
+
+      console.log(`==== 热备磁盘同步结果 ====`);\r
+
+      console.log(`可热备空闲磁盘: ${hsIndex} 块`);\r
+
+      \r
+
+      const updatedVars = pm.moduleVariables.toObject();\r
+
+      const hsDiskVars = Object.keys(updatedVars)\r
+
+      \    .filter(k => /^hs\\d+_device$/.test(k))\r
+
+      \    .sort((a, b) => parseInt(a.match(/\\d+/)[0]) - parseInt(b.match(/\\d+/)[0]));\r
+
+      \r
+
+      if (hsDiskVars.length > 0) {\r
+
+      \    console.log('---------- hs{N} 变量明细 ----------');\r
+
+      \    hsDiskVars.forEach(k => {\r
+
+      \        const n = k.match(/hs(\\d+)_device/)[1];\r
+
+      \        console.log(`${k} = ${updatedVars[k]}`);\r
+
+      \        console.log(`hs${n}_name  = ${updatedVars[`hs${n}_name`] || '(无)'}`);\r
+
+      \    });\r
+
+      } else {\r
+
+      \    console.log('(无)');\r
+
+      }\r
+
+      console.log('=======================================');\r\n"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/可热备的空闲磁盘（未找到）.resources/examples
+order: 6000

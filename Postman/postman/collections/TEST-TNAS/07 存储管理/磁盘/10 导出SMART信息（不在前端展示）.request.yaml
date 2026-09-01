@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/ExportOverview?device={{disk1_device}}"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: ""
+    description: 不可为空，用户认证所需token
+queryParams:
+  - key: device
+    value: "{{disk1_device}}"
+    description: 设备路径，如/dev/sda，必填参数需要询问用户给出
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/10 导出SMART信息（不在前端展示）.resources/examples
+order: 10000

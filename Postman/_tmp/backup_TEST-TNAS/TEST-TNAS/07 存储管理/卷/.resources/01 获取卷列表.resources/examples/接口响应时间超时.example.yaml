@@ -1,0 +1,28 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/storage/list/volume?uuid={{lv0_uuid}}&type&哈哈哈哈=xcc"
+  method: GET
+  headers:
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+  queryParams:
+    - key: uuid
+      value: "{{lv0_uuid}}"
+    - key: type
+      value: null
+      description: 信息类型：detail=详细信息, brief=简要信息
+    - key: 哈哈哈哈
+      value: xcc
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 13000

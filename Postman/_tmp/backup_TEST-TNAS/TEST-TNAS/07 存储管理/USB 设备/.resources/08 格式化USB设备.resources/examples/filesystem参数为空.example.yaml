@@ -1,0 +1,28 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/extStorageDevice/FormattingDevice"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/x-www-form-urlencoded
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+    - key: X-Curpass-Token
+      value: "{{X-Curpass-Token}}"
+  body:
+    type: urlencoded
+    content:
+      filesystem: ""
+      name: "{{usb1_name}}"
+      type: usb
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 27000

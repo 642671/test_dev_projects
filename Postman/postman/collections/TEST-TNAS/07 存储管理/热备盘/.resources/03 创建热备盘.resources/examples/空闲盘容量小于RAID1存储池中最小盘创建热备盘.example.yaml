@@ -1,0 +1,32 @@
+$kind: http-example
+name: 空闲盘容量小于RAID1存储池中最小盘创建热备盘失败
+request:
+  url: "{{baseUrl}}/v2/hotsparedisk/CreateHotSpareDisk"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: json
+    content: |-
+      {
+          "devices": [
+              "{{hs1_device}}"
+          ],
+          "raids": [
+              "{{hs1_vg}}"
+          ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 2000

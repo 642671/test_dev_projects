@@ -1,0 +1,30 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/hotsparedisk/ModifyArray"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"raids\": [\r
+
+    \        \"{{hs1_vg}}\"\r
+
+    \    ],\r
+
+    \    \"blk\": \"{{hsp1_blk}}\"\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/05 修改热备盘阵列关联.resources/examples
+order: 5000

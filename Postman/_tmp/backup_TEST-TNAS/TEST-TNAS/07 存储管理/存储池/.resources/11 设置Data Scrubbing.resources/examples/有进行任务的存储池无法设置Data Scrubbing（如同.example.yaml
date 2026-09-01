@@ -1,0 +1,39 @@
+$kind: http-example
+name: 有进行任务的存储池无法设置Data Scrubbing（如同步中）
+request:
+  url: "{{baseUrl}}/v2/storage/SetDataScrubbing"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: json
+    content: |-
+      {
+          "status": 1,
+          "raid": "{{vg0_raid}}",
+          "sort": 3,
+          "entity": {
+              "cycle_type": "Disabled",
+              "cycle_weeks_range": "",
+              "cycle_date": "15",
+              "schedule_time": "2026-07-15",
+              "frequency_type": "Disabled",
+              "frequency_value": 0,
+              "hour": 9,
+              "minute": 32
+          }
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 7000

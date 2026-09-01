@@ -1,0 +1,78 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/extStorageDevice/EncryptDevice"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"USB Disk_sdf\",\r
+
+    \    \"user\": \"test\",\r
+
+    \    \"device_name\": \"sdf\",\r
+
+    \    \"password\": \"Admin123\",\r
+
+    \    \"device_partition\": [\r
+
+    \        \"sdf1\"\r
+
+    \    ],\r
+
+    \    \"label\": \"\"\r
+
+    }"
+scripts:
+  - type: beforeRequest
+    code: "// 获取 Base64 公钥\r
+
+      console.log(\"public\", pm.environment.get(\"RSA_PUBLIC_KEY\"))\r
+
+      let base64Key = pm.environment.get(\"RSA_PUBLIC_KEY\");\r
+
+      \r
+
+      if (!base64Key) {\r
+
+      \    throw new Error(\"未配置 RSA_PUBLIC_KEY\");\r
+
+      }\r
+
+      \r
+
+      // Base64 解码 → PEM 字符串\r
+
+      let publicKey = require('atob')(base64Key);\r
+
+      console.log(\"public\", publicKey)\r
+
+      // 获取请求体（JSON）\r
+
+      let body = JSON.parse(pm.request.body);\r
+
+      console.log(\"加密密文:\", body.password);\r
+
+      \r
+
+      body.password = await pm.executeAsync('encoderLoginPassword.go', [body.password, publicKey]);\r
+
+      console.log('Result:', body.password);\r
+
+      // 写回请求体\r
+
+      pm.request.body = JSON.stringify(body);"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/10 加密USB设备.resources/examples
+order: 10000

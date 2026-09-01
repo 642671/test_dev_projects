@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/storage/CheckAvailablePool/:disk"
+  method: POST
+  headers:
+    X-Csrf-Token: "{{NormalUserCsrfToken}}"
+    Cookie: "{{NormalUserCookie}}"
+    Content-Type: application/x-www-form-urlencoded
+    "{{X-Csrf-Token}}": "{{X-Csrf-Token}}"
+  pathVariables:
+    - key: disk
+      value: "{{cap_disk0}}"
+      description: 磁盘名称，如sda，必填参数需要询问用户给出
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 10000

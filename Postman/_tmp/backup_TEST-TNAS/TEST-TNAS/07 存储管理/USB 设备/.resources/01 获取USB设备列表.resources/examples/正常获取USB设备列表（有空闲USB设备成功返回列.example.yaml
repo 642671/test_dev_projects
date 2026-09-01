@@ -1,0 +1,21 @@
+$kind: http-example
+name: 正常获取USB设备列表（有空闲USB设备成功返回列表）
+request:
+  url: "{{baseUrl}}/v2/extStorageDevice/DeviceList"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

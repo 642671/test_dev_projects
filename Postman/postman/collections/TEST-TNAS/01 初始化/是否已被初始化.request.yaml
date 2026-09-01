@@ -1,0 +1,125 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/Initialise/IsInitialise"
+method: GET
+scripts:
+  - type: afterResponse
+    code: "// ============================================================\r
+
+      // 变量清理脚本\r
+
+      // 位置：初始化接口的【前置操作 / Pre-request Script】\r
+
+      // 作用：每次执行前，清空运行期动态变量 + 全部模块变量\r
+
+      // ============================================================\r
+
+      \r
+
+      // 【1】需要保留的静态环境变量白名单\r
+
+      //     —— 当前为空，仅放一条占位示例（不是真实变量，不会匹配任何东西）\r
+
+      //     —— 以后要保护某个变量时，把它的真实变量名加进来即可\r
+
+      var KEEP_ENV_KEYS = [\r
+
+      \    '__示例_这不是真实变量名_加真实变量时替换我__'\r
+
+      ];\r
+
+      \r
+
+      // 【2】清理环境变量：删除白名单之外的所有变量\r
+
+      try {\r
+
+      \    var envObj = pm.environment.toObject();\r
+
+      \    Object.keys(envObj).forEach(function (key) {\r
+
+      \        if (KEEP_ENV_KEYS.indexOf(key) === -1) {\r
+
+      \            pm.environment.unset(key);\r
+
+      \            console.log('[清理] 环境变量已删除: ' + key);\r
+
+      \        }\r
+
+      \    });\r
+
+      } catch (e) {\r
+
+      \    console.log('[清理] 环境变量处理异常: ' + e.message);\r
+
+      }\r
+
+      \r
+
+      // 【3】清空全部模块变量（Apifox 模块变量，全部为运行期派生变量）\r
+
+      try {\r
+
+      \    if (pm.collectionVariables && typeof pm.collectionVariables.toObject === 'function') {\r
+
+      \        var modObj = pm.collectionVariables.toObject();\r
+
+      \        Object.keys(modObj).forEach(function (key) {\r
+
+      \            pm.collectionVariables.unset(key);\r
+
+      \            console.log('[清理] 模块变量已删除: ' + key);\r
+
+      \        });\r
+
+      \    } else if (pm.collectionVariables && typeof pm.collectionVariables.clear === 'function') {\r
+
+      \        pm.collectionVariables.clear();\r
+
+      \        console.log('[清理] 模块变量已全部清空');\r
+
+      \    }\r
+
+      } catch (e) {\r
+
+      \    console.log('[清理] 模块变量处理异常: ' + e.message);\r
+
+      }\r
+
+      \r
+
+      // 【4】清空临时变量 / 集合变量\r
+
+      try { pm.variables.clear(); } catch (e) {}\r
+
+      try { pm.collectionVariables.clear(); } catch (e) {}\r
+
+      \r
+
+      // 【5】全局变量：若全局里存了凭证，请【勿】打开下一行\r
+
+      // try { pm.globals.clear(); } catch (e) {}\r
+
+      \r
+
+      // 【6】（可选）清空 Cookie Jar —— 仅当开启了「自动管理 Cookie」时才需要\r
+
+      // try {\r
+
+      //     var jar = pm.cookies.jar();\r
+
+      //     jar.clear('http://10.18.15.141:8181', function () {\r
+
+      //         console.log('[清理] Cookie Jar 已清空');\r
+
+      //     });\r
+
+      // } catch (e) {}\r
+
+      \r
+
+      console.log('===== 变量清理完成 =====');"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 1000

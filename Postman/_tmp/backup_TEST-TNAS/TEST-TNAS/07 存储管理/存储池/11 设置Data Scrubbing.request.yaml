@@ -1,0 +1,48 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/SetDataScrubbing"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"status\": 1,\r
+
+    \    \"raid\": \"{{vg0_raid}}\",\r
+
+    \    \"sort\": 3,\r
+
+    \    \"entity\": {\r
+
+    \        \"cycle_type\": \"Disabled\",\r
+
+    \        \"cycle_weeks_range\": \"\",\r
+
+    \        \"cycle_date\": \"15\",\r
+
+    \        \"schedule_time\": \"2026-07-15\",\r
+
+    \        \"frequency_type\": \"Disabled\",\r
+
+    \        \"frequency_value\": 0,\r
+
+    \        \"hour\": 9,\r
+
+    \        \"minute\": 32\r
+
+    \    }\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/11 设置Data Scrubbing.resources/examples
+order: 11000

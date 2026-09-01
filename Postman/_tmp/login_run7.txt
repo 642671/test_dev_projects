@@ -1,0 +1,342 @@
+Running your collection...
+postman
+
+
+Folder 02 登录
+Sub-folder 00 获取-语言变量
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  -
+  GET http://10.18.15.135:8181/v2/lang/tos [200 OK, 532.21 KB, 47 ms]
+  Pass  响应体不能为空
+  Pass  用户未登录
+  -
+  | '提取到的 X-Csrf-Token =', '0d7994ccc8402fb39cd724b946aabc
+  | 4a6899f8e30e152dcaa8bd7ee7f6834b44'
+  -
+  Pass  成功从 Set-Cookie 中提取到 X-Csrf-Token
+  Pass  X-Csrf-Token 变量不为空
+
+Sub-folder 01 获取-登录标题样式
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  -
+  GET http://10.18.15.135:8181/v2/welcome [403 Forbidden, 1.15 KB, 12 ms]
+  0. 响应体不能为空
+  1⠄ Error in test-script
+  -
+  | '提取到的 RSA_PUBLIC_KEY =', 'LS0tLS1CRUdJTiBSU0EgUFVCTElD
+  | IEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUT
+  | hBTUlJQkNnS0NBUUVBbXgwV1hoTTNEZEdzRGVpWm5IenAKKzdCVWtV
+  | b3lWNHB3allTSkFmNndTak1pYzVubWw2MGYxUnRwaG11Rk1JSmZjan
+  | Z3QmRnZ3hPU1NVTDF4YXRjaApjcHMwbm9mcVRCMUtKRUZPQVdiTG1m
+  | Zk5lUmw1b1B1ZGlwN0pBS2VhY3VLRVFKOTZmMVRFM0ZRN0l5TXd1Zz
+  | ZLCjdIRHUvSVoxUU1QczBBV0gyRHJialJMTUZ5UzV1aE80TWpTSDdo
+  | TjBIS0lIbVZ2eUhHMGp2YS9lWkNocjJNb2UKNW0wY2dNR3BmYWFtdU
+  | 9Kd0NZL2JlblRnd29Gak1nVEJ5RmttL3owbzhIbGFtZElhM0pzcWFV
+  | YjFxcFFwRU1BKwpkTnEwTmtwMktGRzI5QW1hNzVHT0s3YzJRbWM4Wl
+  | ZPTVUxOFozbXV2bCtIcm1MNFR4N05laDRiYTNrbVg0UVZjClVRSURB
+  | UUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K'
+  -
+  Pass  成功从响应头提取 RSA_PUBLIC_KEY
+
+Sub-folder 02 用户登录
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  | 'public', 'LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1
+  | JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBU
+  | UVBbXgwV1hoTTNEZEdzRGVpWm5IenAKKzdCVWtVb3lWNHB3allTSkF
+  | mNndTak1pYzVubWw2MGYxUnRwaG11Rk1JSmZjanZ3QmRnZ3hPU1NVT
+  | DF4YXRjaApjcHMwbm9mcVRCMUtKRUZPQVdiTG1mZk5lUmw1b1B1ZGl
+  | wN0pBS2VhY3VLRVFKOTZmMVRFM0ZRN0l5TXd1ZzZLCjdIRHUvSVoxU
+  | U1QczBBV0gyRHJialJMTUZ5UzV1aE80TWpTSDdoTjBIS0lIbVZ2eUh
+  | HMGp2YS9lWkNocjJNb2UKNW0wY2dNR3BmYWFtdU9Kd0NZL2JlblRnd
+  | 29Gak1nVEJ5RmttL3owbzhIbGFtZElhM0pzcWFVYjFxcFFwRU1BKwp
+  | kTnEwTmtwMktGRzI5QW1hNzVHT0s3YzJRbWM4WlZPTVUxOFozbXV2b
+  | CtIcm1MNFR4N05laDRiYTNrbVg0UVZjClVRSURBUUFCCi0tLS0tRU5
+  | EIFJTQSBQVUJMSUMgS0VZLS0tLS0K'
+  | 'public', 'LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1
+  | JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBU
+  | UVBbXgwV1hoTTNEZEdzRGVpWm5IenAKKzdCVWtVb3lWNHB3allTSkF
+  | mNndTak1pYzVubWw2MGYxUnRwaG11Rk1JSmZjanZ3QmRnZ3hPU1NVT
+  | DF4YXRjaApjcHMwbm9mcVRCMUtKRUZPQVdiTG1mZk5lUmw1b1B1ZGl
+  | wN0pBS2VhY3VLRVFKOTZmMVRFM0ZRN0l5TXd1ZzZLCjdIRHUvSVoxU
+  | U1QczBBV0gyRHJialJMTUZ5UzV1aE80TWpTSDdoTjBIS0lIbVZ2eUh
+  | HMGp2YS9lWkNocjJNb2UKNW0wY2dNR3BmYWFtdU9Kd0NZL2JlblRnd
+  | 29Gak1nVEJ5RmttL3owbzhIbGFtZElhM0pzcWFVYjFxcFFwRU1BKwp
+  | kTnEwTmtwMktGRzI5QW1hNzVHT0s3YzJRbWM4WlZPTVUxOFozbXV2b
+  | CtIcm1MNFR4N05laDRiYTNrbVg0UVZjClVRSURBUUFCCi0tLS0tRU5
+  | EIFJTQSBQVUJMSUMgS0VZLS0tLS0K'
+  | '加密密文:', 'Admin123'
+  | 'Result:', 'L/2ZJuTsZINcYg469k++H2lDaaWCfzYDIZKaaYj1gH
+  | 4YJqqVmLJSsVS7DSFvbLQIozR4CWaxJMxNJVYPs2UGgUBIIJvvIILe
+  | 5OaxUEWCwv4JPKJRteReT0Xs+wF/KKfiWFqrEacAQMzpa1SqXUedi1
+  | ZwgplUippQoqrfWsHTF6XKnTzzam/+ZgClt1p5fqyEX5KS0feK+7RX
+  | Oz8kQSb0wYXqjm/YpHvtZ+nPsGoSWAEMW+Xjo7UmxB2zOVlJr6FRIe
+  | Ppij4jFo0Dai4P07S1pw5VK3JdAUkqDSAVu5Ww1smOPtIlp41GOX/+
+  | /TPI37ktHoxwn0LwpcXs6+hnNzux9A=='
+  -
+  POST http://10.18.15.135:8181/v2/login [200 OK, 69.05 KB, 33 ms]
+  Pass  响应体不能为空
+  Pass  用户未登录
+  -
+  | 'Set-Cookie:', undefined
+  | '========== 超管登录信息 =========='
+  | 'TMSESSNAME:', undefined
+  | 'tos_current_username:', undefined
+  | 'X-Csrf-Token:', '0d7994ccc8402fb39cd724b946aabc4a6899
+  | f8e30e152dcaa8bd7ee7f6834b44'
+  | '========== 超管登录信息 =========='
+  | 'TMSESSNAME:', undefined
+  | 'tos_current_username:', undefined
+  | 'X-Csrf-Token:', '0d7994ccc8402fb39cd724b946aabc4a6899
+  | f8e30e152dcaa8bd7ee7f6834b44'
+  | '完整 Cookie：'
+  | 'X-Csrf-Token=0d7994ccc8402fb39cd724b946aabc4a6899f8e3
+  | 0e152dcaa8bd7ee7f6834b44; loginStatus=true'
+  | '========== 已保存环境变量 =========='
+  | 'Cookie =', 'X-Csrf-Token=0d7994ccc8402fb39cd724b946aa
+  | bc4a6899f8e30e152dcaa8bd7ee7f6834b44; loginStatus=true
+  | '
+  | 'X-Csrf-Token =', '0d7994ccc8402fb39cd724b946aabc4a689
+  | 9f8e30e152dcaa8bd7ee7f6834b44'
+  | '（未检测到 expired_Cookie，首次运行或未执行过登出）'
+  | 'wrong_X-Csrf-Token =', '0d7994ccc8502fb39cd724b946aab
+  | c5a6899f8e30e152dcaa8cd7ee7f6834b44'
+  -
+
+Sub-folder 03 获取-登录状态-已登录
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  -
+  GET http://10.18.15.135:8181/v2/login/state [403 Forbidden, 1.2 KB, 11 ms]
+  2. 响应体不能为空
+  3⠄ Error in test-script
+  4. 响应体不能为空
+  5⠄ Error in test-script
+
+Sub-folder 04 退出登录
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  -
+  PUT http://10.18.15.135:8181/v2/logout [403 Forbidden, 1.2 KB, 10 ms]
+  6. 响应体不能为空
+  7⠄ Error in test-script
+  -
+  | '========== 登出前凭证快照 =========='
+  | 'Cookie:', 'X-Csrf-Token=0d7994ccc8402fb39cd724b946aab
+  | c4a6899f8e30e152dcaa8bd7ee7f6834b44; loginStatus=true'
+  | 'X-Csrf-Token:', '0d7994ccc8402fb39cd724b946aabc4a6899
+  | f8e30e152dcaa8bd7ee7f6834b44'
+  | 'X-Csrf-Token 已清除（下次 /tos/ 将重新生成）'
+  | '========== 已保存变量总览 =========='
+  | 'expired_Cookie         =', 'X-Csrf-Token=0d7994ccc840
+  | 2fb39cd724b946aabc4a6899f8e30e152dcaa8bd7ee7f6834b44; 
+  | loginStatus=true'
+  | 'expired_X-Csrf-Token   =', '0d7994ccc8402fb39cd724b94
+  | 6aabc4a6899f8e30e152dcaa8bd7ee7f6834b44'
+  -
+
+Sub-folder 05 获取-登录状态-已登出
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  -
+  GET http://10.18.15.135:8181/v2/login/state [403 Forbidden, 1.2 KB, 14 ms]
+  8. 响应体不能为空
+  9⠄ Error in test-script
+ 10. 响应体不能为空
+ 11⠄ Error in test-script
+
+Sub-folder 验证用户密码（生成X-Curpass-Token变量）
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  | '原始密码：', 'Admin123'
+  | '密码加密成功'
+  | 'X-Curpass-Token 已更新'
+  -
+  POST http://10.18.15.135:8181/v2/otp/verify_pwd [200 OK, 1.46 KB, 12 ms]
+  Pass  响应体不能为空
+  Pass  用户未登录
+  -
+  | '========== X-Curpass-Token 快照 =========='
+  | 'X-Curpass-Token:', 'JDu1ZKklPDSovWibfehcMjcI2Qk0x6m2w
+  | 8623iksvjHSCKaVsG5UNr/QWwQHVOoWDPc/jtDneUVTeDAhtznUIK2
+  | cc30lku/DDO63NKVLS+ulAWjeWzdhRLJQ1qcExL+Ex8dNqyDZPc6Rt
+  | CglwnMkTGg4mUVe5XKDJzDypFHmKkgI32rVRBCFFAmTpsT0ualWpjM
+  | lii1+3TQp3xB+SAWL0RgmsfmBBmTF4KRtQ5TRxgRfOU5GLaoZPFEOp
+  | tSYshhY+2bNflUUCW1UteRx3LIL4aQkXSfnkxpCIkW8lLwBPGa32eR
+  | W631s1vn5PRi3g9wronK7AhQFDGIZLit689On3A=='
+  | 'wrong_X-Curpass-Token =', 'JDu1ZLklPDSovWicfehcMjcI2Q
+  | k0x6m2w8623iksvjHSCKaVsG5UNr/QWwQHVOoWDPc/jtDneUVTeDAh
+  | tznUIK2cc30lku/DDO63NKVLS+ulAWjeWzdhRLJQ1qcExL+Ex8dNqy
+  | DZPc6RtCglwnMkTGg4mUVe5XKDJzDypFHmKkgI32rVRBCFFAmTpsT0
+  | ualWpjMlii1+3TQp3xB+SAWL0RgmsfmBBmTF4KRtQ5TRxgRfOU5GLa
+  | oZPFEOptSYshhY+2bNflUUCW1UteRx3LIL4aQkXSfnkxpCIkW8lLwB
+  | PGa32eRW631s1vn5PRi3g9wronK7AhQFDGIZLit689On3A=='
+  -
+
+Sub-folder 普通用户登录
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  | 'public', 'LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1
+  | JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBU
+  | UVBbXgwV1hoTTNEZEdzRGVpWm5IenAKKzdCVWtVb3lWNHB3allTSkF
+  | mNndTak1pYzVubWw2MGYxUnRwaG11Rk1JSmZjanZ3QmRnZ3hPU1NVT
+  | DF4YXRjaApjcHMwbm9mcVRCMUtKRUZPQVdiTG1mZk5lUmw1b1B1ZGl
+  | wN0pBS2VhY3VLRVFKOTZmMVRFM0ZRN0l5TXd1ZzZLCjdIRHUvSVoxU
+  | U1QczBBV0gyRHJialJMTUZ5UzV1aE80TWpTSDdoTjBIS0lIbVZ2eUh
+  | HMGp2YS9lWkNocjJNb2UKNW0wY2dNR3BmYWFtdU9Kd0NZL2JlblRnd
+  | 29Gak1nVEJ5RmttL3owbzhIbGFtZElhM0pzcWFVYjFxcFFwRU1BKwp
+  | kTnEwTmtwMktGRzI5QW1hNzVHT0s3YzJRbWM4WlZPTVUxOFozbXV2b
+  | CtIcm1MNFR4N05laDRiYTNrbVg0UVZjClVRSURBUUFCCi0tLS0tRU5
+  | EIFJTQSBQVUJMSUMgS0VZLS0tLS0K'
+  | 'public', 'LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1
+  | JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBU
+  | UVBbXgwV1hoTTNEZEdzRGVpWm5IenAKKzdCVWtVb3lWNHB3allTSkF
+  | mNndTak1pYzVubWw2MGYxUnRwaG11Rk1JSmZjanZ3QmRnZ3hPU1NVT
+  | DF4YXRjaApjcHMwbm9mcVRCMUtKRUZPQVdiTG1mZk5lUmw1b1B1ZGl
+  | wN0pBS2VhY3VLRVFKOTZmMVRFM0ZRN0l5TXd1ZzZLCjdIRHUvSVoxU
+  | U1QczBBV0gyRHJialJMTUZ5UzV1aE80TWpTSDdoTjBIS0lIbVZ2eUh
+  | HMGp2YS9lWkNocjJNb2UKNW0wY2dNR3BmYWFtdU9Kd0NZL2JlblRnd
+  | 29Gak1nVEJ5RmttL3owbzhIbGFtZElhM0pzcWFVYjFxcFFwRU1BKwp
+  | kTnEwTmtwMktGRzI5QW1hNzVHT0s3YzJRbWM4WlZPTVUxOFozbXV2b
+  | CtIcm1MNFR4N05laDRiYTNrbVg0UVZjClVRSURBUUFCCi0tLS0tRU5
+  | EIFJTQSBQVUJMSUMgS0VZLS0tLS0K'
+  | '加密密文:', 'Admin123'
+  | 'Result:', 'NfwaMNNm6Clc/uTp/x+4Ha+ZBo6KwpdSPZYg/zM3Fh
+  | 3FJF4tq3XwTqthgD8lvRqN4TQfJk7rd/5Kfn4dfB0wkgmMLja1uqzv
+  | G/hctomK6/tqHQ9lgXhOVr2tiZ8/PuHjvmfBCHz1q+xOOp1j/6dMh+
+  | LRDr/69fVa1EkL5WX7AbciuK2djNVOdCJAOR2zvw3V+JQvMkmBLimP
+  | y3+5uY6Qcx2ZmTDAwf0k0g3qq/SNXe1PfcgiYRQvF7lmFHc1v08cO/
+  | jQdJu1a/GFqpz3Iqw3xLyUC2bfjmCQ51IPJbCEcXUSZ4t/ueUwSBzu
+  | W1FZ6HUujIG5esssmpZiuU70WZmMYg=='
+  -
+  POST http://10.18.15.135:8181/v2/login [200 OK, 50.87 KB, 32 ms]
+  Pass  响应体不能为空
+  Pass  用户未登录
+  -
+  | '========== 普通用户登录信息 =========='
+  | 'NormalUser_TMSESSNAME:', undefined
+  | 'NormalUser_tos_current_username:', undefined
+  | 'NormalUser_X-Csrf-Token:', '0d7994ccc8402fb39cd724b94
+  | 6aabc4a6899f8e30e152dcaa8bd7ee7f6834b44'
+  | '完整 NormalUserCookie：'
+  | 'X-Csrf-Token=0d7994ccc8402fb39cd724b946aabc4a6899f8e3
+  | 0e152dcaa8bd7ee7f6834b44; loginStatus=true'
+  | '========== 已保存环境变量 =========='
+  | 'NormalUserCookie =', 'X-Csrf-Token=0d7994ccc8402fb39c
+  | d724b946aabc4a6899f8e30e152dcaa8bd7ee7f6834b44; loginS
+  | tatus=true'
+  | 'NormalUserCsrfToken =', '0d7994ccc8402fb39cd724b946aa
+  | bc4a6899f8e30e152dcaa8bd7ee7f6834b44'
+  -
+
+Sub-folder 验证普通用户密码（生成X-Curpass-Token变量）
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  | '原始密码：', 'Admin123'
+  | '密码加密成功'
+  | 'NormalUser_X-Curpass-Token 已更新'
+  -
+  POST http://10.18.15.135:8181/v2/otp/verify_pwd [200 OK, 1.34 KB, 8 ms]
+  Pass  响应体不能为空
+  Pass  用户未登录
+
+---------------------------------------------------------------------
+|                         |           executed |             failed |
+--------------------------+--------------------+---------------------
+|              iterations |                  1 |                  0 |
+--------------------------+--------------------+---------------------
+|                requests |                  9 |                  0 |
+--------------------------+--------------------+---------------------
+|            test-scripts |                 17 |                  6 |
+--------------------------+--------------------+---------------------
+|      prerequest-scripts |                 13 |                  0 |
+--------------------------+--------------------+---------------------
+|              assertions |                 19 |                  6 |
+---------------------------------------------------------------------
+| total run duration: 1273 ms                                       |
+---------------------------------------------------------------------
+| total data received: 648.6 KB (approx)                            |
+---------------------------------------------------------------------
+| average response time: 19 ms [min: 8 ms, max: 47 ms, s.d.: 13 ms] |
+---------------------------------------------------------------------
+
+   #  failure         detail                                                      
+                                                                                  
+ 01.  AssertionError  响应体不能为空                                              
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true 
+                      at assertion:0 in test-script                               
+                      inside "02 登录 / 01 获取-登录标题样式"                     
+                                                                                  
+ 02.  Error                                                                       
+                      响应体不是合法 JSON，实际返回为：                           
+                                                                                  
+                      at test-script                                              
+                      inside "02 登录 / 01 获取-登录标题样式"                     
+                                                                                  
+ 03.  AssertionError  响应体不能为空                                              
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true 
+                      at assertion:0 in test-script                               
+                      inside "02 登录 / 03 获取-登录状态-已登录"                  
+                                                                                  
+ 04.  Error                                                                       
+                      响应体不是合法 JSON，实际返回为：                           
+                                                                                  
+                      at test-script                                              
+                      inside "02 登录 / 03 获取-登录状态-已登录"                  
+                                                                                  
+ 05.  AssertionError  响应体不能为空                                              
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true 
+                      at assertion:0 in test-script                               
+                      inside "02 登录 / 03 获取-登录状态-已登录"                  
+                                                                                  
+ 06.  Error                                                                       
+                      响应体不是合法 JSON，实际返回为：                           
+                                                                                  
+                      at test-script                                              
+                      inside "02 登录 / 03 获取-登录状态-已登录"                  
+                                                                                  
+ 07.  AssertionError  响应体不能为空                                              
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true 
+                      at assertion:0 in test-script                               
+                      inside "02 登录 / 04 退出登录"                              
+                                                                                  
+ 08.  Error                                                                       
+                      响应体不是合法 JSON，实际返回为：                           
+                                                                                  
+                      at test-script                                              
+                      inside "02 登录 / 04 退出登录"                              
+                                                                                  
+ 09.  AssertionError  响应体不能为空                                              
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true 
+                      at assertion:0 in test-script                               
+                      inside "02 登录 / 05 获取-登录状态-已登出"                  
+                                                                                  
+ 10.  Error                                                                       
+                      响应体不是合法 JSON，实际返回为：                           
+                                                                                  
+                      at test-script                                              
+                      inside "02 登录 / 05 获取-登录状态-已登出"                  
+                                                                                  
+ 11.  AssertionError  响应体不能为空                                              
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true 
+                      at assertion:0 in test-script                               
+                      inside "02 登录 / 05 获取-登录状态-已登出"                  
+                                                                                  
+ 12.  Error                                                                       
+                      响应体不是合法 JSON，实际返回为：                           
+                                                                                  
+                      at test-script                                              
+                      inside "02 登录 / 05 获取-登录状态-已登出"                  
+Publishing run details to postman cloud is currently supported only for collections specified via postman collection id or collections belonging to git linked APIs
+Refer: https://go.pstmn.io/postman-cli-faq

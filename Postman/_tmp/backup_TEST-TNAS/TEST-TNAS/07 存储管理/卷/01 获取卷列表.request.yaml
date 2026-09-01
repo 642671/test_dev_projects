@@ -1,0 +1,379 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/list/volume?type&哈哈哈哈=xcc"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  - key: type
+    value: null
+    description: 信息类型：detail=详细信息, brief=简要信息
+  - key: 哈哈哈哈
+    value: xcc
+scripts:
+  - type: afterResponse
+    code: "/**\r
+
+      \ * ==========================================================\r
+
+      \ * 功能：同步卷 UUID 到模块变量\r
+
+      \ * ==========================================================\r
+
+      \ *\r
+
+      \ * 【脚本目的】\r
+
+      \ * 获取当前系统所有卷(UUID)，自动生成模块变量：\r
+
+      \ *\r
+
+      \ *      lv0_uuid\r
+
+      \ *      lv1_uuid\r
+
+      \ *      lv2_uuid\r
+
+      \ *      ...\r
+
+      \ *\r
+
+      \ * 后续接口可直接使用：\r
+
+      \ *\r
+
+      \ *      lv0_uuid\r
+
+      \ *      lv1_uuid\r
+
+      \ *      lv2_uuid\r
+
+      \ *\r
+
+      \ * ==========================================================\r
+
+      \ * 为什么每次都要同步？\r
+
+      \ * ==========================================================\r
+
+      \ *\r
+
+      \ * 卷是动态变化的，例如：\r
+
+      \ *\r
+
+      \ * 第一次：\r
+
+      \ *      lv0\r
+
+      \ *      lv1\r
+
+      \ *      lv2\r
+
+      \ *\r
+
+      \ * 后来：\r
+
+      \ *      删除 lv1\r
+
+      \ *      新建 lv3\r
+
+      \ *\r
+
+      \ * 如果仍然使用旧变量：\r
+
+      \ *\r
+
+      \ *      lv0_uuid    正确\r
+
+      \ *      lv1_uuid   × 已失效\r
+
+      \ *      lv2_uuid   × 已不是原来的卷\r
+
+      \ *\r
+
+      \ * 因此，本脚本属于【同步脚本】而不是【追加脚本】。\r
+
+      \ *\r
+
+      \ * 每次执行都会：\r
+
+      \ *\r
+
+      \ * ① 删除历史 UUID 变量\r
+
+      \ * ② 获取当前最新卷列表\r
+
+      \ * ③ 重新生成 UUID 变量\r
+
+      \ *\r
+
+      \ * 最终保证：\r
+
+      \ *\r
+
+      \ *      模块变量 == 当前系统真实卷\r
+
+      \ *\r
+
+      \ * 不会出现历史遗留 UUID。\r
+
+      \ *\r
+
+      \ * ==========================================================\r
+
+      \ */\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 1、获取接口响应\r
+
+      // ==========================================================\r
+
+      const res = pm.response.json();\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 2、接口没有返回 data，结束脚本\r
+
+      // ==========================================================\r
+
+      if (!res.data) {\r
+
+      \    console.log(\"响应 data 为空，停止生成模块变量。\");\r
+
+      \    return;\r
+
+      }\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 3、将 Object 转成数组\r
+
+      //\r
+
+      // data：\r
+
+      // {\r
+
+      //      uuid1:{}\r
+
+      //      uuid2:{}\r
+
+      //      uuid3:{}\r
+
+      // }\r
+
+      //\r
+
+      // 转换为：\r
+
+      // [\r
+
+      //      {},\r
+
+      //      {},\r
+
+      //      {}\r
+
+      // ]\r
+
+      //\r
+
+      // 并按照 sort 排序，保证 lv0、lv1、lv2 顺序固定。\r
+
+      // ==========================================================\r
+
+      const volumes = Object.values(res.data)\r
+
+      \    .sort((a, b) => a.sort - b.sort);\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 4、清理历史模块变量\r
+
+      //\r
+
+      // 为什么？\r
+
+      //\r
+
+      // 防止卷删除后变量仍然存在。\r
+
+      //\r
+
+      // 例如：\r
+
+      //\r
+
+      // 上一次：\r
+
+      //\r
+
+      // lv0_uuid\r
+
+      // lv1_uuid\r
+
+      // lv2_uuid\r
+
+      //\r
+
+      // 本次：\r
+
+      //\r
+
+      // 只有两个卷。\r
+
+      //\r
+
+      // 如果不清理：\r
+
+      //\r
+
+      // lv2_uuid\r
+
+      //\r
+
+      // 仍然保存旧 UUID。\r
+
+      //\r
+
+      // 所以后续必须先删除历史变量。\r
+
+      // ==========================================================\r
+
+      for (let i = 0; i < 50; i++) {\r
+
+      \r
+
+      \    // 删除模块变量\r
+
+      \    pm.moduleVariables.unset(`lv${i}_uuid`);\r
+
+      \    pm.moduleVariables.unset(`lv${i}_filesystem`);\r
+
+      \r
+
+      }\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 5、重新生成模块变量\r
+
+      //\r
+
+      // 使用 sort - 1 作为编号（sort 从 1 开始，变量从 lv0 开始）。\r
+
+      //\r
+
+      // 这样即使 sort 不连续（如 1、3、5），\r
+
+      // 变量名也能与实际卷一一对应：\r
+
+      //\r
+
+      // sort=1 → lv0_uuid\r
+
+      // sort=3 → lv2_uuid\r
+
+      // sort=5 → lv4_uuid\r
+
+      //\r
+
+      // 删除中间卷后不会出现错位。\r
+
+      // ==========================================================\r
+
+      volumes.forEach((volume) => {\r
+
+      \r
+
+      \    const sortIndex = volume.sort - 1;\r
+
+      \    const uuidVar = `lv${sortIndex}_uuid`;\r
+
+      \    const fsVar = `lv${sortIndex}_filesystem`;\r
+
+      \r
+
+      \    // 保存模块变量\r
+
+      \    pm.moduleVariables.set(uuidVar, volume.uuid);\r
+
+      \    pm.moduleVariables.set(fsVar, volume.filesystem);\r
+
+      \r
+
+      \    console.log(`${uuidVar} = ${volume.uuid}`);\r
+
+      \    console.log(`${fsVar} = ${volume.filesystem}`);\r
+
+      \r
+
+      });\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 6、保存卷数量\r
+
+      //\r
+
+      // 方便后续循环使用。\r
+
+      // ==========================================================\r
+
+      pm.moduleVariables.set(\"lv_count\", volumes.length);\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 7、输出日志\r
+
+      // ==========================================================\r
+
+      console.log(\"====================================\");\r
+
+      console.log(`共发现 ${volumes.length} 个卷`);\r
+
+      console.log(\"所有 UUID、filesystem 已同步到模块变量。\");\r
+
+      console.log(\"====================================\");"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/01 获取卷列表.resources/examples
+order: 1000

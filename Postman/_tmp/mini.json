@@ -1,0 +1,43 @@
+{
+  "info": {
+    "name": "mini",
+    "_postman_id": "aaaa0000-0000-0000-0000-000000000000",
+    "description": "mini test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "console.log('[mini-bootstrap] loaded');",
+          "pm.collectionVariables.set('probe','yes');"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "welcome",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/v2/welcome", "host": ["{{baseUrl}}"], "path": ["v2", "welcome"], "query": [] },
+        "auth": { "type": "noauth" }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('have X-Rsa-Token', function(){ pm.expect(pm.response.headers.get('X-Rsa-Token')).to.not.be.undefined; });"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [ { "key": "X-Csrf-Token", "value": "" } ]
+}

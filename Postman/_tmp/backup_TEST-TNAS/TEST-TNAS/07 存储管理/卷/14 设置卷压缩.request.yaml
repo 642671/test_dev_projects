@@ -1,0 +1,30 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/compression/:uuid"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+pathVariables:
+  - key: uuid
+    value: "{{lv0_uuid}}"
+    description: 卷UUID，必填参数需要询问用户给出
+body:
+  type: json
+  content: "{\r
+
+    \    \"compressionStatus\": 0,\r
+
+    \    \"compressionLevel\": 99\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/14 设置卷压缩.resources/examples
+order: 14000

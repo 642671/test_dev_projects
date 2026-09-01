@@ -5,7 +5,7 @@
 
 ## 背景一句话
 
-Codex 不直连模型厂商，而是先走 CCSwitchMulti 本地代理（`http://127.0.0.1:15721/v1`），由代理按模型名路由到 OpenAI 官方、DeepSeek、公司 9007 网关或 SiliconFlow。
+Codex 不直连模型厂商，而是先走 CCSwitchMulti 本地代理（`http://127.0.0.1:15721/v1`），由代理按模型名路由到 OpenAI 官方、DeepSeek、SiliconFlow、Zhipu GLM、公司 9007 网关或 Noontec NewAPI。
 
 ## 目录结构
 
@@ -13,17 +13,18 @@ Codex 不直连模型厂商，而是先走 CCSwitchMulti 本地代理（`http://
 | --- | --- |
 | `README.md` | 本页：总览、关键文件速查、启动顺序、安全约定 |
 | `01_架构与关键文件.md` | 请求链路、各层配置归属、关键文件作用 |
-| `02_模型目录与路由.md` | 全部 11 个模型的目录条目、路由匹配规则、如何新增模型 |
+| `02_模型目录与路由.md` | 全部 14 个模型的目录条目、路由匹配规则、如何新增模型 |
 | `03_操作与验证.md` | 日常使用、切换模型、连通性验证、网络分流规则 |
 | `04_故障排查与历史修复.md` | 常见故障表 + 左侧历史记录修复 Skill 用法 |
 | `05_9007公司模型接入手册.md` | 公司 9007 模型从零接入完整手册（由原 guides 目录迁移） |
+| `06_ZhipuGLM接入实录.md` | Zhipu GLM 从 Provider 到 Codex 选择器的完整同步实录（2026-08-27） |
 
 ## 关键文件速查
 
 | 文件 | 作用 |
 | --- | --- |
 | `C:\Users\twm\.codex\config.toml` | Codex 生效配置：provider、默认模型、`base_url` |
-| `C:\Users\twm\.codex\cc-switch-model-catalog.json` | Codex 模型目录（11 个模型条目） |
+| `C:\Users\twm\.codex\cc-switch-model-catalog.json` | Codex 模型目录（14 个模型条目） |
 | `C:\Users\twm\.codex\models_cache.json` | 模型缓存，目录更新后需刷新/清理 |
 | `C:\Users\twm\.cc-switch\cc-switch.db` | CCSwitchMulti 数据库：Provider、路由、模型映射 |
 | `C:\Users\twm\.cc-switch\settings.json` | CCSwitchMulti 设置（本地代理、开机自启、历史迁移） |
@@ -38,7 +39,7 @@ Codex 不直连模型厂商，而是先走 CCSwitchMulti 本地代理（`http://
 
 - provider：`codex_model_router_v2`，`base_url = http://127.0.0.1:15721/v1`，`wire_api = responses`
 - 路由开关：`codexRouting.enabled = true`，兜底路由：`router-codex-official`
-- `config.toml` 默认模型：`deepseek-v4-flash`（遗留值，目录中无此 ID；真实 ID 为 `deepseek-v4-flash-noontec-9007`，菜单显示 `9007deepseek-v4-flash`。当前生效依赖会话内模型选择）
+- `config.toml` 默认模型：`deepseek-v4-flash-vision-exp`（Noontec NewAPI 的 vision 模型，推理强度默认 `xhigh`）
 - Provider 名称：CCSM 中为 `Noontec 9007`（带空格），路由日志 `effective_name` 显示 `Noontec_9007`
 - `Noontec NewAPI` 分组：上游 `http://10.18.2.100/v1`（`newapi.noontec.net` 解析到该内网 IP，仅公司网络可达；HTTPS 因 CCSM TLS 吊销检查不可用，见 `02_模型目录与路由.md`）
 

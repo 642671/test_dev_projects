@@ -1,0 +1,86 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/login/state"
+method: GET
+headers:
+  X-Csrf-Token: "{{X-Csrf-Token}}"
+  Cookie: "{{Cookie}}"
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: "// const res = pm.response.json();\r
+
+      \r
+
+      // pm.test(\"响应中存在 is_login 字段\", function () {\r
+
+      //     pm.expect(res).to.have.property(\"is_login\");\r
+
+      //     pm.expect(res.is_login).to.be.a(\"boolean\");\r
+
+      // });\r
+
+      \r
+
+      // if (res.is_login) {\r
+
+      //     pm.test(\"用户已登录\", function () {\r
+
+      //         pm.expect(res.is_login).to.eql(true);\r
+
+      //     });\r
+
+      // } \r
+
+      // // 由于是正向测试，所以除个别单独设计，其余均只校验用户已登录\r
+
+      // else {\r
+
+      //     pm.test(\"用户未登录\", function () {\r
+
+      //         pm.expect(res.is_login).to.eql(false);\r
+
+      //     });\r
+
+      // }\r
+
+      \r
+
+      const body = pm.response.text();\r
+
+      \r
+
+      pm.test(\"响应体不能为空\", function () {\r
+
+      \    pm.expect(body && body.trim().length > 0, \"响应体为空，无法解析 JSON\").to.eql(true);\r
+
+      });\r
+
+      \r
+
+      let res;\r
+
+      try {\r
+
+      \    res = JSON.parse(body);\r
+
+      } catch (e) {\r
+
+      \    throw new Error(\"响应体不是合法 JSON，实际返回为：\\n\" + body);\r
+
+      }\r
+
+      \r
+
+      pm.test(\"校验用户已登录\", function () {\r
+
+      \    pm.expect(res).to.have.property(\"is_login\");\r
+
+      \    pm.expect(res.is_login, \"用户未登录\").to.eql(true);\r
+
+      });"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 6000

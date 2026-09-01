@@ -1,0 +1,30 @@
+$kind: http-example
+name: 正常迁移系统盘（2块HDD系统盘迁出2块，迁入1块NVMe磁盘）
+request:
+  url: "{{baseUrl}}/v2/disk/MigrateSysDisk"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+    - key: X-Curpass-Token
+      value: "{{X-Curpass-Token}}"
+  body:
+    type: json
+    content: |-
+      {
+          "src_sys_disks": ["{{disk1_device}}", "{{disk2_device}}"],
+          "dest_disk": "{{disk3_device}}"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 5000

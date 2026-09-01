@@ -1,0 +1,24 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/disk/InitSysDisk"
+  method: POST
+  headers:
+    - key: X-Csrf-Token
+      value: "{{NormalUserCsrfToken}}"
+      description: 不可为空，用户认证所需token
+    - key: Cookie
+      value: "{{NormalUserCookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Curpass-Token
+      value: "{{NormalUser_X-Curpass-Token}}"
+    - key: Content-Type
+      value: application/json
+    - key: " X-Curpass-Token"
+      value: "{{X-Curpass-Token}}"
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 8000

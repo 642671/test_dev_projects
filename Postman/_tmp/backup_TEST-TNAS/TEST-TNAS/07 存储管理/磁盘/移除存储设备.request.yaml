@@ -1,0 +1,30 @@
+$kind: http-request
+url: "{{baseUrl}}/v1/:name/:remove?type&flag"
+method: DELETE
+headers:
+  - key: Content-Type
+    value: application/x-www-form-urlencoded
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  - key: type
+    value: null
+    description: 设备类型：0=USB, 1=硬盘，枚举值：0=USB，1=硬盘
+  - key: flag
+    value: null
+    description: 标识：out=拔出
+pathVariables:
+  - key: name
+    value: ""
+    description: 设备名称，必填参数需要询问用户给出
+  - key: remove
+    value: ""
+    description: 是否移除：0=不删除，1=删除，枚举值：0=不删除，1=删除
+body:
+  type: formdata
+  content: []
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 45000

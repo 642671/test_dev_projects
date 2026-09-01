@@ -1,0 +1,44 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/create/volume"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"mode\": 1,\r
+
+    \    \"device\": \"{{cv_vg0_name}}\",\r
+
+    \    \"filesystem\": \"ext4\",\r
+
+    \    \"pool_free_size\": {{cv_vg0_free_gb}},\r
+
+    \    \"volume_size\": 10,\r
+
+    \    \"description\": \"测试卷\",\r
+
+    \    \"level\": \"\",\r
+
+    \    \"disks\": [],\r
+
+    \    \"hyper_lock_status\": 0,\r
+
+    \    \"hyper_lock_day\": 0,\r
+
+    \    \"hyper_lock_model\": 0\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/16 创建卷.resources/examples
+order: 16000

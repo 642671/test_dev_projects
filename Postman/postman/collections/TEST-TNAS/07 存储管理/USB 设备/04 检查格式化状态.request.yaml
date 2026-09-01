@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/extStorageDevice/IsFormating?name={{usb1_device}}"
+method: GET
+headers:
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  - key: name
+    value: "{{usb1_device}}"
+    description: 设备名称，如sda，必填参数需要询问用户给出
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/04 检查格式化状态.resources/examples
+order: 4000

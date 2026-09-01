@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/v1/update_mount_status"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: ""
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 42000

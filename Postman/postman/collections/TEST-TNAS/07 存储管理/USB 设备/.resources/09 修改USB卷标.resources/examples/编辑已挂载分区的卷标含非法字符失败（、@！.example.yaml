@@ -1,0 +1,28 @@
+$kind: http-example
+name: 编辑已挂载分区的卷标含非法字符失败（、@！.等）
+request:
+  url: "{{baseUrl}}/v2/extStorageDevice/EditUsbLabel"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: json
+    content: |-
+      {
+          "device_name": "{{usb1_z1}}",
+          "label": "a、b@c！"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 13000

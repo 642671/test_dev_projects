@@ -1,0 +1,27 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/storage/CheckAddDisk?disks=/dev/sda&uuid={{vg0_uuid}}"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: CSRF防护令牌，必须与Cookie中的X-Csrf-Token值保持一致
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 用户会话Cookie。字段说明：userName=当前登录用户名; TMSESSNAME=会话ID(Session ID); X-Csrf-Token=CSRF防护令牌; tos_current_username=当前用户名(与userName保持一致); loginStatus=登录状态标记(true=已登录)
+  queryParams:
+    - key: disks
+      value: /dev/sda
+      description: 逗号分隔的目标盘列表，如 `/dev/sda,/dev/sdb`
+    - key: uuid
+      value: "{{vg0_uuid}}"
+      description: 存储池 UUID
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 12000

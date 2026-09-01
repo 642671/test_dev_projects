@@ -1,0 +1,32 @@
+$kind: http-example
+name: 选用正在抹除中的磁盘添加磁盘成功（抹除为异步不锁盘）
+request:
+  url: "{{baseUrl}}/v2/storage/edit/pool/:uuid"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  pathVariables:
+    - key: uuid
+      value: "{{vg0_uuid}}"
+      description: 存储池UUID，必填参数需要询问用户给出
+  body:
+    type: json
+    content: |-
+      {
+          "action": "add",
+          "disks": ["{{disk1_device}}"]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 68000

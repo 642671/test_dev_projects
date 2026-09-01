@@ -1,0 +1,73 @@
+$kind: http-request
+url: '{{baseUrl}}/v2/extStorageDevice/MountedDevice'
+method: POST
+headers:
+- key: Content-Type
+  value: multipart/form-data
+- key: Cookie
+  value: '{{Cookie}}'
+  description: 不可为空，用户认证所需cookie
+- key: X-Csrf-Token
+  value: '{{X-Csrf-Token}}'
+  description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r\n    \"name\": \"USB Disk_sdf\",\r\n    \"device\": \"sdf\",\r\n \
+    \   \"password\": \"Admin123\"\r\n}"
+scripts:
+- type: beforeRequest
+  code: "var rsaEncryptPassword = function (message, keyInput) {\n  function readTLV(buf,\
+    \ pos) {\n    var tag = buf[pos]; pos++;\n    var len = buf[pos]; pos++;\n   \
+    \ if (len & 0x80) {\n      var n = len & 0x7f;\n      len = 0;\n      for (var\
+    \ i = 0; i < n; i++) len = (len << 8) | buf[pos + i];\n      pos += n;\n    }\n\
+    \    return { tag: tag, value: buf.subarray(pos, pos + len), next: pos + len };\n\
+    \  }\n  function bufToBig(buf) {\n    var h = '';\n    for (var i = 0; i < buf.length;\
+    \ i++) h += buf[i].toString(16).padStart(2, '0');\n    return BigInt('0x' + (h\
+    \ || '0'));\n  }\n  function bigToBuf(v, k) {\n    var hex = v.toString(16);\n\
+    \    if (hex.length % 2) hex = '0' + hex;\n    var out = new Uint8Array(k);\n\
+    \    var idx = k;\n    for (var i = hex.length - 2; i >= 0; i -= 2) { idx--; out[idx]\
+    \ = parseInt(hex.substr(i, 2), 16); }\n    return out;\n  }\n  function modPow(base,\
+    \ exp, mod) {\n    var r = 1n; base %= mod;\n    while (exp > 0n) {\n      if\
+    \ (exp & 1n) r = (r * base) % mod;\n      base = (base * base) % mod;\n      exp\
+    \ >>= 1n;\n    }\n    return r;\n  }\n  function parsePublicKey(der) {\n    var\
+    \ outer = readTLV(der, 0);\n    var first = readTLV(outer.value, 0);\n    var\
+    \ second = readTLV(outer.value, first.next);\n    var rsapub = (second.tag ===\
+    \ 0x03) ? second.value.subarray(1) : outer.value;\n    var seq = readTLV(rsapub,\
+    \ 0);\n    var nTlv = readTLV(seq.value, 0);\n    var eTlv = readTLV(seq.value,\
+    \ nTlv.next);\n    var nBig = bufToBig(nTlv.value);\n    var eBig = bufToBig(eTlv.value);\n\
+    \    var k = nTlv.value.length;\n    if (nTlv.value[0] === 0) k = nTlv.value.length\
+    \ - 1;\n    return { nBig: nBig, eBig: eBig, k: k };\n  }\n  function keyBytesDer(keyInput)\
+    \ {\n    var key = String(keyInput).trim();\n    var pemText = null;\n    if (key.indexOf('-----BEGIN')\
+    \ === 0) {\n      pemText = key;\n    } else {\n      var bin = atob(key);\n \
+    \     if (bin.indexOf('-----BEGIN') === 0) pemText = bin;\n      else {\n    \
+    \    var dr = new Uint8Array(bin.length);\n        for (var di = 0; di < bin.length;\
+    \ di++) dr[di] = bin.charCodeAt(di);\n        return dr;\n      }\n    }\n   \
+    \ var body = pemText.split(/\\r?\\n/).filter(function (l) { return l && l.indexOf('-----')\
+    \ < 0; }).join('');\n    var b = atob(body);\n    var d = new Uint8Array(b.length);\n\
+    \    for (var dj = 0; dj < b.length; dj++) d[dj] = b.charCodeAt(dj);\n    return\
+    \ d;\n  }\n  var der = keyBytesDer(keyInput);\n  var pk = parsePublicKey(der);\n\
+    \  var m = [];\n  for (var mi = 0; mi < message.length; mi++) m.push(message.charCodeAt(mi)\
+    \ & 0xff);\n  if (m.length > pk.k - 11) throw new Error('message too long for\
+    \ RSA');\n  var psLen = pk.k - 3 - m.length;\n  var rnd = (typeof crypto !== 'undefined'\
+    \ && crypto.getRandomValues) ? function () {\n    var a = new Uint32Array(1);\
+    \ crypto.getRandomValues(a); return a[0];\n  } : function () { return Math.floor(Math.random()\
+    \ * 0xffffffff); };\n  var ps = [];\n  for (var pi = 0; pi < psLen; pi++) ps.push(1\
+    \ + (rnd() % 255));\n  var eb = new Uint8Array(pk.k);\n  eb[0] = 0x00; eb[1] =\
+    \ 0x02;\n  for (var qi = 0; qi < psLen; qi++) eb[2 + qi] = ps[qi];\n  eb[2 + psLen]\
+    \ = 0x00;\n  for (var ti = 0; ti < m.length; ti++) eb[3 + psLen + ti] = m[ti];\n\
+    \  var c = modPow(bufToBig(eb), pk.eBig, pk.nBig);\n  var cbuf = bigToBuf(c, pk.k);\n\
+    \  var b64 = '';\n  for (var zi = 0; zi < cbuf.length; zi++) b64 += String.fromCharCode(cbuf[zi]);\n\
+    \  return btoa(b64);\n};\n\n// POST /v2/extStorageDevice/MountedDevice 前置脚本\r\n\
+    // JSON 请求体，RSA 加密 password\r\n\r\nvar plainPassword = pm.environment.get('usb_password')\
+    \ || 'Admin123';\r\nvar base64Key = pm.environment.get('RSA_PUBLIC_KEY');\r\n\r\
+    \nif (!base64Key) {\r\n    console.log('RSA_PUBLIC_KEY 未设置，跳过加密');\r\n} else {\r\
+    \n    var publicKey = base64Key;\r\n    var encrypted = rsaEncryptPassword(plainPassword,\
+    \ publicKey);\r\n\r\n    var body = JSON.parse(pm.request.body);\r\n    body.password\
+    \ = encrypted;\r\n    pm.request.body = JSON.stringify(body);\r\n\r\n    console.log('password\
+    \ 已加密，长度:', encrypted.length\r\n);\r\n}"
+  language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/14 挂载加密USB设备.resources/examples
+order: 14000

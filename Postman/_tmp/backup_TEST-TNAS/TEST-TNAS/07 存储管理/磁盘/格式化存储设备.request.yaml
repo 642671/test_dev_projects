@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{baseUrl}}/v1/:name/:fs"
+method: PUT
+headers:
+  - key: Content-Type
+    value: application/x-www-form-urlencoded
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+pathVariables:
+  - key: name
+    value: ""
+    description: 设备名称，必填参数需要询问用户给出
+  - key: fs
+    value: ""
+    description: 文件系统类型，枚举值：ntfs=NTFS，vfat=FAT32，ext4=EXT4
+body:
+  type: formdata
+  content: []
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 47000

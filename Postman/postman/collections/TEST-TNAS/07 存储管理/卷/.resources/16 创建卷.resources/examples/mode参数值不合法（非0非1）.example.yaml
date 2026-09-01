@@ -1,0 +1,36 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/storage/create/volume"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: json
+    content: |-
+      {
+          "mode": 2,
+          "device": "{{cv_vg0_name}}",
+          "filesystem": "btrfs",
+          "pool_free_size": {{cv_vg0_free_gb}},
+          "volume_size": 10,
+          "description": "测试卷",
+          "level": "",
+          "disks": [],
+          "hyper_lock_status": 0,
+          "hyper_lock_day": 0,
+          "hyper_lock_model": 0
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 3000

@@ -1,0 +1,26 @@
+$kind: http-example
+name: 连接的Target对应服务端IP已关机连接失败（action=login）
+request:
+  url: "{{baseUrl}}/v2/virtualdisk/IscsiAction"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/x-www-form-urlencoded
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: urlencoded
+    content:
+      target: "{{wan_target_iqn}}"
+      action: login
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 5000

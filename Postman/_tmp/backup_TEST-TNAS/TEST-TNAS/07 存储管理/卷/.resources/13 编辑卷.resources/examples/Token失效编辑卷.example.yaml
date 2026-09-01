@@ -1,0 +1,30 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/storage/edit/volume/:uuid"
+  method: POST
+  headers:
+    - key: X-Csrf-Token
+      value: "{{expired_X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+    - key: Cookie
+      value: "{{expired_Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: Content-Type
+      value: application/json
+  pathVariables:
+    uuid: "{{lv0_uuid}}"
+  body:
+    type: json
+    content: |-
+      {
+          "description": " ",
+          "capacity": 100,
+          "quota_flag": 0
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 34000

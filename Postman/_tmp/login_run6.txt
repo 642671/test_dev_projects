@@ -1,0 +1,81 @@
+Running your collection...
+postman
+
+
+Folder 02 登录
+Sub-folder 02 用户登录
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  | 'public', undefined
+  -
+  0⠄ Error in prerequest-script
+  POST http://10.18.15.135:8181/v2/login [403 Forbidden, 1.25 KB, 263 ms]
+  1. 响应体不能为空
+  2⠄ Error in test-script
+  -
+  | 'Set-Cookie:', 'X-Csrf-Token=18ff3a5b2994aadcae6630961
+  | 50ccdda41994879073164978504587804c6be86; Path=/'
+  | '========== 超管登录信息 =========='
+  | 'TMSESSNAME:', undefined
+  | 'tos_current_username:', undefined
+  | 'X-Csrf-Token:', '18ff3a5b2994aadcae663096150ccdda4199
+  | 4879073164978504587804c6be86'
+  | '========== 超管登录信息 =========='
+  | 'TMSESSNAME:', undefined
+  | 'tos_current_username:', undefined
+  | 'X-Csrf-Token:', '18ff3a5b2994aadcae663096150ccdda4199
+  | 4879073164978504587804c6be86'
+  | '完整 Cookie：'
+  | 'X-Csrf-Token=18ff3a5b2994aadcae663096150ccdda41994879
+  | 073164978504587804c6be86; loginStatus=true'
+  | '========== 已保存环境变量 =========='
+  | 'Cookie =', 'X-Csrf-Token=18ff3a5b2994aadcae663096150c
+  | cdda41994879073164978504587804c6be86; loginStatus=true
+  | '
+  | 'X-Csrf-Token =', '18ff3a5b2994aadcae663096150ccdda419
+  | 94879073164978504587804c6be86'
+  | '（未检测到 expired_Cookie，首次运行或未执行过登出）'
+  | 'wrong_X-Csrf-Token =', '18ff3a5b29a4aadcae663096150cc
+  | dea41994879073164978514587804c6be86'
+  -
+
+------------------------------------------------------------------------
+|                         |             executed |              failed |
+--------------------------+----------------------+----------------------
+|              iterations |                    1 |                   0 |
+--------------------------+----------------------+----------------------
+|                requests |                    1 |                   0 |
+--------------------------+----------------------+----------------------
+|            test-scripts |                    2 |                   1 |
+--------------------------+----------------------+----------------------
+|      prerequest-scripts |                    2 |                   1 |
+--------------------------+----------------------+----------------------
+|              assertions |                    1 |                   1 |
+------------------------------------------------------------------------
+| total run duration: 1611 ms                                          |
+------------------------------------------------------------------------
+| total data received: 0 B (approx)                                    |
+------------------------------------------------------------------------
+| average response time: 263 ms [min: 263 ms, max: 263 ms, s.d.: 0 us] |
+------------------------------------------------------------------------
+
+  #  failure         detail                                                      
+                                                                                 
+ 1.  Error                                                                       
+                     未配置 RSA_PUBLIC_KEY                                       
+                     at prerequest-script                                        
+                     inside "02 登录 / 02 用户登录"                              
+                                                                                 
+ 2.  AssertionError  响应体不能为空                                              
+                     响应体为空，无法解析 JSON: expected '' to deeply equal true 
+                     at assertion:0 in test-script                               
+                     inside "02 登录 / 02 用户登录"                              
+                                                                                 
+ 3.  Error                                                                       
+                     响应体不是合法 JSON，实际返回为：                           
+                                                                                 
+                     at test-script                                              
+                     inside "02 登录 / 02 用户登录"                              
+Publishing run details to postman cloud is currently supported only for collections specified via postman collection id or collections belonging to git linked APIs
+Refer: https://go.pstmn.io/postman-cli-faq

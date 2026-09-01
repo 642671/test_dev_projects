@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/lvmCache/FixLvmCache"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+    - key: X-Curpass-Token
+      value: "{{X-Curpass-Token}}"
+  body:
+    type: json
+    content: |-
+      {
+          "disk_list": [
+              "{{pool_disk}}"
+          ],
+          "md_uuid": "{{hc_md1_uuid}}"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 10000

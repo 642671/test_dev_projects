@@ -1,0 +1,20 @@
+$kind: http-example
+name: md参数错误（不存在的md设备）访问检查mdadm信息接口
+request:
+  url: "{{baseUrl}}/v2/storage/CheckMdInfo/:md"
+  method: POST
+  headers:
+    Content-Type: application/x-www-form-urlencoded
+    Cookie: "{{Cookie}}"
+    X-Csrf-Token: "{{X-Csrf-Token}}"
+  pathVariables:
+    - key: md
+      value: md999
+      description: md设备名，如md0，必填参数需要询问用户给出
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 7000

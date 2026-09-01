@@ -1,0 +1,177 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/hotsparedisk/GetHotSpareList"
+method: GET
+headers:
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+scripts:
+  - type: afterResponse
+    code: "// ============================================================\r
+
+      // GET /v2/hotsparedisk/GetHotSpareList 后置脚本\r
+
+      // 提取已有热备盘的 device 和 device_name，\r
+
+      // 生成 hsp{N}_device 和 hsp{N}_blk（N 从 1 起）\r
+
+      // ------------------------------------------------------------\r
+
+      // hsp{N}_device → POST /v2/hotsparedisk/DelHotSpare（删除热备盘）\r
+
+      // hsp{N}_blk    → POST /v2/hotsparedisk/ModifyArray（修改关联阵列）\r
+
+      // ============================================================\r
+
+      \r
+
+      const res = pm.response.json();\r
+
+      const data = res.data || res;\r
+
+      \r
+
+      function setOrUnset(key, val) {\r
+
+      \    if (val === undefined || val === null || val === '' || Number.isNaN(val)) {\r
+
+      \        pm.moduleVariables.unset(key);\r
+
+      \    } else {\r
+
+      \        pm.moduleVariables.set(key, val);\r
+
+      \    }\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 0. 清理所有旧的 hsp 变量\r
+
+      // ============================================================\r
+
+      const allModuleVars = pm.moduleVariables.toObject();\r
+
+      Object.keys(allModuleVars)\r
+
+      \    .filter(k => /^hsp\\d+_/.test(k))\r
+
+      \    .forEach(k => pm.moduleVariables.unset(k));\r
+
+      \r
+
+      // ============================================================\r
+
+      // 1. 标准化为数组\r
+
+      // ============================================================\r
+
+      let items;\r
+
+      if (Array.isArray(data)) {\r
+
+      \    items = data;\r
+
+      } else if (data && typeof data === 'object') {\r
+
+      \    items = [data];\r
+
+      } else {\r
+
+      \    items = [];\r
+
+      }\r
+
+      \r
+
+      if (items.length === 0) {\r
+
+      \    console.log('当前无已有热备盘，所有 hsp 变量已清空');\r
+
+      \    pm.moduleVariables.set('hsp_count', 0);\r
+
+      \    return;\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 2. 提取 device 和 device_name，按数组顺序从 1 起编号\r
+
+      // ============================================================\r
+
+      items.forEach((item, i) => {\r
+
+      \    const idx = i + 1;\r
+
+      \    setOrUnset(`hsp${idx}_device`, (item.device || '').trim());\r
+
+      \    setOrUnset(`hsp${idx}_blk`,    (item.device_name || '').trim());\r
+
+      \    console.log(`hsp${idx}_device = ${item.device}, hsp${idx}_blk = ${item.device_name} (${item.name || ''})`);\r
+
+      });\r
+
+      \r
+
+      pm.moduleVariables.set('hsp_count', items.length);\r
+
+      \r
+
+      // ============================================================\r
+
+      // 3. 调试输出\r
+
+      // ============================================================\r
+
+      console.log(`==== 已有热备盘同步结果 ====`);\r
+
+      console.log(`已有热备盘: ${items.length} 个`);\r
+
+      \r
+
+      const updatedVars = pm.moduleVariables.toObject();\r
+
+      const hspVars = Object.keys(updatedVars)\r
+
+      \    .filter(k => /^hsp\\d+_device$/.test(k))\r
+
+      \    .sort((a, b) => parseInt(a.match(/\\d+/)[0]) - parseInt(b.match(/\\d+/)[0]));\r
+
+      \r
+
+      if (hspVars.length > 0) {\r
+
+      \    console.log('---------- hsp{N} 明细 ----------');\r
+
+      \    hspVars.forEach(k => {\r
+
+      \        const n = k.match(/hsp(\\d+)_device/)[1];\r
+
+      \        console.log(`${k} = ${updatedVars[k]}`);\r
+
+      \        console.log(`hsp${n}_blk  = ${updatedVars[`hsp${n}_blk`] || '(无)'}`);\r
+
+      \    });\r
+
+      } else {\r
+
+      \    console.log('(无)');\r
+
+      }\r
+
+      console.log('=======================================');\r\n"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/02 获取热备盘列表.resources/examples
+order: 2000

@@ -1,0 +1,107 @@
+Running your collection...
+postman
+
+
+Folder 02 登录
+Sub-folder 02 用户登录
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  | 'public', undefined
+  -
+  0⠄ Error in prerequest-script
+  POST http://10.18.15.135:8181/v2/login [403 Forbidden, 1.25 KB, 52 ms]
+  1. 响应体不能为空
+  2⠄ Error in test-script
+  -
+  | 'Set-Cookie:', 'X-Csrf-Token=31fac4760b6d07a6a74bbf722
+  | 4f6182394aa3a26b24ef88d1b53b4c12f1f4427; Path=/'
+  | 'LOGIN-headers:', '{"connection":"close","content-leng
+  | th":"0","access-control-allow-credentials":"true","acc
+  | ess-control-allow-headers":"Origin, X-Requested-With, 
+  | Content-Type, Accept, Authorization, x-csrf-token","ac
+  | cess-control-allow-methods":"POST, GET, OPTIONS, PUT, 
+  | DELETE, UPDATE","access-control-allow-origin":"same-or
+  | igin","access-control-expose-headers":"Content-Length,
+  |  Access-Control-Allow-Origin, Access-Control-Allow-Hea
+  | ders, Cache-Control, Content-Language, Content-Type","
+  | date":"Fri, 28 Aug 2026 10:01:41 GMT","server":"nginx/
+  | 1.18.0","set-cookie":"X-Csrf-Token=31fac4760b6d07a6a74
+  | bbf7224f6182394aa3a26b24ef88d1b53b4c12f1f4427; Path=/"
+  | ,"x-console-type":"4","x-rsa-token":"LS0tLS1CRUdJTiBSU
+  | 0EgUFVCTElDIEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVF
+  | FRkFBT0NBUThBTUlJQkNnS0NBUUVBbXgwV1hoTTNEZEdzRGVpWm5Ie
+  | nAKKzdCVWtVb3lWNHB3allTSkFmNndTak1pYzVubWw2MGYxUnRwaG1
+  | 1Rk1JSmZjanZ3QmRnZ3hPU1NVTDF4YXRjaApjcHMwbm9mcVRCMUtKR
+  | UZPQVdiTG1mZk5lUmw1b1B1ZGlwN0pBS2VhY3VLRVFKOTZmMVRFM0Z
+  | RN0l5TXd1ZzZLCjdIRHUvSVoxUU1QczBBV0gyRHJialJMTUZ5UzV1a
+  | E80TWpTSDdoTjBIS0lIbVZ2eUhHMGp2YS9lWkNocjJNb2UKNW0wY2d
+  | NR3BmYWFtdU9Kd0NZL2JlblRnd29Gak1nVEJ5RmttL3owbzhIbGFtZ
+  | ElhM0pzcWFVYjFxcFFwRU1BKwpkTnEwTmtwMktGRzI5QW1hNzVHT0s
+  | 3YzJRbWM4WlZPTVUxOFozbXV2bCtIcm1MNFR4N05laDRiYTNrbVg0U
+  | VZjClVRSURBUUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0
+  | K"}'
+  | 'LOGIN-body:', ''
+  | '========== 超管登录信息 =========='
+  | 'TMSESSNAME:', undefined
+  | 'tos_current_username:', undefined
+  | 'X-Csrf-Token:', '31fac4760b6d07a6a74bbf7224f6182394aa
+  | 3a26b24ef88d1b53b4c12f1f4427'
+  | '========== 超管登录信息 =========='
+  | 'TMSESSNAME:', undefined
+  | 'tos_current_username:', undefined
+  | 'X-Csrf-Token:', '31fac4760b6d07a6a74bbf7224f6182394aa
+  | 3a26b24ef88d1b53b4c12f1f4427'
+  | '完整 Cookie：'
+  | 'X-Csrf-Token=31fac4760b6d07a6a74bbf7224f6182394aa3a26
+  | b24ef88d1b53b4c12f1f4427; loginStatus=true'
+  | '========== 已保存环境变量 =========='
+  | 'Cookie =', 'X-Csrf-Token=31fac4760b6d07a6a74bbf7224f6
+  | 182394aa3a26b24ef88d1b53b4c12f1f4427; loginStatus=true
+  | '
+  | 'X-Csrf-Token =', '31fac4760b6d07a6a74bbf7224f6182394a
+  | a3a26b24ef88d1b53b4c12f1f4427'
+  | '（未检测到 expired_Cookie，首次运行或未执行过登出）'
+  | 'wrong_X-Csrf-Token =', '31fac4760b7d07a6a74bbf7224f61
+  | 83394aa3a26b24ef88d1b63b4c12f1f4427'
+  -
+
+---------------------------------------------------------------------
+|                         |           executed |             failed |
+--------------------------+--------------------+---------------------
+|              iterations |                  1 |                  0 |
+--------------------------+--------------------+---------------------
+|                requests |                  1 |                  0 |
+--------------------------+--------------------+---------------------
+|            test-scripts |                  2 |                  1 |
+--------------------------+--------------------+---------------------
+|      prerequest-scripts |                  2 |                  1 |
+--------------------------+--------------------+---------------------
+|              assertions |                  1 |                  1 |
+---------------------------------------------------------------------
+| total run duration: 316 ms                                        |
+---------------------------------------------------------------------
+| total data received: 0 B (approx)                                 |
+---------------------------------------------------------------------
+| average response time: 52 ms [min: 52 ms, max: 52 ms, s.d.: 0 us] |
+---------------------------------------------------------------------
+
+  #  failure         detail                                                      
+                                                                                 
+ 1.  Error                                                                       
+                     未配置 RSA_PUBLIC_KEY                                       
+                     at prerequest-script                                        
+                     inside "02 登录 / 02 用户登录"                              
+                                                                                 
+ 2.  AssertionError  响应体不能为空                                              
+                     响应体为空，无法解析 JSON: expected '' to deeply equal true 
+                     at assertion:0 in test-script                               
+                     inside "02 登录 / 02 用户登录"                              
+                                                                                 
+ 3.  Error                                                                       
+                     响应体不是合法 JSON，实际返回为：                           
+                                                                                 
+                     at test-script                                              
+                     inside "02 登录 / 02 用户登录"                              
+Publishing run details to postman cloud is currently supported only for collections specified via postman collection id or collections belonging to git linked APIs
+Refer: https://go.pstmn.io/postman-cli-faq

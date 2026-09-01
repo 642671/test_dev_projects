@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/welcome"
+method: GET
+headers:
+  X-Csrf-Token: "{{X-Csrf-Token}}"
+auth:
+  type: noauth
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 2000

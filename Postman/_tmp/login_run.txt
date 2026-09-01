@@ -1,0 +1,358 @@
+Running your collection...
+postman
+
+
+Folder 02 登录
+Sub-folder 00 获取-语言变量
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  -
+  GET http://10.18.15.135:8181/v2/lang/tos [200 OK, 532.21 KB, 48 ms]
+  Pass  响应体不能为空
+  Pass  用户未登录
+  0⠄ TypeError in test-script
+
+Sub-folder 01 获取-登录标题样式
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  -
+  GET http://10.18.15.135:8181/v2/welcome [403 Forbidden, 1.15 KB, 9 ms]
+  1. 响应体不能为空
+  2⠄ Error in test-script
+  -
+  | '提取到的 RSA_PUBLIC_KEY =', 'LS0tLS1CRUdJTiBSU0EgUFVCTElD
+  | IEtFWS0tLS0tCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUT
+  | hBTUlJQkNnS0NBUUVBbXgwV1hoTTNEZEdzRGVpWm5IenAKKzdCVWtV
+  | b3lWNHB3allTSkFmNndTak1pYzVubWw2MGYxUnRwaG11Rk1JSmZjan
+  | Z3QmRnZ3hPU1NVTDF4YXRjaApjcHMwbm9mcVRCMUtKRUZPQVdiTG1m
+  | Zk5lUmw1b1B1ZGlwN0pBS2VhY3VLRVFKOTZmMVRFM0ZRN0l5TXd1Zz
+  | ZLCjdIRHUvSVoxUU1QczBBV0gyRHJialJMTUZ5UzV1aE80TWpTSDdo
+  | TjBIS0lIbVZ2eUhHMGp2YS9lWkNocjJNb2UKNW0wY2dNR3BmYWFtdU
+  | 9Kd0NZL2JlblRnd29Gak1nVEJ5RmttL3owbzhIbGFtZElhM0pzcWFV
+  | YjFxcFFwRU1BKwpkTnEwTmtwMktGRzI5QW1hNzVHT0s3YzJRbWM4Wl
+  | ZPTVUxOFozbXV2bCtIcm1MNFR4N05laDRiYTNrbVg0UVZjClVRSURB
+  | UUFCCi0tLS0tRU5EIFJTQSBQVUJMSUMgS0VZLS0tLS0K'
+  -
+  Pass  成功从响应头提取 RSA_PUBLIC_KEY
+
+Sub-folder 02 用户登录
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  | 'public', 'LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1
+  | JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBU
+  | UVBbXgwV1hoTTNEZEdzRGVpWm5IenAKKzdCVWtVb3lWNHB3allTSkF
+  | mNndTak1pYzVubWw2MGYxUnRwaG11Rk1JSmZjanZ3QmRnZ3hPU1NVT
+  | DF4YXRjaApjcHMwbm9mcVRCMUtKRUZPQVdiTG1mZk5lUmw1b1B1ZGl
+  | wN0pBS2VhY3VLRVFKOTZmMVRFM0ZRN0l5TXd1ZzZLCjdIRHUvSVoxU
+  | U1QczBBV0gyRHJialJMTUZ5UzV1aE80TWpTSDdoTjBIS0lIbVZ2eUh
+  | HMGp2YS9lWkNocjJNb2UKNW0wY2dNR3BmYWFtdU9Kd0NZL2JlblRnd
+  | 29Gak1nVEJ5RmttL3owbzhIbGFtZElhM0pzcWFVYjFxcFFwRU1BKwp
+  | kTnEwTmtwMktGRzI5QW1hNzVHT0s3YzJRbWM4WlZPTVUxOFozbXV2b
+  | CtIcm1MNFR4N05laDRiYTNrbVg0UVZjClVRSURBUUFCCi0tLS0tRU5
+  | EIFJTQSBQVUJMSUMgS0VZLS0tLS0K'
+  | 'public', 'LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1
+  | JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBU
+  | UVBbXgwV1hoTTNEZEdzRGVpWm5IenAKKzdCVWtVb3lWNHB3allTSkF
+  | mNndTak1pYzVubWw2MGYxUnRwaG11Rk1JSmZjanZ3QmRnZ3hPU1NVT
+  | DF4YXRjaApjcHMwbm9mcVRCMUtKRUZPQVdiTG1mZk5lUmw1b1B1ZGl
+  | wN0pBS2VhY3VLRVFKOTZmMVRFM0ZRN0l5TXd1ZzZLCjdIRHUvSVoxU
+  | U1QczBBV0gyRHJialJMTUZ5UzV1aE80TWpTSDdoTjBIS0lIbVZ2eUh
+  | HMGp2YS9lWkNocjJNb2UKNW0wY2dNR3BmYWFtdU9Kd0NZL2JlblRnd
+  | 29Gak1nVEJ5RmttL3owbzhIbGFtZElhM0pzcWFVYjFxcFFwRU1BKwp
+  | kTnEwTmtwMktGRzI5QW1hNzVHT0s3YzJRbWM4WlZPTVUxOFozbXV2b
+  | CtIcm1MNFR4N05laDRiYTNrbVg0UVZjClVRSURBUUFCCi0tLS0tRU5
+  | EIFJTQSBQVUJMSUMgS0VZLS0tLS0K'
+  | '加密密文:', 'Admin123'
+  -
+  3⠄ TypeError in prerequest-script
+  POST http://10.18.15.135:8181/v2/login [200 OK, 4.02 KB, 25 ms]
+  Pass  响应体不能为空
+  Pass  用户未登录
+  -
+  | '========== 超管登录信息 =========='
+  | 'TMSESSNAME:', undefined
+  | 'tos_current_username:', undefined
+  | 'X-Csrf-Token:', 'aefdf9656beccbecf8c5965dbec9465f821e
+  | 5fbe196b08cfebbf48864bdb0ce6'
+  | '完整 Cookie：'
+  | 'X-Csrf-Token=aefdf9656beccbecf8c5965dbec9465f821e5fbe
+  | 196b08cfebbf48864bdb0ce6; loginStatus=true'
+  | '========== 已保存环境变量 =========='
+  | 'Cookie =', 'X-Csrf-Token=aefdf9656beccbecf8c5965dbec9
+  | 465f821e5fbe196b08cfebbf48864bdb0ce6; loginStatus=true
+  | '
+  | 'X-Csrf-Token =', 'aefdf9656beccbecf8c5965dbec9465f821
+  | e5fbe196b08cfebbf48864bdb0ce6'
+  | '（未检测到 expired_Cookie，首次运行或未执行过登出）'
+  | 'wrong_X-Csrf-Token =', 'aefdf9656bfccbecf8c5965dbec94
+  | 66f821e5fbe196b08cfebcf48864bdb0ce6'
+  -
+
+Sub-folder 03 获取-登录状态-已登录
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  -
+  GET http://10.18.15.135:8181/v2/login/state [403 Forbidden, 1.2 KB, 10 ms]
+  4. 响应体不能为空
+  5⠄ Error in test-script
+  6. 响应体不能为空
+  7⠄ Error in test-script
+
+Sub-folder 04 退出登录
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  -
+  PUT http://10.18.15.135:8181/v2/logout [403 Forbidden, 1.2 KB, 10 ms]
+  8. 响应体不能为空
+  9⠄ Error in test-script
+  -
+  | '========== 登出前凭证快照 =========='
+  | 'Cookie:', 'X-Csrf-Token=aefdf9656beccbecf8c5965dbec94
+  | 65f821e5fbe196b08cfebbf48864bdb0ce6; loginStatus=true'
+  | 'X-Csrf-Token:', 'aefdf9656beccbecf8c5965dbec9465f821e
+  | 5fbe196b08cfebbf48864bdb0ce6'
+  | 'X-Csrf-Token 已清除（下次 /tos/ 将重新生成）'
+  | '========== 已保存变量总览 =========='
+  | 'expired_Cookie         =', 'X-Csrf-Token=aefdf9656bec
+  | cbecf8c5965dbec9465f821e5fbe196b08cfebbf48864bdb0ce6; 
+  | loginStatus=true'
+  | 'expired_X-Csrf-Token   =', 'aefdf9656beccbecf8c5965db
+  | ec9465f821e5fbe196b08cfebbf48864bdb0ce6'
+  -
+
+Sub-folder 05 获取-登录状态-已登出
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  -
+  GET http://10.18.15.135:8181/v2/login/state [403 Forbidden, 1.2 KB, 17 ms]
+ 10. 响应体不能为空
+ 11⠄ Error in test-script
+ 12. 响应体不能为空
+ 13⠄ Error in test-script
+
+Sub-folder 验证用户密码（生成X-Curpass-Token变量）
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  | '原始密码：', 'Admin123'
+  -
+ 14⠄ TypeError in prerequest-script
+  POST http://10.18.15.135:8181/v2/otp/verify_pwd [403 Forbidden, 1.15 KB, 18 ms]
+ 15. 响应体不能为空
+ 16⠄ Error in test-script
+  -
+  | '========== X-Curpass-Token 快照 =========='
+  | 'X-Curpass-Token:', undefined
+  | '警告：未读取到 X-Curpass-Token，wrong_X-Curpass-Token 未更新'
+  -
+
+Sub-folder 普通用户登录
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  | 'public', 'LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1
+  | JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBU
+  | UVBbXgwV1hoTTNEZEdzRGVpWm5IenAKKzdCVWtVb3lWNHB3allTSkF
+  | mNndTak1pYzVubWw2MGYxUnRwaG11Rk1JSmZjanZ3QmRnZ3hPU1NVT
+  | DF4YXRjaApjcHMwbm9mcVRCMUtKRUZPQVdiTG1mZk5lUmw1b1B1ZGl
+  | wN0pBS2VhY3VLRVFKOTZmMVRFM0ZRN0l5TXd1ZzZLCjdIRHUvSVoxU
+  | U1QczBBV0gyRHJialJMTUZ5UzV1aE80TWpTSDdoTjBIS0lIbVZ2eUh
+  | HMGp2YS9lWkNocjJNb2UKNW0wY2dNR3BmYWFtdU9Kd0NZL2JlblRnd
+  | 29Gak1nVEJ5RmttL3owbzhIbGFtZElhM0pzcWFVYjFxcFFwRU1BKwp
+  | kTnEwTmtwMktGRzI5QW1hNzVHT0s3YzJRbWM4WlZPTVUxOFozbXV2b
+  | CtIcm1MNFR4N05laDRiYTNrbVg0UVZjClVRSURBUUFCCi0tLS0tRU5
+  | EIFJTQSBQVUJMSUMgS0VZLS0tLS0K'
+  | 'public', 'LS0tLS1CRUdJTiBSU0EgUFVCTElDIEtFWS0tLS0tCk1
+  | JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBU
+  | UVBbXgwV1hoTTNEZEdzRGVpWm5IenAKKzdCVWtVb3lWNHB3allTSkF
+  | mNndTak1pYzVubWw2MGYxUnRwaG11Rk1JSmZjanZ3QmRnZ3hPU1NVT
+  | DF4YXRjaApjcHMwbm9mcVRCMUtKRUZPQVdiTG1mZk5lUmw1b1B1ZGl
+  | wN0pBS2VhY3VLRVFKOTZmMVRFM0ZRN0l5TXd1ZzZLCjdIRHUvSVoxU
+  | U1QczBBV0gyRHJialJMTUZ5UzV1aE80TWpTSDdoTjBIS0lIbVZ2eUh
+  | HMGp2YS9lWkNocjJNb2UKNW0wY2dNR3BmYWFtdU9Kd0NZL2JlblRnd
+  | 29Gak1nVEJ5RmttL3owbzhIbGFtZElhM0pzcWFVYjFxcFFwRU1BKwp
+  | kTnEwTmtwMktGRzI5QW1hNzVHT0s3YzJRbWM4WlZPTVUxOFozbXV2b
+  | CtIcm1MNFR4N05laDRiYTNrbVg0UVZjClVRSURBUUFCCi0tLS0tRU5
+  | EIFJTQSBQVUJMSUMgS0VZLS0tLS0K'
+  | '加密密文:', 'Admin123'
+  -
+ 17⠄ TypeError in prerequest-script
+  POST http://10.18.15.135:8181/v2/login [403 Forbidden, 1.15 KB, 8 ms]
+ 18. 响应体不能为空
+ 19⠄ Error in test-script
+  -
+  | '========== 普通用户登录信息 =========='
+  | 'NormalUser_TMSESSNAME:', undefined
+  | 'NormalUser_tos_current_username:', undefined
+  | 'NormalUser_X-Csrf-Token:', ''
+  | '完整 NormalUserCookie：'
+  | 'loginStatus=true'
+  | '========== 已保存环境变量 =========='
+  | 'NormalUserCookie =', 'loginStatus=true'
+  | 'NormalUserCsrfToken =', undefined
+  -
+
+Sub-folder 验证普通用户密码（生成X-Curpass-Token变量）
+
+  -
+  | '[bootstrap] moduleVariables + rsaEncryptPassword 已就绪'
+  | '原始密码：', 'Admin123'
+  -
+ 20⠄ TypeError in prerequest-script
+  POST http://10.18.15.135:8181/v2/otp/verify_pwd [403 Forbidden, 1.15 KB, 10 ms]
+ 21. 响应体不能为空
+ 22⠄ Error in test-script
+
+---------------------------------------------------------------------
+|                         |           executed |             failed |
+--------------------------+--------------------+---------------------
+|              iterations |                  1 |                  0 |
+--------------------------+--------------------+---------------------
+|                requests |                  9 |                  0 |
+--------------------------+--------------------+---------------------
+|            test-scripts |                 17 |                 10 |
+--------------------------+--------------------+---------------------
+|      prerequest-scripts |                 13 |                  4 |
+--------------------------+--------------------+---------------------
+|              assertions |                 14 |                  9 |
+---------------------------------------------------------------------
+| total run duration: 1257 ms                                       |
+---------------------------------------------------------------------
+| total data received: 533.61 KB (approx)                           |
+---------------------------------------------------------------------
+| average response time: 17 ms [min: 8 ms, max: 48 ms, s.d.: 12 ms] |
+---------------------------------------------------------------------
+
+   #  failure         detail                                                         
+                                                                                     
+ 01.  TypeError                                                                      
+                      Cannot read properties of undefined (reading 'set')            
+                      at test-script                                                 
+                      inside "02 登录 / 00 获取-语言变量"                            
+                                                                                     
+ 02.  AssertionError  响应体不能为空                                                 
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true    
+                      at assertion:0 in test-script                                  
+                      inside "02 登录 / 01 获取-登录标题样式"                        
+                                                                                     
+ 03.  Error                                                                          
+                      响应体不是合法 JSON，实际返回为：                              
+                                                                                     
+                      at test-script                                                 
+                      inside "02 登录 / 01 获取-登录标题样式"                        
+                                                                                     
+ 04.  TypeError                                                                      
+                      pm.rsaEncryptPassword is not a function                        
+                      at prerequest-script                                           
+                      inside "02 登录 / 02 用户登录"                                 
+                                                                                     
+ 05.  AssertionError  响应体不能为空                                                 
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true    
+                      at assertion:0 in test-script                                  
+                      inside "02 登录 / 03 获取-登录状态-已登录"                     
+                                                                                     
+ 06.  Error                                                                          
+                      响应体不是合法 JSON，实际返回为：                              
+                                                                                     
+                      at test-script                                                 
+                      inside "02 登录 / 03 获取-登录状态-已登录"                     
+                                                                                     
+ 07.  AssertionError  响应体不能为空                                                 
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true    
+                      at assertion:0 in test-script                                  
+                      inside "02 登录 / 03 获取-登录状态-已登录"                     
+                                                                                     
+ 08.  Error                                                                          
+                      响应体不是合法 JSON，实际返回为：                              
+                                                                                     
+                      at test-script                                                 
+                      inside "02 登录 / 03 获取-登录状态-已登录"                     
+                                                                                     
+ 09.  AssertionError  响应体不能为空                                                 
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true    
+                      at assertion:0 in test-script                                  
+                      inside "02 登录 / 04 退出登录"                                 
+                                                                                     
+ 10.  Error                                                                          
+                      响应体不是合法 JSON，实际返回为：                              
+                                                                                     
+                      at test-script                                                 
+                      inside "02 登录 / 04 退出登录"                                 
+                                                                                     
+ 11.  AssertionError  响应体不能为空                                                 
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true    
+                      at assertion:0 in test-script                                  
+                      inside "02 登录 / 05 获取-登录状态-已登出"                     
+                                                                                     
+ 12.  Error                                                                          
+                      响应体不是合法 JSON，实际返回为：                              
+                                                                                     
+                      at test-script                                                 
+                      inside "02 登录 / 05 获取-登录状态-已登出"                     
+                                                                                     
+ 13.  AssertionError  响应体不能为空                                                 
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true    
+                      at assertion:0 in test-script                                  
+                      inside "02 登录 / 05 获取-登录状态-已登出"                     
+                                                                                     
+ 14.  Error                                                                          
+                      响应体不是合法 JSON，实际返回为：                              
+                                                                                     
+                      at test-script                                                 
+                      inside "02 登录 / 05 获取-登录状态-已登出"                     
+                                                                                     
+ 15.  TypeError                                                                      
+                      pm.rsaEncryptPassword is not a function                        
+                      at prerequest-script                                           
+                      inside "02 登录 / 验证用户密码（生成X-Curpass-Token变量）"     
+                                                                                     
+ 16.  AssertionError  响应体不能为空                                                 
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true    
+                      at assertion:0 in test-script                                  
+                      inside "02 登录 / 验证用户密码（生成X-Curpass-Token变量）"     
+                                                                                     
+ 17.  Error                                                                          
+                      响应体不是合法 JSON，实际返回为：                              
+                                                                                     
+                      at test-script                                                 
+                      inside "02 登录 / 验证用户密码（生成X-Curpass-Token变量）"     
+                                                                                     
+ 18.  TypeError                                                                      
+                      pm.rsaEncryptPassword is not a function                        
+                      at prerequest-script                                           
+                      inside "02 登录 / 普通用户登录"                                
+                                                                                     
+ 19.  AssertionError  响应体不能为空                                                 
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true    
+                      at assertion:0 in test-script                                  
+                      inside "02 登录 / 普通用户登录"                                
+                                                                                     
+ 20.  Error                                                                          
+                      响应体不是合法 JSON，实际返回为：                              
+                                                                                     
+                      at test-script                                                 
+                      inside "02 登录 / 普通用户登录"                                
+                                                                                     
+ 21.  TypeError                                                                      
+                      pm.rsaEncryptPassword is not a function                        
+                      at prerequest-script                                           
+                      inside "02 登录 / 验证普通用户密码（生成X-Curpass-Token变量）" 
+                                                                                     
+ 22.  AssertionError  响应体不能为空                                                 
+                      响应体为空，无法解析 JSON: expected '' to deeply equal true    
+                      at assertion:0 in test-script                                  
+                      inside "02 登录 / 验证普通用户密码（生成X-Curpass-Token变量）" 
+                                                                                     
+ 23.  Error                                                                          
+                      响应体不是合法 JSON，实际返回为：                              
+                                                                                     
+                      at test-script                                                 
+                      inside "02 登录 / 验证普通用户密码（生成X-Curpass-Token变量）" 
+Publishing run details to postman cloud is currently supported only for collections specified via postman collection id or collections belonging to git linked APIs
+Refer: https://go.pstmn.io/postman-cli-faq

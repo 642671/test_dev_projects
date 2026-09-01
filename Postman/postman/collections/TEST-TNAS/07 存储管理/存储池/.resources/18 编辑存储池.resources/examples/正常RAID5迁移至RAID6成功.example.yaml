@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/storage/edit/pool/:uuid"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  pathVariables:
+    - key: uuid
+      value: "{{vg0_uuid}}"
+      description: 存储池UUID，必填参数需要询问用户给出
+  body:
+    type: json
+    content: |-
+      {
+          "action": "up",
+          "disks": ["{{disk1_device}}"]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 52000

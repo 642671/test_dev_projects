@@ -1,0 +1,191 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/hotsparedisk/GetRaidHotSpare"
+method: GET
+headers:
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+scripts:
+  - type: afterResponse
+    code: "// ============================================================\r
+
+      // GET /v2/hotsparedisk/GetRaidHotSpare 后置脚本\r
+
+      // 提取所有支持热备的存储池 vgs 名称，\r
+
+      // 生成 hs{N}_vg（如 hs1_vg = vg0），供创建热备盘使用\r
+
+      // ------------------------------------------------------------\r
+
+      // POST /v2/hotsparedisk/CreateHotSpareDisk 请求体示例：\r
+
+      //   { \"devices\": [\"{{hs1_device}}\"], \"raids\": [\"{{hs1_vg}}\"] }\r
+
+      // ============================================================\r
+
+      \r
+
+      const res = pm.response.json();\r
+
+      const data = res.data || res;\r
+
+      \r
+
+      function setOrUnset(key, val) {\r
+
+      \    if (val === undefined || val === null || val === '' || Number.isNaN(val)) {\r
+
+      \        pm.collectionVariables.unset(key);\r
+
+      \    } else {\r
+
+      \        pm.collectionVariables.set(key, val);\r
+
+      \    }\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 0. 清理所有旧的 hs{N}_vg 变量\r
+
+      // ============================================================\r
+
+      const allModuleVars = pm.collectionVariables.toObject();\r
+
+      Object.keys(allModuleVars)\r
+
+      \    .filter(k => /^hs\\d+_vg$/.test(k))\r
+
+      \    .forEach(k => pm.collectionVariables.unset(k));\r
+
+      \r
+
+      // ============================================================\r
+
+      // 1. 标准化为数组\r
+
+      // ============================================================\r
+
+      let pools;\r
+
+      if (Array.isArray(data)) {\r
+
+      \    pools = data;\r
+
+      } else if (data && typeof data === 'object') {\r
+
+      \    pools = [data];\r
+
+      } else {\r
+
+      \    pools = [];\r
+
+      }\r
+
+      \r
+
+      if (pools.length === 0) {\r
+
+      \    console.log('无支持热备的存储池，所有 hs_vg 变量已清空');\r
+
+      \    pm.collectionVariables.set('hs_vg_count', 0);\r
+
+      \    return;\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 2. 提取每个池的 vgs 名称，按数组顺序从 1 起编号\r
+
+      // ============================================================\r
+
+      const vgNames = [];\r
+
+      pools.forEach(p => {\r
+
+      \    const vgName = (p.vgs || '').trim();\r
+
+      \    if (vgName) vgNames.push(vgName);\r
+
+      });\r
+
+      \r
+
+      if (vgNames.length === 0) {\r
+
+      \    console.log('无有效 vgs 名称，所有 hs_vg 变量已清空');\r
+
+      \    pm.collectionVariables.set('hs_vg_count', 0);\r
+
+      \    return;\r
+
+      }\r
+
+      \r
+
+      // 按原数组顺序写入 hs{N}_vg（N 从 1 起）\r
+
+      vgNames.forEach((name, i) => {\r
+
+      \    const idx = i + 1;\r
+
+      \    pm.collectionVariables.set(`hs${idx}_vg`, name);\r
+
+      \    console.log(`hs${idx}_vg = ${name}`);\r
+
+      });\r
+
+      \r
+
+      pm.collectionVariables.set('hs_vg_count', vgNames.length);\r
+
+      pm.collectionVariables.set('hs_vg_list', JSON.stringify(vgNames));\r
+
+      \r
+
+      // ============================================================\r
+
+      // 3. 调试输出\r
+
+      // ============================================================\r
+
+      console.log(`==== 热备存储池同步结果 ====`);\r
+
+      console.log(`支持热备的存储池: ${vgNames.length} 个 → ${vgNames.join(', ')}`);\r
+
+      \r
+
+      const updatedVars = pm.collectionVariables.toObject();\r
+
+      const hsVgVars = Object.keys(updatedVars)\r
+
+      \    .filter(k => /^hs\\d+_vg$/.test(k))\r
+
+      \    .sort((a, b) => parseInt(a.match(/\\d+/)[0]) - parseInt(b.match(/\\d+/)[0]));\r
+
+      \r
+
+      if (hsVgVars.length > 0) {\r
+
+      \    console.log('---------- hs{N}_vg 明细 ----------');\r
+
+      \    hsVgVars.forEach(k => console.log(`${k} = ${updatedVars[k]}`));\r
+
+      }\r
+
+      console.log('=======================================');\r\n"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/01 获取阵列列表.resources/examples
+order: 1000

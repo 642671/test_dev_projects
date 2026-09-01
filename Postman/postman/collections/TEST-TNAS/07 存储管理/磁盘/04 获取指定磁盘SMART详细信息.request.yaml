@@ -1,0 +1,203 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/GetDiskDetailData?device={{disk1_device}}"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  - key: device
+    value: "{{disk1_device}}"
+    description: 设备路径，如/dev/sda，必填参数需要询问用户给出
+scripts:
+  - type: afterResponse
+    code: "// ============================================================\r
+
+      // GET /v2/disk/detail 后置脚本（示例路径，请按实际接口调整）\r
+
+      // 功能：根据请求参数 device 反查磁盘索引 N，\r
+
+      //       先清空 diskN_model / diskN_serial，再写入新值\r
+
+      // ------------------------------------------------------------\r
+
+      // 遵循 POSTMAN_SCRIPT_STANDARDS.md 中的强制规范：\r
+
+      //   1. 每次执行先清空本次对应的 diskN_model / diskN_serial\r
+
+      //   2. 有值就 set，没值就 unset，不残留空字符串\r
+
+      //   3. 变量命名与磁盘列表接口一致：diskN_model / diskN_serial\r
+
+      // ============================================================\r
+
+      \r
+
+      const res = pm.response.json();\r
+
+      const data = res.data || res;\r
+
+      \r
+
+      // ------------------------------------------------------------\r
+
+      // 小工具\r
+
+      // ------------------------------------------------------------\r
+
+      function setOrUnset(key, val) {\r
+
+      \    if (val === undefined || val === null || val === '' || Number.isNaN(val)) {\r
+
+      \        pm.collectionVariables.unset(key);\r
+
+      \    } else {\r
+
+      \        pm.collectionVariables.set(key, val);\r
+
+      \    }\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 0. 从请求中提取 device → 反查索引 → 先清空对应变量\r
+
+      // ============================================================\r
+
+      let reqDevice = '';\r
+
+      \r
+
+      // 方式 A：URL 查询参数\r
+
+      const queryDevice = pm.request.url.query.get('device');\r
+
+      if (queryDevice) {\r
+
+      \    reqDevice = (typeof queryDevice === 'string') ? queryDevice : queryDevice.toString();\r
+
+      }\r
+
+      \r
+
+      // 方式 B：请求体 JSON\r
+
+      if (!reqDevice && pm.request.body) {\r
+
+      \    try {\r
+
+      \        const body = JSON.parse(pm.request.body.raw);\r
+
+      \        reqDevice = (body.device || '').trim();\r
+
+      \    } catch (e) { /* 忽略 */ }\r
+
+      }\r
+
+      \r
+
+      // 反查模块变量中哪个 diskN_device 匹配本次请求的 device\r
+
+      let diskIndex = null;\r
+
+      if (reqDevice) {\r
+
+      \    const allVars = pm.collectionVariables.toObject();\r
+
+      \    for (const [key, value] of Object.entries(allVars)) {\r
+
+      \        const match = key.match(/^disk(\\d+)_device$/);\r
+
+      \        if (match && String(value).trim() === reqDevice.trim()) {\r
+
+      \            diskIndex = parseInt(match[1], 10);\r
+
+      \            break;\r
+
+      \        }\r
+
+      \    }\r
+
+      }\r
+
+      \r
+
+      // ★ 关键：先清空本次要写入的变量，再写新值\r
+
+      if (diskIndex !== null) {\r
+
+      \    pm.collectionVariables.unset(`disk${diskIndex}_model`);\r
+
+      \    pm.collectionVariables.unset(`disk${diskIndex}_serial`);\r
+
+      \    pm.collectionVariables.unset(`disk${diskIndex}_type`);\r
+
+      \    pm.collectionVariables.unset(`disk${diskIndex}_capacity`);\r
+
+      \    pm.collectionVariables.unset(`disk${diskIndex}_slot`);\r
+
+      \    console.log(`已清空 disk${diskIndex}_model / disk${diskIndex}_serial（准备写入新值）`);\r
+
+      } else {\r
+
+      \    console.warn(`⚠ 未在模块变量中找到 device=${reqDevice} 对应的 diskN_device，跳过清理`);\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 1. 响应结构校验\r
+
+      // ============================================================\r
+
+      pm.test('响应结构正确（包含 model 和 serial）', () => {\r
+
+      \    pm.expect(data).to.have.property('model');\r
+
+      \    pm.expect(data).to.have.property('serial');\r
+
+      });\r
+
+      \r
+
+      // ============================================================\r
+
+      // 2. 写入 diskN_model / diskN_serial（及补充字段）\r
+
+      // ============================================================\r
+
+      if (diskIndex !== null) {\r
+
+      \    setOrUnset(`disk${diskIndex}_model`,    (data.model  || '').trim());\r
+
+      \    setOrUnset(`disk${diskIndex}_serial`,   (data.serial || '').trim());\r
+
+      \    setOrUnset(`disk${diskIndex}_type`,     (data.type   || '').trim());\r
+
+      \    setOrUnset(`disk${diskIndex}_capacity`, data.factory_capacity || '');\r
+
+      \    setOrUnset(`disk${diskIndex}_slot`,     data.slot);\r
+
+      \r
+
+      \    console.log(`disk${diskIndex}_model  = ${data.model}`);\r
+
+      \    console.log(`disk${diskIndex}_serial = ${data.serial}`);\r
+
+      }"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/04 获取指定磁盘SMART详细信息.resources/examples
+order: 4000

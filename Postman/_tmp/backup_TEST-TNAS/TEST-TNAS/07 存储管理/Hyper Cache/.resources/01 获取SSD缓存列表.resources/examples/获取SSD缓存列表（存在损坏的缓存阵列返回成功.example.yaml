@@ -1,0 +1,21 @@
+$kind: http-example
+name: 获取SSD缓存列表（存在损坏的缓存阵列返回成功）
+request:
+  url: "{{baseUrl}}/v2/lvmCache/CacheLvsInfo"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 3000

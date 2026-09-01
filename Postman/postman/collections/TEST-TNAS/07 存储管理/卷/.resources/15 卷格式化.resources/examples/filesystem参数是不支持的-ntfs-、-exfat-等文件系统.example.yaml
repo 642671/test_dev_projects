@@ -1,0 +1,31 @@
+$kind: http-example
+name: filesystem参数是不支持的"ntfs"、"exfat"等文件系统
+request:
+  url: "{{baseUrl}}/v2/storage/volumeFormatting"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+    - key: X-CurPass-Token
+      value: "{{X-Curpass-Token}}"
+      description: 不可为空，密码认证密文
+  body:
+    type: json
+    content: |-
+      {
+          "uuid": "{{lv0_uuid}}",
+          "filesystem": "ntfs"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 17000

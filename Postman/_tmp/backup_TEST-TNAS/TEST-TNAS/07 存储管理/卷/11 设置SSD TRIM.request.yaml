@@ -1,0 +1,50 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/ssd/trim/:uuid?das=dasda"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  das: dasda
+pathVariables:
+  - key: uuid
+    value: "{{lv5_uuid}}"
+    description: 卷UUID，必填参数需要询问用户给出
+body:
+  type: json
+  content: "{\r
+
+    \    \"cycle_type\": \"Disabled\",\r
+
+    \    \"cycle_weeks_range\": \"\",\r
+
+    \    \"cycle_date\": \"13\",\r
+
+    \    \"schedule_time\": \"2026-07-13\",\r
+
+    \    \"frequency_type\": \"Disabled\",\r
+
+    \    \"frequency_value\": 0,\r
+
+    \    \"hour\": 14,\r
+
+    \    \"minute\": 10,\r
+
+    \    \"lv_name\": \"lv5\",\r
+
+    \    \"enable\": 1,\r
+
+    \    \"is_run_immediately\": 0\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/11 设置SSD TRIM.resources/examples
+order: 11000

@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/setting"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/12 获取磁盘设置.resources/examples
+order: 12000

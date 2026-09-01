@@ -1,0 +1,28 @@
+$kind: http-example
+name: 选用锁定磁盘（安全擦除后解锁失败）创建存储池失败（锁定盘被过滤不可用）
+request:
+  url: "{{baseUrl}}/v2/storage/create/pool"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: json
+    content: |-
+      {
+          "level": "single",
+          "disks": ["{{disk1_device}}"]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 38000

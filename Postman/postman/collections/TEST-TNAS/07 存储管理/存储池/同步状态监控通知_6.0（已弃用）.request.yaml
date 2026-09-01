@@ -1,0 +1,22 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/VgMonitor?raid=阵列名称&event=事件"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/x-www-form-urlencoded
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+queryParams:
+  raid: 阵列名称
+  event: 事件
+body:
+  type: formdata
+  content: []
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 23000

@@ -1,0 +1,43 @@
+$kind: http-example
+name: 正常创建SMART任务（启用计划任务，每4小时重复执行）
+request:
+  url: "{{baseUrl}}/v2/disk/smart_test/schedule"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: json
+    content: |-
+      {
+          "name": "{{disk1_model}}",
+          "serial": "{{disk1_serial}}",
+          "test_type": 0,
+          "disks": "{{disk1_device}}",
+          "enabled": true,
+          "run_immediately": false,
+          "exception_warn": true,
+          "schedule": {
+              "cycle_type": "EveryDay",
+              "cycle_weeks_range": "",
+              "cycle_date": "",
+              "schedule_time": "",
+              "frequency_type": "Hour",
+              "frequency_value": 4,
+              "hour": 0,
+              "minute": 0
+          }
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 21000

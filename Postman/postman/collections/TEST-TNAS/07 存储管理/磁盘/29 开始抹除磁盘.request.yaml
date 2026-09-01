@@ -1,0 +1,31 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/format/start?device={{disk1_device}}"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+  - key: X-Curpass-Token
+    value: "{{X-Curpass-Token}}"
+    description: 不可为空，密码认证所需token
+queryParams:
+  - key: device
+    value: "{{disk1_device}}"
+    description: 设备路径，如/dev/sda
+body:
+  type: json
+  content: "{\r
+
+    \    \"device\": \"{{disk1_device}}\"\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/29 开始抹除磁盘.resources/examples
+order: 29000

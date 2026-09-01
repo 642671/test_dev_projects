@@ -1,0 +1,30 @@
+$kind: http-example
+name: 参数选中多个非当前系统盘批量删除失败（一次只允许删除一个）
+request:
+  url: "{{baseUrl}}/v2/disk/DelSysDisk"
+  method: DELETE
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+    - key: X-Curpass-Token
+      value: "{{X-Curpass-Token}}"
+      description: 不可为空，密码认证所以密文
+  body:
+    type: json
+    content: |-
+      {
+          "disk": "{{disk1_device}}:{{disk2_device}}"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 13000

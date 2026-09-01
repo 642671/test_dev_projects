@@ -1,0 +1,18 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/storage/CheckAvailablePool/:disk"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Cookie: "{{Cookie}}"
+    X-Csrf-Token: "{{X-Csrf-Token}}"
+    "{{X-Csrf-Token}}": "{{X-Csrf-Token}}"
+  pathVariables:
+    disk: ""
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 15000

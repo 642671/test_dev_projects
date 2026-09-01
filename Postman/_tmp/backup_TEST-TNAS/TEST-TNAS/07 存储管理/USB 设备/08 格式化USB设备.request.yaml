@@ -1,0 +1,38 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/extStorageDevice/FormattingDevice"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/x-www-form-urlencoded
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+  - key: X-Curpass-Token
+    value: "{{X-Curpass-Token}}"
+body:
+  type: formdata
+  content:
+    - type: text
+      key: filesystem
+      value: ext4
+      description: 格式化文件系统类型：ext4、ntfs、vfat、exfat，必填参数需要询问用户给出
+    - type: text
+      key: name
+      value: "{{usb1_name}}"
+      description: 设备名称（如sdg），必填参数需要询问用户给出
+    - type: text
+      key: type
+      value: usb
+      description: 设备类型：默认值usb，其它类型不允许
+    - type: text
+      key: label
+      value: newlabel
+      description: 分区卷标（可选），ext4最多16字符，ntfs/vfat/exfat最多11字符
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/08 格式化USB设备.resources/examples
+order: 8000

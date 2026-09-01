@@ -1,0 +1,36 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/lvmCache/CreateCacheLv"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+    - key: X-Curpass-Token
+      value: "{{X-Curpass-Token}}"
+  body:
+    type: json
+    content: |-
+      {
+          "raid_level": 5,
+          "cache_mode": "writethrough",
+          "cache_size": "74G",
+          "main_lv": "{{hc_lv_path}}",
+          "fast_devices": [
+              "{{hc_cand_ssd}}",
+              "{{hc_cand_ssd2}}",
+              "{{hc_cand_ssd3}}"
+          ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 5000

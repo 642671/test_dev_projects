@@ -1,0 +1,32 @@
+$kind: http-example
+name: 未启用数据摘要与表头摘要功能却携带登录虚拟磁盘失败
+request:
+  url: "{{baseUrl}}/v2/virtualdisk/IscsiLogin"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: json
+    content: |-
+      {
+          "targetName": "iqn.tnas.terramaster.26719092407",
+          "ip": "10.18.15.161",
+          "port": "3260",
+          "head": "1",
+          "data": "1",
+          "status": false
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 4000

@@ -1,0 +1,285 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/login"
+method: POST
+headers:
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: X-Csrf-Token 可以为任意值，但是必须与Headers的值一样，例如为空值的{{X-Csrf-Token}}
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"test\",\r
+
+    \    \"password\": \"Admin123\",\r
+
+    \    \"code\": \"\",\r
+
+    \    \"remember\": true,\r
+
+    \    \"slidecode\": 1\r
+
+    }"
+auth:
+  type: noauth
+scripts:
+  - type: beforeRequest
+    code: "// 获取 Base64 公钥\r
+
+      console.log(\"public\", pm.environment.get(\"RSA_PUBLIC_KEY\"))\r
+
+      let base64Key = pm.environment.get(\"RSA_PUBLIC_KEY\");\r
+
+      \r
+
+      if (!base64Key) {\r
+
+      \    throw new Error(\"未配置 RSA_PUBLIC_KEY\");\r
+
+      }\r
+
+      \r
+
+      // Base64 解码 → PEM 字符串\r
+
+      let publicKey = require('atob')(base64Key);\r
+
+      console.log(\"public\", publicKey)\r
+
+      // 获取请求体（JSON）\r
+
+      let body = JSON.parse(pm.request.body);\r
+
+      console.log(\"加密密文:\", body.password);\r
+
+      \r
+
+      body.password = await pm.executeAsync('encoderLoginPassword.go', [body.password, publicKey]);\r
+
+      console.log('Result:', body.password);\r
+
+      // 写回请求体\r
+
+      pm.request.body = JSON.stringify(body);"
+    language: text/javascript
+  - type: afterResponse
+    code: "// ======================================\r
+
+      // 超管用户登录接口后置脚本\r
+
+      // 功能：\r
+
+      // 1. 获取登录返回的 Cookie\r
+
+      // 2. 获取 X-Csrf-Token\r
+
+      // 3. 获取当前用户名\r
+
+      // 4. 自动拼接完整 Cookie\r
+
+      // 5. 保存到环境变量，供后续接口直接使用\r
+
+      // ======================================\r
+
+      \r
+
+      // 获取变量\r
+
+      const tmsessname = pm.variables.get(\"TMSESSNAME\");\r
+
+      const tosCurrentUsername = pm.variables.get(\"tos_current_username\");\r
+
+      const csrfToken = pm.variables.get(\"X-Csrf-Token\");\r
+
+      \r
+
+      // 输出日志，方便调试\r
+
+      console.log(\"========== 超管登录信息 ==========\");\r
+
+      console.log(\"TMSESSNAME:\", tmsessname);\r
+
+      console.log(\"tos_current_username:\", tosCurrentUsername);\r
+
+      console.log(\"X-Csrf-Token:\", csrfToken);\r
+
+      \r
+
+      // 使用数组拼接 Cookie，避免多余分号\r
+
+      const cookieItems = [];\r
+
+      \r
+
+      // X-Csrf-Token\r
+
+      if (csrfToken) {\r
+
+      \    cookieItems.push(`X-Csrf-Token=${csrfToken}`);\r
+
+      }\r
+
+      \r
+
+      // Session\r
+
+      if (tmsessname) {\r
+
+      \    cookieItems.push(`TMSESSNAME=${tmsessname}`);\r
+
+      }\r
+
+      \r
+
+      // 当前用户名\r
+
+      if (tosCurrentUsername) {\r
+
+      \    cookieItems.push(`tos_current_username=${tosCurrentUsername}`);\r
+
+      \    cookieItems.push(`userName=${tosCurrentUsername}`);\r
+
+      }\r
+
+      \r
+
+      // 登录状态\r
+
+      cookieItems.push(\"loginStatus=true\");\r
+
+      \r
+
+      // 拼接完整 Cookie\r
+
+      const fullCookie = cookieItems.join(\"; \");\r
+
+      \r
+
+      console.log(\"完整 Cookie：\");\r
+
+      console.log(fullCookie);\r
+
+      \r
+
+      // ======================\r
+
+      // 保存环境变量\r
+
+      // ======================\r
+
+      \r
+
+      // 保存 X-Csrf-Token\r
+
+      if (csrfToken) {\r
+
+      \    pm.environment.set(\"X-Csrf-Token\", csrfToken);\r
+
+      }\r
+
+      \r
+
+      // 保存 Cookie\r
+
+      pm.environment.set(\"Cookie\", fullCookie);\r
+
+      \r
+
+      // 调试输出\r
+
+      console.log(\"========== 已保存环境变量 ==========\");\r
+
+      console.log(\"Cookie =\", pm.environment.get(\"Cookie\"));\r
+
+      console.log(\"X-Csrf-Token =\", pm.environment.get(\"X-Csrf-Token\"));\r
+
+      \r
+
+      // ======================\r
+
+      // 登出会话复用检测\r
+
+      // ======================\r
+
+      \r
+
+      const prevCookie = pm.environment.get(\"expired_Cookie\");\r
+
+      if (prevCookie) {\r
+
+      \    if (prevCookie === fullCookie) {\r
+
+      \        console.warn(\"⚠️ 重新登录 Cookie 与 expired_Cookie 完全相同！会话被复用\");\r
+
+      \        // 逐段拆解，定位未变的成分\r
+
+      \        const prevMap = Object.fromEntries(prevCookie.split(\"; \").map(s => s.split(/=(.*)/s)));\r
+
+      \        const currMap = Object.fromEntries(fullCookie.split(\"; \").map(s => s.split(/=(.*)/s)));\r
+
+      \        const allKeys = new Set([...Object.keys(prevMap), ...Object.keys(currMap)]);\r
+
+      \        for (const k of allKeys) {\r
+
+      \            const p = prevMap[k] ?? \"(无)\";\r
+
+      \            const c = currMap[k] ?? \"(无)\";\r
+
+      \            console.warn(`  ${p === c ? \"✓\" : \"✗\"} ${k}: 旧=${p} 新=${c}`);\r
+
+      \        }\r
+
+      \    } else {\r
+
+      \        console.log(\"✓ Cookie 已轮换，与 expired_Cookie 不同\");\r
+
+      \    }\r
+
+      } else {\r
+
+      \    console.log(\"（未检测到 expired_Cookie，首次运行或未执行过登出）\");\r
+
+      }\r
+
+      \r
+
+      // ======================\r
+
+      // 生成 wrong_X-Csrf-Token（token 不一致场景）\r
+
+      // ======================\r
+
+      \r
+
+      if (csrfToken) {\r
+
+      \    // 修改第 10、30、50 位 hex 字符，生成与当前 token 不同的\"不一致\"token\r
+
+      \    const hexNext = { \"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"4\":\"5\",\"5\":\"6\",\"6\":\"7\",\"7\":\"8\",\"8\":\"9\",\"9\":\"a\",\"a\":\"b\",\"b\":\"c\",\"c\":\"d\",\"d\":\"e\",\"e\":\"f\",\"f\":\"0\" };\r
+
+      \    let wrongToken = csrfToken.split(\"\");\r
+
+      \    [10, 30, 50].forEach(pos => {\r
+
+      \        if (pos < wrongToken.length) {\r
+
+      \            wrongToken[pos] = hexNext[wrongToken[pos]] || \"0\";\r
+
+      \        }\r
+
+      \    });\r
+
+      \    pm.environment.set(\"wrong_X-Csrf-Token\", wrongToken.join(\"\"));\r
+
+      \    console.log(\"wrong_X-Csrf-Token =\", pm.environment.get(\"wrong_X-Csrf-Token\"));\r
+
+      } else {\r
+
+      \    console.warn(\"警告：未读取到 X-Csrf-Token，wrong_X-Csrf-Token 未更新\");\r
+
+      }\r\n"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 3000

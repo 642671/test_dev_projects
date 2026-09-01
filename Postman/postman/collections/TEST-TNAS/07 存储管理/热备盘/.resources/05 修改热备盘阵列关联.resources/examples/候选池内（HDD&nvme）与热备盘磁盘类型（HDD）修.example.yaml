@@ -1,0 +1,30 @@
+$kind: http-example
+name: 候选池内（HDD&nvme）与热备盘磁盘类型（HDD）修改成功
+request:
+  url: "{{baseUrl}}/v2/hotsparedisk/ModifyArray"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: json
+    content: |-
+      {
+          "raids": [
+              "{{hs1_vg}}"
+          ],
+          "blk": "{{hsp1_blk}}"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

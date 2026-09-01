@@ -1,0 +1,57 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/edit/volume/:uuid"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+pathVariables:
+  - key: uuid
+    value: "{{lv0_uuid}}"
+    description: 卷UUID，必填参数需要询问用户给出
+scripts:
+  - type: afterResponse
+    code: "// GET /v2/storage/edit/volume/:uuid 后置脚本\r
+
+      // 按卷名生成 {卷名}_mnt_path，空就删\r
+
+      \r
+
+      const data = pm.response.json().data;\r
+
+      \r
+
+      const mntPath = data.mntpath || '';\r
+
+      \r
+
+      console.log('卷名:', data.name);\r
+
+      console.log('挂载路径:', mntPath);\r
+
+      \r
+
+      if (mntPath) {\r
+
+      \    pm.environment.set(`${data.name}_mnt_path`, mntPath);\r
+
+      \    console.log(`已设置 ${data.name}_mnt_path = ${mntPath}`);\r
+
+      } else {\r
+
+      \    pm.environment.unset(`${data.name}_mnt_path`);\r
+
+      \    console.log(`已删除 ${data.name}_mnt_path`);\r
+
+      }"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/09 获取卷信息（提取lv0_mnt_path ）.resources/examples
+order: 9000

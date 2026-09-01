@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/GetRaidSpeedOrBitmap?raid={{vg0_raid}}"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  - key: raid
+    value: "{{vg0_raid}}"
+    description: RAID设备路径，如/dev/md0，必填参数需要询问用户给出
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/04 获取阵列同步速度及Bitmap.resources/examples
+order: 4000

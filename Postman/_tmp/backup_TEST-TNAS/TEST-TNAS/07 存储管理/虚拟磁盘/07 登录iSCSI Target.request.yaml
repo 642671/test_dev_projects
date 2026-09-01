@@ -1,0 +1,36 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/virtualdisk/IscsiLogin"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"targetName\": \"iqn.tnas.terramaster.26731112534\",\r
+
+    \    \"head\": \"0\",\r
+
+    \    \"data\": \"0\",\r
+
+    \    \"username\": \"test\",\r
+
+    \    \"password\": \"Admin1234567\",\r
+
+    \    \"ip\": \"10.18.15.141\",\r
+
+    \    \"port\": \"3260\"\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/07 登录iSCSI Target.resources/examples
+order: 8000

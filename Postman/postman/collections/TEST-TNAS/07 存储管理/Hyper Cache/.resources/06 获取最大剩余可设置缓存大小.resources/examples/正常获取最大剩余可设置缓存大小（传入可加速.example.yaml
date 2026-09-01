@@ -1,0 +1,25 @@
+$kind: http-example
+name: 正常获取最大剩余可设置缓存大小（传入可加速的卷）
+request:
+  url: "{{baseUrl}}/v2/lvmCache/GetMaxResidueCacheSize?volumeUUID={{lv0_uuid}}"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  queryParams:
+    - key: volumeUUID
+      value: "{{lv0_uuid}}"
+      description: 卷UUID，文本类型，必填参数需要询问用户给出
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

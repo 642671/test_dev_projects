@@ -1,0 +1,30 @@
+$kind: http-example
+name: 正常删除系统盘（存在多块系统盘，删除非唯一系统盘）
+request:
+  url: "{{baseUrl}}/v2/disk/DelSysDisk"
+  method: DELETE
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+    - key: X-Curpass-Token
+      value: "{{X-Curpass-Token}}"
+      description: 不可为空，密码认证所以密文
+  body:
+    type: json
+    content: |-
+      {
+          "disk": "{{disk1_device}}"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

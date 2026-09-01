@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/proxy/iSCSIManager/Select"
+method: GET
+headers:
+  Content-Type: application/x-www-form-urlencoded
+  Cookie: "{{Cookie}}"
+  X-Csrf-Token: "{{X-Csrf-Token}}"
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 1000

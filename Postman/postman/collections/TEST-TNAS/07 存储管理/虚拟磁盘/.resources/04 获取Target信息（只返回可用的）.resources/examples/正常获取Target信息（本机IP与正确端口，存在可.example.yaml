@@ -1,0 +1,24 @@
+$kind: http-example
+name: 正常获取Target信息（本机IP与正确端口，存在可用Target返回不为空）
+request:
+  url: "{{baseUrl}}/v2/virtualdisk/GetTargetInfo"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  pathVariables:
+    ip: 10.18.15.161
+    port: "3260"
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 5000

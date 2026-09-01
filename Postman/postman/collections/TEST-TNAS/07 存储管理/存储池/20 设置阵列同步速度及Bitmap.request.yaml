@@ -1,0 +1,32 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/SetRaidSpeedOrBitmap"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"raid\": \"/dev/md1\",\r
+
+    \    \"speed_status\": 3,\r
+
+    \    \"speed_min\": 100,\r
+
+    \    \"speed_max\": 500,\r
+
+    \    \"bitmap_status\": true\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/20 设置阵列同步速度及Bitmap.resources/examples
+order: 20000

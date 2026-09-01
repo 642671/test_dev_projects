@@ -1,0 +1,24 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/storage/ssd/trim/:uuid?uuid={{lv0_uuid}}"
+  method: GET
+  headers:
+    - key: X-Csrf-Token
+      value: "{{NormalUserCsrfToken}}"
+      description: 不可为空，用户认证所需token
+    - key: Cookie
+      value: "{{NormalUserCookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: Content-Type
+      value: application/json
+  queryParams:
+    uuid: "{{lv0_uuid}}"
+  pathVariables:
+    uuid: ""
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 11000

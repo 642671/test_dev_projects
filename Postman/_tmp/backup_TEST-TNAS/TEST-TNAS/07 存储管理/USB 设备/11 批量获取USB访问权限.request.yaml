@@ -1,0 +1,28 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/extStorageDevice/UsbAclAll"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"folder_names\": [\r
+
+    \        \"{{usb1_s1}}\"\r
+
+    \    ]\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/11 批量获取USB访问权限.resources/examples
+order: 11000

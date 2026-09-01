@@ -1,0 +1,22 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/virtualdisk/GetTargetInfo?ip=10.18.15.207&port=3260"
+method: GET
+headers:
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  - key: ip
+    value: 10.18.15.207
+    description: iSCSI服务端IP地址，文本类型，必填参数需要询问用户给出
+  - key: port
+    value: "3260"
+    description: iSCSI服务端端口，数值文本，1-65535，必填参数需要询问用户给出
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/04 获取Target信息（只返回可用的）.resources/examples
+order: 5000

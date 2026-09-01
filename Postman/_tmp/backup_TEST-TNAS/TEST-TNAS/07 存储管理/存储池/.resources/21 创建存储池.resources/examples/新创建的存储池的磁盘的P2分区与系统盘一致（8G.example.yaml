@@ -1,0 +1,28 @@
+$kind: http-example
+name: 新创建的存储池的磁盘的P2分区与系统盘一致（8GB系统盘）
+request:
+  url: "{{baseUrl}}/v2/storage/create/pool"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Cookie
+      value: "{{Cookie}}"
+      description: 不可为空，用户认证所需cookie
+    - key: X-Csrf-Token
+      value: "{{X-Csrf-Token}}"
+      description: 不可为空，用户认证所需token
+  body:
+    type: json
+    content: |-
+      {
+          "level": "single",
+          "disks": ["{{cp_disk_0_path}}"]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 3000

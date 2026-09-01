@@ -1,0 +1,28 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/virtualdisk/IscsiAction"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/x-www-form-urlencoded
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: formdata
+  content:
+    - type: text
+      key: target
+      value: ""
+      description: Target IQN名称，必填参数需要询问用户给出
+    - type: text
+      key: action
+      value: login
+      description: 操作类型：login=连接，logout=断开，必填参数需要询问用户给出
+settings:
+  strictSSL: false
+  followRedirects: true
+examples: ./.resources/11 iSCSI操作.resources/examples
+order: 12000

@@ -1,0 +1,19 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/storage/CheckMdInfo/:md"
+  method: POST
+  headers:
+    Content-Type: application/x-www-form-urlencoded
+    Cookie: "{{Cookie}}"
+    X-Csrf-Token: "{{X-Csrf-Token}}"
+  pathVariables:
+    - key: md
+      value: ""
+      description: md设备名，如md0，必填参数需要询问用户给出
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 6000
