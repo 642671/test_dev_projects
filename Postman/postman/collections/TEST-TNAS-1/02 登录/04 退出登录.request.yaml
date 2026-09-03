@@ -1,0 +1,55 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/logout"
+method: PUT
+scripts:
+  - type: afterResponse
+    code: |
+      // ======================================
+      // 登出接口后置脚本（POST /v2/logout）
+      // 功能：
+      // 1. 把登出前 Cookie 存为 expired_Cookie（会话已轮换，自然失效）
+      // 2. 把登出前 X-Csrf-Token 存为 expired_X-Csrf-Token（原始值备份）
+      // 3. 清除环境变量 X-Csrf-Token（下次 /tos/ 会重新生成）
+      // 注意：
+      //   - wrong_X-Csrf-Token 由登录后置脚本 01_auth_login.js 生成
+      //   - expired_Cookie / expired_X-Csrf-Token 现在已是真正失效的凭证
+      //     （服务端已修复登出后 session 轮换问题）
+      // ======================================
+
+      // 读取登出前的有效凭证（当前 environment 里保存的仍是登出前的值）
+      const currentCookie = pm.environment.get("Cookie");
+      const currentCsrfToken = pm.environment.get("X-Csrf-Token");
+
+      console.log("========== 登出前凭证快照 ==========");
+      console.log("Cookie:", currentCookie);
+      console.log("X-Csrf-Token:", currentCsrfToken);
+
+      // ======================
+      // ① 备份原始凭证（过期失效）
+      // ======================
+
+      if (currentCookie) {
+          pm.environment.set("expired_Cookie", currentCookie);
+      } else {
+          console.warn("警告：未读取到 Cookie，expired_Cookie 未更新");
+      }
+
+      if (currentCsrfToken) {
+          pm.environment.set("expired_X-Csrf-Token", currentCsrfToken);
+      } else {
+          console.warn("警告：未读取到 X-Csrf-Token，expired_X-Csrf-Token 未更新");
+      }
+
+      // ======================
+      // ② 清除 X-Csrf-Token → 让下次 /tos/ 重新生成
+      // ======================
+
+      pm.environment.unset("X-Csrf-Token");
+      console.log("X-Csrf-Token 已清除（下次 /tos/ 将重新生成）");
+
+      // 调试输出
+      console.log("========== 已保存变量总览 ==========");
+      console.log("expired_Cookie         =", pm.environment.get("expired_Cookie"));
+      console.log("expired_X-Csrf-Token   =", pm.environment.get("expired_X-Csrf-Token"));
+    language: text/javascript
+order: 5000

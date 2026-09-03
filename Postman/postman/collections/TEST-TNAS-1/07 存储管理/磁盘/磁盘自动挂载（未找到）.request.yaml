@@ -1,0 +1,16 @@
+$kind: http-request
+url: '{{baseUrl}}/v1/:name'
+method: PUT
+queryParams:
+  - key: type
+    value: ""
+  - key: way
+    value: ""
+  - key: flag
+    value: ""
+pathVariables:
+  name: ""
+body:
+  type: formdata
+  content: []
+order: 49000

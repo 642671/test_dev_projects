@@ -1,0 +1,271 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/smart_test/schedule"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"{{disk1_model}}\",\r
+
+    \    \"serial\": \"{{disk1_serial}}\",\r
+
+    \    \"test_type\": 0,\r
+
+    \    \"disks\": \"{{disk1_device}}\",\r
+
+    \    \"enabled\": false,\r
+
+    \    \"run_immediately\": true,\r
+
+    \    \"exception_warn\": true,\r
+
+    \    \"schedule\": {\r
+
+    \        \"cycle_type\": \"Disabled\",\r
+
+    \        \"cycle_weeks_range\": \"\",\r
+
+    \        \"cycle_date\": \"15\",\r
+
+    \        \"schedule_time\": \"2026-07-15\",\r
+
+    \        \"frequency_type\": \"Disabled\",\r
+
+    \        \"frequency_value\": 0,\r
+
+    \        \"hour\": 19,\r
+
+    \        \"minute\": 44\r
+
+    \    }\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "// ============================================================\r
+
+      // POST /v2/disk/smart_test/schedule 后置脚本\r
+
+      // 功能：从请求体中提取 disks 设备路径，反查模块变量中\r
+
+      //       对应的 diskN_device，将响应的 id 写入 diskN_smart_id\r
+
+      // ------------------------------------------------------------\r
+
+      // 遵循 POSTMAN_SCRIPT_STANDARDS.md 中的强制规范：\r
+
+      //   1. 每次执行先清空本次对应的 diskN_smart_id\r
+
+      //   2. 有值就 set，没值就 unset，不残留空字符串\r
+
+      //   3. 变量命名与磁盘列表接口一致：diskN_smart_id\r
+
+      // ============================================================\r
+
+      \r
+
+      const res = pm.response.json();\r
+
+      const data = res.data || res;\r
+
+      \r
+
+      // ------------------------------------------------------------\r
+
+      // 小工具\r
+
+      // ------------------------------------------------------------\r
+
+      function setOrUnset(key, val) {\r
+
+      \    if (val === undefined || val === null || val === '' || Number.isNaN(val)) {\r
+
+      \        pm.moduleVariables.unset(key);\r
+
+      \    } else {\r
+
+      \        pm.moduleVariables.set(key, val);\r
+
+      \    }\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 0. 从请求体中提取 disks 设备路径 → 反查索引 → 先清空\r
+
+      // ============================================================\r
+
+      let reqDevice = '';\r
+
+      \r
+
+      if (pm.request.body) {\r
+
+      \    try {\r
+
+      \        const body = JSON.parse(pm.request.body.raw);\r
+
+      \        reqDevice = (body.disks || '').trim();\r
+
+      \    } catch (e) { /* 请求体非 JSON，忽略 */ }\r
+
+      }\r
+
+      \r
+
+      if (!reqDevice) {\r
+
+      \    console.warn('⚠ 未从请求体提取到 disks 参数，跳过变量写入');\r
+
+      }\r
+
+      \r
+
+      // 反查模块变量中哪个 diskN_device 匹配\r
+
+      let diskIndex = null;\r
+
+      if (reqDevice) {\r
+
+      \    const allVars = pm.moduleVariables.toObject();\r
+
+      \    for (const [key, value] of Object.entries(allVars)) {\r
+
+      \        const match = key.match(/^disk(\\d+)_device$/);\r
+
+      \        if (match && String(value).trim() === reqDevice) {\r
+
+      \            diskIndex = parseInt(match[1], 10);\r
+
+      \            break;\r
+
+      \        }\r
+
+      \    }\r
+
+      }\r
+
+      \r
+
+      // ★ 先清空本次要写入的变量\r
+
+      if (diskIndex !== null) {\r
+
+      \    pm.moduleVariables.unset(`disk${diskIndex}_smart_id`);\r
+
+      \    console.log(`已清空 disk${diskIndex}_smart_id（准备写入新值）`);\r
+
+      } else {\r
+
+      \    console.warn(`⚠ 未在模块变量中找到 device=${reqDevice} 对应的 diskN_device`);\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 1. 响应结构校验\r
+
+      // ============================================================\r
+
+      pm.test('响应包含 id', () => {\r
+
+      \    pm.expect(data).to.have.property('id');\r
+
+      });\r
+
+      \r
+
+      // ============================================================\r
+
+      // 2. 写入 diskN_smart_id\r
+
+      // ============================================================\r
+
+      if (diskIndex !== null) {\r
+
+      \    setOrUnset(`disk${diskIndex}_smart_id`, data.id);\r
+
+      \    console.log(`disk${diskIndex}_smart_id = ${data.id}`);\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 3. 调试输出（结构化格式）\r
+
+      // ============================================================\r
+
+      console.log('====================================');\r
+
+      if (diskIndex !== null) {\r
+
+      \    console.log(`disk${diskIndex}_smart_id 已同步: ${data.id}`);\r
+
+      } else {\r
+
+      \    console.log('未匹配到磁盘编号，变量未写入');\r
+
+      }\r
+
+      console.log('====================================');\r
+
+      console.log('========== diskN_smart_id 变量明细 ==========');\r
+
+      \r
+
+      const updatedVars = pm.moduleVariables.toObject();\r
+
+      const smartVars = Object.keys(updatedVars)\r
+
+      \    .filter(k => /^disk\\d+_smart_id$/.test(k))\r
+
+      \    .sort((a, b) => {\r
+
+      \        const na = parseInt(a.match(/\\d+/)[0], 10);\r
+
+      \        const nb = parseInt(b.match(/\\d+/)[0], 10);\r
+
+      \        return na - nb;\r
+
+      \    });\r
+
+      \r
+
+      if (smartVars.length > 0) {\r
+
+      \    smartVars.forEach(k => console.log(`${k} = ${updatedVars[k]}`));\r
+
+      } else {\r
+
+      \    console.log('(无)');\r
+
+      }\r
+
+      \r
+
+      console.log('=======================================');\r
+
+      console.log('SMART 任务 ID 已同步到模块变量。');\r
+
+      console.log('=======================================');"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 15000

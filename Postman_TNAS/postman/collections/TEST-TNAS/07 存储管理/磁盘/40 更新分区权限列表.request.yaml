@@ -1,0 +1,149 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/UpdatePartPerms"
+method: PUT
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "[\r
+
+    \    {\r
+
+    \        \"uuid\": \"f762fb11-416b-4bfa-ad7c-5068b00c158d\",\r
+
+    \        \"mount_point\": \"/Volume1/@disk/Externaldrive_sdb1\",\r
+
+    \        \"user\": \"admin\",\r
+
+    \        \"fs_type\": \"ext2\",\r
+
+    \        \"editable\": true,\r
+
+    \        \"is_mount\": true\r
+
+    \    },\r
+
+    \    {\r
+
+    \        \"uuid\": \"1ae9aa21-b940-43cb-9c03-58cc2927fa2c\",\r
+
+    \        \"mount_point\": \"/Volume1/@disk/Externaldrive_sdb2\",\r
+
+    \        \"user\": \"admin\",\r
+
+    \        \"fs_type\": \"ext3\",\r
+
+    \        \"editable\": true,\r
+
+    \        \"is_mount\": true\r
+
+    \    },\r
+
+    \    {\r
+
+    \        \"uuid\": \"5e868d75-2572-49cb-93ea-f803e5fb90ac\",\r
+
+    \        \"mount_point\": \"/Volume1/@disk/Externaldrive_sdb3\",\r
+
+    \        \"user\": \"admin\",\r
+
+    \        \"fs_type\": \"ext4\",\r
+
+    \        \"editable\": true,\r
+
+    \        \"is_mount\": true\r
+
+    \    },\r
+
+    \    {\r
+
+    \        \"uuid\": \"7BF5-63CE\",\r
+
+    \        \"mount_point\": \"/Volume1/@disk/Externaldrive_sdb4\",\r
+
+    \        \"user\": \"allusers\",\r
+
+    \        \"fs_type\": \"exfat\",\r
+
+    \        \"editable\": false,\r
+
+    \        \"is_mount\": true\r
+
+    \    },\r
+
+    \    {\r
+
+    \        \"uuid\": \"3CEA-ABE1\",\r
+
+    \        \"mount_point\": \"/Volume1/@disk/Externaldrive_sdb5\",\r
+
+    \        \"user\": \"allusers\",\r
+
+    \        \"fs_type\": \"vfat\",\r
+
+    \        \"editable\": false,\r
+
+    \        \"is_mount\": true\r
+
+    \    },\r
+
+    \    {\r
+
+    \        \"uuid\": \"03277864-e098-462d-b9ed-cbc94dbafa99\",\r
+
+    \        \"mount_point\": \"/Volume1/@disk/Externaldrive_sdb6\",\r
+
+    \        \"user\": \"allusers\",\r
+
+    \        \"fs_type\": \"btrfs\",\r
+
+    \        \"editable\": true,\r
+
+    \        \"is_mount\": true\r
+
+    \    },\r
+
+    \    {\r
+
+    \        \"uuid\": \"365B81E725E44CE9\",\r
+
+    \        \"mount_point\": \"/Volume1/@disk/Externaldrive_sdb7\",\r
+
+    \        \"user\": \"allusers\",\r
+
+    \        \"fs_type\": \"ntfs\",\r
+
+    \        \"editable\": false,\r
+
+    \        \"is_mount\": true\r
+
+    \    },\r
+
+    \    {\r
+
+    \        \"uuid\": \"5cd346bf-6719-32a8-bc25-04880fecdbd2\",\r
+
+    \        \"mount_point\": \"/Volume1/@disk/Externaldrive_sdb8\",\r
+
+    \        \"user\": \"admin\",\r
+
+    \        \"fs_type\": \"hfsplus\",\r
+
+    \        \"editable\": true,\r
+
+    \        \"is_mount\": true\r
+
+    \    }\r
+
+    ]"
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 41000

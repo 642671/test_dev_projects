@@ -1,0 +1,28 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/extStorageDevice/ObtainSecretKey"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/x-www-form-urlencoded
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: formdata
+  content:
+    - type: text
+      key: pwd
+      value: Admin123
+      description: 用户密码（明文），用于验证权限，必填参数需要询问用户给出
+    - type: text
+      key: path
+      value: usb_test_2
+      description: USB挂载路径（如usbshare_sdd1），必填参数需要询问用户给出
+    - type: text
+      key: dev
+      value: "{{usb1_device}}"
+      description: 设备名称（如sdd），必填参数需要询问用户给出
+order: 6000

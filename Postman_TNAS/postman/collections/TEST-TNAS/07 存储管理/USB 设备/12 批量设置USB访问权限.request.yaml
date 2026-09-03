@@ -1,0 +1,109 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/extStorageDevice/SetUsbAclAll"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"acls\": [\r
+
+    \        {\r
+
+    \            \"folder\": \"usb_generic\",\r
+
+    \            \"editable\": true,\r
+
+    \            \"acl\": {\r
+
+    \                \"id\": 19,\r
+
+    \                \"user\": \"admin\",\r
+
+    \                \"group\": \"\",\r
+
+    \                \"path\": \"/Volume1/@usb/usb_generic\",\r
+
+    \                \"type\": \"usb\",\r
+
+    \                \"acl\": \"rwx\",\r
+
+    \                \"uuid\": \"45ccf68d-de4f-4810-b1dc-ed45add20a31\",\r
+
+    \                \"timestamp\": 1785743409\r
+
+    \            }\r
+
+    \        },\r
+
+    \        {\r
+
+    \            \"folder\": \"usb_generic_1\",\r
+
+    \            \"editable\": false,\r
+
+    \            \"acl\": {\r
+
+    \                \"id\": 15,\r
+
+    \                \"user\": \"allusers\",\r
+
+    \                \"group\": \"\",\r
+
+    \                \"path\": \"/Volume1/@usb/usb_generic_1\",\r
+
+    \                \"type\": \"usb\",\r
+
+    \                \"acl\": \"rwx\",\r
+
+    \                \"uuid\": \"EFF8-B895\",\r
+
+    \                \"timestamp\": 1785743170\r
+
+    \            }\r
+
+    \        },\r
+
+    \        {\r
+
+    \            \"folder\": \"usb_generic_2\",\r
+
+    \            \"editable\": true,\r
+
+    \            \"acl\": {\r
+
+    \                \"id\": 20,\r
+
+    \                \"user\": \"allusers\",\r
+
+    \                \"group\": \"\",\r
+
+    \                \"path\": \"/Volume1/@usb/usb_generic_2\",\r
+
+    \                \"type\": \"usb\",\r
+
+    \                \"acl\": \"rwx\",\r
+
+    \                \"uuid\": \"5168ac04-4f97-4de5-8340-93ccc63ed62f\",\r
+
+    \                \"timestamp\": 1785743409\r
+
+    \            }\r
+
+    \        }\r
+
+    \    ]\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 12000

@@ -1,0 +1,25 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/AddSysDisk"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+  - key: X-Curpass-Token
+    value: "{{X-Curpass-Token}}"
+body:
+  type: json
+  content: "{\r
+
+    \    \"disk\": \"{{disk1_device}}\"\r
+
+    }"
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 34000

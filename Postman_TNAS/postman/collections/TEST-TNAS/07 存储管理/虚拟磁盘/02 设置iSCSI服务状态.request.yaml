@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/virtualdisk/SetIscsidStatus"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/x-www-form-urlencoded
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: formdata
+  content:
+    - type: text
+      key: status
+      value: start
+      description: 服务状态：start=启动，stop=停止，必填参数需要询问用户给出
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 3000

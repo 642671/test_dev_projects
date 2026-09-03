@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/CheckMdInfo/:md"
+method: POST
+pathVariables:
+  md: "{{vg0_md}}"
+body:
+  type: formdata
+  content: []
+order: 19000

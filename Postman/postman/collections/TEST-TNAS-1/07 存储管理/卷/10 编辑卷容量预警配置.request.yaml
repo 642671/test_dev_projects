@@ -1,0 +1,26 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/EditVolumeRemindConfig?dasd=sada"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  dasd: sada
+body:
+  type: json
+  content: "{\r
+
+    \    \"device\": \"volume\",\r
+
+    \    \"enable\": false,\r
+
+    \    \"remind_ratio\": 0.1\r
+
+    }"
+order: 10000

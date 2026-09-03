@@ -1,0 +1,67 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/extStorageDevice/MountedDevice"
+method: POST
+headers:
+  - key: Content-Type
+    value: multipart/form-data
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"USB Disk_sdf\",\r
+
+    \    \"device\": \"sdf\",\r
+
+    \    \"password\": \"Admin123\"\r
+
+    }"
+scripts:
+  - type: beforeRequest
+    code: "// POST /v2/extStorageDevice/MountedDevice 前置脚本\r
+
+      // JSON 请求体，RSA 加密 password\r
+
+      \r
+
+      var plainPassword = pm.environment.get('usb_password') || 'Admin123';\r
+
+      var base64Key = pm.environment.get('RSA_PUBLIC_KEY');\r
+
+      \r
+
+      if (!base64Key) {\r
+
+      \    console.log('RSA_PUBLIC_KEY 未设置，跳过加密');\r
+
+      } else {\r
+
+      \    var publicKey = require('atob')(base64Key);\r
+
+      \    var encrypted = await pm.executeAsync('encoderLoginPassword.go', [plainPassword, publicKey]);\r
+
+      \r
+
+      \    var body = JSON.parse(pm.request.body);\r
+
+      \    body.password = encrypted;\r
+
+      \    pm.request.body = JSON.stringify(body);\r
+
+      \r
+
+      \    console.log('password 已加密，长度:', encrypted.length\r
+
+      );\r
+
+      }"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 14000

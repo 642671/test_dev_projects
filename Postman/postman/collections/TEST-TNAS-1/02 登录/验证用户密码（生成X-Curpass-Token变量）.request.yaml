@@ -1,0 +1,203 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/otp/verify_pwd"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 用户会话Cookie。字段说明：userName=当前登录用户名; TMSESSNAME=会话ID(Session ID); X-Csrf-Token=CSRF防护令牌; tos_current_username=当前用户名(与userName保持一致); loginStatus=登录状态标记(true=已登录)
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: CSRF防护令牌，必须与Cookie中的X-Csrf-Token值保持一致
+  - key: X-Curpass-Token
+    value: "{{X-Curpass-Token}}"
+body:
+  type: json
+  content: "{\r
+
+    \    \"password\": \"Admin123\"\r
+
+    }\r\n"
+scripts:
+  - type: beforeRequest
+    code: |-
+      var rsaEncryptPassword = function (message, keyInput) {
+        function readTLV(buf, pos) {
+          var tag = buf[pos]; pos++;
+          var len = buf[pos]; pos++;
+          if (len & 0x80) {
+            var n = len & 0x7f;
+            len = 0;
+            for (var i = 0; i < n; i++) len = (len << 8) | buf[pos + i];
+            pos += n;
+          }
+          return { tag: tag, value: buf.subarray(pos, pos + len), next: pos + len };
+        }
+        function bufToBig(buf) {
+          var h = '';
+          for (var i = 0; i < buf.length; i++) h += buf[i].toString(16).padStart(2, '0');
+          return BigInt('0x' + (h || '0'));
+        }
+        function bigToBuf(v, k) {
+          var hex = v.toString(16);
+          if (hex.length % 2) hex = '0' + hex;
+          var out = new Uint8Array(k);
+          var idx = k;
+          for (var i = hex.length - 2; i >= 0; i -= 2) { idx--; out[idx] = parseInt(hex.substr(i, 2), 16); }
+          return out;
+        }
+        function modPow(base, exp, mod) {
+          var r = 1n; base %= mod;
+          while (exp > 0n) {
+            if (exp & 1n) r = (r * base) % mod;
+            base = (base * base) % mod;
+            exp >>= 1n;
+          }
+          return r;
+        }
+        function parsePublicKey(der) {
+          var outer = readTLV(der, 0);
+          var first = readTLV(outer.value, 0);
+          var second = readTLV(outer.value, first.next);
+          var rsapub = (second.tag === 0x03) ? second.value.subarray(1) : outer.value;
+          var seq = readTLV(rsapub, 0);
+          var nTlv = readTLV(seq.value, 0);
+          var eTlv = readTLV(seq.value, nTlv.next);
+          var nBig = bufToBig(nTlv.value);
+          var eBig = bufToBig(eTlv.value);
+          var k = nTlv.value.length;
+          if (nTlv.value[0] === 0) k = nTlv.value.length - 1;
+          return { nBig: nBig, eBig: eBig, k: k };
+        }
+        function keyBytesDer(keyInput) {
+          var key = String(keyInput).trim();
+          var pemText = null;
+          if (key.indexOf('-----BEGIN') === 0) {
+            pemText = key;
+          } else {
+            var bin = atob(key);
+            if (bin.indexOf('-----BEGIN') === 0) pemText = bin;
+            else {
+              var dr = new Uint8Array(bin.length);
+              for (var di = 0; di < bin.length; di++) dr[di] = bin.charCodeAt(di);
+              return dr;
+            }
+          }
+          var body = pemText.split(/\r?\n/).filter(function (l) { return l && l.indexOf('-----') < 0; }).join('');
+          var b = atob(body);
+          var d = new Uint8Array(b.length);
+          for (var dj = 0; dj < b.length; dj++) d[dj] = b.charCodeAt(dj);
+          return d;
+        }
+        var der = keyBytesDer(keyInput);
+        var pk = parsePublicKey(der);
+        var m = [];
+        for (var mi = 0; mi < message.length; mi++) m.push(message.charCodeAt(mi) & 0xff);
+        if (m.length > pk.k - 11) throw new Error('message too long for RSA');
+        var psLen = pk.k - 3 - m.length;
+        var rnd = (typeof crypto !== 'undefined' && crypto.getRandomValues) ? function () {
+          var a = new Uint32Array(1); crypto.getRandomValues(a); return a[0];
+        } : function () { return Math.floor(Math.random() * 0xffffffff); };
+        var ps = [];
+        for (var pi = 0; pi < psLen; pi++) ps.push(1 + (rnd() % 255));
+        var eb = new Uint8Array(pk.k);
+        eb[0] = 0x00; eb[1] = 0x02;
+        for (var qi = 0; qi < psLen; qi++) eb[2 + qi] = ps[qi];
+        eb[2 + psLen] = 0x00;
+        for (var ti = 0; ti < m.length; ti++) eb[3 + psLen + ti] = m[ti];
+        var c = modPow(bufToBig(eb), pk.eBig, pk.nBig);
+        var cbuf = bigToBuf(c, pk.k);
+        var b64 = '';
+        for (var zi = 0; zi < cbuf.length; zi++) b64 += String.fromCharCode(cbuf[zi]);
+        return btoa(b64);
+      };
+
+      // ===========================
+      // 前置脚本：生成 X-Curpass-Token
+      // 请求体：
+      // {
+      //     "password": "Admin123"
+      // }
+      // ===========================
+
+      // 获取 Base64 编码的 RSA 公钥
+      const base64Key = pm.environment.get("RSA_PUBLIC_KEY");
+
+      if (!base64Key) {
+          throw new Error("未配置环境变量：RSA_PUBLIC_KEY");
+      }
+
+      // Base64 解码 -> PEM 公钥
+      const publicKey = base64Key;
+
+      // 获取请求体
+      let body;
+
+      try {
+          body = JSON.parse(pm.request.body.raw);
+      } catch (e) {
+          throw new Error("请求体不是合法的 JSON");
+      }
+
+      // 校验 password
+      if (!body.password) {
+          throw new Error("请求体中缺少 password 字段");
+      }
+
+      console.log("原始密码：", body.password);
+
+      // 调用 Go 脚本进行 RSA 加密
+      const encryptPassword = rsaEncryptPassword(body.password, publicKey);
+
+      console.log("密码加密成功");
+
+      // 保存为环境变量
+      pm.environment.set("X-Curpass-Token", encryptPassword);
+
+      console.log("X-Curpass-Token 已更新");
+    language: text/javascript
+  - type: afterResponse
+    code: |
+      // ======================================
+      // 密码验证接口后置脚本（POST /v2/otp/verify_pwd）
+      // 功能：
+      // 1. 从响应中提取 X-Curpass-Token
+      // 2. 修改 base64 字符第 5、15 位 → 存入 wrong_X-Curpass-Token
+      // 3. 供"token 不一致"负向测试用例使用
+      // ======================================
+
+      // 读取当前环境变量中的 X-Curpass-Token（由验证接口返回后设置）
+      const curpassToken = pm.environment.get("X-Curpass-Token");
+
+      console.log("========== X-Curpass-Token 快照 ==========");
+      console.log("X-Curpass-Token:", curpassToken);
+
+      if (curpassToken) {
+          // base64 字符循环映射（A→B → … → /→A）
+          const b64chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+          const b64Next = {};
+          for (let i = 0; i < b64chars.length; i++) {
+              b64Next[b64chars[i]] = b64chars[(i + 1) % b64chars.length];
+          }
+
+          // 去掉末尾 = 填充，在有效字符范围内改第 5、15 位
+          const padding = curpassToken.match(/=+$/)?.[0] || "";
+          let tokenBody = curpassToken.replace(/=+$/, "");
+          let charArray = tokenBody.split("");
+
+          [5, 15].forEach(pos => {
+              if (pos < charArray.length) {
+                  charArray[pos] = b64Next[charArray[pos]] || "A";
+              }
+          });
+
+          const wrongToken = charArray.join("") + padding;
+          pm.environment.set("wrong_X-Curpass-Token", wrongToken);
+
+          console.log("wrong_X-Curpass-Token =", wrongToken);
+      } else {
+          console.warn("警告：未读取到 X-Curpass-Token，wrong_X-Curpass-Token 未更新");
+      }
+    language: text/javascript
+order: 7000

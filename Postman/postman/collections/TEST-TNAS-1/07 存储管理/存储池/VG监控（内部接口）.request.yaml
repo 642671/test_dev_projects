@@ -1,0 +1,9 @@
+$kind: http-request
+url: '{{baseUrl}}/v2/storage/VgMonitor'
+method: GET
+queryParams:
+  - key: raid
+    value: ""
+  - key: event
+    value: ""
+order: 22000

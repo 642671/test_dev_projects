@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/v1/encrypt/:action/:name/:password"
+method: PUT
+headers:
+  - key: Content-Type
+    value: application/x-www-form-urlencoded
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+pathVariables:
+  action: ""
+  name: ""
+  password: ""
+body:
+  type: formdata
+  content: []
+order: 46000

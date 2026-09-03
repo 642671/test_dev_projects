@@ -1,0 +1,102 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/hotsparedisk/GetRaidHotSpare"
+method: GET
+headers:
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+scripts:
+  - type: afterResponse
+    code: |
+      // ============================================================
+      // GET /v2/hotsparedisk/GetRaidHotSpare 后置脚本
+      // 提取所有支持热备的存储池 vgs 名称，
+      // 生成 hs{N}_vg（如 hs1_vg = vg0），供创建热备盘使用
+      // ------------------------------------------------------------
+      // POST /v2/hotsparedisk/CreateHotSpareDisk 请求体示例：
+      //   { "devices": ["{{hs1_device}}"], "raids": ["{{hs1_vg}}"] }
+      // ============================================================
+
+      const res = pm.response.json();
+      const data = res.data || res;
+
+      function setOrUnset(key, val) {
+          if (val === undefined || val === null || val === '' || Number.isNaN(val)) {
+              pm.collectionVariables.unset(key);
+          } else {
+              pm.collectionVariables.set(key, val);
+          }
+      }
+
+      // ============================================================
+      // 0. 清理所有旧的 hs{N}_vg 变量
+      // ============================================================
+      const allModuleVars = pm.collectionVariables.toObject();
+      Object.keys(allModuleVars)
+          .filter(k => /^hs\d+_vg$/.test(k))
+          .forEach(k => pm.collectionVariables.unset(k));
+
+      // ============================================================
+      // 1. 标准化为数组
+      // ============================================================
+      let pools;
+      if (Array.isArray(data)) {
+          pools = data;
+      } else if (data && typeof data === 'object') {
+          pools = [data];
+      } else {
+          pools = [];
+      }
+
+      if (pools.length === 0) {
+          console.log('无支持热备的存储池，所有 hs_vg 变量已清空');
+          pm.collectionVariables.set('hs_vg_count', 0);
+          return;
+      }
+
+      // ============================================================
+      // 2. 提取每个池的 vgs 名称，按数组顺序从 1 起编号
+      // ============================================================
+      const vgNames = [];
+      pools.forEach(p => {
+          const vgName = (p.vgs || '').trim();
+          if (vgName) vgNames.push(vgName);
+      });
+
+      if (vgNames.length === 0) {
+          console.log('无有效 vgs 名称，所有 hs_vg 变量已清空');
+          pm.collectionVariables.set('hs_vg_count', 0);
+          return;
+      }
+
+      // 按原数组顺序写入 hs{N}_vg（N 从 1 起）
+      vgNames.forEach((name, i) => {
+          const idx = i + 1;
+          pm.collectionVariables.set(`hs${idx}_vg`, name);
+          console.log(`hs${idx}_vg = ${name}`);
+      });
+
+      pm.collectionVariables.set('hs_vg_count', vgNames.length);
+      pm.collectionVariables.set('hs_vg_list', JSON.stringify(vgNames));
+
+      // ============================================================
+      // 3. 调试输出
+      // ============================================================
+      console.log(`==== 热备存储池同步结果 ====`);
+      console.log(`支持热备的存储池: ${vgNames.length} 个 → ${vgNames.join(', ')}`);
+
+      const updatedVars = pm.collectionVariables.toObject();
+      const hsVgVars = Object.keys(updatedVars)
+          .filter(k => /^hs\d+_vg$/.test(k))
+          .sort((a, b) => parseInt(a.match(/\d+/)[0]) - parseInt(b.match(/\d+/)[0]));
+
+      if (hsVgVars.length > 0) {
+          console.log('---------- hs{N}_vg 明细 ----------');
+          hsVgVars.forEach(k => console.log(`${k} = ${updatedVars[k]}`));
+      }
+      console.log('=======================================');
+    language: text/javascript
+order: 1000

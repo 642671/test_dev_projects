@@ -1,0 +1,16 @@
+$kind: http-request
+url: '{{baseUrl}}/v1/part_perms'
+method: PUT
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: X-Csrf-Token
+    value: '{{X-Csrf-Token}}'
+    description: 不可为空，用户认证所需token
+queryParams:
+  - key: devtype
+    value: ""
+body:
+  type: json
+  content: ""
+order: 43000

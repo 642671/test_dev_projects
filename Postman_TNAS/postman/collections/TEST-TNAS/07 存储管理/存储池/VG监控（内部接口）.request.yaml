@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/VgMonitor?raid=&event"
+method: GET
+headers:
+  Content-Type: application/x-www-form-urlencoded
+queryParams:
+  - key: raid
+    value: ""
+    description: RAID设备名，必填参数需要询问用户给出
+  - key: event
+    value: null
+    description: 事件类型，start-同步开始，finish-同步完成。必填参数需要询问用户给出
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 22000

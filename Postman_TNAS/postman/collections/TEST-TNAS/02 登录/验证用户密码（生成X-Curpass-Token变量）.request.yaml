@@ -1,0 +1,200 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/otp/verify_pwd"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 用户会话Cookie。字段说明：userName=当前登录用户名; TMSESSNAME=会话ID(Session ID); X-Csrf-Token=CSRF防护令牌; tos_current_username=当前用户名(与userName保持一致); loginStatus=登录状态标记(true=已登录)
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: CSRF防护令牌，必须与Cookie中的X-Csrf-Token值保持一致
+  - key: X-Curpass-Token
+    value: "{{X-Curpass-Token}}"
+body:
+  type: json
+  content: "{\r
+
+    \    \"password\": \"Admin123\"\r
+
+    }\r\n"
+scripts:
+  - type: beforeRequest
+    code: "// ===========================\r
+
+      // 前置脚本：生成 X-Curpass-Token\r
+
+      // 请求体：\r
+
+      // {\r
+
+      //     \"password\": \"Admin123\"\r
+
+      // }\r
+
+      // ===========================\r
+
+      \r
+
+      // 获取 Base64 编码的 RSA 公钥\r
+
+      const base64Key = pm.environment.get(\"RSA_PUBLIC_KEY\");\r
+
+      \r
+
+      if (!base64Key) {\r
+
+      \    throw new Error(\"未配置环境变量：RSA_PUBLIC_KEY\");\r
+
+      }\r
+
+      \r
+
+      // Base64 解码 -> PEM 公钥\r
+
+      const publicKey = require(\"atob\")(base64Key);\r
+
+      \r
+
+      // 获取请求体\r
+
+      let body;\r
+
+      \r
+
+      try {\r
+
+      \    body = JSON.parse(pm.request.body.raw);\r
+
+      } catch (e) {\r
+
+      \    throw new Error(\"请求体不是合法的 JSON\");\r
+
+      }\r
+
+      \r
+
+      // 校验 password\r
+
+      if (!body.password) {\r
+
+      \    throw new Error(\"请求体中缺少 password 字段\");\r
+
+      }\r
+
+      \r
+
+      console.log(\"原始密码：\", body.password);\r
+
+      \r
+
+      // 调用 Go 脚本进行 RSA 加密\r
+
+      const encryptPassword = await pm.executeAsync(\r
+
+      \    \"encoderLoginPassword.go\",\r
+
+      \    [body.password, publicKey]\r
+
+      );\r
+
+      \r
+
+      console.log(\"密码加密成功\");\r
+
+      \r
+
+      // 保存为环境变量\r
+
+      pm.environment.set(\"X-Curpass-Token\", encryptPassword);\r
+
+      \r
+
+      console.log(\"X-Curpass-Token 已更新\");"
+    language: text/javascript
+  - type: afterResponse
+    code: "// ======================================\r
+
+      // 密码验证接口后置脚本（POST /v2/otp/verify_pwd）\r
+
+      // 功能：\r
+
+      // 1. 从响应中提取 X-Curpass-Token\r
+
+      // 2. 修改 base64 字符第 5、15 位 → 存入 wrong_X-Curpass-Token\r
+
+      // 3. 供\"token 不一致\"负向测试用例使用\r
+
+      // ======================================\r
+
+      \r
+
+      // 读取当前环境变量中的 X-Curpass-Token（由验证接口返回后设置）\r
+
+      const curpassToken = pm.environment.get(\"X-Curpass-Token\");\r
+
+      \r
+
+      console.log(\"========== X-Curpass-Token 快照 ==========\");\r
+
+      console.log(\"X-Curpass-Token:\", curpassToken);\r
+
+      \r
+
+      if (curpassToken) {\r
+
+      \    // base64 字符循环映射（A→B → … → /→A）\r
+
+      \    const b64chars = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/\";\r
+
+      \    const b64Next = {};\r
+
+      \    for (let i = 0; i < b64chars.length; i++) {\r
+
+      \        b64Next[b64chars[i]] = b64chars[(i + 1) % b64chars.length];\r
+
+      \    }\r
+
+      \r
+
+      \    // 去掉末尾 = 填充，在有效字符范围内改第 5、15 位\r
+
+      \    const padding = curpassToken.match(/=+$/)?.[0] || \"\";\r
+
+      \    let tokenBody = curpassToken.replace(/=+$/, \"\");\r
+
+      \    let charArray = tokenBody.split(\"\");\r
+
+      \r
+
+      \    [5, 15].forEach(pos => {\r
+
+      \        if (pos < charArray.length) {\r
+
+      \            charArray[pos] = b64Next[charArray[pos]] || \"A\";\r
+
+      \        }\r
+
+      \    });\r
+
+      \r
+
+      \    const wrongToken = charArray.join(\"\") + padding;\r
+
+      \    pm.environment.set(\"wrong_X-Curpass-Token\", wrongToken);\r
+
+      \r
+
+      \    console.log(\"wrong_X-Curpass-Token =\", wrongToken);\r
+
+      } else {\r
+
+      \    console.warn(\"警告：未读取到 X-Curpass-Token，wrong_X-Curpass-Token 未更新\");\r
+
+      }\r\n"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 7000

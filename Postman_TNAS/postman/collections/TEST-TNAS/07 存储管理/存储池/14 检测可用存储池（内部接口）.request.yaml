@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/CheckAvailablePool/:disk"
+method: POST
+headers:
+  Content-Type: application/x-www-form-urlencoded
+  Cookie: "{{Cookie}}"
+  "{{X-Csrf-Token}}": "{{X-Csrf-Token}}"
+pathVariables:
+  - key: disk
+    value: "{{cap_disk2}}"
+    description: 磁盘名称，如sda，必填参数需要询问用户给出
+body:
+  type: formdata
+  content: []
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 14000

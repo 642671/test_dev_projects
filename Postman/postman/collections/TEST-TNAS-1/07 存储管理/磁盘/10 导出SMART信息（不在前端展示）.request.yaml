@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/ExportOverview?device={{disk1_device}}"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: ""
+    description: 不可为空，用户认证所需token
+queryParams:
+  device: "{{disk1_device}}"
+order: 10000

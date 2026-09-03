@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/tos"
+method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      // 从响应头提取 X-Csrf-Token
+      const csrfToken = pm.response.headers.get('X-Csrf-Token');
+
+      if (csrfToken) {
+          pm.collectionVariables.set('X-Csrf-Token', csrfToken);
+          console.log('✅ X-Csrf-Token 已保存到集合变量:', csrfToken);
+      } else {
+          console.warn('⚠️ 响应头中未找到 X-Csrf-Token');
+      }
+    language: text/javascript
+order: 2000

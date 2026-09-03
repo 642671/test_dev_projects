@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/v1/active/:uuid"
+method: PUT
+headers:
+  - key: Content-Type
+    value: application/x-www-form-urlencoded
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+pathVariables:
+  uuid: ""
+body:
+  type: formdata
+  content: []
+order: 44000

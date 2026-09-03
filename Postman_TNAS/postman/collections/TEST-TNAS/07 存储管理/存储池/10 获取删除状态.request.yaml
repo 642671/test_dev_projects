@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/StatusForDeleting/:role"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/x-www-form-urlencoded
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+pathVariables:
+  - key: role
+    value: volume
+    description: 类型：volume=卷, pool=存储池，必填参数需要询问用户给出
+body:
+  type: formdata
+  content: []
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 10000

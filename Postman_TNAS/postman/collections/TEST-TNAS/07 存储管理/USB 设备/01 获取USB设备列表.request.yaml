@@ -1,0 +1,240 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/extStorageDevice/DeviceList"
+method: GET
+headers:
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+scripts:
+  - type: afterResponse
+    code: "// ============================================================\r
+
+      // GET /v2/extStorageDevice/DeviceList 后置脚本\r
+
+      // 提取 USB 设备的 name、device_name、分区列表、挂载状态\r
+
+      // ------------------------------------------------------------\r
+
+      // usb{N}_name    → POST /v2/extStorageDevice/MountedDevice（name 参数）\r
+
+      // usb{N}_device  → POST /v2/extStorageDevice/MountedDevice（device 参数）\r
+
+      //                → GET  /v2/extStorageDevice/IsFormating（name 参数）\r
+
+      // usb{N}_z{M}    → POST /v2/extStorageDevice/EditUsbLabel（分区名，如 sda1）\r
+
+      // usb{N}_mnt     → 已挂载分区 device_name（逗号分隔）\r
+
+      // usb{N}_umnt    → 未挂载分区 device_name（逗号分隔）\r
+
+      // usb{N}_fmt     → 格式化中分区 device_name（逗号分隔）\r
+
+      // ============================================================\r
+
+      \r
+
+      const res = pm.response.json();\r
+
+      const data = res.data || res;\r
+
+      \r
+
+      function setOrUnset(key, val) {\r
+
+      \    if (val === undefined || val === null || val === '' || Number.isNaN(val)) {\r
+
+      \        pm.moduleVariables.unset(key);\r
+
+      \    } else {\r
+
+      \        pm.moduleVariables.set(key, val);\r
+
+      \    }\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 0. 清理所有旧的 usb 变量\r
+
+      // ============================================================\r
+
+      const allModuleVars = pm.moduleVariables.toObject();\r
+
+      Object.keys(allModuleVars)\r
+
+      \    .filter(k => /^usb\\d+_/.test(k))\r
+
+      \    .forEach(k => pm.moduleVariables.unset(k));\r
+
+      \r
+
+      // ============================================================\r
+
+      // 1. 标准化为数组\r
+
+      // ============================================================\r
+
+      let items;\r
+
+      if (Array.isArray(data)) {\r
+
+      \    items = data;\r
+
+      } else if (data && typeof data === 'object') {\r
+
+      \    items = [data];\r
+
+      } else {\r
+
+      \    items = [];\r
+
+      }\r
+
+      \r
+
+      if (items.length === 0) {\r
+
+      \    console.log('当前无 USB 设备，所有 usb 变量已清空');\r
+
+      \    pm.moduleVariables.set('usb_count', 0);\r
+
+      \    return;\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 2. 遍历提取\r
+
+      // ============================================================\r
+
+      items.forEach((item, i) => {\r
+
+      \    const idx = i + 1;\r
+
+      \r
+
+      \    // --- 基本信息 ---\r
+
+      \    setOrUnset(`usb${idx}_name`,   (item.name || '').trim());\r
+
+      \    setOrUnset(`usb${idx}_device`, (item.device_name || '').trim());\r
+
+      \r
+
+      \    // --- 设备分区列表（zone_name[]）---\r
+
+      \    const zones = item.zone_name || [];\r
+
+      \    zones.forEach((z, j) => {\r
+
+      \        const zIdx = j + 1;\r
+
+      \        setOrUnset(`usb${idx}_z${zIdx}`, (z || '').trim());\r
+
+      \    });\r
+
+      \r
+
+      \    // --- 共享文件夹按挂载状态分类 ---\r
+
+      \    const folders = item.shared_folders || [];\r
+
+      \    const mounted   = folders.filter(f => f.status === 1).map(f => (f.device_name || '').trim()).filter(Boolean);\r
+
+      \    const unmounted = folders.filter(f => f.status === 2).map(f => (f.device_name || '').trim()).filter(Boolean);\r
+
+      \    const formatting= folders.filter(f => f.status === 3).map(f => (f.device_name || '').trim()).filter(Boolean);\r
+
+      \r
+
+      \    if (mounted.length    > 0) pm.moduleVariables.set(`usb${idx}_mnt`,  mounted.join(','));\r
+
+      \    else                        pm.moduleVariables.unset(`usb${idx}_mnt`);\r
+
+      \r
+
+      \    if (unmounted.length  > 0) pm.moduleVariables.set(`usb${idx}_umnt`, unmounted.join(','));\r
+
+      \    else                        pm.moduleVariables.unset(`usb${idx}_umnt`);\r
+
+      \r
+
+      \    if (formatting.length > 0) pm.moduleVariables.set(`usb${idx}_fmt`,  formatting.join(','));\r
+
+      \    else                        pm.moduleVariables.unset(`usb${idx}_fmt`);\r
+
+      \r
+
+      \    console.log(`usb${idx}_name=${item.name}, usb${idx}_device=${item.device_name}`);\r
+
+      \    console.log(`  分区: ${zones.join(', ') || '无'}`);\r
+
+      \    console.log(`  已挂载: ${mounted.join(',') || '无'} | 未挂载: ${unmounted.join(',') || '无'} | 格式化中: ${formatting.join(',') || '无'}`);\r
+
+      });\r
+
+      \r
+
+      pm.moduleVariables.set('usb_count', items.length);\r
+
+      \r
+
+      // ============================================================\r
+
+      // 3. 调试输出\r
+
+      // ============================================================\r
+
+      console.log(`==== USB 设备同步结果 ====`);\r
+
+      console.log(`USB 设备: ${items.length} 个`);\r
+
+      \r
+
+      const updatedVars = pm.moduleVariables.toObject();\r
+
+      const usbVars = Object.keys(updatedVars)\r
+
+      \    .filter(k => /^usb\\d+_device$/.test(k))\r
+
+      \    .sort((a, b) => parseInt(a.match(/\\d+/)[0]) - parseInt(b.match(/\\d+/)[0]));\r
+
+      \r
+
+      usbVars.forEach(k => {\r
+
+      \    const n = k.match(/usb(\\d+)_device/)[1];\r
+
+      \    console.log(`--- usb${n} ---`);\r
+
+      \    console.log(`  name    = ${updatedVars[`usb${n}_name`]}`);\r
+
+      \    console.log(`  device  = ${updatedVars[k]}`);\r
+
+      \    const zoneVars = Object.keys(updatedVars).filter(v => v.startsWith(`usb${n}_z`) && /^usb\\d+_z\\d+$/.test(v)).sort();\r
+
+      \    console.log(`  分区    = ${zoneVars.map(v => updatedVars[v]).join(', ') || '(无)'}`);\r
+
+      \    console.log(`  已挂载  = ${updatedVars[`usb${n}_mnt`] || '(无)'}`);\r
+
+      \    console.log(`  未挂载  = ${updatedVars[`usb${n}_umnt`] || '(无)'}`);\r
+
+      \    console.log(`  格式化中= ${updatedVars[`usb${n}_fmt`] || '(无)'}`);\r
+
+      });\r
+
+      console.log('=======================================');\r\n"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 1000

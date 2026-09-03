@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/proxy/iSCSIManager/Select"
+method: GET
+order: 1000

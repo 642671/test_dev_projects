@@ -1,0 +1,46 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/login/state"
+method: GET
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |-
+      // const res = pm.response.json();
+
+      // pm.test("响应中存在 is_login 字段", function () {
+      //     pm.expect(res).to.have.property("is_login");
+      //     pm.expect(res.is_login).to.be.a("boolean");
+      // });
+
+      // if (res.is_login) {
+      //     pm.test("用户已登录", function () {
+      //         pm.expect(res.is_login).to.eql(true);
+      //     });
+      // }
+      // // 由于是正向测试，所以除个别单独设计，其余均只校验用户已登录
+      // else {
+      //     pm.test("用户未登录", function () {
+      //         pm.expect(res.is_login).to.eql(false);
+      //     });
+      // }
+
+      const body = pm.response.text();
+
+      pm.test("响应体不能为空", function () {
+          pm.expect(body && body.trim().length > 0, "响应体为空，无法解析 JSON").to.eql(true);
+      });
+
+      let res;
+      try {
+          res = JSON.parse(body);
+      } catch (e) {
+          throw new Error("响应体不是合法 JSON，实际返回为：\n" + body);
+      }
+
+      pm.test("校验用户已登录", function () {
+          pm.expect(res).to.have.property("is_login");
+          pm.expect(res.is_login, "用户未登录").to.eql(true);
+      });
+    language: text/javascript
+order: 4000

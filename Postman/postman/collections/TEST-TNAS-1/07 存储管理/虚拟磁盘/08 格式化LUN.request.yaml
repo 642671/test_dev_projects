@@ -1,0 +1,32 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/virtualdisk/FormattingMountLun"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/x-www-form-urlencoded
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: formdata
+  content:
+    - type: text
+      key: target
+      value: ""
+      description: Target IQN名称，必填参数需要询问用户给出
+    - type: text
+      key: lunid
+      value: ""
+      description: LUN编号，必填参数需要询问用户给出
+    - type: text
+      key: device
+      value: ""
+      description: 块设备名称（如sdb），必填参数需要询问用户给出
+    - type: text
+      key: fileType
+      value: ntfs
+      description: 文件系统类型：ntfs、ext4，必填参数需要询问用户给出
+order: 9000

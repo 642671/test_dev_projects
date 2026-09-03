@@ -1,0 +1,63 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/lang/tos"
+method: GET
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: "const setCookie = pm.response.headers.get('Set-Cookie');\r
+
+      const match = setCookie && setCookie.match(/X-Csrf-Token=([^;]+)/);\r
+
+      \r
+
+      if (match) {\r
+
+      \    pm.environment.set('X-Csrf-Token', match[1]);\r
+
+      \    console.log('提取到的 X-Csrf-Token =', match[1]);\r
+
+      }
+
+      // 使用online的时候，用这个，使用直接的ip不能用这个\r
+
+      const setCookie = pm.response.headers.get('Set-Cookie');\r
+
+      const match = setCookie && setCookie.match(/X-Csrf-Token=([^;]+)/);\r
+
+      \r
+
+      // 提取并保存\r
+
+      if (match) {\r
+
+      \    pm.moduleVariables.set('X-Csrf-Token', match[1]);\r
+
+      }\r
+
+      \r
+
+      // 断言1：必须成功匹配到\r
+
+      pm.test(\"成功从 Set-Cookie 中提取到 X-Csrf-Token\", function () {\r
+
+      \    pm.expect(match, \"没有匹配到 X-Csrf-Token\").to.not.eql(null);\r
+
+      });\r
+
+      \r
+
+      // 断言2：环境变量必须存在且不为空\r
+
+      pm.test(\"X-Csrf-Token 变量不为空\", function () {\r
+
+      \    const token = pm.environment.get('X-Csrf-Token');\r
+
+      \    pm.expect(token, \"X-Csrf-Token 变量为空\").to.be.a(\"string\").and.not.empty;\r
+
+      });"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 1000

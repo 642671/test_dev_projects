@@ -1,0 +1,106 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/logout"
+method: PUT
+headers:
+  X-Csrf-Token: "{{X-Csrf-Token}}"
+  Cookie: "{{Cookie}}"
+scripts:
+  - type: afterResponse
+    code: "// ======================================\r
+
+      // 登出接口后置脚本（POST /v2/logout）\r
+
+      // 功能：\r
+
+      // 1. 把登出前 Cookie 存为 expired_Cookie（会话已轮换，自然失效）\r
+
+      // 2. 把登出前 X-Csrf-Token 存为 expired_X-Csrf-Token（原始值备份）\r
+
+      // 3. 清除环境变量 X-Csrf-Token（下次 /tos/ 会重新生成）\r
+
+      // 注意：\r
+
+      //   - wrong_X-Csrf-Token 由登录后置脚本 01_auth_login.js 生成\r
+
+      //   - expired_Cookie / expired_X-Csrf-Token 现在已是真正失效的凭证\r
+
+      //     （服务端已修复登出后 session 轮换问题）\r
+
+      // ======================================\r
+
+      \r
+
+      // 读取登出前的有效凭证（当前 environment 里保存的仍是登出前的值）\r
+
+      const currentCookie = pm.environment.get(\"Cookie\");\r
+
+      const currentCsrfToken = pm.environment.get(\"X-Csrf-Token\");\r
+
+      \r
+
+      console.log(\"========== 登出前凭证快照 ==========\");\r
+
+      console.log(\"Cookie:\", currentCookie);\r
+
+      console.log(\"X-Csrf-Token:\", currentCsrfToken);\r
+
+      \r
+
+      // ======================\r
+
+      // ① 备份原始凭证（过期失效）\r
+
+      // ======================\r
+
+      \r
+
+      if (currentCookie) {\r
+
+      \    pm.environment.set(\"expired_Cookie\", currentCookie);\r
+
+      } else {\r
+
+      \    console.warn(\"警告：未读取到 Cookie，expired_Cookie 未更新\");\r
+
+      }\r
+
+      \r
+
+      if (currentCsrfToken) {\r
+
+      \    pm.environment.set(\"expired_X-Csrf-Token\", currentCsrfToken);\r
+
+      } else {\r
+
+      \    console.warn(\"警告：未读取到 X-Csrf-Token，expired_X-Csrf-Token 未更新\");\r
+
+      }\r
+
+      \r
+
+      // ======================\r
+
+      // ② 清除 X-Csrf-Token → 让下次 /tos/ 重新生成\r
+
+      // ======================\r
+
+      \r
+
+      pm.environment.unset(\"X-Csrf-Token\");\r
+
+      console.log(\"X-Csrf-Token 已清除（下次 /tos/ 将重新生成）\");\r
+
+      \r
+
+      // 调试输出\r
+
+      console.log(\"========== 已保存变量总览 ==========\");\r
+
+      console.log(\"expired_Cookie         =\", pm.environment.get(\"expired_Cookie\"));\r
+
+      console.log(\"expired_X-Csrf-Token   =\", pm.environment.get(\"expired_X-Csrf-Token\"));\r\n"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 5000

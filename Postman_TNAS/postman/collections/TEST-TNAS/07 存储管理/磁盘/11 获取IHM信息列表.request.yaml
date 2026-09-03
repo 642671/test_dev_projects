@@ -1,0 +1,220 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/IhmInfoList"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+scripts:
+  - type: afterResponse
+    code: "// ============================================================\r
+
+      // GET /v2/disk/IhmInfoList 后置脚本\r
+
+      // 解析返回 → 写入模块变量 → 供后续健康扫描接口引用磁盘路径\r
+
+      // ------------------------------------------------------------\r
+
+      // 遵循 POSTMAN_SCRIPT_STANDARDS.md 中的强制规范：\r
+
+      //   1. 每次执行必须先清理旧的同前缀变量（正则 /^Ihm\\d+_/ 动态扫描）\r
+
+      //   2. 有值就 set，没值就 unset，不允许残留空字符串或 0\r
+
+      //   3. 变量按索引命名：Ihm1_device / Ihm1_name，索引从 1 起\r
+
+      //   4. 兼容空数组：当前环境仅 1 块可扫描盘，未来可能多块或 0 块\r
+
+      // ============================================================\r
+
+      \r
+
+      const res = pm.response.json();\r
+
+      const data = res.data || res;\r
+
+      \r
+
+      // ------------------------------------------------------------\r
+
+      // 小工具：有值就 set，否则 unset，避免残留空变量\r
+
+      // ------------------------------------------------------------\r
+
+      function setOrUnset(key, val) {\r
+
+      \    if (val === undefined || val === null || val === '' || Number.isNaN(val)) {\r
+
+      \        pm.moduleVariables.unset(key);\r
+
+      \    } else {\r
+
+      \        pm.moduleVariables.set(key, val);\r
+
+      \    }\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 0. 清理所有旧的 IhmN_ 变量（动态扫描，防止拔盘后残留）\r
+
+      // ============================================================\r
+
+      const allModuleVars = pm.moduleVariables.toObject();\r
+
+      Object.keys(allModuleVars)\r
+
+      \    .filter(k => /^Ihm\\d+_/.test(k))\r
+
+      \    .forEach(k => pm.moduleVariables.unset(k));\r
+
+      \r
+
+      // ============================================================\r
+
+      // 1. 响应合法性校验（仅断言 data 为数组，允许空数组）\r
+
+      // ============================================================\r
+
+      pm.test('响应结构正确（data 为数组）', () => {\r
+
+      \    pm.expect(data).to.be.an('array');\r
+
+      });\r
+
+      \r
+
+      // ============================================================\r
+
+      // 2. 标准化为数组（兼容对象 / 数组 / 空数组 / null）\r
+
+      // ============================================================\r
+
+      let ihmDisks;\r
+
+      if (Array.isArray(data)) {\r
+
+      \    ihmDisks = data;\r
+
+      } else if (data && typeof data === 'object') {\r
+
+      \    ihmDisks = [data];\r
+
+      } else {\r
+
+      \    ihmDisks = [];\r
+
+      }\r
+
+      \r
+
+      // 提取字段（.trim 防 %20）\r
+
+      const disks = ihmDisks.map(d => ({\r
+
+      \    name:        (d.name       || '').trim(),   // HDD1\r
+
+      \    device:      (d.device     || '').trim(),   // /dev/sde\r
+
+      \    model:       (d.model      || '').trim(),   // ST2000VN004-2E4164\r
+
+      \    drive_type:  (d.drive_type || '').trim(),   // IRONWOLF\r
+
+      \    health:      (d.health     || '').trim(),   // Healthy\r
+
+      \    capacity:    (d.capacity   || '').trim(),   // 2.00 TB\r
+
+      }));\r
+
+      \r
+
+      // ============================================================\r
+
+      // 3. 汇总变量 + 按索引 1 起生成 IhmN_device / IhmN_name\r
+
+      // ============================================================\r
+
+      pm.moduleVariables.set('Ihm_count', disks.length);\r
+
+      if (disks.length > 0) {\r
+
+      \    pm.moduleVariables.set('Ihm_disk_list', JSON.stringify(disks));\r
+
+      } else {\r
+
+      \    pm.moduleVariables.unset('Ihm_disk_list');\r
+
+      }\r
+
+      \r
+
+      disks.forEach((d, i) => {\r
+
+      \    const idx = i + 1;                                  // 索引从 1 起\r
+
+      \    setOrUnset(`Ihm${idx}_device`, d.device);           // Ihm1_device = /dev/sde\r
+
+      \    setOrUnset(`Ihm${idx}_name`,   d.name);             // Ihm1_name   = HDD1\r
+
+      \    setOrUnset(`Ihm${idx}_model`,  d.model);            // Ihm1_model  = ST2000VN004-2E4164\r
+
+      \    setOrUnset(`Ihm${idx}_health`, d.health);           // Ihm1_health = Healthy\r
+
+      });\r
+
+      \r
+
+      // ============================================================\r
+
+      // 4. 调试输出（结构化格式）\r
+
+      // ============================================================\r
+
+      console.log('====================================');\r
+
+      console.log(`共发现 ${disks.length} 块可执行健康扫描的磁盘`);\r
+
+      console.log('====================================');\r
+
+      console.log('========== IhmN_ 变量明细 ==========');\r
+
+      if (disks.length > 0) {\r
+
+      \    disks.forEach((d, i) => {\r
+
+      \        const idx = i + 1;\r
+
+      \        console.log(`Ihm${idx}_device = ${d.device}`);\r
+
+      \        console.log(`Ihm${idx}_name = ${d.name}`);\r
+
+      \        console.log(`Ihm${idx}_model = ${d.model}`);\r
+
+      \        console.log(`Ihm${idx}_health = ${d.health}`);\r
+
+      \    });\r
+
+      } else {\r
+
+      \    console.log('(无可扫描磁盘，所有 IhmN_ 变量已清空)');\r
+
+      }\r
+
+      console.log('=======================================');\r
+
+      console.log('所有 IHM 磁盘信息已同步到模块变量。');\r
+
+      console.log('=======================================');\r\n"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 11000

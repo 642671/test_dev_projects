@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{baseUrl}}/tos"
+method: GET
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 2000

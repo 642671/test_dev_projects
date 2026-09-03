@@ -1,0 +1,12 @@
+$kind: http-request
+url: '{{baseUrl}}/v1/notice/:name'
+method: PUT
+queryParams:
+  - key: type
+    value: ""
+pathVariables:
+  name: ""
+body:
+  type: formdata
+  content: []
+order: 50000

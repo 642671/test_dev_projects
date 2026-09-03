@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/welcome"
+method: GET
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: "// ======================================\r // /v2/welcome 后置脚本（从 Apifox 后置操作恢复）\r // 功能：把响应头 X-Rsa-Token 提取为 RSA_PUBLIC_KEY 环境变量\r // ======================================\r \r // 1. 提取公钥：响应头 X-Rsa-Token\r const rsaToken = pm.response.headers.get('X-Rsa-Token');\r if (rsaToken) {\r     pm.environment.set('RSA_PUBLIC_KEY', rsaToken);\r     console.log('提取到的 RSA_PUBLIC_KEY =', rsaToken);\r } else {\r     console.warn('警告：响应头中未找到 X-Rsa-Token，RSA_PUBLIC_KEY 未设置');\r }\r \r // 2. 兜底：若 X-Csrf-Token 尚未设置，从 Set-Cookie 提取\r const setCookie = pm.response.headers.get('Set-Cookie');\r const csrfMatch = setCookie && setCookie.match(/X-Csrf-Token=([^;]+)/);\r if (csrfMatch && !pm.environment.get('X-Csrf-Token')) {\r     pm.environment.set('X-Csrf-Token', csrfMatch[1]);\r     console.log('兜底提取 X-Csrf-Token =', csrfMatch[1]);\r }\r \r // 3. 断言：公钥必须提取成功\r pm.test(\"成功从响应头提取 RSA_PUBLIC_KEY\", function () {\r     pm.expect(pm.environment.get('RSA_PUBLIC_KEY'), \"RSA_PUBLIC_KEY 为空\").to.be.a(\"string\").and.not.empty;\r });"
+    language: text/javascript
+order: 2000

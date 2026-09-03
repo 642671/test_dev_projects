@@ -1,0 +1,119 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/otp/verify_pwd"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{NormalUserCookie}}"
+    description: 用户会话Cookie。字段说明：userName=当前登录用户名; TMSESSNAME=会话ID(Session ID); X-Csrf-Token=CSRF防护令牌; tos_current_username=当前用户名(与userName保持一致); loginStatus=登录状态标记(true=已登录)
+  - key: X-Csrf-Token
+    value: "{{NormalUserCsrfToken}}"
+    description: CSRF防护令牌，必须与Cookie中的X-Csrf-Token值保持一致
+  - key: X-Curpass-Token
+    value: "{{NormalUser_X-Curpass-Token}}"
+body:
+  type: json
+  content: "{\r
+
+    \    \"password\": \"Admin123\"\r
+
+    }\r\n"
+scripts:
+  - type: beforeRequest
+    code: "// ===========================\r
+
+      // 前置脚本：生成 NormalUser_X-Curpass-Token\r
+
+      // 请求体：\r
+
+      // {\r
+
+      //     \"password\": \"Admin123\"\r
+
+      // }\r
+
+      // ===========================\r
+
+      \r
+
+      // 获取 Base64 编码的 RSA 公钥\r
+
+      const base64Key = pm.environment.get(\"RSA_PUBLIC_KEY\");\r
+
+      \r
+
+      if (!base64Key) {\r
+
+      \    throw new Error(\"未配置环境变量：RSA_PUBLIC_KEY\");\r
+
+      }\r
+
+      \r
+
+      // Base64 解码 -> PEM 公钥\r
+
+      const publicKey = require(\"atob\")(base64Key);\r
+
+      \r
+
+      // 获取请求体\r
+
+      let body;\r
+
+      \r
+
+      try {\r
+
+      \    body = JSON.parse(pm.request.body.raw);\r
+
+      } catch (e) {\r
+
+      \    throw new Error(\"请求体不是合法的 JSON\");\r
+
+      }\r
+
+      \r
+
+      // 校验 password\r
+
+      if (!body.password) {\r
+
+      \    throw new Error(\"请求体中缺少 password 字段\");\r
+
+      }\r
+
+      \r
+
+      console.log(\"原始密码：\", body.password);\r
+
+      \r
+
+      // 调用 Go 脚本进行 RSA 加密\r
+
+      const encryptPassword = await pm.executeAsync(\r
+
+      \    \"encoderLoginPassword.go\",\r
+
+      \    [body.password, publicKey]\r
+
+      );\r
+
+      \r
+
+      console.log(\"密码加密成功\");\r
+
+      \r
+
+      // 保存为环境变量\r
+
+      pm.environment.set(\"NormalUser_X-Curpass-Token\", encryptPassword);\r
+
+      \r
+
+      console.log(\"NormalUser_X-Curpass-Token 已更新\");"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 9000

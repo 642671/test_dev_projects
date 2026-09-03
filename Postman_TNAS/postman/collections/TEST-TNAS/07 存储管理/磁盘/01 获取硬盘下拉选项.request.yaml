@@ -1,0 +1,541 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/GetDiskOption"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+scripts:
+  - type: afterResponse
+    code: "/**\r
+
+      \ * ==========================================================\r
+
+      \ * 功能：同步磁盘设备名到模块变量\r
+
+      \ * ==========================================================\r
+
+      \ *\r
+
+      \ * 【脚本目的】\r
+
+      \ * 获取当前系统所有磁盘设备名，自动生成模块变量：\r
+
+      \ *\r
+
+      \ *      cap_disk0\r
+
+      \ *      cap_disk1\r
+
+      \ *      cap_disk2\r
+
+      \ *      ...\r
+
+      \ *\r
+
+      \ * 后续接口可直接使用：\r
+
+      \ *\r
+
+      \ *      /v2/storage/CheckAvailablePool/{{cap_disk0}}\r
+
+      \ *      /v2/storage/CheckAvailablePool/{{cap_disk1}}\r
+
+      \ *      /v2/storage/CheckAvailablePool/{{cap_disk2}}\r
+
+      \ *\r
+
+      \ * 命名说明：\r
+
+      \ *\r
+
+      \ *      cap_ = CheckAvailablePool 接口专用前缀\r
+
+      \ *\r
+
+      \ * ==========================================================\r
+
+      \ * 为什么每次都要同步？\r
+
+      \ * ==========================================================\r
+
+      \ *\r
+
+      \ * 磁盘是动态变化的，例如：\r
+
+      \ *\r
+
+      \ * 第一次：\r
+
+      \ *      sda\r
+
+      \ *      sdb\r
+
+      \ *      sdc\r
+
+      \ *\r
+
+      \ * 后来：\r
+
+      \ *      拔掉 sdb\r
+
+      \ *      插入 sdd\r
+
+      \ *\r
+
+      \ * 如果仍然使用旧变量：\r
+
+      \ *\r
+
+      \ *      cap_disk0  = sda   √\r
+
+      \ *      cap_disk1  = sdb   × 已不存在\r
+
+      \ *      cap_disk2  = sdc   × 序号已变\r
+
+      \ *\r
+
+      \ * 因此，本脚本属于【同步脚本】\r
+
+      \ *\r
+
+      \ * 每次执行：\r
+
+      \ *\r
+
+      \ * ① 删除历史磁盘变量\r
+
+      \ * ② 获取当前最新磁盘列表\r
+
+      \ * ③ 重新生成磁盘变量\r
+
+      \ *\r
+
+      \ * 保证：\r
+
+      \ *\r
+
+      \ *      模块变量 == 当前系统真实磁盘\r
+
+      \ *\r
+
+      \ * ==========================================================\r
+
+      \ */\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 1、获取接口响应\r
+
+      // ==========================================================\r
+
+      const res = pm.response.json();\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 2、接口没有返回 data，结束脚本\r
+
+      // ==========================================================\r
+
+      if (!res.data) {\r
+
+      \r
+
+      \    console.log(\"响应 data 为空，停止生成磁盘变量。\");\r
+
+      \r
+
+      \    return;\r
+
+      }\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 3、将 data 作为数组\r
+
+      //\r
+
+      // data:\r
+
+      //\r
+
+      // [\r
+
+      //      { \"name\": \"HDD1\",   \"device\": \"/dev/sda\"  },\r
+
+      //      { \"name\": \"HDD2\",   \"device\": \"/dev/sdb\"  },\r
+
+      //      { \"name\": \"NVMe1\",  \"device\": \"/dev/sdza\" }\r
+
+      // ]\r
+
+      //\r
+
+      // 提取 device 中 /dev/ 后面的部分作为磁盘名。\r
+
+      // ==========================================================\r
+
+      \r
+
+      const disks = res.data.map(d => d.device.replace(/^\\/dev\\//, ''));\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 4、清理历史模块变量\r
+
+      //\r
+
+      // 防止磁盘变化后变量残留。\r
+
+      //\r
+
+      // 例如：\r
+
+      //\r
+
+      // 上一次:\r
+
+      //\r
+
+      // cap_disk0\r
+
+      // cap_disk1\r
+
+      // cap_disk2\r
+
+      //\r
+
+      //\r
+
+      // 本次:\r
+
+      //\r
+
+      // 只有两个磁盘\r
+
+      //\r
+
+      //\r
+
+      // 如果不清理:\r
+
+      //\r
+
+      // cap_disk2\r
+
+      //\r
+
+      // 仍保存旧设备名\r
+
+      //\r
+
+      // ==========================================================\r
+
+      \r
+
+      for (let i = 0; i < 50; i++) {\r
+
+      \r
+
+      \    pm.moduleVariables.unset(`cap_disk${i}`);\r
+
+      \r
+
+      }\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 5、重新生成模块变量\r
+
+      //\r
+
+      // 生成:\r
+
+      //\r
+
+      // cap_disk0 = sda\r
+
+      // cap_disk1 = sdb\r
+
+      // cap_disk2 = sdc\r
+
+      // ...\r
+
+      //\r
+
+      // 用于接口:\r
+
+      //\r
+
+      // /v2/storage/CheckAvailablePool/{{cap_disk0}}\r
+
+      // /v2/storage/CheckAvailablePool/{{cap_disk1}}\r
+
+      // /v2/storage/CheckAvailablePool/{{cap_disk2}}\r
+
+      // ==========================================================\r
+
+      \r
+
+      disks.forEach((disk, index) => {\r
+
+      \r
+
+      \    const variableName = `cap_disk${index}`;\r
+
+      \r
+
+      \    pm.moduleVariables.set(\r
+
+      \        variableName,\r
+
+      \        disk\r
+
+      \    );\r
+
+      \r
+
+      \    console.log(\r
+
+      \        `${variableName} = ${disk}`\r
+
+      \    );\r
+
+      \r
+
+      });\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 6、保存磁盘数量\r
+
+      //\r
+
+      // 方便后续接口循环使用。\r
+
+      // ==========================================================\r
+
+      \r
+
+      pm.moduleVariables.set(\r
+
+      \    \"cap_disk_count\",\r
+
+      \    disks.length\r
+
+      );\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 7、输出日志\r
+
+      // ==========================================================\r
+
+      \r
+
+      console.log(\"====================================\");\r
+
+      console.log(`共发现 ${disks.length} 个磁盘`);\r
+
+      console.log(\"所有磁盘设备名已同步到模块变量。\");\r
+
+      console.log(\"====================================\");\r
+
+
+      // ============================================================\r
+
+      // GET /v2/disk/list 后置脚本（示例路径，请按实际接口路径调整注释）\r
+
+      // 解析返回 → 写入模块变量 → 供后续接口引用磁盘路径\r
+
+      // ------------------------------------------------------------\r
+
+      // 遵循 POSTMAN_SCRIPT_STANDARDS.md 中的强制规范：\r
+
+      //   1. 每次执行必须先清理旧的同前缀变量\r
+
+      //   2. 有值就 set，没值就 unset，不允许残留空字符串或 0\r
+
+      //   3. 磁盘变量按索引命名：disk1_device / disk1_name（索引从 1 起）\r
+
+      // ============================================================\r
+
+      \r
+
+      const res = pm.response.json();\r
+
+      const data = res.data || res;       // 此接口 data 直接是数组\r
+
+      \r
+
+      // ------------------------------------------------------------\r
+
+      // 小工具：有值就 set，否则 unset，避免残留空变量\r
+
+      // ------------------------------------------------------------\r
+
+      function setOrUnset(key, val) {\r
+
+      \    if (val === undefined || val === null || val === '' || Number.isNaN(val)) {\r
+
+      \        pm.moduleVariables.unset(key);\r
+
+      \    } else {\r
+
+      \        pm.moduleVariables.set(key, val);\r
+
+      \    }\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 0. 清理所有旧的 diskN_ 变量（动态扫描，防止残留）\r
+
+      //    匹配 disk1_device / disk2_name / disk12_device 等\r
+
+      // ============================================================\r
+
+      const allModuleVars = pm.moduleVariables.toObject();\r
+
+      Object.keys(allModuleVars)\r
+
+      \    .filter(k => /^disk\\d+_/.test(k))\r
+
+      \    .forEach(k => pm.moduleVariables.unset(k));\r
+
+      \r
+
+      // ============================================================\r
+
+      // 1. 响应合法性校验\r
+
+      // ============================================================\r
+
+      pm.test('响应结构正确（data 为数组）', () => {\r
+
+      \    pm.expect(data).to.be.an('array');\r
+
+      });\r
+
+      \r
+
+      pm.test('至少存在一个磁盘', () => {\r
+
+      \    pm.expect(data.length).to.be.above(0);\r
+
+      });\r
+
+      \r
+
+      pm.test('每个磁盘元素包含 name 和 device', () => {\r
+
+      \    data.forEach(item => {\r
+
+      \        pm.expect(item).to.have.property('name');\r
+
+      \        pm.expect(item).to.have.property('device');\r
+
+      \    });\r
+
+      });\r
+
+      \r
+
+      // ============================================================\r
+
+      // 2. 提取磁盘列表 → 按索引 1 起生成 diskN_device / diskN_name\r
+
+      // ============================================================\r
+
+      const disks = (data || []).map(d => ({\r
+
+      \    name:   (d.name   || '').trim(),\r
+
+      \    device: (d.device || '').trim(),\r
+
+      }));\r
+
+      \r
+
+      // 汇总变量\r
+
+      if (disks.length > 0) {\r
+
+      \    pm.moduleVariables.set('disk_count', disks.length);\r
+
+      \    pm.moduleVariables.set('disk_list', JSON.stringify(disks));\r
+
+      }\r
+
+      \r
+
+      // 按索引为每一块磁盘生成独立变量（索引从 1 起）\r
+
+      disks.forEach((d, i) => {\r
+
+      \    const idx = i + 1;                              // 索引 1 起\r
+
+      \    setOrUnset(`disk${idx}_device`, d.device);      // disk1_device = /dev/sda\r
+
+      \    setOrUnset(`disk${idx}`,   d.name);        // disk1_name   = HDD3\r
+
+      });\r
+
+      \r
+
+      // ============================================================\r
+
+      // 3. 调试输出\r
+
+      // ============================================================\r
+
+      console.log('==== 磁盘列表资源一览 ====');\r
+
+      console.log(`磁盘总数: ${disks.length} 块`);\r
+
+      disks.forEach((d, i) => {\r
+
+      \    console.log(`  disk${i + 1}_device=${d.device}, disk${i + 1}=${d.name}`);\r
+
+      });"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 1000

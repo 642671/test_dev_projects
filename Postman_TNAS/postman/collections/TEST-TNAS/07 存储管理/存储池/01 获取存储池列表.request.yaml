@@ -1,0 +1,502 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/list/storagePool?type=breif"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  - key: type
+    value: breif
+    description: 信息类型：detail=详细信息, brief=简要信息
+scripts:
+  - type: afterResponse
+    code: "/**\r
+
+      \ * ==========================================================\r
+
+      \ * 功能：同步存储池 UUID 到模块变量\r
+
+      \ * ==========================================================\r
+
+      \ *\r
+
+      \ * 【脚本目的】\r
+
+      \ * 获取当前系统所有存储池(UUID)，自动生成模块变量：\r
+
+      \ *\r
+
+      \ *      vg0_uuid\r
+
+      \ *      vg1_uuid\r
+
+      \ *      vg2_uuid\r
+
+      \ *      ...\r
+
+      \ *\r
+
+      \ * 后续接口可直接使用：\r
+
+      \ *\r
+
+      \ *      vg0_uuid\r
+
+      \ *      vg1_uuid\r
+
+      \ *      vg2_uuid\r
+
+      \ *\r
+
+      \ * ==========================================================\r
+
+      \ * 为什么每次都要同步？\r
+
+      \ * ==========================================================\r
+
+      \ *\r
+
+      \ * 存储池是动态变化的，例如：\r
+
+      \ *\r
+
+      \ * 第一次：\r
+
+      \ *      vg0\r
+
+      \ *      vg1\r
+
+      \ *      vg2\r
+
+      \ *\r
+
+      \ * 后来：\r
+
+      \ *      删除vg1\r
+
+      \ *      新建vg3\r
+
+      \ *\r
+
+      \ * 如果仍然使用旧变量：\r
+
+      \ *\r
+
+      \ *      vg0_uuid √\r
+
+      \ *      vg1_uuid × 已失效\r
+
+      \ *      vg2_uuid × 数据可能变化\r
+
+      \ *\r
+
+      \ * 因此，本脚本属于【同步脚本】\r
+
+      \ *\r
+
+      \ * 每次执行：\r
+
+      \ *\r
+
+      \ * ① 删除历史存储池UUID变量\r
+
+      \ * ② 获取当前最新存储池列表\r
+
+      \ * ③ 按sort排序\r
+
+      \ * ④ 重新生成UUID变量\r
+
+      \ *\r
+
+      \ * 保证：\r
+
+      \ *\r
+
+      \ *      模块变量 == 当前系统真实存储池\r
+
+      \ *\r
+
+      \ * ==========================================================\r
+
+      \ */\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 1、获取接口响应\r
+
+      // ==========================================================\r
+
+      const res = pm.response.json();\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 2、接口没有返回data，结束脚本\r
+
+      // ==========================================================\r
+
+      if (!res.data) {\r
+
+      \r
+
+      \    console.log(\"响应 data 为空，停止生成存储池变量。\");\r
+
+      \r
+
+      \    return;\r
+
+      }\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 3、将Object转换为数组\r
+
+      //\r
+
+      // data:\r
+
+      //\r
+
+      // {\r
+
+      //      uuid1:{},\r
+
+      //      uuid2:{},\r
+
+      //      uuid3:{}\r
+
+      // }\r
+
+      //\r
+
+      // 转换为:\r
+
+      //\r
+
+      // [\r
+
+      //      {},\r
+
+      //      {},\r
+
+      //      {}\r
+
+      // ]\r
+
+      //\r
+
+      // 根据sort排序，保证vg0、vg1、vg2顺序固定。\r
+
+      // ==========================================================\r
+
+      \r
+
+      const storagePools = Object.values(res.data)\r
+
+      \    .sort((a, b) => a.sort - b.sort);\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 4、清理历史模块变量\r
+
+      //\r
+
+      // 防止存储池删除后变量残留。\r
+
+      //\r
+
+      // 例如：\r
+
+      //\r
+
+      // 上一次:\r
+
+      //\r
+
+      // vg0_uuid\r
+
+      // vg1_uuid\r
+
+      // vg2_uuid\r
+
+      //\r
+
+      //\r
+
+      // 本次:\r
+
+      //\r
+
+      // 只有两个存储池\r
+
+      //\r
+
+      //\r
+
+      // 如果不清理:\r
+
+      //\r
+
+      // vg2_uuid\r
+
+      //\r
+
+      // 仍保存旧UUID\r
+
+      //\r
+
+      // ==========================================================\r
+
+      \r
+
+      for (let i = 0; i < 50; i++) {\r
+
+      \r
+
+      \    pm.moduleVariables.unset(`vg${i}_uuid`);\r
+
+      \r
+
+      }\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 5、重新生成模块变量\r
+
+      //\r
+
+      // 使用 sort - 1 作为编号（sort 从 1 开始，变量从 vg0 开始）。\r
+
+      //\r
+
+      // 这样即使 sort 不连续（如 1、3、5），\r
+
+      // 变量名也能与实际存储池一一对应：\r
+
+      //\r
+
+      // sort=1 → vg0_uuid\r
+
+      // sort=3 → vg2_uuid\r
+
+      // sort=5 → vg4_uuid\r
+
+      //\r
+
+      // 删除中间存储池后不会出现错位。\r
+
+      // ==========================================================\r
+
+      \r
+
+      storagePools.forEach((pool) => {\r
+
+      \r
+
+      \    const sortIndex = pool.sort - 1;\r
+
+      \    const variableName = `vg${sortIndex}_uuid`;\r
+
+      \r
+
+      \    pm.moduleVariables.set(\r
+
+      \        variableName,\r
+
+      \        pool.uuid\r
+
+      \    );\r
+
+      \r
+
+      \    console.log(\r
+
+      \        `${variableName} = ${pool.uuid}`\r
+
+      \    );\r
+
+      \r
+
+      });\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 6、保存存储池数量\r
+
+      //\r
+
+      // 方便后续接口循环使用。\r
+
+      // ==========================================================\r
+
+      \r
+
+      pm.moduleVariables.set(\r
+
+      \    \"vg_count\",\r
+
+      \    storagePools.length\r
+
+      );\r
+
+      \r
+
+      \r
+
+      // ==========================================================\r
+
+      // 7、输出日志\r
+
+      // ==========================================================\r
+
+      \r
+
+      console.log(\"====================================\");\r
+
+      console.log(`共发现 ${storagePools.length} 个存储池`);\r
+
+      console.log(\"所有存储池 UUID 已同步到模块变量。\");\r
+
+      console.log(\"====================================\");
+
+      // ============================================================\r
+
+      // GET /v2/storage/list/storagePool 后置脚本\r
+
+      // 按池名生成模块变量：\r
+
+      //   avail_{池名}_uuid    → 可用池 UUID\r
+
+      //   corrupt_{池名}_uuid  → 损坏池 UUID\r
+
+      // 每次执行自动刷新，不存在的变量自动删除，不留遗留\r
+
+      // ============================================================\r
+
+      \r
+
+      const pools = pm.response.json().data || {};\r
+
+      \r
+
+      const availNames = [];\r
+
+      const corruptNames = [];\r
+
+      \r
+
+      Object.values(pools).forEach(p => {\r
+
+      \    if (p.is_available || p.health === 999) {\r
+
+      \        availNames.push(p.name);\r
+
+      \        pm.moduleVariables.set(`avail_${p.name}_uuid`, p.uuid);\r
+
+      \    } else if (p.health === 0) {\r
+
+      \        corruptNames.push(p.name);\r
+
+      \        pm.moduleVariables.set(`corrupt_${p.name}_uuid`, p.uuid);\r
+
+      \    }\r
+
+      });\r
+
+      \r
+
+      \r
+
+      // 清理已不存在的变量\r
+
+      const allVars = pm.moduleVariables.toObject();\r
+
+      Object.keys(allVars).forEach(key => {\r
+
+      \    const am = key.match(/^avail_(.+)_uuid$/);\r
+
+      \    const cm = key.match(/^corrupt_(.+)_uuid$/);\r
+
+      \    if (am && !availNames.includes(am[1])) pm.moduleVariables.unset(key);\r
+
+      \    if (cm && !corruptNames.includes(cm[1])) pm.moduleVariables.unset(key);\r
+
+      });\r
+
+      \r
+
+      \r
+
+      // ============================================================\r
+
+      // 控制台输出结果\r
+
+      // ============================================================\r
+
+      console.log('========== 存储池变量同步结果 ==========');\r
+
+      console.log(`可用池(${availNames.length}): ${availNames.map(n => `avail_${n}_uuid`).join(', ') || '无'}`);\r
+
+      console.log(`损坏池(${corruptNames.length}): ${corruptNames.map(n => `corrupt_${n}_uuid`).join(', ') || '无'}`);\r
+
+      \r
+
+      // 逐个打印变量名 = 值，便于核对\r
+
+      console.log('---------- 可用池变量明细 ----------');\r
+
+      availNames.forEach(n => {\r
+
+      \    const key = `avail_${n}_uuid`;\r
+
+      \    console.log(`${key} = ${pm.moduleVariables.get(key)}`);\r
+
+      });\r
+
+      \r
+
+      console.log('---------- 损坏池变量明细 ----------');\r
+
+      corruptNames.forEach(n => {\r
+
+      \    const key = `corrupt_${n}_uuid`;\r
+
+      \    console.log(`${key} = ${pm.moduleVariables.get(key)}`);\r
+
+      });\r
+
+      console.log('=======================================');"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 1000

@@ -1,0 +1,26 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/edit/volume/:uuid"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+pathVariables:
+  uuid: ""
+body:
+  type: json
+  content: "{\r
+
+    \    \"description\": \"hdsa\",\r
+
+    \    \"capacity\": 11,\r
+
+    \    \"quota_flag\":0\r
+
+    }"
+order: 13000

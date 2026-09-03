@@ -1,0 +1,163 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/smart_test/schedule"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"{{disk1_model}}\",\r
+
+    \    \"serial\": \"{{disk1_serial}}\",\r
+
+    \    \"test_type\": 0,\r
+
+    \    \"disks\": \"{{disk1_device}}\",\r
+
+    \    \"enabled\": false,\r
+
+    \    \"run_immediately\": true,\r
+
+    \    \"exception_warn\": true,\r
+
+    \    \"schedule\": {\r
+
+    \        \"cycle_type\": \"Disabled\",\r
+
+    \        \"cycle_weeks_range\": \"\",\r
+
+    \        \"cycle_date\": \"15\",\r
+
+    \        \"schedule_time\": \"2026-07-15\",\r
+
+    \        \"frequency_type\": \"Disabled\",\r
+
+    \        \"frequency_value\": 0,\r
+
+    \        \"hour\": 19,\r
+
+    \        \"minute\": 44\r
+
+    \    }\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: |-
+      // ============================================================
+      // POST /v2/disk/smart_test/schedule 后置脚本
+      // 功能：从请求体中提取 disks 设备路径，反查模块变量中
+      //       对应的 diskN_device，将响应的 id 写入 diskN_smart_id
+      // ------------------------------------------------------------
+      // 遵循 POSTMAN_SCRIPT_STANDARDS.md 中的强制规范：
+      //   1. 每次执行先清空本次对应的 diskN_smart_id
+      //   2. 有值就 set，没值就 unset，不残留空字符串
+      //   3. 变量命名与磁盘列表接口一致：diskN_smart_id
+      // ============================================================
+
+      const res = pm.response.json();
+      const data = res.data || res;
+
+      // ------------------------------------------------------------
+      // 小工具
+      // ------------------------------------------------------------
+      function setOrUnset(key, val) {
+          if (val === undefined || val === null || val === '' || Number.isNaN(val)) {
+              pm.collectionVariables.unset(key);
+          } else {
+              pm.collectionVariables.set(key, val);
+          }
+      }
+
+      // ============================================================
+      // 0. 从请求体中提取 disks 设备路径 → 反查索引 → 先清空
+      // ============================================================
+      let reqDevice = '';
+
+      if (pm.request.body) {
+          try {
+              const body = JSON.parse(pm.request.body.raw);
+              reqDevice = (body.disks || '').trim();
+          } catch (e) { /* 请求体非 JSON，忽略 */ }
+      }
+
+      if (!reqDevice) {
+          console.warn('⚠ 未从请求体提取到 disks 参数，跳过变量写入');
+      }
+
+      // 反查模块变量中哪个 diskN_device 匹配
+      let diskIndex = null;
+      if (reqDevice) {
+          const allVars = pm.collectionVariables.toObject();
+          for (const [key, value] of Object.entries(allVars)) {
+              const match = key.match(/^disk(\d+)_device$/);
+              if (match && String(value).trim() === reqDevice) {
+                  diskIndex = parseInt(match[1], 10);
+                  break;
+              }
+          }
+      }
+
+      // ★ 先清空本次要写入的变量
+      if (diskIndex !== null) {
+          pm.collectionVariables.unset(`disk${diskIndex}_smart_id`);
+          console.log(`已清空 disk${diskIndex}_smart_id（准备写入新值）`);
+      } else {
+          console.warn(`⚠ 未在模块变量中找到 device=${reqDevice} 对应的 diskN_device`);
+      }
+
+      // ============================================================
+      // 1. 响应结构校验
+      // ============================================================
+      pm.test('响应包含 id', () => {
+          pm.expect(data).to.have.property('id');
+      });
+
+      // ============================================================
+      // 2. 写入 diskN_smart_id
+      // ============================================================
+      if (diskIndex !== null) {
+          setOrUnset(`disk${diskIndex}_smart_id`, data.id);
+          console.log(`disk${diskIndex}_smart_id = ${data.id}`);
+      }
+
+      // ============================================================
+      // 3. 调试输出（结构化格式）
+      // ============================================================
+      console.log('====================================');
+      if (diskIndex !== null) {
+          console.log(`disk${diskIndex}_smart_id 已同步: ${data.id}`);
+      } else {
+          console.log('未匹配到磁盘编号，变量未写入');
+      }
+      console.log('====================================');
+      console.log('========== diskN_smart_id 变量明细 ==========');
+
+      const updatedVars = pm.collectionVariables.toObject();
+      const smartVars = Object.keys(updatedVars)
+          .filter(k => /^disk\d+_smart_id$/.test(k))
+          .sort((a, b) => {
+              const na = parseInt(a.match(/\d+/)[0], 10);
+              const nb = parseInt(b.match(/\d+/)[0], 10);
+              return na - nb;
+          });
+
+      if (smartVars.length > 0) {
+          smartVars.forEach(k => console.log(`${k} = ${updatedVars[k]}`));
+      } else {
+          console.log('(无)');
+      }
+
+      console.log('=======================================');
+      console.log('SMART 任务 ID 已同步到模块变量。');
+      console.log('=======================================');
+    language: text/javascript
+order: 15000

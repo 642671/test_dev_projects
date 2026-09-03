@@ -1,0 +1,19 @@
+$kind: http-request
+name: 05 获取Target认证信息（只能返回连接过的target的认证信息）
+url: "{{baseUrl}}/v2/virtualdisk/GetTargetAttr?target=iqn.tnas.terramaster.26730093613"
+method: GET
+headers:
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  - key: target
+    value: iqn.tnas.terramaster.26730093613
+    description: Target名称，文本类型，必填参数需要询问用户给出
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 6000

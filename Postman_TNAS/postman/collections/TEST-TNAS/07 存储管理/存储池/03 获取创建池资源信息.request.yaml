@@ -1,0 +1,280 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/create/pool"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+scripts:
+  - type: afterResponse
+    code: "// ============================================================\r
+
+      // GET /v2/storage/create/pool 后置脚本\r
+
+      // 解析返回 → 写入模块变量 → 供后续 POST 创建存储池使用\r
+
+      // ------------------------------------------------------------\r
+
+      // 遵循 POSTMAN_SCRIPT_STANDARDS.md 中的强制规范：\r
+
+      //   1. 每次执行必须先清理旧的同前缀变量（动态扫描 cp_ 前缀）\r
+
+      //   2. 有值就 set，没值就 unset，不允许残留空字符串或 0\r
+
+      //   3. 磁盘变量按索引 cp_disk_N_* 铺开，不限数量（适配大盘位机器）\r
+
+      // ============================================================\r
+
+      \r
+
+      const res = pm.response.json();\r
+
+      const data = res.data || res;\r
+
+      \r
+
+      // ------------------------------------------------------------\r
+
+      // 小工具：有值就 set，否则 unset，避免残留空变量\r
+
+      // ------------------------------------------------------------\r
+
+      function setOrUnset(key, val) {\r
+
+      \    if (val === undefined || val === null || val === '' || Number.isNaN(val)) {\r
+
+      \        pm.moduleVariables.unset(key);\r
+
+      \    } else {\r
+
+      \        pm.moduleVariables.set(key, val);\r
+
+      \    }\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 0. 清理所有旧的 cp_ 变量（动态扫描，防止残留）\r
+
+      // ============================================================\r
+
+      const allModuleVars = pm.moduleVariables.toObject();\r
+
+      Object.keys(allModuleVars)\r
+
+      \    .filter(k => k.startsWith('cp_'))\r
+
+      \    .forEach(k => pm.moduleVariables.unset(k));\r
+
+      \r
+
+      // ============================================================\r
+
+      // 1. 响应合法性校验\r
+
+      // ============================================================\r
+
+      pm.test('响应结构正确', () => {\r
+
+      \    pm.expect(res).to.be.an('object');\r
+
+      \    pm.expect(data).to.have.property('pool_info');\r
+
+      \    pm.expect(data).to.have.property('free_disk');\r
+
+      \    pm.expect(data.free_disk).to.be.an('array');\r
+
+      });\r
+
+      \r
+
+      pm.test('至少存在一个空闲磁盘（POST disks 必填 ≥1 item）', () => {\r
+
+      \    pm.expect(data.free_disk.length).to.be.above(0);\r
+
+      });\r
+
+      \r
+
+      // ============================================================\r
+
+      // 2. 空闲磁盘列表 → 提取 name / 设备路径 / 类型 / 容量\r
+
+      // ============================================================\r
+
+      const freeDisks = (data.free_disk || []).map(d => ({\r
+
+      \    label: `${d.name}(${d.device || ''}, ${d.capacity || ''})`,  // 展示：HDD1(/dev/sdg, 128 GB)\r
+
+      \    value: (d.device || '').trim(),           // 设备路径：/dev/sdg（.trim 防 %20）\r
+
+      \    name:  (d.name  || '').trim(),            // 盘位名：HDD1\r
+
+      \    slot:  d.slot || 0,                       // 槽位号\r
+
+      \    type:  d.type || '',                      // ssd / normal / nvme\r
+
+      \    capacity: d.capacity || '',               // 容量文本：128 GB\r
+
+      \    bytes: d.bytes?.value || 0,               // 容量字节数\r
+
+      \    status: d.status || '',                   // 状态\r
+
+      }));\r
+
+      \r
+
+      // ------------------------------------------------------------\r
+
+      // 2.1 汇总变量：仅列表 JSON 与总数，方便日志与用例判断\r
+
+      // ------------------------------------------------------------\r
+
+      if (freeDisks.length > 0) {\r
+
+      \    pm.moduleVariables.set('cp_disk_list', JSON.stringify(freeDisks));\r
+
+      \    pm.moduleVariables.set('cp_disk_count', freeDisks.length);\r
+
+      }\r
+
+      \r
+
+      // ------------------------------------------------------------\r
+
+      // 2.2 按索引为每一块空闲磁盘生成独立变量（数量不限，几块生成几块）\r
+
+      //     命名规则：cp_disk_<索引>_<字段>，索引从 0 开始\r
+
+      //     大盘位 12/16/24 盘位机器同样按此规则扩展至 cp_disk_23_path\r
+
+      // ------------------------------------------------------------\r
+
+      freeDisks.forEach((d, i) => {\r
+
+      \    setOrUnset(`cp_disk_${i}_path`,     d.value);       // /dev/sdg\r
+
+      \    setOrUnset(`cp_disk_${i}_name`,     d.name);        // HDD1\r
+
+      \    setOrUnset(`cp_disk_${i}_type`,     d.type);        // ssd / normal / nvme\r
+
+      \    setOrUnset(`cp_disk_${i}_capacity`, d.capacity);    // 128 GB\r
+
+      \    setOrUnset(`cp_disk_${i}_slot`,     d.slot);        // 1\r
+
+      });\r
+
+      \r
+
+      // ============================================================\r
+
+      // 3. 新建存储池信息（本次创建成功后将生成的池）\r
+
+      // ============================================================\r
+
+      const poolInfo = data.pool_info || {};\r
+
+      setOrUnset('cp_new_pool_show_name',   poolInfo.show_name);       // ${storage,storagepool} 4\r
+
+      setOrUnset('cp_new_pool_sort',        poolInfo.sort);            // 4\r
+
+      setOrUnset('cp_new_pool_uuid',        poolInfo.uuid);            // 创建前一般为空\r
+
+      setOrUnset('cp_new_pool_description', poolInfo.description);\r
+
+      setOrUnset('cp_new_pool_compression', poolInfo.compression);\r
+
+      \r
+
+      // 由 sort 推导下一个 vg 名（vgN = sort - 1，与存储池变量命名规则一致）\r
+
+      if (typeof poolInfo.sort === 'number' && poolInfo.sort >= 1) {\r
+
+      \    pm.moduleVariables.set('cp_new_pool_vg_name', `vg${poolInfo.sort - 1}`);\r
+
+      } else {\r
+
+      \    pm.moduleVariables.unset('cp_new_pool_vg_name');\r
+
+      }\r
+
+      \r
+
+      // ============================================================\r
+
+      // 4. 调试输出\r
+
+      // ============================================================\r
+
+      console.log('==== 创建存储池资源一览 ====');\r
+
+      console.log(`空闲磁盘: ${freeDisks.length} 块`);\r
+
+      freeDisks.forEach((d, i) => {\r
+
+      \    console.log(`  cp_disk_${i}_path=${d.value}, name=${d.name}, type=${d.type}, capacity=${d.capacity}`);\r
+
+      });\r
+
+      console.log(`新池: show_name=${poolInfo.show_name || '(未返回)'}, sort=${poolInfo.sort}, vg=${pm.moduleVariables.get('cp_new_pool_vg_name') || '?'}`);\r
+
+      \r
+
+      \r
+
+      // // 单盘 basic\r
+
+      // { \"level\": \"basic\", \"disks\": [\"{{cp_disk_0_path}}\"] }\r
+
+      \r
+
+      // // 双盘 RAID1\r
+
+      // { \"level\": \"raid1\", \"disks\": [\"{{cp_disk_0_path}}\", \"{{cp_disk_1_path}}\"] }\r
+
+      \r
+
+      // // 三盘 RAID5\r
+
+      // { \"level\": \"raid5\", \"disks\": [\"{{cp_disk_0_path}}\", \"{{cp_disk_1_path}}\", \"{{cp_disk_2_path}}\"] }\r
+
+      \r
+
+      // // 四盘 RAID6/RAID10\r
+
+      // { \"level\": \"raid6\",  \"disks\": [\"{{cp_disk_0_path}}\", \"{{cp_disk_1_path}}\", \"{{cp_disk_2_path}}\", \"{{cp_disk_3_path}}\"] }\r
+
+      // { \"level\": \"raid10\", \"disks\": [\"{{cp_disk_0_path}}\", \"{{cp_disk_1_path}}\", \"{{cp_disk_2_path}}\", \"{{cp_disk_3_path}}\"] }\r
+
+      \r
+
+      // // 大盘位 TRAID 全组（示例：12 盘）\r
+
+      // { \"level\": \"traid\", \"disks\": [\r
+
+      //     \"{{cp_disk_0_path}}\",\"{{cp_disk_1_path}}\",\"{{cp_disk_2_path}}\",\"{{cp_disk_3_path}}\",\r
+
+      //     \"{{cp_disk_4_path}}\",\"{{cp_disk_5_path}}\",\"{{cp_disk_6_path}}\",\"{{cp_disk_7_path}}\",\r
+
+      //     \"{{cp_disk_8_path}}\",\"{{cp_disk_9_path}}\",\"{{cp_disk_10_path}}\",\"{{cp_disk_11_path}}\"\r
+
+      // ] }\r
+
+      \r
+
+      // // 跳选（负面用例：仅选 0/2/4 盘）\r
+
+      // { \"level\": \"raid5\", \"disks\": [\"{{cp_disk_0_path}}\", \"{{cp_disk_2_path}}\", \"{{cp_disk_4_path}}\"] }"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 3000

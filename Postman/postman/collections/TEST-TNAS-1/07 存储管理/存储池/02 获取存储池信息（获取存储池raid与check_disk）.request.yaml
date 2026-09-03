@@ -1,0 +1,338 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/edit/pool/:uuid"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+pathVariables:
+  uuid: "{{vg0_uuid}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      /**
+       * ==========================================================
+       * 功能：同步存储池 RAID设备到模块变量
+       * ==========================================================
+       *
+       * 【脚本目的】
+       *
+       * 获取当前存储池对应的RAID设备：
+       *
+       *      pvs
+       *      raidname（从 volumes 中提取）
+       *
+       * 自动生成模块变量：
+       *
+       *      vg0_raid
+       *      vg1_raid
+       *      vg2_raid
+       *
+       *      vg0_md
+       *      vg1_md
+       *      vg2_md
+       *
+       *
+       * 示例：
+       *
+       *      vg0_raid=/dev/md1
+       *      vg0_md=md0
+       *
+       *
+       * ==========================================================
+       *
+       * 同步机制：
+       *
+       * 每次执行：
+       *
+       * ① 清理历史RAID变量及md变量
+       * ② 获取最新pvs数据
+       * ③ 根据当前数据重新生成变量
+       *
+       *
+       * 防止：
+       *
+       * 旧RAID删除后变量仍然存在
+       *
+       * ==========================================================
+       */
+
+
+      // ==========================================================
+      // 1、获取响应
+      // ==========================================================
+
+      const res = pm.response.json();
+
+
+      // ==========================================================
+      // 2、清理历史RAID变量及md变量
+      //
+      // 必须放在前面
+      //
+      // 即使接口返回空数据，也需要清理旧变量。
+      // ==========================================================
+
+      for (let i = 0; i < 50; i++) {
+
+          pm.collectionVariables.unset(`vg${i}_raid`);
+          pm.collectionVariables.unset(`vg${i}_md`);
+
+      }
+
+
+      // 清理数量变量
+
+      pm.collectionVariables.unset("vg_raid_count");
+      pm.collectionVariables.unset("vg_md_count");
+
+
+
+      console.log("历史RAID变量及md变量清理完成。");
+
+
+
+      // ==========================================================
+      // 3、判断data是否存在
+      // ==========================================================
+
+      if (!res.data) {
+
+          console.log("响应 data 为空，停止生成RAID变量。");
+
+          return;
+
+      }
+
+
+
+      // ==========================================================
+      // 4、获取存储池名称
+      //
+      // 示例:
+      //
+      // name:
+      // vg0
+      //
+      // ==========================================================
+
+      const vgName = res.data.name;
+
+
+
+      // ==========================================================
+      // 5、获取pvs
+      //
+      // 示例:
+      //
+      // pvs:
+      //
+      // [
+      //     "/dev/md1"
+      // ]
+      //
+      // ==========================================================
+
+      const pvs = res.data.pvs;
+
+
+
+      // ==========================================================
+      // 6、判断pvs是否为空
+      //
+      // 注意：
+      // 此时历史变量已经清理
+      //
+      // 所以不会残留旧值。
+      // ==========================================================
+
+      if (!pvs || pvs.length === 0) {
+
+
+          console.log("pvs为空，不生成新的RAID变量。");
+
+
+          pm.collectionVariables.set(
+              "vg_raid_count",
+              0
+          );
+
+
+          console.log("====================================");
+          console.log("RAID变量同步完成，无RAID设备。");
+          console.log("====================================");
+
+
+          // 注意：pvs为空时仍继续提取md
+          // 不在此处return
+
+      }
+
+
+
+      // ==========================================================
+      // 7、生成RAID变量
+      //
+      // 当前规则:
+      //
+      // vg0_raid=/dev/md1
+      //
+      // 如果多个pvs:
+      //
+      // 只取第一个RAID设备
+      //
+      // ==========================================================
+
+      if (pvs && pvs.length > 0) {
+
+          const raidVariableName = `${vgName}_raid`;
+
+
+          pm.collectionVariables.set(
+              raidVariableName,
+              pvs[0]
+          );
+
+
+          console.log(
+              `${raidVariableName} = ${pvs[0]}`
+          );
+
+
+          // 保存RAID数量
+
+          pm.collectionVariables.set(
+              "vg_raid_count",
+              pvs.length
+          );
+
+      }
+
+
+
+      // ==========================================================
+      // 8、提取 raidname（md设备名）
+      //
+      // 来源：
+      //
+      // res.data.volumes[].raidname[]
+      //
+      // 示例:
+      //
+      // volumes[0].raidname = ["md0"]
+      //
+      // 生成规则:
+      //
+      // vg0_md = md0
+      //
+      // 取所有卷中去重后的第一个raidname
+      //
+      // ==========================================================
+
+      const volumes = res.data.volumes;
+
+
+      if (!volumes || volumes.length === 0) {
+
+          console.log("volumes为空，不生成md变量。");
+
+          pm.collectionVariables.set(
+              "vg_md_count",
+              0
+          );
+
+      } else {
+
+          // 收集所有卷中的 raidname，去重
+
+          const mdSet = new Set();
+
+          for (const vol of volumes) {
+
+              if (vol.raidname && vol.raidname.length > 0) {
+
+                  for (const md of vol.raidname) {
+                      mdSet.add(md);
+                  }
+
+              }
+
+          }
+
+
+          if (mdSet.size === 0) {
+
+              console.log("所有卷的raidname为空，不生成md变量。");
+
+              pm.collectionVariables.set(
+                  "vg_md_count",
+                  0
+              );
+
+          } else {
+
+              // 取第一个md设备名
+
+              const mdName = [...mdSet][0];
+
+              const mdVariableName = `${vgName}_md`;
+
+
+              pm.collectionVariables.set(
+                  mdVariableName,
+                  mdName
+              );
+
+
+              console.log(
+                  `${mdVariableName} = ${mdName}`
+              );
+
+
+              // 保存md数量
+
+              pm.collectionVariables.set(
+                  "vg_md_count",
+                  mdSet.size
+              );
+
+          }
+
+      }
+
+
+
+      // ==========================================================
+      // 9、输出日志
+      // ==========================================================
+
+      console.log("====================================");
+      console.log(`存储池：${vgName}`);
+      console.log(`RAID数量：${pvs ? pvs.length : 0}`);
+      console.log("RAID设备变量及md变量同步完成。");
+      console.log("====================================");
+      // GET /v2/storage/edit/pool/:uuid 后置脚本
+      // 按池名生成 {池名}_check_disk，空就删
+
+      const data = pm.response.json().data;
+
+      const freeDevices = (data.free_disk || [])
+          .map(d => d.device);
+
+      console.log('池名:', data.name);
+      console.log('空闲磁盘:', freeDevices);
+
+      if (freeDevices.length > 0) {
+          pm.environment.set(`${data.name}_check_disk`, freeDevices.join(','));
+          console.log(`已设置 ${data.name}_check_disk = ${freeDevices.join(',')}`);
+      } else {
+          pm.environment.unset(`${data.name}_check_disk`);
+          console.log(`已删除 ${data.name}_check_disk`);
+      }
+    language: text/javascript
+order: 2000

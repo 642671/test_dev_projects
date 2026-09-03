@@ -1,0 +1,134 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/disk/smart_test/schedule"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+scripts:
+  - type: afterResponse
+    code: |-
+      // ============================================================
+      // GET /v2/disk/smart/list 后置脚本（兼容对象/数组/空数组）
+      // ============================================================
+
+      const res = pm.response.json();
+      const data = res.data || res;
+
+      // ------------------------------------------------------------
+      // 小工具
+      // ------------------------------------------------------------
+      function setOrUnset(key, val) {
+          if (val === undefined || val === null || val === '' || Number.isNaN(val)) {
+              pm.collectionVariables.unset(key);
+          } else {
+              pm.collectionVariables.set(key, val);
+          }
+      }
+
+      // ============================================================
+      // 0. 清空所有旧的 diskN_smart_id 变量
+      // ============================================================
+      const allModuleVars = pm.collectionVariables.toObject();
+      Object.keys(allModuleVars)
+          .filter(k => /^disk\d+_smart_id$/.test(k))
+          .forEach(k => pm.collectionVariables.unset(k));
+
+      // ============================================================
+      // 1. 统一标准化为数组（兼容对象 / 数组 / 空数组 / null）
+      // ============================================================
+      let tasks;
+      if (Array.isArray(data)) {
+          tasks = data;                        // 正常数组
+      } else if (data && typeof data === 'object') {
+          tasks = [data];                      // 单条对象包装为数组
+      } else {
+          tasks = [];                          // null/undefined 视为空
+      }
+
+      // ============================================================
+      // 2. 空数组直接返回
+      // ============================================================
+      if (tasks.length === 0) {
+          console.log('无 SMART 任务，已清空所有 diskN_smart_id 变量');
+          pm.collectionVariables.set('smart_task_count', 0);
+          return;
+      }
+
+      // ============================================================
+      // 3. 构建 device → 编号 反查映射
+      // ============================================================
+      const deviceToIndex = {};
+      for (const [key, value] of Object.entries(allModuleVars)) {
+          const match = key.match(/^disk(\d+)_device$/);
+          if (match) {
+              const idx = parseInt(match[1], 10);
+              const devPath = String(value).trim();
+              if (devPath) {
+                  deviceToIndex[devPath] = idx;
+              }
+          }
+      }
+
+      console.log('device → 编号映射表:', JSON.stringify(deviceToIndex));
+
+      // ============================================================
+      // 4. 遍历写入 diskN_smart_id
+      // ============================================================
+      const matched = [];
+      const orphan  = [];
+
+      tasks.forEach(item => {
+          const diskPath = (item.disks || '').trim();
+          const smartId  = item.id;
+
+          if (!diskPath) return;
+
+          const idx = deviceToIndex[diskPath];
+          if (idx !== undefined) {
+              setOrUnset(`disk${idx}_smart_id`, smartId);
+              matched.push(`disk${idx} (${diskPath}) → smart_id=${smartId}`);
+          } else {
+              orphan.push(`${diskPath} (id=${smartId})`);
+          }
+      });
+
+      // ============================================================
+      // 5. 汇总与调试输出（结构化格式）
+      // ============================================================
+      pm.collectionVariables.set('smart_task_count', tasks.length);
+
+      console.log('====================================');
+      console.log(`共 ${matched.length} 个 SMART 任务已同步`);
+      if (orphan.length > 0) {
+          console.log(`${orphan.length} 个任务无法匹配（设备不在磁盘列表中）`);
+      }
+      console.log('====================================');
+
+      // 输出所有 diskN_smart_id 变量明细
+      console.log('========== diskN_smart_id 变量明细 ==========');
+      const updatedVars = pm.collectionVariables.toObject();
+      const smartVars = Object.keys(updatedVars)
+          .filter(k => /^disk\d+_smart_id$/.test(k))
+          .sort((a, b) => {
+              const na = parseInt(a.match(/\d+/)[0], 10);
+              const nb = parseInt(b.match(/\d+/)[0], 10);
+              return na - nb;
+          });
+
+      if (smartVars.length > 0) {
+          smartVars.forEach(k => console.log(`${k} = ${updatedVars[k]}`));
+      } else {
+          console.log('(无)');
+      }
+
+      console.log('=======================================');
+      console.log('所有 SMART 任务 ID 已同步到模块变量。');
+      console.log('=======================================');
+    language: text/javascript
+order: 14000

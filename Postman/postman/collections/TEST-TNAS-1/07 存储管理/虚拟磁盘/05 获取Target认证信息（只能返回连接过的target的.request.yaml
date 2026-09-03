@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/virtualdisk/GetTargetAttr?target=iqn.tnas.terramaster.26730093613"
+method: GET
+headers:
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  target: iqn.tnas.terramaster.26730093613
+order: 6000

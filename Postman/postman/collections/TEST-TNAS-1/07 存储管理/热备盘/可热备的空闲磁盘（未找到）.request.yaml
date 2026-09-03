@@ -1,0 +1,98 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/hotsparedisk/GetAvailableDiskList"
+method: GET
+headers:
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+scripts:
+  - type: afterResponse
+    code: |
+      // ============================================================
+      // GET /v2/hotsparedisk/GetAvailableDiskList 后置脚本
+      // 遍历返回的空闲磁盘列表，反查已存在的 disk{N}_device，
+      // 生成 hs{N}_device / hs{N}_name（按热备可用顺序编号，从 1 起）
+      // ------------------------------------------------------------
+      // 依赖：必须先执行 GET /v2/disk/GetDiskOption（脚本 11）
+      // ============================================================
+
+      const res = pm.response.json();
+      const data = res.data || res;
+
+      function setOrUnset(key, val) {
+          if (val === undefined || val === null || val === '' || Number.isNaN(val)) {
+              pm.collectionVariables.unset(key);
+          } else {
+              pm.collectionVariables.set(key, val);
+          }
+      }
+
+      // ============================================================
+      // 0. 清理所有旧的热备变量
+      // ============================================================
+      const allModuleVars = pm.collectionVariables.toObject();
+      Object.keys(allModuleVars)
+          .filter(k => /^hs\d+_/.test(k))
+          .forEach(k => pm.collectionVariables.unset(k));
+
+      // ============================================================
+      // 1. 标准化为数组
+      // ============================================================
+      let disks;
+      if (Array.isArray(data)) {
+          disks = data;
+      } else if (data && typeof data === 'object') {
+          disks = [data];
+      } else {
+          disks = [];
+      }
+
+      if (disks.length === 0) {
+          console.log('无可用于热备的空闲磁盘，所有 hs 变量已清空');
+          pm.collectionVariables.set('hs_disk_count', 0);
+          return;
+      }
+
+      // ============================================================
+      // 2. 遍历标记，按热备可用顺序生成 hs{N}_device / hs{N}_name
+      // ============================================================
+      let hsIndex = 0;
+      disks.forEach(d => {
+          const devPath = (d.device || '').trim();
+          if (!devPath) return;
+          hsIndex++;
+          const idx = hsIndex;  // 从 1 起
+          setOrUnset(`hs${idx}_device`, devPath);
+          setOrUnset(`hs${idx}_name`,   (d.name || '').trim());
+          console.log(`hs${idx}_device = ${devPath} (${d.name || ''})`);
+      });
+
+      pm.collectionVariables.set('hs_disk_count', hsIndex);
+
+      // ============================================================
+      // 3. 调试输出
+      // ============================================================
+      console.log(`==== 热备磁盘同步结果 ====`);
+      console.log(`可热备空闲磁盘: ${hsIndex} 块`);
+
+      const updatedVars = pm.collectionVariables.toObject();
+      const hsDiskVars = Object.keys(updatedVars)
+          .filter(k => /^hs\d+_device$/.test(k))
+          .sort((a, b) => parseInt(a.match(/\d+/)[0]) - parseInt(b.match(/\d+/)[0]));
+
+      if (hsDiskVars.length > 0) {
+          console.log('---------- hs{N} 变量明细 ----------');
+          hsDiskVars.forEach(k => {
+              const n = k.match(/hs(\d+)_device/)[1];
+              console.log(`${k} = ${updatedVars[k]}`);
+              console.log(`hs${n}_name  = ${updatedVars[`hs${n}_name`] || '(无)'}`);
+          });
+      } else {
+          console.log('(无)');
+      }
+      console.log('=======================================');
+    language: text/javascript
+order: 6000

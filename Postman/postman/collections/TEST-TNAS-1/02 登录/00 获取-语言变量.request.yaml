@@ -1,0 +1,30 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/lang/tos"
+method: GET
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |-
+      const setCookie = pm.response.headers.get('Set-Cookie');
+      const match = setCookie && setCookie.match(/X-Csrf-Token=([^;]+)/);
+
+      // 提取后同时写入环境变量与模块变量（模块变量在 Postman 里映射到集合变量）
+      if (match) {
+        pm.environment.set('X-Csrf-Token', match[1]);
+        pm.collectionVariables.set('X-Csrf-Token', match[1]);
+        console.log('提取到的 X-Csrf-Token =', match[1]);
+      }
+
+      // 断言1：必须成功匹配到
+      pm.test("成功从 Set-Cookie 中提取到 X-Csrf-Token", function () {
+        pm.expect(match, "没有匹配到 X-Csrf-Token").to.not.eql(null);
+      });
+
+      // 断言2：环境变量必须存在且不为空
+      pm.test("X-Csrf-Token 变量不为空", function () {
+        const token = pm.environment.get('X-Csrf-Token');
+        pm.expect(token, "X-Csrf-Token 变量为空").to.be.a("string").and.not.empty;
+      });
+    language: text/javascript
+order: 1000

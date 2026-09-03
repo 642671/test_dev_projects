@@ -1,0 +1,38 @@
+$kind: collection
+scripts:
+  - type: http:afterResponse
+    code: "const body = pm.response.text();\r
+
+      \r
+
+      pm.test(\"响应体不能为空\", function () {\r
+
+      \    pm.expect(body && body.trim().length > 0, \"响应体为空，无法解析 JSON\").to.eql(true);\r
+
+      });\r
+
+      \r
+
+      let res;\r
+
+      try {\r
+
+      \    res = JSON.parse(body);\r
+
+      } catch (e) {\r
+
+      \    throw new Error(\"响应体不是合法 JSON，实际返回为：\\n\" + body);\r
+
+      }\r
+
+      \r
+
+      pm.test(\"用户未登录\", function () {\r
+
+      \    pm.expect(res).to.have.property(\"is_login\");\r
+
+      \    pm.expect(res.is_login, \"用户未登录\").to.eql(false);\r
+
+      });"
+    language: text/javascript
+order: 2000

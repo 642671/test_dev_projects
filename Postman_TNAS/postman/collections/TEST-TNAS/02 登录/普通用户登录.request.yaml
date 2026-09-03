@@ -1,0 +1,199 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/login"
+method: POST
+headers:
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: X-Csrf-Token 可以为任意值，但是必须与Headers的值一样，例如为空值的{{X-Csrf-Token}}
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"NormalUser\",\r
+
+    \    \"password\": \"Admin123\",\r
+
+    \    \"code\": \"\",\r
+
+    \    \"remember\": false,\r
+
+    \    \"slidecode\": 1\r
+
+    }"
+auth:
+  type: noauth
+scripts:
+  - type: beforeRequest
+    code: "// 获取 Base64 公钥\r
+
+      console.log(\"public\", pm.environment.get(\"RSA_PUBLIC_KEY\"))\r
+
+      let base64Key = pm.environment.get(\"RSA_PUBLIC_KEY\");\r
+
+      \r
+
+      if (!base64Key) {\r
+
+      \    throw new Error(\"未配置 RSA_PUBLIC_KEY\");\r
+
+      }\r
+
+      \r
+
+      // Base64 解码 → PEM 字符串\r
+
+      let publicKey = require('atob')(base64Key);\r
+
+      console.log(\"public\", publicKey)\r
+
+      // 获取请求体（JSON）\r
+
+      let body = JSON.parse(pm.request.body);\r
+
+      console.log(\"加密密文:\", body.password);\r
+
+      \r
+
+      body.password = await pm.executeAsync('encoderLoginPassword.go', [body.password, publicKey]);\r
+
+      console.log('Result:', body.password);\r
+
+      // 写回请求体\r
+
+      pm.request.body = JSON.stringify(body);"
+    language: text/javascript
+  - type: afterResponse
+    code: "// ======================================\r
+
+      // 普通用户登录接口后置脚本\r
+
+      // 功能：\r
+
+      // 1. 获取登录返回的 Cookie\r
+
+      // 2. 获取 X-Csrf-Token\r
+
+      // 3. 获取当前用户名\r
+
+      // 4. 自动拼接完整 Cookie\r
+
+      // 5. 保存到环境变量，供后续接口直接使用\r
+
+      // ======================================\r
+
+      \r
+
+      // 获取变量（普通用户，已由 Apifox 后置操作提取）\r
+
+      const tmsessname = pm.variables.get(\"NormalUser_TMSESSNAME\");\r
+
+      const tosCurrentUsername = pm.variables.get(\"NormalUser_tos_current_username\");\r
+
+      const csrfToken = pm.variables.get(\"X-Csrf-Token\");\r
+
+      \r
+
+      // 输出日志，方便调试\r
+
+      console.log(\"========== 普通用户登录信息 ==========\");\r
+
+      console.log(\"NormalUser_TMSESSNAME:\", tmsessname);\r
+
+      console.log(\"NormalUser_tos_current_username:\", tosCurrentUsername);\r
+
+      console.log(\"NormalUser_X-Csrf-Token:\", csrfToken);\r
+
+      \r
+
+      // 使用数组拼接 Cookie，避免多余分号\r
+
+      const cookieItems = [];\r
+
+      \r
+
+      // X-Csrf-Token\r
+
+      if (csrfToken) {\r
+
+      \    cookieItems.push(`X-Csrf-Token=${csrfToken}`);\r
+
+      }\r
+
+      \r
+
+      // Session\r
+
+      if (tmsessname) {\r
+
+      \    cookieItems.push(`TMSESSNAME=${tmsessname}`);\r
+
+      }\r
+
+      \r
+
+      // 当前用户名\r
+
+      if (tosCurrentUsername) {\r
+
+      \    cookieItems.push(`tos_current_username=${tosCurrentUsername}`);\r
+
+      \    cookieItems.push(`userName=${tosCurrentUsername}`);\r
+
+      }\r
+
+      \r
+
+      // 登录状态\r
+
+      cookieItems.push(\"loginStatus=true\");\r
+
+      \r
+
+      // 拼接完整 Cookie\r
+
+      const fullCookie = cookieItems.join(\"; \");\r
+
+      \r
+
+      console.log(\"完整 NormalUserCookie：\");\r
+
+      console.log(fullCookie);\r
+
+      \r
+
+      // ======================\r
+
+      // 保存环境变量（普通用户专用）\r
+
+      // ======================\r
+
+      \r
+
+      // 保存 X-Csrf-Token\r
+
+      if (csrfToken) {\r
+
+      \    pm.environment.set(\"NormalUserCsrfToken\", csrfToken);\r
+
+      }\r
+
+      \r
+
+      // 保存 Cookie\r
+
+      pm.environment.set(\"NormalUserCookie\", fullCookie);\r
+
+      \r
+
+      // 调试输出\r
+
+      console.log(\"========== 已保存环境变量 ==========\");\r
+
+      console.log(\"NormalUserCookie =\", pm.environment.get(\"NormalUserCookie\"));\r
+
+      console.log(\"NormalUserCsrfToken =\", pm.environment.get(\"NormalUserCsrfToken\"));\r\n"
+    language: text/javascript
+settings:
+  strictSSL: false
+  followRedirects: true
+order: 8000

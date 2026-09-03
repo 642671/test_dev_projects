@@ -1,0 +1,145 @@
+$kind: collection
+name: TEST-TNAS
+description: Generated from 2026-04-16 API docs for qishi owned modules. Login sample used only as Apifox project format reference.
+variables:
+  X-Csrf-Token: ""
+scripts:
+  - type: http:beforeRequest
+    code: |-
+      // =====================================================================
+      //  Postman 集合级前置脚本（每个请求执行前运行）
+      //  1) 把 Apifox 的 pm.moduleVariables 映射到 Postman 集合变量，
+      //     集合变量在单次集合运行内共享；每次 CLI 运行都自动重置，做到 IP 天然隔离。
+      //  2) 定义 pm.rsaEncryptPassword：纯 JS 实现 RSA PKCS#1 v1.5 加密，
+      //     兼容原 Apifox 的 encoderLoginPassword.go / 前端 JSEncrypt。
+      //  公钥支持两种输入：base64 字符串（即 X-Rsa-Token 原值）或 PEM 字符串。
+      // =====================================================================
+      (function () {
+        // 1) moduleVariables -> collectionVariables
+        if (!pm.moduleVariables) {
+          var cv = pm.collectionVariables;
+          pm.moduleVariables = {
+            set: function (k, v) { return cv.set(k, v); },
+            get: function (k) { return cv.get(k); },
+            unset: function (k) { if (cv.unset) { cv.unset(k); } },
+            has: function (k) { if (cv.has) { return cv.has(k); } return cv.get(k) !== undefined && cv.get(k) !== null; },
+            toObject: function () {
+              if (cv.toObject) { return cv.toObject(); }
+              var o = {};
+              cv.each && cv.each(function (v, k) { o[k] = v; });
+              return o;
+            },
+            clear: function () { if (cv.clear) { cv.clear(); } }
+          };
+        }
+
+        // 2) RSA PKCS#1 v1.5 加密
+        if (!pm.rsaEncryptPassword) {
+          pm.rsaEncryptPassword = function (message, keyInput) {
+            function readTLV(buf, pos) {
+              var tag = buf[pos]; pos++;
+              var len = buf[pos]; pos++;
+              if (len & 0x80) {
+                var n = len & 0x7f;
+                len = 0;
+                for (var i = 0; i < n; i++) len = (len << 8) | buf[pos + i];
+                pos += n;
+              }
+              return { tag: tag, value: buf.subarray(pos, pos + len), next: pos + len };
+            }
+            function bufToBig(buf) {
+              var h = '';
+              for (var i = 0; i < buf.length; i++) h += buf[i].toString(16).padStart(2, '0');
+              return BigInt('0x' + (h || '0'));
+            }
+            function bigToBuf(v, k) {
+              var hex = v.toString(16);
+              if (hex.length % 2) hex = '0' + hex;
+              var out = new Uint8Array(k);
+              var idx = k;
+              for (var i = hex.length - 2; i >= 0; i -= 2) {
+                idx--;
+                out[idx] = parseInt(hex.substr(i, 2), 16);
+              }
+              return out;
+            }
+            function modPow(base, exp, mod) {
+              var r = 1n; base %= mod;
+              while (exp > 0n) {
+                if (exp & 1n) r = (r * base) % mod;
+                base = (base * base) % mod;
+                exp >>= 1n;
+              }
+              return r;
+            }
+            function parsePublicKey(der) {
+              var outer = readTLV(der, 0);
+              var first = readTLV(outer.value, 0);
+              var second = readTLV(outer.value, first.next);
+              var rsapub;
+              if (second.tag === 0x03) { rsapub = second.value.subarray(1); }
+              else { rsapub = outer.value; }
+              var seq = readTLV(rsapub, 0);
+              var nTlv = readTLV(seq.value, 0);
+              var eTlv = readTLV(seq.value, nTlv.next);
+              var nBig = bufToBig(nTlv.value);
+              var eBig = bufToBig(eTlv.value);
+              var k = nTlv.value.length;
+              if (nTlv.value[0] === 0) k = nTlv.value.length - 1;
+              return { nBig: nBig, eBig: eBig, k: k };
+            }
+
+            // 兼容三种公钥形态：
+            //   1) PEM 字符串（-----BEGIN ... -----END）
+            //   2) base64(PEM)，即 X-Rsa-Token 原始返回
+            //   3) base64(DER)
+            function keyBytesDer(keyInput) {
+              var key = String(keyInput).trim();
+              var pemText = null;
+              if (key.indexOf('-----BEGIN') === 0) {
+                pemText = key;
+              } else {
+                var bin = atob(key);
+                if (bin.indexOf('-----BEGIN') === 0) {
+                  pemText = bin;
+                } else {
+                  var dr = new Uint8Array(bin.length);
+                  for (var di = 0; di < bin.length; di++) dr[di] = bin.charCodeAt(di);
+                  return dr;
+                }
+              }
+              var body = pemText.split(/\r?\n/).filter(function (l) { return l && l.indexOf('-----') < 0; }).join('');
+              var b = atob(body);
+              var d = new Uint8Array(b.length);
+              for (var dj = 0; dj < b.length; dj++) d[dj] = b.charCodeAt(dj);
+              return d;
+            }
+
+            var der = keyBytesDer(keyInput);
+
+            var pk = parsePublicKey(der);
+            var m = [];
+            for (var mi = 0; mi < message.length; mi++) m.push(message.charCodeAt(mi) & 0xff);
+            if (m.length > pk.k - 11) throw new Error('message too long for RSA');
+            var psLen = pk.k - 3 - m.length;
+            var rnd = (typeof crypto !== 'undefined' && crypto.getRandomValues) ? function () {
+              var a = new Uint32Array(1); crypto.getRandomValues(a); return a[0];
+            } : function () { return Math.floor(Math.random() * 0xffffffff); };
+            var ps = [];
+            for (var pi = 0; pi < psLen; pi++) ps.push(1 + (rnd() % 255));
+            var eb = new Uint8Array(pk.k);
+            eb[0] = 0x00; eb[1] = 0x02;
+            for (var qi = 0; qi < psLen; qi++) eb[2 + qi] = ps[qi];
+            eb[2 + psLen] = 0x00;
+            for (var ti = 0; ti < m.length; ti++) eb[3 + psLen + ti] = m[ti];
+
+            var c = modPow(bufToBig(eb), pk.eBig, pk.nBig);
+            var cbuf = bigToBuf(c, pk.k);
+            var b64 = '';
+            for (var zi = 0; zi < cbuf.length; zi++) b64 += String.fromCharCode(cbuf[zi]);
+            return btoa(b64);
+          };
+        }
+        console.log('[bootstrap] moduleVariables + rsaEncryptPassword 已就绪');
+      })();
+    language: text/javascript

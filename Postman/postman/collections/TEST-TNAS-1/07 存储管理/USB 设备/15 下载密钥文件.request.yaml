@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/extStorageDevice/DownloadSecretKey?data={{src}}"
+method: GET
+headers:
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+queryParams:
+  data: "{{src}}"
+order: 15000

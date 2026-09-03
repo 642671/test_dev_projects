@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/EnableQuota"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Cookie
+    value: "{{Cookie}}"
+    description: 不可为空，用户认证所需cookie
+  - key: X-Csrf-Token
+    value: "{{X-Csrf-Token}}"
+    description: 不可为空，用户认证所需token
+body:
+  type: json
+  content: "{\r
+
+    \    \"uuid\":\"{{lv0_uuid}}\",\r
+
+    \    \"file_system\": \"{{lv0_filesystem}}\",\r
+
+    \    \"quota_flag\": 1\r
+
+    }"
+order: 9000

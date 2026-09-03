@@ -102,3 +102,8 @@ storagemanager/**/*.deb
 
 # Codex Dream Skin 独立仓库，不嵌套到本仓库
 Codex-Dream-Skin/
+
+# 本机 Codex 认证、会话与探针备份，不上传
+docs/codex-model-integration/backups/
+docs/codex-model-integration/direct-newapi-probe/
+docs/codex-model-integration/scripts/minirouter/router.log

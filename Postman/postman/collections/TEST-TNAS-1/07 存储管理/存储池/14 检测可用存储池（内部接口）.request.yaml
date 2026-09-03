@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/v2/storage/CheckAvailablePool/:disk"
+method: POST
+pathVariables:
+  disk: "{{cap_disk2}}"
+body:
+  type: formdata
+  content: []
+order: 14000
