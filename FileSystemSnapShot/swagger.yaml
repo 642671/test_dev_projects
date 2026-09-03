@@ -1,0 +1,1084 @@
+swagger: "2.0"
+info:
+  title: FileSystemSnapshot API
+  description: |
+    TerraMaster NAS 文件系统快照服务。所有接口挂载在 `/FileSystemSnapshot` 路径组下，
+    需要登录认证（Cookie/Token）和 X-CSRF-Token 请求头。
+
+    失败响应的 `code_num` 为 4 位业务错误码（1xxx 通用 / 2xxx Btrfs·卷 / 3xxx 快照 / 4xxx 恢复），
+    各接口可能返回的错误码见下方每个接口的"可能的错误码"说明；完整码表与语义见
+    《业务错误码文档》（docs/error-codes.md），权威定义在 internal/bizerr/errcode.go。
+  version: "1.0.0"
+
+basePath: /FileSystemSnapshot
+
+schemes:
+  - http
+  - https
+
+consumes:
+  - application/json
+
+produces:
+  - application/json
+
+securityDefinitions:
+  CookieAuth:
+    type: apiKey
+    name: Cookie
+    in: header
+    description: TOS 平台登录 Cookie
+  XCsrfToken:
+    type: apiKey
+    name: X-Csrf-Token
+    in: header
+    description: CSRF 防护 Token
+
+security:
+  - CookieAuth: []
+  - XCsrfToken: []
+
+# ── Response Envelope ──
+# 所有接口统一使用 ResponseBody 包裹返回。
+
+definitions:
+  ResponseBody:
+    type: object
+    description: 统一响应信封
+    required:
+      - is_login
+      - code
+      - time
+    properties:
+      is_login:
+        type: boolean
+        description: 登录状态是否有效
+      code:
+        type: boolean
+        description: 业务成功 (true) 或失败 (false)
+      msg:
+        type: string
+        description: 失败时的错误信息（成功时不返回）
+      data:
+        description: 业务数据（类型因接口而异，成功时返回）
+      time:
+        type: number
+        format: float
+        description: 接口耗时（秒）
+      code_num:
+        type: integer
+        description: |
+          错误码（失败时返回）：
+          - `0` — 无业务错误码的普通失败（以 msg 为准，前端回退通用失败文案）
+          - `117` — 平台登录态失效（中间件 PleaseLogin 返回，is_login=false，与业务码互斥）
+          - `1001`~`4001` — 业务错误码（分类：1xxx 通用 / 2xxx Btrfs·卷 / 3xxx 快照 / 4xxx 恢复），
+            完整语义见 docs/error-codes.md
+      code_msg:
+        type: string
+        description: 错误码描述（code_num > 0 时返回，成功时为空串）
+
+  # ── 快照配置 ──
+
+  TimedTask:
+    type: object
+    description: 定时任务参数
+    properties:
+      cycle_type:
+        type: string
+        enum:
+          - Disabled
+          - EveryMonth
+          - EveryDay
+          - WorkingDay
+          - WeeksRange
+        description: |
+          周期类型：
+          - `Disabled` — 指定时间运行
+          - `EveryMonth` — 每月
+          - `EveryDay` — 每天
+          - `WorkingDay` — 工作日
+          - `WeeksRange` — 每周指定天数
+      cycle_weeks_range:
+        type: string
+        description: 周期值（CycleType=WeeksRange 时生效），范围 0-6（周日-周六），多个逗号分隔，如 "1,3,5"
+      cycle_date:
+        type: string
+        description: 周期值（CycleType=EveryMonth 时生效），范围 1-31，多个逗号分隔，如 "1,15"
+      schedule_time:
+        type: string
+        description: 指定运行时间（CycleType=Disabled 时生效），格式 "2021-08-24"
+      frequency_type:
+        type: string
+        enum:
+          - Disabled
+          - Second
+          - Minute
+          - Hour
+        description: 频率类型
+      frequency_value:
+        type: integer
+        minimum: 1
+        maximum: 59
+        description: 频率值。Second/Minute 范围 1-59，Hour 范围 1-23
+      hour:
+        type: integer
+        minimum: 0
+        maximum: 23
+        description: 小时（0-23），不传为每小时
+      minute:
+        type: integer
+        minimum: 0
+        maximum: 59
+        description: 分钟（0-59），不传为每分钟
+      task_id:
+        type: integer
+        description: 定时任务 ID（cron.EntryID）
+
+  SnapshotConf:
+    type: object
+    description: 文件系统快照配置
+    properties:
+      status:
+        type: boolean
+        description: 是否开启定时快照
+      timed_task_status:
+        type: boolean
+        description: 是否开启定时任务
+      dir_name:
+        type: string
+        description: 快照目录名称
+      max_quantity:
+        type: integer
+        minimum: 1
+        maximum: 1024
+        description: 最大快照数量（1-1024）
+      strategy:
+        type: integer
+        enum: [1, 2]
+        description: |
+          策略：
+          - `1` — 超出上限时删除旧快照
+          - `2` — 超出上限时停止拍摄
+      timed_task:
+        $ref: '#/definitions/TimedTask'
+      task_id:
+        type: integer
+        description: 定时任务 ID
+
+  # ── 快照信息 ──
+
+  VolumeSnapshot:
+    type: object
+    description: 卷快照条目
+    properties:
+      path:
+        type: string
+        description: 快照完整路径
+      name:
+        type: string
+        description: 快照名称
+      time:
+        type: string
+        description: 快照时间
+      lock:
+        type: boolean
+        description: 是否锁定（锁定的快照不被自动删除）
+      status:
+        type: integer
+        description: |
+          快照状态（SnapshotStatus，仅用于快照列表展示）：
+          - `0` — 正常（Available）
+          - `1` — 创建中（Creating，拍摄后台进行中，尚未落盘）
+          - `2` — 删除中（Deleting，删除后台进行中）
+          - `3` — 损坏（Corrupted，删除失败且无法读取子卷信息时标记，持久化于卷根目录 .corrupted 文件，重启不丢失）
+      msg:
+        type: string
+        description: 状态消息（当前列表状态无附加消息，预留字段）
+
+  TaskStatus:
+    type: object
+    description: 任务进度状态
+    properties:
+      status:
+        type: integer
+        description: |
+          恢复/快照任务状态（RestoreStatus，与 VolumeSnapshot.status 不同）：
+          - `0` — 未运行
+          - `1` — 还原中
+          - `2` — 还原成功
+          - `3` — 还原失败
+          - `4` — 快照运行中
+          - `5` — 快照成功
+          - `6` — 快照失败
+          - `7` — 还原失败（空间不足，预快照或回拷阶段 ENOSPC / InsufficientDiskSpace 时置位，前端应区分提示）
+      progress:
+        type: integer
+        description: 进度百分比 (0-100)
+
+  # ── 请求体 ──
+
+  DelSnapshotRequest:
+    type: object
+    required:
+      - paths
+    properties:
+      paths:
+        type: array
+        items:
+          type: string
+        description: 要删除的快照路径列表
+      force:
+        type: boolean
+        description: |
+          true 时，删除失败且路径残留的不是 btrfs 子卷（如创建失败残留的普通目录），
+          强制清理残留并视为删除成功；false/缺省按真实结果记录。
+          前端暂不发送，默认 false
+
+  LockSnapshotRequest:
+    type: object
+    required:
+      - path
+      - lock
+    properties:
+      path:
+        type: string
+        description: 快照路径
+      lock:
+        type: boolean
+        description: true 锁定，false 解锁
+
+  RestoreSnapshotRequest:
+    type: object
+    required:
+      - path
+    properties:
+      path:
+        type: string
+        description: 要还原的快照路径
+
+  TakeSnapshotRequest:
+    type: object
+    required:
+      - volume
+    properties:
+      volume:
+        type: string
+        description: 卷名，如 "Volume1"
+
+  # ── 应用日志（actionlog 查询协议）──
+
+  LogGetRequest:
+    type: object
+    description: type=get / get_count 时的查询条件（字段平铺在 get_request 下，无 option 包一层）
+    properties:
+      desc_order:
+        type: boolean
+        description: true 按时间倒序（time desc），false/缺省按时间正序
+      limit:
+        type: integer
+        description: 返回条数上限（分页），<=0 时服务端使用默认值
+      offset:
+        type: integer
+        description: 偏移量（分页）
+      category:
+        type: string
+        description: 按 category 精确过滤（本应用为 "backup"）；null/缺省不过滤
+      str_to_search:
+        type: string
+        description: |
+          模糊搜索关键字，匹配 translation JSON、level、time、user 任一字段，
+          不区分大小写；空串表示不过滤
+
+  LogDelRequest:
+    type: object
+    description: type=delete 时的删除条件
+    properties:
+      category:
+        type: string
+        description: 只删除该 category 的日志；空串/缺省删除全部日志
+
+  LogExportRequest:
+    type: object
+    description: type=export 时的导出条件（字段平铺在 export_request 下，与 get_request 一致，仅无 str_to_search）
+    properties:
+      desc_order:
+        type: boolean
+        description: true 按时间倒序
+      limit:
+        type: integer
+        description: 导出条数上限
+      offset:
+        type: integer
+        description: 偏移量
+      category:
+        type: string
+        description: 按 category 过滤；null/缺省不过滤
+
+  LogCleanupCfg:
+    type: object
+    description: 日志自动清理配置（服务启动时默认落盘到 FsSnapShot.cfg）
+    properties:
+      enabled_max_num_of_logs:
+        type: boolean
+        description: 是否启用条数上限清理
+      max_num_of_logs:
+        type: integer
+        description: 最大保留条数（默认 10000，超出自动删除最旧日志）
+      enabled_max_days_of_logs:
+        type: boolean
+        description: 是否启用天数清理
+      max_days_of_logs:
+        type: integer
+        description: 最大保留天数（默认 30）
+
+  LogSetCleanupRequest:
+    type: object
+    description: type=set_cleanup_cfg 时的请求对象
+    properties:
+      cleanup_cfg:
+        $ref: '#/definitions/LogCleanupCfg'
+
+  LogRequest:
+    type: object
+    description: |
+      /log 接口请求体（actionlog 查询协议）。`type` 必填，其余请求对象按 type 附带：
+
+      - `get` — 查询日志列表（需 get_request），data 为 LogEntity 数组
+      - `get_count` — 查询匹配条数（需 get_request），data 为数字
+      - `export` — 导出 CSV 文件（需 export_request）
+      - `delete` — 删除日志（需 del_request）
+      - `set_cleanup_cfg` — 设置清理配置（需 set_cleanup_request）
+      - `get_cleanup_cfg` — 获取清理配置（无请求对象）
+      - `get_log_total_number` — 日志总数与分类统计（无请求对象）
+    properties:
+      type:
+        type: string
+        enum:
+          - get
+          - get_count
+          - export
+          - delete
+          - set_cleanup_cfg
+          - get_cleanup_cfg
+          - get_log_total_number
+      get_request:
+        $ref: '#/definitions/LogGetRequest'
+      del_request:
+        $ref: '#/definitions/LogDelRequest'
+      export_request:
+        $ref: '#/definitions/LogExportRequest'
+      set_cleanup_request:
+        $ref: '#/definitions/LogSetCleanupRequest'
+
+  LogEntity:
+    type: object
+    description: 单条日志记录
+    properties:
+      id:
+        type: integer
+        description: 记录 ID
+      level:
+        type: string
+        enum: [Info, Warning, Error]
+        description: 日志级别
+      time:
+        type: string
+        description: 日志时间（RFC3339，如 "2026-08-04T02:01:17+08:00"）
+      category:
+        type: string
+        description: 日志分类（本应用为 "backup"）
+      user:
+        type: string
+        description: 触发用户（部分事件无用户，为空串）
+      event:
+        type: string
+        description: |
+          按服务端语言库翻译后的日志文案，变量已替换
+          （如 "快照删除成功！快照：GMT+08-2026.08.04-10:01:17。"）
+      timestamp:
+        type: integer
+        description: 日志时间戳（Unix 秒）
+
+  LogCategoryCount:
+    type: object
+    description: 分类统计条目
+    properties:
+      name:
+        type: string
+        description: 分类名（本应用为 "backup"）
+      count:
+        type: integer
+        description: 该分类的日志条数
+
+  LogTotalNumber:
+    type: object
+    description: type=get_log_total_number 的 data
+    properties:
+      count:
+        type: integer
+        description: 日志总条数
+      categories:
+        type: array
+        items:
+          $ref: '#/definitions/LogCategoryCount'
+
+# ═══════════════════════════════════════════════
+#  API 路径
+# ═══════════════════════════════════════════════
+
+paths:
+
+  # ── 快照列表与查询 ──
+
+  /GetVolumeSnapshot:
+    get:
+      tags:
+        - 快照查询
+      summary: 获取卷快照列表
+      description: |
+        获取指定卷（和可选任务名）下的所有快照信息，包含正在创建中（尚未落盘）的快照。
+        创建/删除为异步操作，前端应轮询本接口（当前每 5 秒一次）刷新列表状态：
+        - `1` — 创建中：拍摄后台进行，落盘后转为正常（status=0）
+        - `2` — 删除中：删除后台进行，完成后记录消失
+        - `3` — 损坏：删除失败残留且无法读取子卷信息
+
+        可能的错误码（code_num）：
+        - `1001` 参数错误：volume 为空
+        - `1002` 内部错误：读取快照配置/锁定数据/快照目录失败
+        - `2003` 卷根子卷未挂载
+      parameters:
+        - name: volume
+          in: query
+          type: string
+          required: true
+          description: 卷名，如 "Volume1"
+        - name: task_name
+          in: query
+          type: string
+          required: false
+          description: 定时任务名称，不传则返回该卷所有快照
+      responses:
+        200:
+          description: 成功
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            application/json:
+              code: true
+              is_login: true
+              data:
+                - path: "/mnt/Volume1/@snapshot/任务名/GMT-07-2026.01.15-12.30.00"
+                  name: "GMT-07-2026.01.15-12.30.00"
+                  time: "2026-01-15 12:30:00"
+                  lock: false
+                  status: 0
+                  msg: ""
+              time: 0.05
+
+  /GetSnapshotTasks:
+    get:
+      tags:
+        - 快照查询
+      summary: 获取任务名称列表
+      description: |
+        获取指定卷下所有定时任务名称
+
+        可能的错误码（code_num）：
+        - `1002` 内部错误：读取任务目录或快照配置失败
+      parameters:
+        - name: volume
+          in: query
+          type: string
+          required: true
+          description: 卷名
+      responses:
+        200:
+          description: 成功
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            application/json:
+              code: true
+              is_login: true
+              data:
+                - "每日快照"
+                - "每周备份"
+              time: 0.02
+
+  /GetSnapshotTaskMap:
+    get:
+      tags:
+        - 快照查询
+      summary: 获取任务与卷的映射
+      description: |
+        返回所有卷与其快照任务名的映射关系。单个卷的任务读取失败仅记录日志并跳过该卷，
+        不返回错误。
+
+        可能的错误码：无业务错误码
+      responses:
+        200:
+          description: 成功
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            application/json:
+              code: true
+              is_login: true
+              data:
+                Volume1:
+                  - "每日快照"
+                  - "每周备份"
+                Volume2:
+                  - "归档快照"
+              time: 0.03
+
+  /GetBtrfsVolume:
+    get:
+      tags:
+        - 快照查询
+      summary: 获取 Btrfs 卷列表
+      description: |
+        获取系统中所有 Btrfs 文件系统卷
+
+        可能的错误码：无业务错误码
+      responses:
+        200:
+          description: 成功
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            application/json:
+              code: true
+              is_login: true
+              data:
+                - "Volume1"
+                - "Volume2"
+              time: 0.01
+
+  # ── 快照配置 ──
+
+  /GetSnapshotConf:
+    get:
+      tags:
+        - 快照配置
+      summary: 获取快照配置
+      description: |
+        获取当前的快照定时任务配置
+
+        可能的错误码（code_num）：
+        - `1002` 内部错误：读取/解析配置文件失败（配置文件不存在时返回默认配置，不报错）
+      responses:
+        200:
+          description: 成功
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            application/json:
+              code: true
+              is_login: true
+              data:
+                status: true
+                timed_task_status: true
+                dir_name: "@snapshot"
+                max_quantity: 32
+                strategy: 1
+                timed_task:
+                  cycle_type: "EveryDay"
+                  hour: 3
+                  minute: 0
+                  frequency_type: "Disabled"
+                  frequency_value: 0
+                task_id: 1
+              time: 0.02
+
+  /SetSnapshotConf:
+    post:
+      tags:
+        - 快照配置
+      summary: 设置快照配置
+      description: |
+        创建或更新文件系统快照的定时任务配置。
+        - `max_quantity` 必须在 1-1024 之间
+        - `strategy` 必须为 1（删除旧快照）或 2（停止拍摄）
+
+        可能的错误码（code_num）：
+        - `1001` 参数错误：body 非法、max_quantity 越界、strategy 非法
+        - `1003` 登录失效
+        - `3003` 全局删除进行中
+        - `1002` 内部错误：序列化/创建目录/同步定时任务/写配置文件失败
+        - `2001` 空间不足、`2002` 文件系统只读（写配置前空间预检）
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SnapshotConf'
+      responses:
+        200:
+          description: 成功返回 true，失败返回 false+错误信息
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            success:
+              code: true
+              is_login: true
+              data: true
+              time: 0.12
+            error:
+              code: false
+              is_login: true
+              msg: "max_quantity must be between 1 and 99999999"
+              data: false
+              time: 0.01
+              code_num: 1001
+              code_msg: "invalid parameter"
+
+  # ── 快照操作 ──
+
+  /TakeSnapshot:
+    post:
+      tags:
+        - 快照操作
+      summary: 手动拍摄快照
+      description: |
+        对指定卷立即执行一次快照拍摄。**异步执行**：接口立即返回，拍摄在后台进行，
+        成功/失败均写入 actionlog。拍摄期间该快照在 GetVolumeSnapshot 列表中显示为
+        "创建中"（status=1），完成后变为"正常"（status=0）；创建失败则清理残留，
+        列表记录消失。还原中或已有快照任务运行时返回错误。
+
+        可能的错误码（code_num）：
+        - `1001` 参数错误：body 非法、volume 为空
+        - `1003` 登录失效
+        - `2003` 卷未挂载：卷的 /Volume* 挂载点不存在（已卸载/挂载失败），不允许拍摄
+        - `3003` 全局删除进行中，或系统忙（还原/已有快照任务运行中）
+        - `3004` 快照功能未开启（配置 status=false）
+        - `1002` 内部错误：读取快照配置失败
+
+        拍摄阶段的失败（btrfs 操作失败等）不体现在本接口响应，经 actionlog 记录；
+        列表中的创建中记录随后消失。
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TakeSnapshotRequest'
+      responses:
+        200:
+          description: 请求已接受返回 true，不代表拍摄已成功（结果以日志与列表状态为准）
+          schema:
+            $ref: '#/definitions/ResponseBody'
+
+  /DelSnapshot:
+    delete:
+      tags:
+        - 快照操作
+      summary: 删除快照
+      description: |
+        删除指定的一个或多个快照（锁定的快照不会被删除）。**异步执行**：接口立即返回，
+        删除在后台进行，成功/失败均写入 actionlog。删除期间对应行显示"删除中"
+        （status=2），完成后该行从列表消失；真实删除失败则按数据状态标记为"正常"或
+        "损坏"（status=3）。`force=true` 时，非子卷残留（如创建失败残留目录）会被
+        强制清理并视为删除成功。
+
+        可能的错误码（code_num）：
+        - `1001` 参数错误：body 非法、paths 为空
+        - `1003` 登录失效
+        - `3003` 全局删除进行中
+
+        删除阶段的失败不体现在本接口响应（后台异步执行），经 actionlog 与列表状态反馈。
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DelSnapshotRequest'
+      responses:
+        200:
+          description: 请求已接受返回 true，不代表删除已成功（结果以日志与列表状态为准）
+          schema:
+            $ref: '#/definitions/ResponseBody'
+
+  /DelAllSnapshot:
+    delete:
+      tags:
+        - 快照操作
+      summary: 删除卷下所有快照
+      description: |
+        删除指定卷（和可选任务名）下的所有快照。**注意：锁定的快照不会被删除。**
+        **异步执行**：接口立即返回，后台逐个删除，期间各行显示"删除中"（status=2），
+        完成后记录消失；成功/失败均写入 actionlog。
+
+        可能的错误码（code_num）：
+        - `1003` 登录失效
+        - `1001` 参数错误：volume 为空
+        - `3003` 全局删除进行中，或已有快照正在创建/删除/还原（含定时快照任务运行中）
+
+        删除阶段的失败不体现在本接口响应（后台异步执行），经 actionlog 与列表状态反馈。
+      parameters:
+        - name: volume
+          in: query
+          type: string
+          required: true
+          description: 卷名
+        - name: task_name
+          in: query
+          type: string
+          required: false
+          description: 任务名称，不传则删除该卷下所有快照
+      responses:
+        200:
+          description: 成功返回 null，失败返回错误信息
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            success:
+              code: true
+              is_login: true
+              data: null
+              time: 2.31
+            error:
+              code: false
+              is_login: true
+              msg: "global deletion is taking place and cannot be performed"
+              data: null
+              time: 0.01
+              code_num: 3003
+              code_msg: "snapshot operation conflict"
+
+  /LockSnapshot:
+    post:
+      tags:
+        - 快照操作
+      summary: 锁定/解锁快照
+      description: |
+        锁定快照防止被自动删除策略清理，或解锁以允许删除
+
+        可能的错误码（code_num）：
+        - `1001` 参数错误：body 非法、快照路径非法
+        - `1003` 登录失效
+        - `3003` 全局删除进行中、快照删除中或还原中（不可锁定/解锁）
+        - `3002` 快照损坏（不可锁定/解锁）
+        - `1002` 内部错误：读写锁定状态文件失败
+        - `2003` 卷根子卷未挂载
+        - `2001` 空间不足、`2002` 文件系统只读（锁定写入 .lock 文件预检/实际写入 ENOSPC）
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/LockSnapshotRequest'
+      responses:
+        200:
+          description: 成功返回 true
+          schema:
+            $ref: '#/definitions/ResponseBody'
+
+  /RestoreSnapshot:
+    post:
+      tags:
+        - 快照操作
+      summary: 还原快照
+      description: |
+        将指定快照还原到原始位置。
+        返回值含义：
+        - `0` — 还原成功
+        - `1` — 还原失败
+        - `2` — 需要先卸载 USB 设备（前端契约，当前后端不产生该值）
+
+        可能的错误码（code_num）：
+        - `1001` 参数错误：body 非法、path 为空、快照路径非法
+        - `1003` 登录失效
+        - `3003` 全局删除进行中
+        - `3001` 快照不存在
+        - `3002` 快照损坏
+        - `4001` 还原冲突：目标快照删除中，或已有还原/快照任务运行中
+
+        还原执行阶段的失败不体现在本接口响应：接口返回后还原在后台进行，
+        失败结果通过 QueryStatus（status=3 还原失败 / status=7 空间不足）与 actionlog 反馈；
+        自举还原（还原应用所在卷）期间由还原状态 socket 提供列表与进度查询。
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RestoreSnapshotRequest'
+      responses:
+        200:
+          description: 还原结果
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            success:
+              code: true
+              is_login: true
+              data: 0
+              time: 5.20
+            need_unmount_usb:
+              code: false
+              is_login: true
+              msg: "usb device is mounted"
+              data: 2
+              time: 0.50
+
+  # ── 状态查询 ──
+
+  /QueryStatus:
+    get:
+      tags:
+        - 状态查询
+      summary: 查询还原/快照进度
+      description: |
+        查询当前正在执行的还原或快照任务的进度和状态
+
+        可能的错误码：无业务错误码
+      responses:
+        200:
+          description: 成功
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            application/json:
+              code: true
+              is_login: true
+              data:
+                status: 1
+                progress: 45
+              time: 0.01
+
+  /GetGlobalStatus:
+    get:
+      tags:
+        - 状态查询
+      summary: 获取全局状态
+      description: |
+        返回全局操作状态：
+        - `0` — 空闲
+        - `1` — 全局删除中
+
+        可能的错误码：无业务错误码
+      responses:
+        200:
+          description: 成功
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            application/json:
+              code: true
+              is_login: true
+              data: 0
+              time: 0.01
+
+  /GetInitData:
+    get:
+      tags:
+        - 页面基础数据
+      summary: 获取页面基础数据
+      description: |
+        返回页面初始化所需的基础数据：
+        - `status` — 配置文件中的 status 字段（快照功能是否开启）
+        - `has_snapshots` — 系统中任一卷是否存在快照，命中即返回 true
+
+        可能的错误码（code_num）：
+        - `1002` 内部错误：读取快照配置失败
+      responses:
+        200:
+          description: 成功
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            application/json:
+              code: true
+              is_login: true
+              data:
+                status: true
+                has_snapshots: false
+              time: 0.01
+
+  # ── 国际化 ──
+
+  /lang:
+    get:
+      tags:
+        - 国际化
+      summary: 获取语言翻译资源
+      description: |
+        根据请求头中的 `Accept-Language` 返回对应的前端翻译资源。
+        返回的 `lng` 为 `{ section: { key: value } }` 结构，section 名称为 `FsSnapShot`，
+        包含快照管理界面所需的全部翻译文本。
+
+        支持的语言包括：zh-cn、zh-hk、en-us、de-de、fr-fr、es-es、it-it、ja-jp、ko-kr、
+        hu-hu、pl-pl、pt-pt、ru-ru、tr-tr。
+
+        可能的错误码：无业务错误码
+      parameters:
+        - name: Accept-Language
+          in: header
+          type: string
+          required: false
+          description: |
+            浏览器语言偏好，如 `zh-cn`、`en-us`。未传则使用服务端默认语言。
+      responses:
+        200:
+          description: 成功
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            application/json:
+              code: true
+              is_login: true
+              data:
+                name: "zh-cn"
+                lng:
+                  FsSnapShot:
+                    lock: "锁定"
+                    unlock: "解锁"
+                    delete: "删除"
+                    restore: "还原"
+                    save: "保存"
+                    apply: "应用"
+                    cancel: "取消"
+                    settings: "设置"
+                    Every_day: "每日"
+                    EveryMonth: "每月"
+                    workingday: "工作日"
+                    Snapshot_List: "快照清单"
+                    operation_success: "操作成功！"
+                    restore_success: "还原成功"
+                    restore_failure: "还原失败"
+                    Confirm: "确认"
+                    Tips: "提示"
+                    warning: "警告"
+                    delete_confirm: "您确定要删除已选择的项目吗？"
+                    Maximum_Snapshot: "最大快照数量"
+                    en_file_snapshot: "启用文件系统快照"
+                    Retention_policy: "保留策略"
+                    Delete_oldest_version: "删除最旧的版本"
+                    Stop_Snapshot: "停止快照"
+                    snapshot_task_schedule: "快照任务计划"
+                    snapshot_delete_all: "删除全部"
+                    snapshot_succeeded: "快照成功"
+                    Snapshot_restoration_progress: "快照还原中"
+                    snapshot_delete_all_tips: "您确定要删除所有的项目吗？"
+              time: 0.01
+
+  # ── 应用日志 ──
+
+  /log:
+    post:
+      tags:
+        - 日志
+      summary: 查询/导出/删除应用日志（actionlog 查询协议）
+      description: |
+        按请求体中的 `type` 执行不同操作，请求体格式见 LogRequest 定义：
+
+        **type=get** — 查询日志列表（分页/排序/分类/关键字过滤）：
+        ```json
+        {"type":"get","get_request":{"desc_order":true,"limit":10,"offset":0,"category":"backup","str_to_search":""}}
+        ```
+        data 为 LogEntity 数组。
+
+        **type=get_count** — 查询匹配条数，请求体同 get：
+        ```json
+        {"type":"get_count","get_request":{"desc_order":true,"limit":10,"offset":0,"category":null,"str_to_search":""}}
+        ```
+        data 为数字。
+
+        **type=export** — 导出 CSV 文件（export_request 字段与 option 平铺）：
+        ```json
+        {"type":"export","export_request":{"desc_order":true,"limit":100,"offset":0,"category":null}}
+        ```
+        返回文件下载，文件名 `{appName}_log_YYYYMMDDHHmm.csv`（本应用为
+        `FileSystemSnapshot_log_...`），CSV 表头 `level,time,category,user,event`。
+
+        **type=delete** — 删除日志：
+        ```json
+        {"type":"delete","del_request":{"category":"backup"}}
+        ```
+        category 为空串/缺省删除全部；data 为 null。
+
+        **type=set_cleanup_cfg** — 设置自动清理配置：
+        ```json
+        {"type":"set_cleanup_cfg","set_cleanup_request":{"cleanup_cfg":{"enabled_max_num_of_logs":true,"max_num_of_logs":10000,"enabled_max_days_of_logs":true,"max_days_of_logs":30}}}
+        ```
+        data 为 null。
+
+        **type=get_cleanup_cfg** — 获取当前清理配置：
+        ```json
+        {"type":"get_cleanup_cfg"}
+        ```
+        data 为 LogCleanupCfg。
+
+        **type=get_log_total_number** — 日志总数与分类统计：
+        ```json
+        {"type":"get_log_total_number"}
+        ```
+        data 为 LogTotalNumber。
+
+        校验规则：get/get_count 必须带 `get_request`，export 必须带 `export_request`，
+        delete 必须带 `del_request`，set_cleanup_cfg 必须带 `set_cleanup_request`，
+        缺失返回参数错误；未知 type 返回 data: null（不报错）。
+        set_cleanup_cfg 的 cleanup_cfg 必须满足 max_days_of_logs≤365、max_num_of_logs≤500000，
+        越界返回 code=false + code_num=1001（invalid parameter）。
+
+        可能的错误码（code_num）：
+        - `1001` 参数错误：请求体非法（JSON 解析失败）、set_cleanup_cfg 配置越界
+        - `1002` 内部错误：actionlog 未初始化（仅发生在应用启动异常时）
+        - `0` — actionlog 库内部错误（第三方库返回，无业务码，前端按通用失败文案提示）
+        - `117` — 未登录/CSRF 校验失败（中间件返回，is_login=false）
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - text/csv
+        - application/octet-stream
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/LogRequest'
+      responses:
+        200:
+          description: |
+            成功。data 类型随 type 变化（LogEntity 数组 / 数字 / LogTotalNumber / LogCleanupCfg / null）。
+            未登录或 CSRF 校验失败时返回 code_num=117 "please login"。
+          schema:
+            $ref: '#/definitions/ResponseBody'
+          examples:
+            get:
+              code: true
+              is_login: true
+              data:
+                - id: 2
+                  level: "Warning"
+                  time: "2026-08-04T02:01:17+08:00"
+                  category: "backup"
+                  user: ""
+                  event: "快照删除成功！快照：GMT+08-2026.08.04-10:01:17。"
+                  timestamp: 1764806477
+              time: 0.01
+            get_log_total_number:
+              code: true
+              is_login: true
+              data:
+                count: 5
+                categories:
+                  - name: "backup"
+                    count: 5
+              time: 0.01
+            get_cleanup_cfg:
+              code: true
+              is_login: true
+              data:
+                enabled_max_num_of_logs: true
+                max_num_of_logs: 10000
+                enabled_max_days_of_logs: true
+                max_days_of_logs: 30
+              time: 0.01
+            unauthenticated:
+              code: false
+              is_login: false
+              msg: "please login"
+              time: 0.02
+              code_num: 117
+              code_msg: "please login"
