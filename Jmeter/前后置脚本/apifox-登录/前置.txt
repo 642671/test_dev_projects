@@ -1,0 +1,19 @@
+// 获取 Base64 公钥
+console.log("public", pm.environment.get("RSA_PUBLIC_KEY"))
+let base64Key = pm.environment.get("RSA_PUBLIC_KEY");
+
+if (!base64Key) {
+    throw new Error("未配置 RSA_PUBLIC_KEY");
+}
+
+// Base64 解码 → PEM 字符串
+let publicKey = require('atob')(base64Key);
+console.log("public", publicKey)
+// 获取请求体（JSON）
+let body = JSON.parse(pm.request.body);
+console.log("加密密文:", body.password);
+
+body.password = await pm.executeAsync('encoderLoginPassword.go', [body.password, publicKey]);
+console.log('Result:', body.password);
+// 写回请求体
+pm.request.body = JSON.stringify(body);
