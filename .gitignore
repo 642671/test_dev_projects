@@ -99,3 +99,6 @@ miaoqi/
 
 # 存储管理安装包仅本地保留；版本目录说明可正常提交
 storagemanager/**/*.deb
+
+# Codex Dream Skin 独立仓库，不嵌套到本仓库
+Codex-Dream-Skin/
