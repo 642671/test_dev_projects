@@ -5,26 +5,18 @@
 ## 当前最终测试计划
 
 ```text
-D:\test_dev_projects\Jmeter\01-测试计划\TNAS存储管理接口测试计划_三账号登录版.jmx
+D:\test_dev_projects\Jmeter\01-测试计划\TNAS存储管理接口测试计划.jmx
 ```
 
 这是包含超级管理员、管理员、普通用户三套登录流程的最终版本。
-
-推送到公开仓库的版本是：
-
-```text
-D:\test_dev_projects\Jmeter\01-测试计划\TNAS存储管理接口测试计划_三账号登录版_公开版.jmx
-```
-
-公开版已将 NAS IP、账号和密码替换为占位符；本地工作版仍保留真实测试配置，但不会提交到仓库。
 
 ## 目录结构
 
 ```text
 D:\test_dev_projects\Jmeter
 ├── 01-测试计划
-│   ├── TNAS存储管理接口测试计划_三账号登录版_公开版.jmx
-│   └── TNAS存储管理接口测试计划_三账号登录版.jmx（本地工作版，不入库）
+│   ├── TNAS存储管理接口测试计划.jmx
+│   └── TNAS存储管理接口测试计划_编辑前备份_20260903_150811.jmx（本地，不入库）
 ├── 02-学习笔记
 │   ├── JMeter学习目录.md
 │   ├── JMeter-JSR223-Groovy入门与内置变量.md
@@ -59,7 +51,7 @@ D:\test_dev_projects\Jmeter
 1. 需要执行 JMeter 时，打开：
 
 ```text
-01-测试计划\TNAS存储管理接口测试计划_三账号登录版.jmx
+01-测试计划\TNAS存储管理接口测试计划.jmx
 ```
 
 2. 需要学习时，从：

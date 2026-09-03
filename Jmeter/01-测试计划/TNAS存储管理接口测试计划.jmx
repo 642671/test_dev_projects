@@ -1,0 +1,1432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="测试计划">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="用户定义的变量">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="protocol" elementType="Argument">
+            <stringProp name="Argument.name">protocol</stringProp>
+            <stringProp name="Argument.value">http</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="server_ip" elementType="Argument">
+            <stringProp name="Argument.name">server_ip</stringProp>
+            <stringProp name="Argument.value">10.18.15.106</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="server_port" elementType="Argument">
+            <stringProp name="Argument.name">server_port</stringProp>
+            <stringProp name="Argument.value">8181</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="content_encoding" elementType="Argument">
+            <stringProp name="Argument.name">content_encoding</stringProp>
+            <stringProp name="Argument.value">UTF-8</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="content_type" elementType="Argument">
+            <stringProp name="Argument.name">content_type</stringProp>
+            <stringProp name="Argument.value">application/json</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="super_admin_username" elementType="Argument">
+            <stringProp name="Argument.name">super_admin_username</stringProp>
+            <stringProp name="Argument.value">test</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="super_admin_password" elementType="Argument">
+            <stringProp name="Argument.name">super_admin_password</stringProp>
+            <stringProp name="Argument.value">Admin123</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="admin_username" elementType="Argument">
+            <stringProp name="Argument.name">admin_username</stringProp>
+            <stringProp name="Argument.value">manager01</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="admin_password" elementType="Argument">
+            <stringProp name="Argument.name">admin_password</stringProp>
+            <stringProp name="Argument.value">Admin123</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="user_username" elementType="Argument">
+            <stringProp name="Argument.name">user_username</stringProp>
+            <stringProp name="Argument.value">user01</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="user_password" elementType="Argument">
+            <stringProp name="Argument.name">user_password</stringProp>
+            <stringProp name="Argument.value">Admin123</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="全局 HTTP 请求默认值">
+        <intProp name="HTTPSampler.connect_timeout">5000</intProp>
+        <intProp name="HTTPSampler.response_timeout">30000</intProp>
+        <stringProp name="HTTPSampler.domain">${server_ip}</stringProp>
+        <stringProp name="HTTPSampler.port">${server_port}</stringProp>
+        <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
+        <stringProp name="HTTPSampler.contentEncoding">${content_encoding}</stringProp>
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="全局 HTTP 信息头">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="Accept" elementType="Header">
+            <stringProp name="Header.name">Accept</stringProp>
+            <stringProp name="Header.value">application/json, text/plain, */*</stringProp>
+          </elementProp>
+          <elementProp name="Content-Type" elementType="Header">
+            <stringProp name="Header.name">Content-Type</stringProp>
+            <stringProp name="Header.value">${content_type}; charset=${content_encoding}</stringProp>
+          </elementProp>
+        </collectionProp>
+      </HeaderManager>
+      <hashTree/>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="超级管理员登录流程">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="循环控制器">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="超级管理员 Cookie 管理器">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="超级管理员登录流程"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SA-01 获取公钥与令牌">
+            <stringProp name="TestPlan.comments">超级管理员获取公钥 X-Rsa-Token 和 CSRF Token</stringProp>
+            <stringProp name="HTTPSampler.path">/tos/</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="提取 超级管理员 公钥与 CSRF" enabled="true">
+              <stringProp name="TestPlan.comments">只写入 super_admin 对应的公钥和 CSRF 变量</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="language">groovy</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters">super_admin</stringProp>
+              <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+if (!role) {
+    throw new Exception(&apos;JSR223 参数值未设置角色，例如：super_admin / admin / user&apos;)
+}
+
+def headers = prev.getResponseHeaders()
+String publicKey = &apos;&apos;
+String csrf = &apos;&apos;
+
+headers.eachLine { line -&gt;
+    def mRsa = line =~ /(?i)^\s*X-Rsa-Token:\s*(.+)$/
+    if (mRsa.find()) {
+        publicKey = mRsa.group(1).trim()
+    }
+
+    def mHeaderCsrf = line =~ /(?i)^\s*X-Csrf-Token:\s*(.+)$/
+    if (mHeaderCsrf.find()) {
+        csrf = mHeaderCsrf.group(1).trim()
+    }
+
+    def mSetCsrf = line =~ /(?i)^\s*Set-Cookie:\s*X-Csrf-Token=([^;]+)/
+    if (mSetCsrf.find()) {
+        csrf = mSetCsrf.group(1).trim()
+    }
+}
+
+vars.put(&quot;${role}_public_key&quot;, publicKey ? publicKey : &apos;NOT_FOUND&apos;)
+vars.put(&quot;${role}_csrf_token&quot;, csrf ? csrf : &apos;NOT_FOUND&apos;)
+log.info(&quot;${role} 公钥长度=&quot; + publicKey.length())
+log.info(&quot;${role} CSRF=&quot; + csrf)
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+            <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug 查看 超级管理员 提取结果" enabled="false">
+              <boolProp name="displayJMeterProperties">false</boolProp>
+              <boolProp name="displayJMeterVariables">true</boolProp>
+              <boolProp name="displaySamplerProperties">false</boolProp>
+              <boolProp name="displaySystemProperties">false</boolProp>
+            </DebugPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="SA-01 查看超级管理员本次新增变量" enabled="true">
+            <stringProp name="TestPlan.comments">只显示公钥和CSRF的提取摘要</stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="language">groovy</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters">super_admin</stringProp>
+            <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+def lines = []
+def publicValue = vars.get(&quot;${role}_public_key&quot;)
+def csrfValue = vars.get(&quot;${role}_csrf_token&quot;)
+lines.add(&quot;===== ${role} /tos/ 获取公钥与令牌：本次新增变量 =====&quot;)
+lines.add(&quot;${role}_public_key = &quot; + (publicValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_csrf_token = &quot; + (csrfValue ?: &apos;NOT_FOUND&apos;))
+def hasValue = publicValue &amp;&amp; publicValue != &apos;NOT_FOUND&apos; &amp;&amp; csrfValue &amp;&amp; csrfValue != &apos;NOT_FOUND&apos;
+def status = hasValue ? &apos;OK&apos; : &apos;FAIL&apos;
+lines.add(&apos;状态 = &apos; + status + &apos;（仅表示变量提取状态）&apos;)
+SampleResult.setResponseData(lines.join(&apos;\n&apos;), &apos;UTF-8&apos;)
+SampleResult.setResponseMessage(&apos;新增变量摘要 &apos; + status)
+SampleResult.setSuccessful(hasValue)
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SA-02 登录接口">
+            <stringProp name="TestPlan.comments">POST /v2/login，超级管理员密码使用 RSA 公钥加密</stringProp>
+            <stringProp name="HTTPSampler.path">/v2/login</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;username&quot;: &quot;${super_admin_username}&quot;,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;password&quot;: &quot;${super_admin_encrypted_password}&quot;,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;code&quot;: &quot;&quot;,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;remember&quot;: true,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;slidecode&quot;: 1&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="RSA 加密 超级管理员 登录密码" enabled="true">
+              <stringProp name="TestPlan.comments">等价的 Apifox 前置脚本 + encoderLoginPassword.go 的 JMeter 版本</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="language">groovy</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters">super_admin</stringProp>
+              <stringProp name="script">
+import java.security.KeyFactory
+import java.security.spec.X509EncodedKeySpec
+import java.util.Base64
+import javax.crypto.Cipher
+
+def role = (Parameters ?: &apos;&apos;).trim()
+if (!role) {
+    throw new Exception(&apos;JSR223 参数值未设置角色，例如：super_admin / admin / user&apos;)
+}
+
+String base64Pem = vars.get(&quot;${role}_public_key&quot;)
+if (base64Pem == null || base64Pem.isEmpty() || base64Pem == &apos;NOT_FOUND&apos;) {
+    throw new Exception(&quot;${role} 未获取到 X-Rsa-Token 公钥&quot;)
+}
+
+String pem = new String(Base64.getMimeDecoder().decode(base64Pem), &apos;UTF-8&apos;)
+
+boolean inKey = false
+StringBuilder pemBody = new StringBuilder()
+pem.eachLine { line -&gt;
+    String trimmed = line.trim()
+    if (trimmed.startsWith(&apos;-----BEGIN&apos;)) {
+        inKey = true
+        return
+    }
+    if (trimmed.startsWith(&apos;-----END&apos;)) {
+        inKey = false
+        return
+    }
+    if (inKey &amp;&amp; trimmed) {
+        pemBody.append(trimmed)
+    }
+}
+
+String body = pemBody.toString()
+if (!body) {
+    throw new Exception(&quot;${role} PEM 正文为空&quot;)
+}
+
+byte[] der = Base64.getMimeDecoder().decode(body)
+KeyFactory keyFactory = KeyFactory.getInstance(&apos;RSA&apos;)
+def publicKey = keyFactory.generatePublic(new X509EncodedKeySpec(der))
+
+Cipher cipher = Cipher.getInstance(&apos;RSA/ECB/PKCS1Padding&apos;)
+cipher.init(Cipher.ENCRYPT_MODE, publicKey)
+
+String plainPassword = vars.get(&quot;${role}_password&quot;)
+if (plainPassword == null || plainPassword.isEmpty()) {
+    throw new Exception(&quot;${role} 未配置密码&quot;)
+}
+
+byte[] encrypted = cipher.doFinal(plainPassword.getBytes(&apos;UTF-8&apos;))
+vars.put(&quot;${role}_encrypted_password&quot;, Base64.getEncoder().encodeToString(encrypted))
+log.info(&quot;${role} RSA 登录密码加密成功，PEM正文长度=&quot; + body.length() + &quot;，密文长度=&quot; + encrypted.length)
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="超级管理员登录请求头" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="X-Csrf-Token" elementType="Header">
+                  <stringProp name="Header.name">X-Csrf-Token</stringProp>
+                  <stringProp name="Header.value">${super_admin_csrf_token}</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="提取 超级管理员 登录 Cookie" enabled="true">
+              <stringProp name="TestPlan.comments">从登录响应头/Set-Cookie/请求Cookie中提取登录后的必要Cookie</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="language">groovy</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters">super_admin</stringProp>
+              <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+if (!role) {
+    throw new Exception(&apos;JSR223 参数值未设置角色，例如：super_admin / admin / user&apos;)
+}
+
+def responseHeaders = prev.getResponseHeaders() ?: &apos;&apos;
+def requestHeaders = prev.getRequestHeaders() ?: &apos;&apos;
+
+def setCookies = [:]
+def setCookieMatcher = responseHeaders =~ /(?i)Set-Cookie:\s*([^;\r\n=]+)=([^;\r\n]+)/
+while (setCookieMatcher.find()) {
+    setCookies[setCookieMatcher.group(1).trim()] = setCookieMatcher.group(2).trim()
+}
+
+String responseCsrf = &apos;&apos;
+responseHeaders.eachLine { line -&gt;
+    def m = line =~ /(?i)^\s*X-Csrf-Token:\s*(.+)$/
+    if (m.find()) {
+        responseCsrf = m.group(1).trim()
+    }
+}
+
+def reqCookies = [:]
+String cookieLine = &apos;&apos;
+requestHeaders.eachLine { line -&gt;
+    def m = line =~ /(?i)^\s*Cookie:\s*(.+?)\s*$/
+    if (m.find()) {
+        cookieLine = m.group(1).trim()
+    }
+}
+cookieLine.split(&apos;;&apos;).each { part -&gt;
+    def kv = part.trim().split(&apos;=&apos;, 2)
+    if (kv.length == 2) {
+        reqCookies[kv[0].trim()] = kv[1].trim()
+    }
+}
+
+String userName = reqCookies[&apos;userName&apos;] ?: setCookies[&apos;userName&apos;] ?: vars.get(&quot;${role}_username&quot;) ?: &apos;NOT_FOUND&apos;
+String tms = setCookies[&apos;TMSESSNAME&apos;] ?: reqCookies[&apos;TMSESSNAME&apos;] ?: &apos;NOT_FOUND&apos;
+String csrf = responseCsrf ?: setCookies[&apos;X-Csrf-Token&apos;] ?: reqCookies[&apos;X-Csrf-Token&apos;] ?: vars.get(&quot;${role}_csrf_token&quot;) ?: &apos;NOT_FOUND&apos;
+String loginStatus = reqCookies[&apos;loginStatus&apos;] ?: setCookies[&apos;loginStatus&apos;] ?: &apos;true&apos;
+String tosUser = setCookies[&apos;tos_current_username&apos;] ?: reqCookies[&apos;tos_current_username&apos;] ?: userName
+
+def cookieValue = &quot;userName=${userName}; TMSESSNAME=${tms}; X-Csrf-Token=${csrf}; loginStatus=${loginStatus}; tos_current_username=${tosUser}&quot;
+
+vars.put(&quot;${role}_cookie_userName&quot;, userName)
+vars.put(&quot;${role}_cookie_TMSESSNAME&quot;, tms)
+vars.put(&quot;${role}_csrf_token&quot;, csrf)
+vars.put(&quot;${role}_cookie_loginStatus&quot;, loginStatus)
+vars.put(&quot;${role}_cookie_tos_current_username&quot;, tosUser)
+vars.put(&quot;${role}_cookie&quot;, cookieValue)
+
+if (csrf == &apos;NOT_FOUND&apos;) {
+    log.warn(&quot;${role} 未提取到 X-Csrf-Token&quot;)
+}
+if (tms == &apos;NOT_FOUND&apos;) {
+    log.warn(&quot;${role} 未提取到 TMSESSNAME&quot;)
+}
+log.info(&quot;${role} Cookie 提取完成，TMSESSNAME=&quot; + tms)
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+            <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug 查看 超级管理员 登录结果" enabled="false">
+              <boolProp name="displayJMeterProperties">false</boolProp>
+              <boolProp name="displayJMeterVariables">true</boolProp>
+              <boolProp name="displaySamplerProperties">false</boolProp>
+              <boolProp name="displaySystemProperties">false</boolProp>
+            </DebugPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="SA-02 查看超级管理员登录本次新增变量">
+            <stringProp name="TestPlan.comments">显示登录Cookie、CSRF和接口业务状态摘要</stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="language">groovy</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters">super_admin</stringProp>
+            <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+def lines = []
+
+def body = prev?.getResponseDataAsString() ?: &apos;&apos;
+def isLogin = &apos;未知&apos;
+def business = &apos;&apos;
+try {
+    def json = new groovy.json.JsonSlurper().parseText(body)
+    isLogin = String.valueOf(json.is_login)
+    business = String.valueOf(json.data ?: json.msg ?: &apos;&apos;)
+} catch (Exception e) {
+    business = &apos;响应不是 JSON&apos;
+}
+
+def cookieValue = vars.get(&quot;${role}_cookie&quot;)
+def csrfValue = vars.get(&quot;${role}_csrf_token&quot;)
+def tmsValue = vars.get(&quot;${role}_cookie_TMSESSNAME&quot;)
+def userNameValue = vars.get(&quot;${role}_cookie_userName&quot;)
+def loginStatusValue = vars.get(&quot;${role}_cookie_loginStatus&quot;)
+def tosUserValue = vars.get(&quot;${role}_cookie_tos_current_username&quot;)
+
+lines.add(&quot;===== ${role} /v2/login 登录接口：本次新增变量 =====&quot;)
+lines.add(&apos;接口响应 is_login = &apos; + isLogin)
+lines.add(&apos;接口响应业务提示 = &apos; + business)
+lines.add(&quot;${role}_cookie = &quot; + (cookieValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_csrf_token = &quot; + (csrfValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_TMSESSNAME = &quot; + (tmsValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_userName = &quot; + (userNameValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_loginStatus = &quot; + (loginStatusValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_tos_current_username = &quot; + (tosUserValue ?: &apos;NOT_FOUND&apos;))
+
+def hasValue = cookieValue &amp;&amp; cookieValue != &apos;NOT_FOUND&apos; &amp;&amp; csrfValue &amp;&amp; csrfValue != &apos;NOT_FOUND&apos; &amp;&amp; tmsValue &amp;&amp; tmsValue != &apos;NOT_FOUND&apos;
+def status = hasValue ? &apos;OK&apos; : &apos;FAIL&apos;
+lines.add(&apos;变量提取状态 = &apos; + status + &apos;（仅表示变量提取状态）&apos;)
+SampleResult.setResponseData(lines.join(&apos;\n&apos;), &apos;UTF-8&apos;)
+SampleResult.setResponseMessage(&apos;新增变量摘要 &apos; + status)
+SampleResult.setSuccessful(hasValue)
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="超级管理员查看结果树">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="超级管理员聚合报告">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="管理员登录流程">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="循环控制器">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="管理员 Cookie 管理器">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="管理员登录流程"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ADM-01 获取公钥与令牌">
+            <stringProp name="TestPlan.comments">管理员获取公钥 X-Rsa-Token 和 CSRF Token</stringProp>
+            <stringProp name="HTTPSampler.path">/tos/</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="提取 管理员 公钥与 CSRF" enabled="true">
+              <stringProp name="TestPlan.comments">只写入 admin 对应的公钥和 CSRF 变量</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="language">groovy</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters">admin</stringProp>
+              <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+if (!role) {
+    throw new Exception(&apos;JSR223 参数值未设置角色，例如：super_admin / admin / user&apos;)
+}
+
+def headers = prev.getResponseHeaders()
+String publicKey = &apos;&apos;
+String csrf = &apos;&apos;
+
+headers.eachLine { line -&gt;
+    def mRsa = line =~ /(?i)^\s*X-Rsa-Token:\s*(.+)$/
+    if (mRsa.find()) {
+        publicKey = mRsa.group(1).trim()
+    }
+
+    def mHeaderCsrf = line =~ /(?i)^\s*X-Csrf-Token:\s*(.+)$/
+    if (mHeaderCsrf.find()) {
+        csrf = mHeaderCsrf.group(1).trim()
+    }
+
+    def mSetCsrf = line =~ /(?i)^\s*Set-Cookie:\s*X-Csrf-Token=([^;]+)/
+    if (mSetCsrf.find()) {
+        csrf = mSetCsrf.group(1).trim()
+    }
+}
+
+vars.put(&quot;${role}_public_key&quot;, publicKey ? publicKey : &apos;NOT_FOUND&apos;)
+vars.put(&quot;${role}_csrf_token&quot;, csrf ? csrf : &apos;NOT_FOUND&apos;)
+log.info(&quot;${role} 公钥长度=&quot; + publicKey.length())
+log.info(&quot;${role} CSRF=&quot; + csrf)
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+            <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug 查看 管理员 提取结果" enabled="false">
+              <boolProp name="displayJMeterProperties">false</boolProp>
+              <boolProp name="displayJMeterVariables">true</boolProp>
+              <boolProp name="displaySamplerProperties">false</boolProp>
+              <boolProp name="displaySystemProperties">false</boolProp>
+            </DebugPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ADM-01 查看管理员本次新增变量">
+            <stringProp name="TestPlan.comments">只显示公钥和CSRF的提取摘要</stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="language">groovy</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters">admin</stringProp>
+            <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+def lines = []
+def publicValue = vars.get(&quot;${role}_public_key&quot;)
+def csrfValue = vars.get(&quot;${role}_csrf_token&quot;)
+lines.add(&quot;===== ${role} /tos/ 获取公钥与令牌：本次新增变量 =====&quot;)
+lines.add(&quot;${role}_public_key = &quot; + (publicValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_csrf_token = &quot; + (csrfValue ?: &apos;NOT_FOUND&apos;))
+def hasValue = publicValue &amp;&amp; publicValue != &apos;NOT_FOUND&apos; &amp;&amp; csrfValue &amp;&amp; csrfValue != &apos;NOT_FOUND&apos;
+def status = hasValue ? &apos;OK&apos; : &apos;FAIL&apos;
+lines.add(&apos;状态 = &apos; + status + &apos;（仅表示变量提取状态）&apos;)
+SampleResult.setResponseData(lines.join(&apos;\n&apos;), &apos;UTF-8&apos;)
+SampleResult.setResponseMessage(&apos;新增变量摘要 &apos; + status)
+SampleResult.setSuccessful(hasValue)
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ADM-02 登录接口">
+            <stringProp name="TestPlan.comments">POST /v2/login，管理员密码使用 RSA 公钥加密</stringProp>
+            <stringProp name="HTTPSampler.path">/v2/login</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;username&quot;: &quot;${admin_username}&quot;,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;password&quot;: &quot;${admin_encrypted_password}&quot;,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;code&quot;: &quot;&quot;,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;remember&quot;: true,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;slidecode&quot;: 1&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="RSA 加密 管理员 登录密码">
+              <stringProp name="TestPlan.comments">等价的 Apifox 前置脚本 + encoderLoginPassword.go 的 JMeter 版本</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="language">groovy</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters">admin</stringProp>
+              <stringProp name="script">
+import java.security.KeyFactory
+import java.security.spec.X509EncodedKeySpec
+import java.util.Base64
+import javax.crypto.Cipher
+
+def role = (Parameters ?: &apos;&apos;).trim()
+if (!role) {
+    throw new Exception(&apos;JSR223 参数值未设置角色，例如：super_admin / admin / user&apos;)
+}
+
+String base64Pem = vars.get(&quot;${role}_public_key&quot;)
+if (base64Pem == null || base64Pem.isEmpty() || base64Pem == &apos;NOT_FOUND&apos;) {
+    throw new Exception(&quot;${role} 未获取到 X-Rsa-Token 公钥&quot;)
+}
+
+String pem = new String(Base64.getMimeDecoder().decode(base64Pem), &apos;UTF-8&apos;)
+
+boolean inKey = false
+StringBuilder pemBody = new StringBuilder()
+pem.eachLine { line -&gt;
+    String trimmed = line.trim()
+    if (trimmed.startsWith(&apos;-----BEGIN&apos;)) {
+        inKey = true
+        return
+    }
+    if (trimmed.startsWith(&apos;-----END&apos;)) {
+        inKey = false
+        return
+    }
+    if (inKey &amp;&amp; trimmed) {
+        pemBody.append(trimmed)
+    }
+}
+
+String body = pemBody.toString()
+if (!body) {
+    throw new Exception(&quot;${role} PEM 正文为空&quot;)
+}
+
+byte[] der = Base64.getMimeDecoder().decode(body)
+KeyFactory keyFactory = KeyFactory.getInstance(&apos;RSA&apos;)
+def publicKey = keyFactory.generatePublic(new X509EncodedKeySpec(der))
+
+Cipher cipher = Cipher.getInstance(&apos;RSA/ECB/PKCS1Padding&apos;)
+cipher.init(Cipher.ENCRYPT_MODE, publicKey)
+
+String plainPassword = vars.get(&quot;${role}_password&quot;)
+if (plainPassword == null || plainPassword.isEmpty()) {
+    throw new Exception(&quot;${role} 未配置密码&quot;)
+}
+
+byte[] encrypted = cipher.doFinal(plainPassword.getBytes(&apos;UTF-8&apos;))
+vars.put(&quot;${role}_encrypted_password&quot;, Base64.getEncoder().encodeToString(encrypted))
+log.info(&quot;${role} RSA 登录密码加密成功，PEM正文长度=&quot; + body.length() + &quot;，密文长度=&quot; + encrypted.length)
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="管理员登录请求头">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="X-Csrf-Token" elementType="Header">
+                  <stringProp name="Header.name">X-Csrf-Token</stringProp>
+                  <stringProp name="Header.value">${admin_csrf_token}</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="提取 管理员 登录 Cookie" enabled="true">
+              <stringProp name="TestPlan.comments">从登录响应头/Set-Cookie/请求Cookie中提取登录后的必要Cookie</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="language">groovy</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters">admin</stringProp>
+              <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+if (!role) {
+    throw new Exception(&apos;JSR223 参数值未设置角色，例如：super_admin / admin / user&apos;)
+}
+
+def responseHeaders = prev.getResponseHeaders() ?: &apos;&apos;
+def requestHeaders = prev.getRequestHeaders() ?: &apos;&apos;
+
+def setCookies = [:]
+def setCookieMatcher = responseHeaders =~ /(?i)Set-Cookie:\s*([^;\r\n=]+)=([^;\r\n]+)/
+while (setCookieMatcher.find()) {
+    setCookies[setCookieMatcher.group(1).trim()] = setCookieMatcher.group(2).trim()
+}
+
+String responseCsrf = &apos;&apos;
+responseHeaders.eachLine { line -&gt;
+    def m = line =~ /(?i)^\s*X-Csrf-Token:\s*(.+)$/
+    if (m.find()) {
+        responseCsrf = m.group(1).trim()
+    }
+}
+
+def reqCookies = [:]
+String cookieLine = &apos;&apos;
+requestHeaders.eachLine { line -&gt;
+    def m = line =~ /(?i)^\s*Cookie:\s*(.+?)\s*$/
+    if (m.find()) {
+        cookieLine = m.group(1).trim()
+    }
+}
+cookieLine.split(&apos;;&apos;).each { part -&gt;
+    def kv = part.trim().split(&apos;=&apos;, 2)
+    if (kv.length == 2) {
+        reqCookies[kv[0].trim()] = kv[1].trim()
+    }
+}
+
+String userName = reqCookies[&apos;userName&apos;] ?: setCookies[&apos;userName&apos;] ?: vars.get(&quot;${role}_username&quot;) ?: &apos;NOT_FOUND&apos;
+String tms = setCookies[&apos;TMSESSNAME&apos;] ?: reqCookies[&apos;TMSESSNAME&apos;] ?: &apos;NOT_FOUND&apos;
+String csrf = responseCsrf ?: setCookies[&apos;X-Csrf-Token&apos;] ?: reqCookies[&apos;X-Csrf-Token&apos;] ?: vars.get(&quot;${role}_csrf_token&quot;) ?: &apos;NOT_FOUND&apos;
+String loginStatus = reqCookies[&apos;loginStatus&apos;] ?: setCookies[&apos;loginStatus&apos;] ?: &apos;true&apos;
+String tosUser = setCookies[&apos;tos_current_username&apos;] ?: reqCookies[&apos;tos_current_username&apos;] ?: userName
+
+def cookieValue = &quot;userName=${userName}; TMSESSNAME=${tms}; X-Csrf-Token=${csrf}; loginStatus=${loginStatus}; tos_current_username=${tosUser}&quot;
+
+vars.put(&quot;${role}_cookie_userName&quot;, userName)
+vars.put(&quot;${role}_cookie_TMSESSNAME&quot;, tms)
+vars.put(&quot;${role}_csrf_token&quot;, csrf)
+vars.put(&quot;${role}_cookie_loginStatus&quot;, loginStatus)
+vars.put(&quot;${role}_cookie_tos_current_username&quot;, tosUser)
+vars.put(&quot;${role}_cookie&quot;, cookieValue)
+
+if (csrf == &apos;NOT_FOUND&apos;) {
+    log.warn(&quot;${role} 未提取到 X-Csrf-Token&quot;)
+}
+if (tms == &apos;NOT_FOUND&apos;) {
+    log.warn(&quot;${role} 未提取到 TMSESSNAME&quot;)
+}
+log.info(&quot;${role} Cookie 提取完成，TMSESSNAME=&quot; + tms)
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+            <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug 查看 管理员 登录结果" enabled="false">
+              <boolProp name="displayJMeterProperties">false</boolProp>
+              <boolProp name="displayJMeterVariables">true</boolProp>
+              <boolProp name="displaySamplerProperties">false</boolProp>
+              <boolProp name="displaySystemProperties">false</boolProp>
+            </DebugPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ADM-02 查看管理员登录本次新增变量">
+            <stringProp name="TestPlan.comments">显示登录Cookie、CSRF和接口业务状态摘要</stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="language">groovy</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters">admin</stringProp>
+            <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+def lines = []
+
+def body = prev?.getResponseDataAsString() ?: &apos;&apos;
+def isLogin = &apos;未知&apos;
+def business = &apos;&apos;
+try {
+    def json = new groovy.json.JsonSlurper().parseText(body)
+    isLogin = String.valueOf(json.is_login)
+    business = String.valueOf(json.data ?: json.msg ?: &apos;&apos;)
+} catch (Exception e) {
+    business = &apos;响应不是 JSON&apos;
+}
+
+def cookieValue = vars.get(&quot;${role}_cookie&quot;)
+def csrfValue = vars.get(&quot;${role}_csrf_token&quot;)
+def tmsValue = vars.get(&quot;${role}_cookie_TMSESSNAME&quot;)
+def userNameValue = vars.get(&quot;${role}_cookie_userName&quot;)
+def loginStatusValue = vars.get(&quot;${role}_cookie_loginStatus&quot;)
+def tosUserValue = vars.get(&quot;${role}_cookie_tos_current_username&quot;)
+
+lines.add(&quot;===== ${role} /v2/login 登录接口：本次新增变量 =====&quot;)
+lines.add(&apos;接口响应 is_login = &apos; + isLogin)
+lines.add(&apos;接口响应业务提示 = &apos; + business)
+lines.add(&quot;${role}_cookie = &quot; + (cookieValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_csrf_token = &quot; + (csrfValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_TMSESSNAME = &quot; + (tmsValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_userName = &quot; + (userNameValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_loginStatus = &quot; + (loginStatusValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_tos_current_username = &quot; + (tosUserValue ?: &apos;NOT_FOUND&apos;))
+
+def hasValue = cookieValue &amp;&amp; cookieValue != &apos;NOT_FOUND&apos; &amp;&amp; csrfValue &amp;&amp; csrfValue != &apos;NOT_FOUND&apos; &amp;&amp; tmsValue &amp;&amp; tmsValue != &apos;NOT_FOUND&apos;
+def status = hasValue ? &apos;OK&apos; : &apos;FAIL&apos;
+lines.add(&apos;变量提取状态 = &apos; + status + &apos;（仅表示变量提取状态）&apos;)
+SampleResult.setResponseData(lines.join(&apos;\n&apos;), &apos;UTF-8&apos;)
+SampleResult.setResponseMessage(&apos;新增变量摘要 &apos; + status)
+SampleResult.setSuccessful(hasValue)
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="管理员查看结果树">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="管理员聚合报告">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="普通用户登录流程" enabled="true">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="循环控制器">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="普通用户 Cookie 管理器" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="普通用户登录流程" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="USER-01 获取公钥与令牌" enabled="true">
+            <stringProp name="TestPlan.comments">普通用户获取公钥 X-Rsa-Token 和 CSRF Token</stringProp>
+            <stringProp name="HTTPSampler.path">/tos/</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="提取 普通用户 公钥与 CSRF" enabled="true">
+              <stringProp name="TestPlan.comments">只写入 user 对应的公钥和 CSRF 变量</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="language">groovy</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters">user</stringProp>
+              <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+if (!role) {
+    throw new Exception(&apos;JSR223 参数值未设置角色，例如：super_admin / admin / user&apos;)
+}
+
+def headers = prev.getResponseHeaders()
+String publicKey = &apos;&apos;
+String csrf = &apos;&apos;
+
+headers.eachLine { line -&gt;
+    def mRsa = line =~ /(?i)^\s*X-Rsa-Token:\s*(.+)$/
+    if (mRsa.find()) {
+        publicKey = mRsa.group(1).trim()
+    }
+
+    def mHeaderCsrf = line =~ /(?i)^\s*X-Csrf-Token:\s*(.+)$/
+    if (mHeaderCsrf.find()) {
+        csrf = mHeaderCsrf.group(1).trim()
+    }
+
+    def mSetCsrf = line =~ /(?i)^\s*Set-Cookie:\s*X-Csrf-Token=([^;]+)/
+    if (mSetCsrf.find()) {
+        csrf = mSetCsrf.group(1).trim()
+    }
+}
+
+vars.put(&quot;${role}_public_key&quot;, publicKey ? publicKey : &apos;NOT_FOUND&apos;)
+vars.put(&quot;${role}_csrf_token&quot;, csrf ? csrf : &apos;NOT_FOUND&apos;)
+log.info(&quot;${role} 公钥长度=&quot; + publicKey.length())
+log.info(&quot;${role} CSRF=&quot; + csrf)
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+            <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug 查看 普通用户 提取结果" enabled="false">
+              <boolProp name="displayJMeterProperties">false</boolProp>
+              <boolProp name="displayJMeterVariables">true</boolProp>
+              <boolProp name="displaySamplerProperties">false</boolProp>
+              <boolProp name="displaySystemProperties">false</boolProp>
+            </DebugPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="USER-01 查看普通用户本次新增变量" enabled="true">
+            <stringProp name="TestPlan.comments">只显示公钥和CSRF的提取摘要</stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="language">groovy</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters">user</stringProp>
+            <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+def lines = []
+def publicValue = vars.get(&quot;${role}_public_key&quot;)
+def csrfValue = vars.get(&quot;${role}_csrf_token&quot;)
+lines.add(&quot;===== ${role} /tos/ 获取公钥与令牌：本次新增变量 =====&quot;)
+lines.add(&quot;${role}_public_key = &quot; + (publicValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_csrf_token = &quot; + (csrfValue ?: &apos;NOT_FOUND&apos;))
+def hasValue = publicValue &amp;&amp; publicValue != &apos;NOT_FOUND&apos; &amp;&amp; csrfValue &amp;&amp; csrfValue != &apos;NOT_FOUND&apos;
+def status = hasValue ? &apos;OK&apos; : &apos;FAIL&apos;
+lines.add(&apos;状态 = &apos; + status + &apos;（仅表示变量提取状态）&apos;)
+SampleResult.setResponseData(lines.join(&apos;\n&apos;), &apos;UTF-8&apos;)
+SampleResult.setResponseMessage(&apos;新增变量摘要 &apos; + status)
+SampleResult.setSuccessful(hasValue)
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="USER-02 登录接口" enabled="true">
+            <stringProp name="TestPlan.comments">POST /v2/login，普通用户密码使用 RSA 公钥加密</stringProp>
+            <stringProp name="HTTPSampler.path">/v2/login</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;username&quot;: &quot;${user_username}&quot;,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;password&quot;: &quot;${user_encrypted_password}&quot;,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;code&quot;: &quot;&quot;,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;remember&quot;: true,&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+  &quot;slidecode&quot;: 1&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="RSA 加密 普通用户 登录密码" enabled="true">
+              <stringProp name="TestPlan.comments">等价的 Apifox 前置脚本 + encoderLoginPassword.go 的 JMeter 版本</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="language">groovy</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters">user</stringProp>
+              <stringProp name="script">
+import java.security.KeyFactory
+import java.security.spec.X509EncodedKeySpec
+import java.util.Base64
+import javax.crypto.Cipher
+
+def role = (Parameters ?: &apos;&apos;).trim()
+if (!role) {
+    throw new Exception(&apos;JSR223 参数值未设置角色，例如：super_admin / admin / user&apos;)
+}
+
+String base64Pem = vars.get(&quot;${role}_public_key&quot;)
+if (base64Pem == null || base64Pem.isEmpty() || base64Pem == &apos;NOT_FOUND&apos;) {
+    throw new Exception(&quot;${role} 未获取到 X-Rsa-Token 公钥&quot;)
+}
+
+String pem = new String(Base64.getMimeDecoder().decode(base64Pem), &apos;UTF-8&apos;)
+
+boolean inKey = false
+StringBuilder pemBody = new StringBuilder()
+pem.eachLine { line -&gt;
+    String trimmed = line.trim()
+    if (trimmed.startsWith(&apos;-----BEGIN&apos;)) {
+        inKey = true
+        return
+    }
+    if (trimmed.startsWith(&apos;-----END&apos;)) {
+        inKey = false
+        return
+    }
+    if (inKey &amp;&amp; trimmed) {
+        pemBody.append(trimmed)
+    }
+}
+
+String body = pemBody.toString()
+if (!body) {
+    throw new Exception(&quot;${role} PEM 正文为空&quot;)
+}
+
+byte[] der = Base64.getMimeDecoder().decode(body)
+KeyFactory keyFactory = KeyFactory.getInstance(&apos;RSA&apos;)
+def publicKey = keyFactory.generatePublic(new X509EncodedKeySpec(der))
+
+Cipher cipher = Cipher.getInstance(&apos;RSA/ECB/PKCS1Padding&apos;)
+cipher.init(Cipher.ENCRYPT_MODE, publicKey)
+
+String plainPassword = vars.get(&quot;${role}_password&quot;)
+if (plainPassword == null || plainPassword.isEmpty()) {
+    throw new Exception(&quot;${role} 未配置密码&quot;)
+}
+
+byte[] encrypted = cipher.doFinal(plainPassword.getBytes(&apos;UTF-8&apos;))
+vars.put(&quot;${role}_encrypted_password&quot;, Base64.getEncoder().encodeToString(encrypted))
+log.info(&quot;${role} RSA 登录密码加密成功，PEM正文长度=&quot; + body.length() + &quot;，密文长度=&quot; + encrypted.length)
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="普通用户登录请求头" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="X-Csrf-Token" elementType="Header">
+                  <stringProp name="Header.name">X-Csrf-Token</stringProp>
+                  <stringProp name="Header.value">${user_csrf_token}</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="提取 普通用户 登录 Cookie" enabled="true">
+              <stringProp name="TestPlan.comments">从登录响应头/Set-Cookie/请求Cookie中提取登录后的必要Cookie</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="language">groovy</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters">user</stringProp>
+              <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+if (!role) {
+    throw new Exception(&apos;JSR223 参数值未设置角色，例如：super_admin / admin / user&apos;)
+}
+
+def responseHeaders = prev.getResponseHeaders() ?: &apos;&apos;
+def requestHeaders = prev.getRequestHeaders() ?: &apos;&apos;
+
+def setCookies = [:]
+def setCookieMatcher = responseHeaders =~ /(?i)Set-Cookie:\s*([^;\r\n=]+)=([^;\r\n]+)/
+while (setCookieMatcher.find()) {
+    setCookies[setCookieMatcher.group(1).trim()] = setCookieMatcher.group(2).trim()
+}
+
+String responseCsrf = &apos;&apos;
+responseHeaders.eachLine { line -&gt;
+    def m = line =~ /(?i)^\s*X-Csrf-Token:\s*(.+)$/
+    if (m.find()) {
+        responseCsrf = m.group(1).trim()
+    }
+}
+
+def reqCookies = [:]
+String cookieLine = &apos;&apos;
+requestHeaders.eachLine { line -&gt;
+    def m = line =~ /(?i)^\s*Cookie:\s*(.+?)\s*$/
+    if (m.find()) {
+        cookieLine = m.group(1).trim()
+    }
+}
+cookieLine.split(&apos;;&apos;).each { part -&gt;
+    def kv = part.trim().split(&apos;=&apos;, 2)
+    if (kv.length == 2) {
+        reqCookies[kv[0].trim()] = kv[1].trim()
+    }
+}
+
+String userName = reqCookies[&apos;userName&apos;] ?: setCookies[&apos;userName&apos;] ?: vars.get(&quot;${role}_username&quot;) ?: &apos;NOT_FOUND&apos;
+String tms = setCookies[&apos;TMSESSNAME&apos;] ?: reqCookies[&apos;TMSESSNAME&apos;] ?: &apos;NOT_FOUND&apos;
+String csrf = responseCsrf ?: setCookies[&apos;X-Csrf-Token&apos;] ?: reqCookies[&apos;X-Csrf-Token&apos;] ?: vars.get(&quot;${role}_csrf_token&quot;) ?: &apos;NOT_FOUND&apos;
+String loginStatus = reqCookies[&apos;loginStatus&apos;] ?: setCookies[&apos;loginStatus&apos;] ?: &apos;true&apos;
+String tosUser = setCookies[&apos;tos_current_username&apos;] ?: reqCookies[&apos;tos_current_username&apos;] ?: userName
+
+def cookieValue = &quot;userName=${userName}; TMSESSNAME=${tms}; X-Csrf-Token=${csrf}; loginStatus=${loginStatus}; tos_current_username=${tosUser}&quot;
+
+vars.put(&quot;${role}_cookie_userName&quot;, userName)
+vars.put(&quot;${role}_cookie_TMSESSNAME&quot;, tms)
+vars.put(&quot;${role}_csrf_token&quot;, csrf)
+vars.put(&quot;${role}_cookie_loginStatus&quot;, loginStatus)
+vars.put(&quot;${role}_cookie_tos_current_username&quot;, tosUser)
+vars.put(&quot;${role}_cookie&quot;, cookieValue)
+
+if (csrf == &apos;NOT_FOUND&apos;) {
+    log.warn(&quot;${role} 未提取到 X-Csrf-Token&quot;)
+}
+if (tms == &apos;NOT_FOUND&apos;) {
+    log.warn(&quot;${role} 未提取到 TMSESSNAME&quot;)
+}
+log.info(&quot;${role} Cookie 提取完成，TMSESSNAME=&quot; + tms)
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+            <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug 查看 普通用户 登录结果" enabled="false">
+              <boolProp name="displayJMeterProperties">false</boolProp>
+              <boolProp name="displayJMeterVariables">true</boolProp>
+              <boolProp name="displaySamplerProperties">false</boolProp>
+              <boolProp name="displaySystemProperties">false</boolProp>
+            </DebugPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="USER-02 查看普通用户登录本次新增变量" enabled="true">
+            <stringProp name="TestPlan.comments">显示登录Cookie、CSRF和接口业务状态摘要</stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="language">groovy</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters">user</stringProp>
+            <stringProp name="script">
+def role = (Parameters ?: &apos;&apos;).trim()
+def lines = []
+
+def body = prev?.getResponseDataAsString() ?: &apos;&apos;
+def isLogin = &apos;未知&apos;
+def business = &apos;&apos;
+try {
+    def json = new groovy.json.JsonSlurper().parseText(body)
+    isLogin = String.valueOf(json.is_login)
+    business = String.valueOf(json.data ?: json.msg ?: &apos;&apos;)
+} catch (Exception e) {
+    business = &apos;响应不是 JSON&apos;
+}
+
+def cookieValue = vars.get(&quot;${role}_cookie&quot;)
+def csrfValue = vars.get(&quot;${role}_csrf_token&quot;)
+def tmsValue = vars.get(&quot;${role}_cookie_TMSESSNAME&quot;)
+def userNameValue = vars.get(&quot;${role}_cookie_userName&quot;)
+def loginStatusValue = vars.get(&quot;${role}_cookie_loginStatus&quot;)
+def tosUserValue = vars.get(&quot;${role}_cookie_tos_current_username&quot;)
+
+lines.add(&quot;===== ${role} /v2/login 登录接口：本次新增变量 =====&quot;)
+lines.add(&apos;接口响应 is_login = &apos; + isLogin)
+lines.add(&apos;接口响应业务提示 = &apos; + business)
+lines.add(&quot;${role}_cookie = &quot; + (cookieValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_csrf_token = &quot; + (csrfValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_TMSESSNAME = &quot; + (tmsValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_userName = &quot; + (userNameValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_loginStatus = &quot; + (loginStatusValue ?: &apos;NOT_FOUND&apos;))
+lines.add(&quot;${role}_cookie_tos_current_username = &quot; + (tosUserValue ?: &apos;NOT_FOUND&apos;))
+
+def hasValue = cookieValue &amp;&amp; cookieValue != &apos;NOT_FOUND&apos; &amp;&amp; csrfValue &amp;&amp; csrfValue != &apos;NOT_FOUND&apos; &amp;&amp; tmsValue &amp;&amp; tmsValue != &apos;NOT_FOUND&apos;
+def status = hasValue ? &apos;OK&apos; : &apos;FAIL&apos;
+lines.add(&apos;变量提取状态 = &apos; + status + &apos;（仅表示变量提取状态）&apos;)
+SampleResult.setResponseData(lines.join(&apos;\n&apos;), &apos;UTF-8&apos;)
+SampleResult.setResponseMessage(&apos;新增变量摘要 &apos; + status)
+SampleResult.setSuccessful(hasValue)
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="普通用户查看结果树" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="普通用户聚合报告" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
