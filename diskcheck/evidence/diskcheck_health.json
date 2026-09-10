@@ -1,0 +1,4 @@
+{
+  "status": 200,
+  "body": "{\"build\":{\"version\":\"0.2.071\",\"commit\":\"46febf67a690\",\"build_time\":\"2026-09-03T09:45:50Z\"},\"helper_ok\":true,\"ok\":true,\"service\":\"diskcheck-api\"}\n"
+}

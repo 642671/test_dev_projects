@@ -1,0 +1,625 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic "TerraMaster DiskCheck" [ref=e4]:
+        - generic [aria-hidden] [ref=e5]: ◫
+        - generic [ref=e6]: 磁盘健康管家
+      - navigation "主导航" [ref=e7]:
+        - button "总览" [ref=e8] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e9]: ⌂
+        - button "完整检测" [ref=e11] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e12]: ▦
+        - button "SMART 报告" [ref=e14] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e15]: ◈
+        - button "智能守护" [ref=e17] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e18]: ♢
+        - button "记录与审计" [active] [ref=e20] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e21]: ≡
+      - generic [ref=e23]:
+        - combobox "界面语言" [ref=e25]:
+          - option "English"
+          - option "Deutsch"
+          - option "Français"
+          - option "Español"
+          - option "Italiano"
+          - option "Português"
+          - option "Magyar"
+          - option "Türkçe"
+          - option "Polski"
+          - option "Русский"
+          - option "日本語"
+          - option "한국어"
+          - option "简体中文" [selected]
+          - option "繁體中文"
+          - option "Tiếng Việt"
+          - option "Bahasa Indonesia"
+          - option "ไทย"
+          - option "Dansk"
+          - option "Norsk"
+          - option "Čeština"
+          - option "Svenska"
+          - option "Nederlands"
+          - option "Română"
+          - option "Ελληνικά"
+        - generic "软件版本 · 0.2.071 · 46febf67a690 · 2026-09-03T09:45:50Z" [ref=e26]:
+          - generic [ref=e27]: 软件版本
+          - strong [ref=e28]: v0.2.071
+    - main [ref=e29]:
+      - generic [ref=e30]:
+        - heading "记录与审计" [level=1] [ref=e980]
+        - generic [ref=e33]:
+          - button "切换暗黑模式" [ref=e34] [cursor=pointer]: ☾
+          - button "帮助与检测原理" [ref=e35] [cursor=pointer]: "?"
+          - button "刷新磁盘与 SMART 信息" [ref=e36] [cursor=pointer]
+      - generic [ref=e982]:
+        - generic [ref=e983]:
+          - generic [ref=e984]:
+            - heading "记录与审计" [level=2] [ref=e985]
+            - paragraph [ref=e986]: 记录带哈希校验。条目数或占用空间达到上限时，系统会自动删除最旧记录并保留最近记录。
+          - generic [ref=e987]: 已保存 68 / 上限 10,000 条 · 已用 31.4 KiB / 上限 256 MiB
+        - generic [ref=e989]:
+          - generic [ref=e990]: 结论筛选
+          - combobox "结论筛选" [ref=e991]:
+            - option "全部" [selected]
+            - option "健康"
+            - option "警告"
+            - option "危险"
+            - option "其他"
+        - table [ref=e993]:
+          - rowgroup [ref=e998]:
+            - row [ref=e999]:
+              - columnheader "检测时间 拖动调整列宽" [ref=e1000]:
+                - text: 检测时间
+                - generic "拖动调整列宽" [ref=e1001]
+              - columnheader "事件与对象 拖动调整列宽" [ref=e1002]:
+                - text: 事件与对象
+                - generic "拖动调整列宽" [ref=e1003]
+              - columnheader "结果 拖动调整列宽" [ref=e1004]:
+                - text: 结果
+                - generic "拖动调整列宽" [ref=e1005]
+          - rowgroup [ref=e1006]:
+            - row [ref=e1007] [cursor=pointer]:
+              - cell [ref=e1008]:
+                - time [ref=e1009]: 2026/9/4 12:32:39
+              - cell [ref=e1010]:
+                - button "SMART 健康检测 磁盘 · USB Disk_sda" [ref=e1011]:
+                  - strong [ref=e1012]: SMART 健康检测
+                  - generic [ref=e1013]: 磁盘 · USB Disk_sda
+              - cell "失败" [ref=e1014]
+            - row [ref=e1016] [cursor=pointer]:
+              - cell [ref=e1017]:
+                - time [ref=e1018]: 2026/9/4 12:31:52
+              - cell [ref=e1019]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk1" [ref=e1020]:
+                  - strong [ref=e1021]: SMART 健康检测
+                  - generic [ref=e1022]: 磁盘 · NVMe Disk1
+              - cell "通过" [ref=e1023]
+            - row [ref=e1025] [cursor=pointer]:
+              - cell [ref=e1026]:
+                - time [ref=e1027]: 2026/9/4 12:18:54
+              - cell [ref=e1028]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk8" [ref=e1029]:
+                  - strong [ref=e1030]: SMART 健康检测
+                  - generic [ref=e1031]: 磁盘 · NVMe Disk8
+              - cell "通过" [ref=e1032]
+            - row [ref=e1034] [cursor=pointer]:
+              - cell [ref=e1035]:
+                - time [ref=e1036]: 2026/9/4 12:18:54
+              - cell [ref=e1037]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk2" [ref=e1038]:
+                  - strong [ref=e1039]: SMART 健康检测
+                  - generic [ref=e1040]: 磁盘 · NVMe Disk2
+              - cell "通过" [ref=e1041]
+            - row [ref=e1043] [cursor=pointer]:
+              - cell [ref=e1044]:
+                - time [ref=e1045]: 2026/9/4 12:18:54
+              - cell [ref=e1046]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk6" [ref=e1047]:
+                  - strong [ref=e1048]: SMART 健康检测
+                  - generic [ref=e1049]: 磁盘 · NVMe Disk6
+              - cell "通过" [ref=e1050]
+            - row [ref=e1052] [cursor=pointer]:
+              - cell [ref=e1053]:
+                - time [ref=e1054]: 2026/9/4 12:18:54
+              - cell [ref=e1055]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk5" [ref=e1056]:
+                  - strong [ref=e1057]: SMART 健康检测
+                  - generic [ref=e1058]: 磁盘 · NVMe Disk5
+              - cell "通过" [ref=e1059]
+            - row [ref=e1061] [cursor=pointer]:
+              - cell [ref=e1062]:
+                - time [ref=e1063]: 2026/9/4 12:18:54
+              - cell [ref=e1064]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk4" [ref=e1065]:
+                  - strong [ref=e1066]: SMART 健康检测
+                  - generic [ref=e1067]: 磁盘 · NVMe Disk4
+              - cell "通过" [ref=e1068]
+            - row [ref=e1070] [cursor=pointer]:
+              - cell [ref=e1071]:
+                - time [ref=e1072]: 2026/9/4 12:18:54
+              - cell [ref=e1073]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk3" [ref=e1074]:
+                  - strong [ref=e1075]: SMART 健康检测
+                  - generic [ref=e1076]: 磁盘 · NVMe Disk3
+              - cell "通过" [ref=e1077]
+            - row [ref=e1079] [cursor=pointer]:
+              - cell [ref=e1080]:
+                - time [ref=e1081]: 2026/9/4 12:18:54
+              - cell [ref=e1082]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk7" [ref=e1083]:
+                  - strong [ref=e1084]: SMART 健康检测
+                  - generic [ref=e1085]: 磁盘 · NVMe Disk7
+              - cell "通过" [ref=e1086]
+            - row [ref=e1088] [cursor=pointer]:
+              - cell [ref=e1089]:
+                - time [ref=e1090]: 2026/9/4 12:18:54
+              - cell [ref=e1091]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk1" [ref=e1092]:
+                  - strong [ref=e1093]: SMART 健康检测
+                  - generic [ref=e1094]: 磁盘 · NVMe Disk1
+              - cell "通过" [ref=e1095]
+            - row [ref=e1097] [cursor=pointer]:
+              - cell [ref=e1098]:
+                - time [ref=e1099]: 2026/9/4 12:18:54
+              - cell [ref=e1100]:
+                - button "SMART 健康检测 磁盘 · USB Disk_sdb" [ref=e1101]:
+                  - strong [ref=e1102]: SMART 健康检测
+                  - generic [ref=e1103]: 磁盘 · USB Disk_sdb
+              - cell "通过" [ref=e1104]
+            - row [ref=e1106] [cursor=pointer]:
+              - cell [ref=e1107]:
+                - time [ref=e1108]: 2026/9/4 12:18:54
+              - cell [ref=e1109]:
+                - button "SMART 健康检测 磁盘 · USB Disk_sdb" [ref=e1110]:
+                  - strong [ref=e1111]: SMART 健康检测
+                  - generic [ref=e1112]: 磁盘 · USB Disk_sdb
+              - cell "通过" [ref=e1113]
+            - row [ref=e1115] [cursor=pointer]:
+              - cell [ref=e1116]:
+                - time [ref=e1117]: 2026/9/4 12:18:54
+              - cell [ref=e1118]:
+                - button "SMART 健康检测 磁盘 · USB Disk_sda" [ref=e1119]:
+                  - strong [ref=e1120]: SMART 健康检测
+                  - generic [ref=e1121]: 磁盘 · USB Disk_sda
+              - cell "失败" [ref=e1122]
+            - row [ref=e1124] [cursor=pointer]:
+              - cell [ref=e1125]:
+                - time [ref=e1126]: 2026/9/4 12:17:21
+              - cell [ref=e1127]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk8" [ref=e1128]:
+                  - strong [ref=e1129]: SMART 健康检测
+                  - generic [ref=e1130]: 磁盘 · NVMe Disk8
+              - cell "通过" [ref=e1131]
+            - row [ref=e1133] [cursor=pointer]:
+              - cell [ref=e1134]:
+                - time [ref=e1135]: 2026/9/4 12:17:21
+              - cell [ref=e1136]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk2" [ref=e1137]:
+                  - strong [ref=e1138]: SMART 健康检测
+                  - generic [ref=e1139]: 磁盘 · NVMe Disk2
+              - cell "通过" [ref=e1140]
+            - row [ref=e1142] [cursor=pointer]:
+              - cell [ref=e1143]:
+                - time [ref=e1144]: 2026/9/4 12:17:21
+              - cell [ref=e1145]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk6" [ref=e1146]:
+                  - strong [ref=e1147]: SMART 健康检测
+                  - generic [ref=e1148]: 磁盘 · NVMe Disk6
+              - cell "通过" [ref=e1149]
+            - row [ref=e1151] [cursor=pointer]:
+              - cell [ref=e1152]:
+                - time [ref=e1153]: 2026/9/4 12:17:21
+              - cell [ref=e1154]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk5" [ref=e1155]:
+                  - strong [ref=e1156]: SMART 健康检测
+                  - generic [ref=e1157]: 磁盘 · NVMe Disk5
+              - cell "通过" [ref=e1158]
+            - row [ref=e1160] [cursor=pointer]:
+              - cell [ref=e1161]:
+                - time [ref=e1162]: 2026/9/4 12:17:21
+              - cell [ref=e1163]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk4" [ref=e1164]:
+                  - strong [ref=e1165]: SMART 健康检测
+                  - generic [ref=e1166]: 磁盘 · NVMe Disk4
+              - cell "通过" [ref=e1167]
+            - row [ref=e1169] [cursor=pointer]:
+              - cell [ref=e1170]:
+                - time [ref=e1171]: 2026/9/4 12:17:21
+              - cell [ref=e1172]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk3" [ref=e1173]:
+                  - strong [ref=e1174]: SMART 健康检测
+                  - generic [ref=e1175]: 磁盘 · NVMe Disk3
+              - cell "通过" [ref=e1176]
+            - row [ref=e1178] [cursor=pointer]:
+              - cell [ref=e1179]:
+                - time [ref=e1180]: 2026/9/4 12:17:21
+              - cell [ref=e1181]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk7" [ref=e1182]:
+                  - strong [ref=e1183]: SMART 健康检测
+                  - generic [ref=e1184]: 磁盘 · NVMe Disk7
+              - cell "通过" [ref=e1185]
+            - row [ref=e1187] [cursor=pointer]:
+              - cell [ref=e1188]:
+                - time [ref=e1189]: 2026/9/4 12:17:21
+              - cell [ref=e1190]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk1" [ref=e1191]:
+                  - strong [ref=e1192]: SMART 健康检测
+                  - generic [ref=e1193]: 磁盘 · NVMe Disk1
+              - cell "通过" [ref=e1194]
+            - row [ref=e1196] [cursor=pointer]:
+              - cell [ref=e1197]:
+                - time [ref=e1198]: 2026/9/4 12:17:21
+              - cell [ref=e1199]:
+                - button "SMART 健康检测 磁盘 · USB Disk_sdb" [ref=e1200]:
+                  - strong [ref=e1201]: SMART 健康检测
+                  - generic [ref=e1202]: 磁盘 · USB Disk_sdb
+              - cell "通过" [ref=e1203]
+            - row [ref=e1205] [cursor=pointer]:
+              - cell [ref=e1206]:
+                - time [ref=e1207]: 2026/9/4 12:17:21
+              - cell [ref=e1208]:
+                - button "SMART 健康检测 磁盘 · USB Disk_sdb" [ref=e1209]:
+                  - strong [ref=e1210]: SMART 健康检测
+                  - generic [ref=e1211]: 磁盘 · USB Disk_sdb
+              - cell "通过" [ref=e1212]
+            - row [ref=e1214] [cursor=pointer]:
+              - cell [ref=e1215]:
+                - time [ref=e1216]: 2026/9/4 12:17:21
+              - cell [ref=e1217]:
+                - button "SMART 健康检测 磁盘 · USB Disk_sda" [ref=e1218]:
+                  - strong [ref=e1219]: SMART 健康检测
+                  - generic [ref=e1220]: 磁盘 · USB Disk_sda
+              - cell "失败" [ref=e1221]
+            - row [ref=e1223] [cursor=pointer]:
+              - cell [ref=e1224]:
+                - time [ref=e1225]: 2026/9/4 12:06:46
+              - cell [ref=e1226]:
+                - button "SMART 健康检测 磁盘 · USB Disk_sda" [ref=e1227]:
+                  - strong [ref=e1228]: SMART 健康检测
+                  - generic [ref=e1229]: 磁盘 · USB Disk_sda
+              - cell "失败" [ref=e1230]
+            - row [ref=e1232] [cursor=pointer]:
+              - cell [ref=e1233]:
+                - time [ref=e1234]: 2026/9/4 11:53:29
+              - cell [ref=e1235]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk1" [ref=e1236]:
+                  - strong [ref=e1237]: SMART 健康检测
+                  - generic [ref=e1238]: 磁盘 · NVMe Disk1
+              - cell "通过" [ref=e1239]
+            - row [ref=e1241] [cursor=pointer]:
+              - cell [ref=e1242]:
+                - time [ref=e1243]: 2026/9/4 11:53:21
+              - cell [ref=e1244]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk5" [ref=e1245]:
+                  - strong [ref=e1246]: SMART 健康检测
+                  - generic [ref=e1247]: 磁盘 · NVMe Disk5
+              - cell "通过" [ref=e1248]
+            - row [ref=e1250] [cursor=pointer]:
+              - cell [ref=e1251]:
+                - time [ref=e1252]: 2026/9/4 11:53:05
+              - cell [ref=e1253]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk5" [ref=e1254]:
+                  - strong [ref=e1255]: SMART 健康检测
+                  - generic [ref=e1256]: 磁盘 · NVMe Disk5
+              - cell "通过" [ref=e1257]
+            - row [ref=e1259] [cursor=pointer]:
+              - cell [ref=e1260]:
+                - time [ref=e1261]: 2026/9/4 11:20:30
+              - cell [ref=e1262]:
+                - button "智能守护快照 智能守护 · snapshot_fff0745abc807a3d856b" [ref=e1263]:
+                  - strong [ref=e1264]: 智能守护快照
+                  - generic [ref=e1265]: 智能守护 · snapshot_fff0745abc807a3d856b
+              - cell "通过" [ref=e1266]
+            - row [ref=e1268] [cursor=pointer]:
+              - cell [ref=e1269]:
+                - time [ref=e1270]: 2026/9/4 11:18:26
+              - cell [ref=e1271]:
+                - button "智能守护快照 智能守护 · snapshot_b255fb0adcfd29268132" [ref=e1272]:
+                  - strong [ref=e1273]: 智能守护快照
+                  - generic [ref=e1274]: 智能守护 · snapshot_b255fb0adcfd29268132
+              - cell "通过" [ref=e1275]
+            - row [ref=e1277] [cursor=pointer]:
+              - cell [ref=e1278]:
+                - time [ref=e1279]: 2026/9/4 11:18:23
+              - cell [ref=e1280]:
+                - button "智能守护快照 智能守护 · snapshot_3aab285b46baefdf3297" [ref=e1281]:
+                  - strong [ref=e1282]: 智能守护快照
+                  - generic [ref=e1283]: 智能守护 · snapshot_3aab285b46baefdf3297
+              - cell "通过" [ref=e1284]
+            - row [ref=e1286] [cursor=pointer]:
+              - cell [ref=e1287]:
+                - time [ref=e1288]: 2026/9/4 11:18:17
+              - cell [ref=e1289]:
+                - button "智能守护快照 智能守护 · snapshot_9956de628781f8a08322" [ref=e1290]:
+                  - strong [ref=e1291]: 智能守护快照
+                  - generic [ref=e1292]: 智能守护 · snapshot_9956de628781f8a08322
+              - cell "通过" [ref=e1293]
+            - row [ref=e1295] [cursor=pointer]:
+              - cell [ref=e1296]:
+                - time [ref=e1297]: 2026/9/4 11:18:13
+              - cell [ref=e1298]:
+                - button "guardian_snapshot_deleted 智能守护 · snapshot_0711d213928956af9361" [ref=e1299]:
+                  - strong [ref=e1300]: guardian_snapshot_deleted
+                  - generic [ref=e1301]: 智能守护 · snapshot_0711d213928956af9361
+              - cell "成功" [ref=e1302]
+            - row [ref=e1304] [cursor=pointer]:
+              - cell [ref=e1305]:
+                - time [ref=e1306]: 2026/9/4 11:17:27
+              - cell [ref=e1307]:
+                - button "智能守护快照 智能守护 · snapshot_0711d213928956af9361" [ref=e1308]:
+                  - strong [ref=e1309]: 智能守护快照
+                  - generic [ref=e1310]: 智能守护 · snapshot_0711d213928956af9361
+              - cell "通过" [ref=e1311]
+            - row [ref=e1313] [cursor=pointer]:
+              - cell [ref=e1314]:
+                - time [ref=e1315]: 2026/9/4 11:14:54
+              - cell [ref=e1316]:
+                - button "守护设置更新 设置 · guardian" [ref=e1317]:
+                  - strong [ref=e1318]: 守护设置更新
+                  - generic [ref=e1319]: 设置 · guardian
+              - cell "成功" [ref=e1320]
+            - row [ref=e1322] [cursor=pointer]:
+              - cell [ref=e1323]:
+                - time [ref=e1324]: 2026/9/4 11:14:34
+              - cell [ref=e1325]:
+                - button "守护设置更新 设置 · guardian" [ref=e1326]:
+                  - strong [ref=e1327]: 守护设置更新
+                  - generic [ref=e1328]: 设置 · guardian
+              - cell "成功" [ref=e1329]
+            - row [ref=e1331] [cursor=pointer]:
+              - cell [ref=e1332]:
+                - time [ref=e1333]: 2026/9/4 11:08:00
+              - cell [ref=e1334]:
+                - button "守护设置更新 设置 · guardian" [ref=e1335]:
+                  - strong [ref=e1336]: 守护设置更新
+                  - generic [ref=e1337]: 设置 · guardian
+              - cell "成功" [ref=e1338]
+            - row [ref=e1340] [cursor=pointer]:
+              - cell [ref=e1341]:
+                - time [ref=e1342]: 2026/9/4 11:07:59
+              - cell [ref=e1343]:
+                - button "守护设置更新 设置 · guardian" [ref=e1344]:
+                  - strong [ref=e1345]: 守护设置更新
+                  - generic [ref=e1346]: 设置 · guardian
+              - cell "成功" [ref=e1347]
+            - row [ref=e1349] [cursor=pointer]:
+              - cell [ref=e1350]:
+                - time [ref=e1351]: 2026/9/4 11:07:58
+              - cell [ref=e1352]:
+                - button "守护设置更新 设置 · guardian" [ref=e1353]:
+                  - strong [ref=e1354]: 守护设置更新
+                  - generic [ref=e1355]: 设置 · guardian
+              - cell "成功" [ref=e1356]
+            - row [ref=e1358] [cursor=pointer]:
+              - cell [ref=e1359]:
+                - time [ref=e1360]: 2026/9/4 11:07:58
+              - cell [ref=e1361]:
+                - button "守护设置更新 设置 · guardian" [ref=e1362]:
+                  - strong [ref=e1363]: 守护设置更新
+                  - generic [ref=e1364]: 设置 · guardian
+              - cell "成功" [ref=e1365]
+            - row [ref=e1367] [cursor=pointer]:
+              - cell [ref=e1368]:
+                - time [ref=e1369]: 2026/9/4 11:07:58
+              - cell [ref=e1370]:
+                - button "守护设置更新 设置 · guardian" [ref=e1371]:
+                  - strong [ref=e1372]: 守护设置更新
+                  - generic [ref=e1373]: 设置 · guardian
+              - cell "成功" [ref=e1374]
+            - row [ref=e1376] [cursor=pointer]:
+              - cell [ref=e1377]:
+                - time [ref=e1378]: 2026/9/4 11:07:58
+              - cell [ref=e1379]:
+                - button "守护设置更新 设置 · guardian" [ref=e1380]:
+                  - strong [ref=e1381]: 守护设置更新
+                  - generic [ref=e1382]: 设置 · guardian
+              - cell "成功" [ref=e1383]
+            - row [ref=e1385] [cursor=pointer]:
+              - cell [ref=e1386]:
+                - time [ref=e1387]: 2026/9/4 11:07:57
+              - cell [ref=e1388]:
+                - button "守护设置更新 设置 · guardian" [ref=e1389]:
+                  - strong [ref=e1390]: 守护设置更新
+                  - generic [ref=e1391]: 设置 · guardian
+              - cell "成功" [ref=e1392]
+            - row [ref=e1394] [cursor=pointer]:
+              - cell [ref=e1395]:
+                - time [ref=e1396]: 2026/9/4 11:07:57
+              - cell [ref=e1397]:
+                - button "守护设置更新 设置 · guardian" [ref=e1398]:
+                  - strong [ref=e1399]: 守护设置更新
+                  - generic [ref=e1400]: 设置 · guardian
+              - cell "成功" [ref=e1401]
+            - row [ref=e1403] [cursor=pointer]:
+              - cell [ref=e1404]:
+                - time [ref=e1405]: 2026/9/4 11:07:56
+              - cell [ref=e1406]:
+                - button "守护设置更新 设置 · guardian" [ref=e1407]:
+                  - strong [ref=e1408]: 守护设置更新
+                  - generic [ref=e1409]: 设置 · guardian
+              - cell "成功" [ref=e1410]
+            - row [ref=e1412] [cursor=pointer]:
+              - cell [ref=e1413]:
+                - time [ref=e1414]: 2026/9/4 11:07:56
+              - cell [ref=e1415]:
+                - button "守护设置更新 设置 · guardian" [ref=e1416]:
+                  - strong [ref=e1417]: 守护设置更新
+                  - generic [ref=e1418]: 设置 · guardian
+              - cell "成功" [ref=e1419]
+            - row [ref=e1421] [cursor=pointer]:
+              - cell [ref=e1422]:
+                - time [ref=e1423]: 2026/9/4 11:07:56
+              - cell [ref=e1424]:
+                - button "守护设置更新 设置 · guardian" [ref=e1425]:
+                  - strong [ref=e1426]: 守护设置更新
+                  - generic [ref=e1427]: 设置 · guardian
+              - cell "成功" [ref=e1428]
+            - row [ref=e1430] [cursor=pointer]:
+              - cell [ref=e1431]:
+                - time [ref=e1432]: 2026/9/4 11:07:55
+              - cell [ref=e1433]:
+                - button "守护设置更新 设置 · guardian" [ref=e1434]:
+                  - strong [ref=e1435]: 守护设置更新
+                  - generic [ref=e1436]: 设置 · guardian
+              - cell "成功" [ref=e1437]
+            - row [ref=e1439] [cursor=pointer]:
+              - cell [ref=e1440]:
+                - time [ref=e1441]: 2026/9/4 11:07:55
+              - cell [ref=e1442]:
+                - button "守护设置更新 设置 · guardian" [ref=e1443]:
+                  - strong [ref=e1444]: 守护设置更新
+                  - generic [ref=e1445]: 设置 · guardian
+              - cell "成功" [ref=e1446]
+            - row [ref=e1448] [cursor=pointer]:
+              - cell [ref=e1449]:
+                - time [ref=e1450]: 2026/9/4 11:07:54
+              - cell [ref=e1451]:
+                - button "守护设置更新 设置 · guardian" [ref=e1452]:
+                  - strong [ref=e1453]: 守护设置更新
+                  - generic [ref=e1454]: 设置 · guardian
+              - cell "成功" [ref=e1455]
+            - row [ref=e1457] [cursor=pointer]:
+              - cell [ref=e1458]:
+                - time [ref=e1459]: 2026/9/4 11:07:52
+              - cell [ref=e1460]:
+                - button "守护设置更新 设置 · guardian" [ref=e1461]:
+                  - strong [ref=e1462]: 守护设置更新
+                  - generic [ref=e1463]: 设置 · guardian
+              - cell "成功" [ref=e1464]
+            - row [ref=e1466] [cursor=pointer]:
+              - cell [ref=e1467]:
+                - time [ref=e1468]: 2026/9/4 11:07:51
+              - cell [ref=e1469]:
+                - button "守护设置更新 设置 · guardian" [ref=e1470]:
+                  - strong [ref=e1471]: 守护设置更新
+                  - generic [ref=e1472]: 设置 · guardian
+              - cell "成功" [ref=e1473]
+            - row [ref=e1475] [cursor=pointer]:
+              - cell [ref=e1476]:
+                - time [ref=e1477]: 2026/9/4 11:07:48
+              - cell [ref=e1478]:
+                - button "守护设置更新 设置 · guardian" [ref=e1479]:
+                  - strong [ref=e1480]: 守护设置更新
+                  - generic [ref=e1481]: 设置 · guardian
+              - cell "成功" [ref=e1482]
+            - row [ref=e1484] [cursor=pointer]:
+              - cell [ref=e1485]:
+                - time [ref=e1486]: 2026/9/4 11:03:50
+              - cell [ref=e1487]:
+                - button "通知通道测试 智能守护 · tos_notification_center" [ref=e1488]:
+                  - strong [ref=e1489]: 通知通道测试
+                  - generic [ref=e1490]: 智能守护 · tos_notification_center
+              - cell "成功" [ref=e1491]
+            - row [ref=e1493] [cursor=pointer]:
+              - cell [ref=e1494]:
+                - time [ref=e1495]: 2026/9/4 11:03:28
+              - cell [ref=e1496]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk1" [ref=e1497]:
+                  - strong [ref=e1498]: SMART 健康检测
+                  - generic [ref=e1499]: 磁盘 · NVMe Disk1
+              - cell "通过" [ref=e1500]
+            - row [ref=e1502] [cursor=pointer]:
+              - cell [ref=e1503]:
+                - time [ref=e1504]: 2026/9/4 10:21:16
+              - cell [ref=e1505]:
+                - button "停止完整检测 检测任务 · NVMe Disk7" [ref=e1506]:
+                  - strong [ref=e1507]: 停止完整检测
+                  - generic [ref=e1508]: 检测任务 · NVMe Disk7
+              - cell "已取消" [ref=e1509]
+            - row [ref=e1511] [cursor=pointer]:
+              - cell [ref=e1512]:
+                - time [ref=e1513]: 2026/9/4 10:20:29
+              - cell [ref=e1514]:
+                - button "停止完整检测 检测任务 · NVMe Disk8" [ref=e1515]:
+                  - strong [ref=e1516]: 停止完整检测
+                  - generic [ref=e1517]: 检测任务 · NVMe Disk8
+              - cell "已取消" [ref=e1518]
+            - row [ref=e1520] [cursor=pointer]:
+              - cell [ref=e1521]:
+                - time [ref=e1522]: 2026/9/4 10:20:10
+              - cell [ref=e1523]:
+                - button "scan_continue 检测任务 · NVMe Disk8" [ref=e1524]:
+                  - strong [ref=e1525]: scan_continue
+                  - generic [ref=e1526]: 检测任务 · NVMe Disk8
+              - cell "等待中" [ref=e1527]
+            - row [ref=e1529] [cursor=pointer]:
+              - cell [ref=e1530]:
+                - time [ref=e1531]: 2026/9/4 10:17:05
+              - cell [ref=e1532]:
+                - button "停止完整检测 检测任务 · NVMe Disk8" [ref=e1533]:
+                  - strong [ref=e1534]: 停止完整检测
+                  - generic [ref=e1535]: 检测任务 · NVMe Disk8
+              - cell "已取消" [ref=e1536]
+            - row [ref=e1538] [cursor=pointer]:
+              - cell [ref=e1539]:
+                - time [ref=e1540]: 2026/9/4 10:14:16
+              - cell [ref=e1541]:
+                - button "创建完整检测 检测任务 · NVMe Disk8" [ref=e1542]:
+                  - strong [ref=e1543]: 创建完整检测
+                  - generic [ref=e1544]: 检测任务 · NVMe Disk8
+              - cell "等待中" [ref=e1545]
+            - row [ref=e1547] [cursor=pointer]:
+              - cell [ref=e1548]:
+                - time [ref=e1549]: 2026/9/4 10:14:16
+              - cell [ref=e1550]:
+                - button "创建完整检测 检测任务 · NVMe Disk7" [ref=e1551]:
+                  - strong [ref=e1552]: 创建完整检测
+                  - generic [ref=e1553]: 检测任务 · NVMe Disk7
+              - cell "等待中" [ref=e1554]
+            - row [ref=e1556] [cursor=pointer]:
+              - cell [ref=e1557]:
+                - time [ref=e1558]: 2026/9/4 10:14:16
+              - cell [ref=e1559]:
+                - button "创建完整检测 检测任务 · NVMe Disk6" [ref=e1560]:
+                  - strong [ref=e1561]: 创建完整检测
+                  - generic [ref=e1562]: 检测任务 · NVMe Disk6
+              - cell "等待中" [ref=e1563]
+            - row [ref=e1565] [cursor=pointer]:
+              - cell [ref=e1566]:
+                - time [ref=e1567]: 2026/9/4 10:14:16
+              - cell [ref=e1568]:
+                - button "创建完整检测 检测任务 · NVMe Disk5" [ref=e1569]:
+                  - strong [ref=e1570]: 创建完整检测
+                  - generic [ref=e1571]: 检测任务 · NVMe Disk5
+              - cell "等待中" [ref=e1572]
+            - row [ref=e1574] [cursor=pointer]:
+              - cell [ref=e1575]:
+                - time [ref=e1576]: 2026/9/4 10:14:16
+              - cell [ref=e1577]:
+                - button "创建完整检测 检测任务 · NVMe Disk4" [ref=e1578]:
+                  - strong [ref=e1579]: 创建完整检测
+                  - generic [ref=e1580]: 检测任务 · NVMe Disk4
+              - cell "等待中" [ref=e1581]
+            - row [ref=e1583] [cursor=pointer]:
+              - cell [ref=e1584]:
+                - time [ref=e1585]: 2026/9/4 10:14:16
+              - cell [ref=e1586]:
+                - button "创建完整检测 检测任务 · NVMe Disk3" [ref=e1587]:
+                  - strong [ref=e1588]: 创建完整检测
+                  - generic [ref=e1589]: 检测任务 · NVMe Disk3
+              - cell "等待中" [ref=e1590]
+            - row [ref=e1592] [cursor=pointer]:
+              - cell [ref=e1593]:
+                - time [ref=e1594]: 2026/9/4 10:14:16
+              - cell [ref=e1595]:
+                - button "创建完整检测 检测任务 · NVMe Disk2" [ref=e1596]:
+                  - strong [ref=e1597]: 创建完整检测
+                  - generic [ref=e1598]: 检测任务 · NVMe Disk2
+              - cell "等待中" [ref=e1599]
+            - row [ref=e1601] [cursor=pointer]:
+              - cell [ref=e1602]:
+                - time [ref=e1603]: 2026/9/4 10:14:16
+              - cell [ref=e1604]:
+                - button "创建完整检测 检测任务 · NVMe Disk1" [ref=e1605]:
+                  - strong [ref=e1606]: 创建完整检测
+                  - generic [ref=e1607]: 检测任务 · NVMe Disk1
+              - cell "等待中" [ref=e1608]
+            - row [ref=e1610] [cursor=pointer]:
+              - cell [ref=e1611]:
+                - time [ref=e1612]: 2026/9/4 10:10:33
+              - cell [ref=e1613]:
+                - button "SMART 健康检测 磁盘 · NVMe Disk5" [ref=e1614]:
+                  - strong [ref=e1615]: SMART 健康检测
+                  - generic [ref=e1616]: 磁盘 · NVMe Disk5
+              - cell "通过" [ref=e1617]
+  - status [ref=e208]

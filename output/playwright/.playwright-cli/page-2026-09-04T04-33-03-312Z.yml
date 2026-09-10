@@ -1,0 +1,144 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic "TerraMaster DiskCheck" [ref=e4]:
+        - generic [aria-hidden] [ref=e5]: ◫
+        - generic [ref=e6]: 磁盘健康管家
+      - navigation "主导航" [ref=e7]:
+        - button "总览" [ref=e8] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e9]: ⌂
+        - button "完整检测" [active] [ref=e11] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e12]: ▦
+        - button "SMART 报告" [ref=e14] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e15]: ◈
+        - button "智能守护" [ref=e17] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e18]: ♢
+        - button "记录与审计" [ref=e20] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e21]: ≡
+      - generic [ref=e23]:
+        - combobox "界面语言" [ref=e25]:
+          - option "English"
+          - option "Deutsch"
+          - option "Français"
+          - option "Español"
+          - option "Italiano"
+          - option "Português"
+          - option "Magyar"
+          - option "Türkçe"
+          - option "Polski"
+          - option "Русский"
+          - option "日本語"
+          - option "한국어"
+          - option "简体中文" [selected]
+          - option "繁體中文"
+          - option "Tiếng Việt"
+          - option "Bahasa Indonesia"
+          - option "ไทย"
+          - option "Dansk"
+          - option "Norsk"
+          - option "Čeština"
+          - option "Svenska"
+          - option "Nederlands"
+          - option "Română"
+          - option "Ελληνικά"
+        - generic "软件版本 · 0.2.071 · 46febf67a690 · 2026-09-03T09:45:50Z" [ref=e26]:
+          - generic [ref=e27]: 软件版本
+          - strong [ref=e28]: v0.2.071
+    - main [ref=e29]:
+      - generic [ref=e30]:
+        - heading "完整检测" [level=1] [ref=e889]
+        - generic [ref=e33]:
+          - button "切换暗黑模式" [ref=e34] [cursor=pointer]: ☾
+          - button "帮助与检测原理" [ref=e35] [cursor=pointer]: "?"
+          - button "刷新磁盘与 SMART 信息" [ref=e36] [cursor=pointer]
+      - generic [ref=e891]:
+        - generic [ref=e892]:
+          - generic [ref=e893]:
+            - generic [ref=e894]: 选择磁盘
+            - combobox "选择磁盘" [ref=e895]:
+              - option "NVMe Disk1 · Kingchuxing 128GB · 128.0 GB · 在线业务盘" [selected]
+              - option "NVMe Disk2 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk3 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk4 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk5 · QUANXING N200 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk6 · QUANXING N200 128GB · 128.0 GB · 未加入存储池/未挂载"
+              - option "NVMe Disk7 · Sandisk NAS 800 NVMe 960GB · 960.2 GB · 未加入存储池/未挂载"
+              - option "NVMe Disk8 · Sandisk NAS 800 NVMe 960GB · 960.2 GB · 系统关键盘"
+              - option "USB Disk_sda · TDAS · 1.0 TB · 未加入存储池/未挂载"
+              - option "USB Disk_sdb · 2280 · 128.0 GB · 未加入存储池/未挂载"
+              - option "USB Disk_sdb · SN5100 4TB · 4.0 TB · 未加入存储池/未挂载"
+          - button "从磁盘起始位置执行完整只读检测" [ref=e896] [cursor=pointer]: ▶ 开始完整只读检测
+          - button "批量顺序检测" [ref=e897] [cursor=pointer]
+          - generic [ref=e898]:
+            - generic [ref=e899]: 检测完成
+            - button "暂停当前检测" [disabled] [ref=e900]: Ⅱ
+            - button "继续当前检测" [disabled] [ref=e901]: ▶
+            - button "停止当前检测并保留可继续的数据" [disabled] [ref=e902]: ■
+          - generic [ref=e903]: 当前没有等待或进行中的检测任务
+        - generic "检测记录操作" [ref=e904]:
+          - button "查看不会写盘的数据安全处置建议" [ref=e905] [cursor=pointer]: 安全处置建议
+          - button "选择格式并导出本次检测报表" [ref=e906] [cursor=pointer]: 导出报表
+          - button "查看所选磁盘的历次检测记录" [ref=e907] [cursor=pointer]: 检测历史
+        - generic [ref=e908]:
+          - generic [ref=e910]:
+            - strong [ref=e911]: NVMe Disk1 · Kingchuxing 128GB
+            - generic [ref=e912]: 共 15,264 个最小检测单元；每格为 8.4 MB 直接读，失败时定位到 512 B 逻辑扇区
+          - button "查看各颜色的响应时间和损坏判定依据" [ref=e913] [cursor=pointer]: 分级标准
+        - generic [ref=e914]:
+          - generic [ref=e915]:
+            - generic [ref=e916]:
+              - img "第 12 / 12 页 · 1,184" [ref=e917]
+              - generic "拖动浏览从第一页到最后一页" [ref=e918]:
+                - scrollbar "全盘页面滚动" [ref=e919]
+            - generic [ref=e921]:
+              - button "第一页" [ref=e922] [cursor=pointer]: «
+              - button "上一页" [ref=e923] [cursor=pointer]: ‹
+              - generic [ref=e924] [cursor=pointer]:
+                - generic [ref=e925]: 第 12 / 12 页
+                - spinbutton "跳转到页码" [ref=e926]: "12"
+              - button "下一页" [disabled] [ref=e927]: ›
+              - button "最后一页" [disabled] [ref=e928]: »
+              - generic [ref=e929] [cursor=pointer]:
+                - generic [ref=e930]: 自动跟随当前扫描位置
+                - checkbox "自动跟随当前扫描位置" [checked] [ref=e931]
+            - generic [ref=e932]:
+              - progressbar [ref=e933]
+              - strong [ref=e934]: 100.0%
+            - generic [ref=e935]:
+              - generic [ref=e936]: 已用时间 00:23:55
+              - generic [ref=e937]: 剩余时间 —
+              - generic [ref=e938]: 128.0 GB / 128.0 GB
+          - complementary "检测结果统计" [ref=e939]:
+            - generic [ref=e940]:
+              - button "优秀 15,262" [ref=e941] [cursor=pointer]:
+                - generic [ref=e943]: 优秀
+                - strong [ref=e944]: 15,262
+              - button "良好 0" [disabled] [ref=e945]:
+                - generic [ref=e947]: 良好
+                - strong [ref=e948]: "0"
+              - button "正常 1" [ref=e949] [cursor=pointer]:
+                - generic [ref=e951]: 正常
+                - strong [ref=e952]: "1"
+              - button "一般 0" [disabled] [ref=e953]:
+                - generic [ref=e955]: 一般
+                - strong [ref=e956]: "0"
+              - button "欠佳 1" [ref=e957] [cursor=pointer]:
+                - generic [ref=e959]: 欠佳
+                - strong [ref=e960]: "1"
+              - button "严重 0" [disabled] [ref=e961]:
+                - generic [ref=e963]: 严重
+                - strong [ref=e964]: "0"
+              - button "损坏 0" [disabled] [ref=e965]:
+                - generic [ref=e967]: 损坏
+                - strong [ref=e968]: "0"
+              - button "未检测 0" [disabled] [ref=e969]:
+                - generic [ref=e971]: 未检测
+                - strong [ref=e972]: "0"
+            - generic [ref=e973]:
+              - generic [ref=e974]: 读取速度
+              - strong [ref=e975]: 89.2 MB/s
+              - generic [ref=e976]: 在线业务盘采用约 101 MB/s 安全限速，以降低对当前业务的影响；此数值不是性能跑分。
+        - generic [ref=e977]:
+          - generic [aria-hidden] [ref=e978]: ⓘ
+          - paragraph [ref=e979]: 完整检测只读取数据，不修改分区、文件系统或用户文件；每格对应一段连续 LBA。检测会持续读取并增加磁盘负载，但不会消耗 SSD/NVMe 的写入寿命。慢块只表示本次响应偏慢；只有重复读取失败并定位到逻辑扇区才标记为损坏。重要数据仍应保持独立备份。
+  - status [ref=e208]

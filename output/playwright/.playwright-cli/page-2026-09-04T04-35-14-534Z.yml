@@ -1,0 +1,72 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic "TerraMaster DiskCheck" [ref=e4]:
+        - generic [aria-hidden] [ref=e5]: ◫
+        - generic [ref=e6]: 磁盘健康管家
+      - navigation "主导航" [ref=e7]:
+        - button "总览" [ref=e8] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e9]: ⌂
+        - button "完整检测" [ref=e11] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e12]: ▦
+        - button "SMART 报告" [active] [ref=e14] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e15]: ◈
+        - button "智能守护" [ref=e17] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e18]: ♢
+        - button "记录与审计" [ref=e20] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e21]: ≡
+      - generic [ref=e23]:
+        - combobox "界面语言" [ref=e25]:
+          - option "English"
+          - option "Deutsch"
+          - option "Français"
+          - option "Español"
+          - option "Italiano"
+          - option "Português"
+          - option "Magyar"
+          - option "Türkçe"
+          - option "Polski"
+          - option "Русский"
+          - option "日本語"
+          - option "한국어"
+          - option "简体中文" [selected]
+          - option "繁體中文"
+          - option "Tiếng Việt"
+          - option "Bahasa Indonesia"
+          - option "ไทย"
+          - option "Dansk"
+          - option "Norsk"
+          - option "Čeština"
+          - option "Svenska"
+          - option "Nederlands"
+          - option "Română"
+          - option "Ελληνικά"
+        - generic "软件版本 · 0.2.071 · 46febf67a690 · 2026-09-03T09:45:50Z" [ref=e26]:
+          - generic [ref=e27]: 软件版本
+          - strong [ref=e28]: v0.2.071
+    - main [ref=e29]:
+      - generic [ref=e30]:
+        - heading "SMART 报告" [level=1] [ref=e1619]
+        - generic [ref=e33]:
+          - button "切换暗黑模式" [ref=e34] [cursor=pointer]: ☾
+          - button "帮助与检测原理" [ref=e35] [cursor=pointer]: "?"
+          - button "刷新磁盘与 SMART 信息" [ref=e36] [cursor=pointer]
+      - generic [ref=e211]:
+        - generic [ref=e212]:
+          - generic [ref=e213]:
+            - generic [ref=e214]: 选择磁盘
+            - combobox "选择磁盘" [ref=e215]:
+              - option "NVMe Disk1 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk2 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk3 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk4 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk5 · QUANXING N200 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk6 · QUANXING N200 128GB · 128.0 GB · 未加入存储池/未挂载" [selected]
+              - option "NVMe Disk7 · Sandisk NAS 800 NVMe 960GB · 960.2 GB · 未加入存储池/未挂载"
+              - option "NVMe Disk8 · Sandisk NAS 800 NVMe 960GB · 960.2 GB · 系统关键盘"
+              - option "USB Disk_sda · TDAS · 1.0 TB · 未加入存储池/未挂载"
+              - option "USB Disk_sdb · 2280 · 128.0 GB · 未加入存储池/未挂载"
+              - option "USB Disk_sdb · SN5100 4TB · 4.0 TB · 未加入存储池/未挂载"
+          - button "刷新 SMART" [disabled] [ref=e216]
+        - generic [ref=e219]: 正在刷新…
+  - status [ref=e208]

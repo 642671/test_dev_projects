@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+export PATH
+# Remember the physical app root before TOS removes its /usr/local symlink.
+# Do not remove anything during upgrade/deconfigure/failed-upgrade.
+case "${1:-}" in
+  remove)
+    install -d -m 0700 -o root -g root /run/diskcheck-uninstall
+    readlink -f /usr/local/diskcheck > /run/diskcheck-uninstall/app-root || true
+    chmod 0600 /run/diskcheck-uninstall/app-root
+    ;;
+esac
+systemctl stop diskcheck-api.service diskcheck-api.socket diskcheck-mail-helper.service diskcheck-helper.service >/dev/null 2>&1 || true
+systemctl disable diskcheck-api.service diskcheck-api.socket diskcheck-mail-helper.service diskcheck-helper.service >/dev/null 2>&1 || true
+if [ -x /etc/tos/scripts/msgConfigRegister ]; then
+  /etc/tos/scripts/msgConfigRegister -action unregister -id diskcheck -path /usr/local/diskcheck/depends/etc/retired-message.yaml >/dev/null 2>&1 || true
+fi
+exit 0

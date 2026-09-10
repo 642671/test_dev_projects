@@ -1,0 +1,23 @@
+[Unit]
+StartLimitIntervalSec=60
+StartLimitBurst=5
+Description=TerraMaster DiskCheck privileged mail helper
+After=local-fs.target network.target
+
+[Service]
+Type=simple
+User=root
+Group=diskcheck
+EnvironmentFile=/usr/local/diskcheck/diskcheck.env
+RuntimeDirectory=diskcheck-mail diskcheck-feedback-mail
+RuntimeDirectoryMode=0755
+ExecStart=/usr/local/diskcheck/bin/diskcheck mail-helper --listen unix:///run/diskcheck-mail/mail.sock --socket-group diskcheck
+ExecStopPost=/usr/bin/rm -f /run/diskcheck-mail/mail.sock
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/run/diskcheck-mail /run/diskcheck-feedback-mail
+UMask=0007
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,283 @@
+[en-us]
+name = "Disk Health Guardian"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "This tool combines SMART evidence, health trends, and a complete read-only scan. Evaluate each indicator together with supporting evidence; no single value is a complete drive-health conclusion."
+release_note = "v0.2.071: Fixes TOS notification settings, scan continuation availability, active-drive labels, concise notices, dialog layering, and English title capitalization."
+important = "The complete scan is read-only and does not alter partitions, file systems, or user files."
+notification_health_failed = "Disk health check found a critical risk"
+notification_health_warning = "Disk health check found a warning"
+notification_health_passed = "Disk health check passed"
+
+[de-de]
+name = "Datenträger-Schutz"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Dieses Tool kombiniert SMART Beweise, Gesundheitstrends und ein vollständiger Read-Only-Scan. Bewerten Sie jeden Indikator zusammen mit unterstützenden Beweisen; kein einzelner Wert ist eine vollständige Schlussfolgerung zu Laufwerk-Gesundheit."
+release_note = "v0.2.071: Fügt gerätespezifisch signiertes Feedback mit fortsetzbaren Hintergrund-Uploads hinzu, damit unterbrochene Übertragungen automatisch weiterlaufen, während der NAS nutzbar bleibt."
+important = "Die vollständige Prüfung ist schreibgeschützt und ändert weder Partitionen noch Dateisysteme oder Benutzerdateien."
+
+notification_health_failed = "Die Datenträgerprüfung hat ein kritisches Risiko erkannt"
+notification_health_warning = "Die Datenträgerprüfung hat eine Warnung erkannt"
+notification_health_passed = "Die Datenträgerprüfung wurde bestanden"
+
+[fr-fr]
+name = "Gardien de santé des disques"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Cet outil combine SMART les données probantes, les tendances en matière de santé et une analyse complète en lecture seule. Évaluer chaque indicateur en même temps que les preuves à l'appui; aucune valeur unique n'est une conclusion complète en matière de santé."
+release_note = "v0.2.071: Ajoute des retours signés par appareil et des téléversements en arrière-plan avec reprise, afin que les transferts interrompus repartent automatiquement sans bloquer le NAS."
+important = "L’analyse complète est en lecture seule et ne modifie ni les partitions, ni les systèmes de fichiers, ni les fichiers utilisateur."
+
+notification_health_failed = "Le contrôle du disque a détecté un risque critique"
+notification_health_warning = "Le contrôle du disque a détecté un avertissement"
+notification_health_passed = "Le contrôle du disque a réussi"
+
+[es-es]
+name = "Guardián de salud del disco"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Esta herramienta combina SMART evidencia, tendencias de salud y un análisis completo de sólo lectura. Evaluar cada indicador junto con pruebas de apoyo; ningún valor único es una conclusión completa de la salud de la unidad."
+release_note = "v0.2.071: Añade informes firmados por dispositivo y cargas reanudables en segundo plano, para recuperar automáticamente las transferencias interrumpidas sin dejar de usar el NAS."
+important = "El análisis completo es de solo lectura y no modifica particiones, sistemas de archivos ni archivos del usuario."
+
+notification_health_failed = "La comprobación del disco detectó un riesgo crítico"
+notification_health_warning = "La comprobación del disco detectó una advertencia"
+notification_health_passed = "La comprobación del disco se completó correctamente"
+
+[it-it]
+name = "Gestore salute dischi"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Questo strumento combina SMART prove, tendenze della salute e una scansione completa di sola lettura. Valutare ogni indicatore insieme a prove di supporto; nessun valore singolo è una conclusione completa di drive-health."
+release_note = "v0.2.071: Aggiunge segnalazioni firmate per dispositivo e caricamenti ripristinabili in background, così i trasferimenti interrotti riprendono automaticamente senza bloccare il NAS."
+important = "La scansione completa è in sola lettura e non modifica partizioni, file system o file utente."
+
+notification_health_failed = "Il controllo del disco ha rilevato un rischio critico"
+notification_health_warning = "Il controllo del disco ha rilevato un avviso"
+notification_health_passed = "Il controllo del disco è stato superato"
+
+[pt-pt]
+name = "Gestor de saúde dos discos"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Esta ferramenta combina SMART provas, tendências de saúde e um exame completo apenas para leitura. Avaliar cada indicador juntamente com evidências de apoio; nenhum valor único é uma conclusão completa de pulsão-saúde."
+release_note = "v0.2.071: Adiciona feedback assinado por dispositivo e carregamentos retomáveis em segundo plano, para recuperar transferências interrompidas sem impedir a utilização do NAS."
+important = "A análise completa é só de leitura e não altera partições, sistemas de ficheiros ou ficheiros do utilizador."
+
+notification_health_failed = "A verificação do disco detetou um risco crítico"
+notification_health_warning = "A verificação do disco detetou um aviso"
+notification_health_passed = "A verificação do disco foi concluída com êxito"
+
+[hu-hu]
+name = "Lemezállapot-őr"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Ez az eszköz egyesíti SMART Bizonyítékok, egészségügyi trendek, és egy teljes, csak olvasható felvétel. Értékelje ki az egyes mutatókat az alátámasztó bizonyítékokkal együtt; egyetlen érték sem teljes körű egészségügyi következtetés."
+release_note = "v0.2.071: Eszközönként aláírt visszajelzést és folytatható háttérfeltöltést ad hozzá, így a megszakadt átvitel automatikusan helyreáll, miközben a NAS tovább használható."
+important = "A teljes vizsgálat csak olvas, és nem módosít partíciót, fájlrendszert vagy felhasználói fájlt."
+
+notification_health_failed = "A lemezellenőrzés kritikus kockázatot talált"
+notification_health_warning = "A lemezellenőrzés figyelmeztetést talált"
+notification_health_passed = "A lemezellenőrzés sikeres"
+
+[tr-tr]
+name = "Disk Sağlığı Koruyucusu"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Bu araç birleştirir SMART Kanıtlar, sağlık eğilimleri ve tam bir okuma-sadece tarama. Her göstergeyi destekleyici kanıtlarla birlikte değerlendirin; tek bir değer tam bir sürüş-sağlık sonucu değildir."
+release_note = "v0.2.071: Cihaza özel imzalı geri bildirim ve devam ettirilebilir arka plan yüklemesi ekler; kesilen aktarımlar NAS kullanımını engellemeden otomatik olarak sürer."
+important = "Tam tarama salt okunurdur; bölümleri, dosya sistemlerini veya kullanıcı dosyalarını değiştirmez."
+
+notification_health_failed = "Disk sağlık denetimi kritik bir risk buldu"
+notification_health_warning = "Disk sağlık denetimi bir uyarı buldu"
+notification_health_passed = "Disk sağlık denetimi başarılı"
+
+[pl-pl]
+name = "Opiekun kondycji dysków"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "To narzędzie łączy SMART dowody, trendy zdrowotne, i pełne ponowne skanowanie. Ocena każdego wskaźnika wraz z dowodami potwierdzającymi; żadna pojedyncza wartość nie jest kompletnym wnioskiem w zakresie zdrowia."
+release_note = "v0.2.071: Dodaje zgłoszenia podpisywane osobno dla każdego urządzenia oraz wznawiane wysyłanie w tle, dzięki czemu przerwane transfery odzyskują się automatycznie bez blokowania NAS."
+important = "Pełne skanowanie jest tylko do odczytu i nie zmienia partycji, systemów plików ani plików użytkownika."
+
+notification_health_failed = "Kontrola dysku wykryła krytyczne ryzyko"
+notification_health_warning = "Kontrola dysku wykryła ostrzeżenie"
+notification_health_passed = "Kontrola dysku zakończona pomyślnie"
+
+[ru-ru]
+name = "Контроль состояния дисков"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Этот инструмент объединяет SMART доказательства, тенденции в области здравоохранения и полное сканирование только для чтения. Оцените каждый показатель вместе с подтверждающими доказательствами; ни одно значение не является полным выводом о здоровье."
+release_note = "v0.2.071: Добавлена отдельная подпись обращений для каждого устройства и возобновляемая фоновая отправка: прерванная передача восстанавливается автоматически, не мешая работе с NAS."
+important = "Полная проверка выполняется только для чтения и не изменяет разделы, файловые системы и пользовательские файлы."
+
+notification_health_failed = "Проверка диска выявила критический риск"
+notification_health_warning = "Проверка диска выявила предупреждение"
+notification_health_passed = "Проверка диска пройдена"
+
+[ja-jp]
+name = "ディスク健康ガーディアン"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "このツールは、 SMART 証拠、健康の傾向および完全な読まれたスキャン。 各指標を支持する証拠と評価する。単一の値が完全なドライブヘルスの結論である。"
+release_note = "v0.2.071: デバイスごとの署名と再開可能なバックグラウンド送信を追加しました。通信が途切れても自動的に再開し、NAS の利用を妨げません。"
+important = "完全検査は読み取り専用で、パーティション、ファイルシステム、ユーザーファイルを変更しません。"
+
+notification_health_failed = "ディスクの健全性チェックで重大なリスクが見つかりました"
+notification_health_warning = "ディスクの健全性チェックで警告が見つかりました"
+notification_health_passed = "ディスクの健全性チェックに合格しました"
+
+[ko-kr]
+name = "디스크 상태 관리자"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "이 도구는 결합 SMART 증거, 건강 동향 및 완전한 읽기 전용 검사. 지원 증거와 함께 각 지표를 평가; 단일 값은 완전한 구동 건강 결론입니다."
+release_note = "v0.2.071: 장치별 서명과 재개 가능한 백그라운드 업로드를 추가해 연결이 끊겨도 자동으로 복구하며 NAS 사용을 방해하지 않습니다."
+important = "전체 검사는 읽기 전용이며 파티션, 파일 시스템 또는 사용자 파일을 변경하지 않습니다."
+
+notification_health_failed = "디스크 상태 검사에서 심각한 위험을 발견했습니다"
+notification_health_warning = "디스크 상태 검사에서 경고를 발견했습니다"
+notification_health_passed = "디스크 상태 검사를 통과했습니다"
+
+[zh-cn]
+name = "磁盘健康管家"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "本工具结合 SMART、健康趋势和完整只读扫描判断磁盘风险。任何单一指标都应结合其他证据，不能单独作为磁盘健康判断依据。"
+release_note = "v0.2.071: 修复 TOS 通知设置、续扫可用性、扫描中磁盘标识、通知精简、窗口层级和英文标题大小写。"
+important = "完整检测全程只读，不修改分区、文件系统或用户文件。"
+notification_health_failed = "磁盘健康检测发现危险"
+notification_health_warning = "磁盘健康检测发现警告"
+notification_health_passed = "磁盘健康检测通过"
+
+[zh-hk]
+name = "磁碟健康管家"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "本工具結合 SMART、健康趨勢及完整唯讀掃描判斷磁碟風險。任何單一指標都應結合其他證據，不能單獨作為磁碟健康判斷依據。"
+release_note = "v0.2.071: 修復 TOS 通知設定、續掃可用性、掃描中磁碟標示、通知精簡、視窗層級及英文標題大小寫。"
+important = "完整檢測全程唯讀，不修改分割區、檔案系統或使用者檔案。"
+notification_health_failed = "磁碟健康檢測發現危險"
+notification_health_warning = "磁碟健康檢測發現警告"
+notification_health_passed = "磁碟健康檢測通過"
+
+[vi-vn]
+name = "Trình quản lý sức khỏe ổ đĩa"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Công cụ này kết hợp SMART Bằng chứng, xu hướng sức khỏe, và quét toàn bộ chỉ đọc. Đánh giá mỗi chỉ số với hỗ trợ bằng chứng; không có giá trị nào là một kết luận hoàn toàn lành mạnh."
+release_note = "v0.2.071: Bổ sung chữ ký riêng cho từng thiết bị và tải lên nền có thể tiếp tục, giúp tự động phục hồi khi gián đoạn mà không cản trở việc sử dụng NAS."
+important = "Quét toàn bộ là chỉ đọc và không thay đổi phân vùng, hệ thống tập tin hoặc tập tin người dùng."
+
+notification_health_failed = "Kiểm tra ổ đĩa phát hiện rủi ro nghiêm trọng"
+notification_health_warning = "Kiểm tra ổ đĩa phát hiện cảnh báo"
+notification_health_passed = "Kiểm tra ổ đĩa đã đạt"
+
+[id-id]
+name = "Pengelola Kesehatan Disk"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Perkakas ini dikombinasikan SMART bukti, tren kesehatan, dan pembacaan lengkap - hanya scan. Evaluasi setiap indikator bersama-sama dengan bukti pendukung; tidak ada nilai tunggal adalah pengangkatan lengkap kesehatan."
+release_note = "v0.2.071: Menambahkan tanda tangan khusus per perangkat dan unggahan latar belakang yang dapat dilanjutkan, sehingga transfer terputus pulih otomatis tanpa mengganggu penggunaan NAS."
+important = "Pemindaian lengkap hanya-baca dan tidak mengubah partisi, sistem berkas, atau berkas pengguna."
+
+notification_health_failed = "Pemeriksaan disk menemukan risiko kritis"
+notification_health_warning = "Pemeriksaan disk menemukan peringatan"
+notification_health_passed = "Pemeriksaan disk berhasil"
+
+[th-th]
+name = "ผู้ดูแลสุขภาพดิสก์"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "เครื่องมือนี้รวม SMART หลักฐาน แนวโน้มสุขภาพ และการสแกนแบบอ่านได้อย่างเดียว แยกแยะตัวบ่งชี้แต่ละตัว ร่วมกับหลักฐานที่สนับสนุน; ไม่มีมูลค่าเดียวเป็น ข้อสรุปที่สมบูรณ์ไดรฟ์"
+release_note = "v0.2.071: เพิ่มลายเซ็นแยกสำหรับแต่ละอุปกรณ์และการอัปโหลดเบื้องหลังที่ทำต่อได้ เพื่อกู้คืนการส่งที่ขาดหายโดยอัตโนมัติโดยไม่รบกวนการใช้งาน NAS"
+important = "การสแกนที่สมบูรณ์นั้นอ่านได้อย่างเดียว และไม่ได้เปลี่ยนแปลงพาร์ทิชัน, ระบบไฟล์, หรือแฟ้มของผู้ใช้"
+
+notification_health_failed = "การตรวจสอบดิสก์พบความเสี่ยงร้ายแรง"
+notification_health_warning = "การตรวจสอบดิสก์พบคำเตือน"
+notification_health_passed = "การตรวจสอบดิสก์ผ่านแล้ว"
+
+[da-dk]
+name = "Disk-sundhedsvagt"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Dette værktøj kombinerer SMART dokumentation, sundhedsmæssige tendenser, og en komplet read- kun scanning. Evaluere hver indikator sammen med dokumentation; ingen enkelt værdi er en komplet drive- sundhed konklusion."
+release_note = "v0.2.071: Tilføjer enhedsspecifik signering og genoptagelig upload i baggrunden, så afbrudte overførsler fortsætter automatisk uden at blokere brugen af NAS'en."
+important = "Den komplette scanning er read- only og ændrer ikke partitioner, filsystemer, eller brugerfiler."
+
+notification_health_failed = "Disksundhedskontrollen fandt en kritisk risiko"
+notification_health_warning = "Disksundhedskontrollen fandt en advarsel"
+notification_health_passed = "Disksundhedskontrollen blev bestået"
+
+[nb-no]
+name = "Diskhelsevakt"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Dette verktøyet kombinerer SMART bevis, helsetendenser og en fullstendig lesebeskyttet skanning. Evaluer hver indikator sammen med støttedokumenter; ingen enkelt verdi er en fullstendig konklusjon om driv-helse."
+release_note = "v0.2.071: Legger til enhetsspesifikk signering og gjenopptakbar opplasting i bakgrunnen, slik at avbrutte overføringer fortsetter automatisk uten å hindre bruk av NAS-en."
+important = "Den komplette skanningen er skrivebeskyttet og endrer ikke partisjoner, filsystemer eller brukerfiler."
+
+notification_health_failed = "Diskkontrollen fant en kritisk risiko"
+notification_health_warning = "Diskkontrollen fant en advarsel"
+notification_health_passed = "Diskkontrollen ble bestått"
+
+[cs-cz]
+name = "Správce stavu disků"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Tento nástroj kombinuje SMART Důkazy, zdravotní trendy a kompletní read- pouze skenování. Hodnotit každý ukazatel spolu s podpůrnými důkazy; žádná jednotlivá hodnota není úplný závěr o zdraví."
+release_note = "v0.2.071: Přidává podpis pro každé zařízení a obnovitelné nahrávání na pozadí, takže přerušený přenos automaticky pokračuje bez omezení používání NAS."
+important = "Kompletní skenování je pouze pro čtení a nemění oddíly, souborové systémy nebo uživatelské soubory."
+
+notification_health_failed = "Kontrola disku zjistila kritické riziko"
+notification_health_warning = "Kontrola disku zjistila varování"
+notification_health_passed = "Kontrola disku byla úspěšná"
+
+[sv-se]
+name = "Diskhälsoövervakning"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Detta verktyg kombinerar SMART bevis, hälsotrender och en komplett läs-bara skanning. Utvärdera varje indikator tillsammans med stödbevis; inget enda värde är en fullständig slutsats om hälsa."
+release_note = "v0.2.071: Lägger till enhetsspecifik signering och återupptagningsbar bakgrundsuppladdning, så avbrutna överföringar fortsätter automatiskt utan att hindra användningen av NAS-enheten."
+important = "Den fullständiga skanningen är lättläst och ändrar inte partitioner, filsystem eller användarfiler."
+
+notification_health_failed = "Diskkontrollen hittade en kritisk risk"
+notification_health_warning = "Diskkontrollen hittade en varning"
+notification_health_passed = "Diskkontrollen godkändes"
+
+[nl-nl]
+name = "Schijfgezondheidsbeheer"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Dit gereedschap combineert SMART bewijs, gezondheidstrends, en een complete alleen-lezen scan. Evaluatie van elke indicator samen met ondersteunend bewijs; geen enkele waarde is een volledige drive-health conclusie."
+release_note = "v0.2.071: Voegt ondertekening per apparaat en hervatbare uploads op de achtergrond toe, zodat onderbroken overdrachten automatisch doorgaan zonder het gebruik van de NAS te blokkeren."
+important = "De volledige scan is alleen-lezen en verandert partities, bestandssystemen of gebruikersbestanden niet."
+
+notification_health_failed = "De schijfcontrole heeft een kritiek risico gevonden"
+notification_health_warning = "De schijfcontrole heeft een waarschuwing gevonden"
+notification_health_passed = "De schijfcontrole is geslaagd"
+
+[ro-ro]
+name = "Manager de sănătate a discurilor"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Acest instrument combină SMART dovezi, tendinţe de sănătate şi o scanare completă. Evaluează fiecare indicator împreună cu dovezile justificative; nicio valoare unică nu este o concluzie completă în materie de sănătate."
+release_note = "v0.2.071: Adaugă semnare separată pentru fiecare dispozitiv și încărcări reluabile în fundal, astfel încât transferurile întrerupte se refac automat fără a bloca utilizarea NAS-ului."
+important = "Scanarea completă este doar citire și nu modifică partițiile, sistemele de fișiere sau fișierele de utilizator."
+
+notification_health_failed = "Verificarea discului a găsit un risc critic"
+notification_health_warning = "Verificarea discului a găsit un avertisment"
+notification_health_passed = "Verificarea discului a fost trecută"
+
+[el-gr]
+name = "Διαχείριση υγείας δίσκων"
+auth = "TerraMaster"
+version = "0.2.071"
+descript = "Αυτό το εργαλείο συνδυάζει SMART στοιχεία, τάσεις υγείας, και μια πλήρη σάρωση μόνο ανάγνωσης. Αξιολογήστε κάθε δείκτη μαζί με τα αποδεικτικά στοιχεία."
+release_note = "v0.2.071: Προσθέτει υπογραφή ανά συσκευή και μεταφορτώσεις παρασκηνίου με δυνατότητα συνέχισης, ώστε οι διακοπές να αποκαθίστανται αυτόματα χωρίς να εμποδίζεται η χρήση του NAS."
+important = "Η πλήρης σάρωση είναι μόνο ανάγνωσης και δεν αλλάζει κατατμήσεις, συστήματα αρχείων, ή αρχεία χρηστών."
+notification_health_failed = "Ο έλεγχος δίσκου εντόπισε κρίσιμο κίνδυνο"
+notification_health_warning = "Ο έλεγχος δίσκου εντόπισε προειδοποίηση"
+notification_health_passed = "Ο έλεγχος δίσκου ολοκληρώθηκε επιτυχώς"

@@ -1,0 +1,30 @@
+name: "diskcheck"
+sort: 30
+msg:
+  - description: "磁盘健康检测发现危险，请立即备份并检查或更换磁盘"
+    level: "error"
+    status:
+      email: true
+      sms: false
+      ws: true
+    jump:
+      path: "app,diskcheck"
+    code: "diskcheck_health_failed"
+  - description: "磁盘健康检测发现警告，请备份并复查磁盘"
+    level: "warning"
+    status:
+      email: true
+      sms: false
+      ws: true
+    jump:
+      path: "app,diskcheck"
+    code: "diskcheck_health_warning"
+  - description: "磁盘健康检测通过，当前未发现磁盘风险"
+    level: "info"
+    status:
+      email: true
+      sms: false
+      ws: true
+    jump:
+      path: "app,diskcheck"
+    code: "diskcheck_health_passed"

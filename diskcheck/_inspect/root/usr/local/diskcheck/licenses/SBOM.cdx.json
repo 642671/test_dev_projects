@@ -1,0 +1,85 @@
+{
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "bom-ref": "go-stdlib",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "name": "Go runtime and standard library",
+      "type": "library",
+      "version": "go1.26.7"
+    }
+  ],
+  "dependencies": [
+    {
+      "dependsOn": [
+        "go-stdlib"
+      ],
+      "ref": "diskcheck"
+    }
+  ],
+  "metadata": {
+    "component": {
+      "author": "Billy Ye",
+      "bom-ref": "diskcheck",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f1abae9e9c960e3e17b234542091f6b001391a6baada11c5142d946bb6df0bc5"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0-only"
+          }
+        }
+      ],
+      "name": "diskcheck",
+      "type": "application",
+      "version": "0.2.071"
+    },
+    "properties": [
+      {
+        "name": "diskcheck:scope",
+        "value": "Application binary and linked Go modules; TOS-provided executables are not bundled. Standard-library embedded license notices are in legal/THIRD_PARTY_NOTICES.txt."
+      },
+      {
+        "name": "go:-buildmode",
+        "value": "exe"
+      },
+      {
+        "name": "go:-compiler",
+        "value": "gc"
+      },
+      {
+        "name": "go:-trimpath",
+        "value": "true"
+      },
+      {
+        "name": "go:CGO_ENABLED",
+        "value": "0"
+      },
+      {
+        "name": "go:GOARCH",
+        "value": "amd64"
+      },
+      {
+        "name": "go:GOOS",
+        "value": "linux"
+      },
+      {
+        "name": "go:GOAMD64",
+        "value": "v1"
+      }
+    ],
+    "timestamp": "2026-09-03T09:45:51Z"
+  },
+  "specVersion": "1.5",
+  "version": 1
+}

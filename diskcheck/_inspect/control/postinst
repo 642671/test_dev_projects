@@ -1,0 +1,97 @@
+#!/bin/sh
+set -eu
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+export PATH
+PERSISTENT_BACKUP=/Volume1/@apps/diskcheck-user-data
+LIVE_DATA=/usr/local/diskcheck/depends/data
+mkdir -p /var/api "$LIVE_DATA" /usr/local/diskcheck/depends/logs
+chmod 0755 /var/api
+if [ -f "$PERSISTENT_BACKUP/.diskcheck-storage-v1" ]; then
+  cp -a "$PERSISTENT_BACKUP/." "$LIVE_DATA/"
+  rm -f "$LIVE_DATA/.diskcheck-storage-v1"
+fi
+chown -R diskcheck:diskcheck "$LIVE_DATA"
+chown diskcheck:diskcheck /usr/local/diskcheck/depends/logs
+chmod 0750 "$LIVE_DATA" /usr/local/diskcheck/depends/logs
+feedback_token=/usr/local/diskcheck/depends/etc/feedback-upload.token
+if [ -f "$feedback_token" ]; then
+  chown diskcheck:diskcheck "$feedback_token"
+  chmod 0600 "$feedback_token"
+fi
+if [ -f /usr/local/diskcheck/webui.bz2 ]; then
+  rm -rf -- /usr/local/diskcheck/webui
+  mkdir -p /usr/local/diskcheck/webui
+  tar -xjf /usr/local/diskcheck/webui.bz2 -C /usr/local/diskcheck/webui
+fi
+spc_label_file="$PERSISTENT_BACKUP/.diskcheck-spc-label"
+if command -v chsmack >/dev/null 2>&1 && [ -f "$spc_label_file" ]; then
+  spc_label=$(cat "$spc_label_file")
+  case "$spc_label" in
+    diskchec-*)
+      chsmack -a "$spc_label" -e "$spc_label" /usr/local/diskcheck/bin/diskcheck
+      chsmack -r -a "$spc_label" -e "$spc_label" /usr/local/diskcheck/webui
+      ;;
+  esac
+fi
+printf '/diskcheck/\n' > /usr/local/diskcheck/ROUTER
+chmod 0644 /usr/local/diskcheck/ROUTER
+systemctl daemon-reload
+rm -f /var/api/diskcheck.sock
+systemctl enable diskcheck-helper.service diskcheck-mail-helper.service diskcheck-api.socket diskcheck-api.service >/dev/null 2>&1 || true
+systemctl start diskcheck-mail-helper.service
+systemctl start diskcheck-api.socket
+systemctl start diskcheck-api.service
+post-install -id=diskcheck >/dev/null 2>&1 || true
+
+# A direct dpkg hot update does not make TOS copy an application's Nginx file
+# into the live include directory. Publish it explicitly and reload only after
+# the complete Nginx configuration passes validation.
+nginx_source=/usr/local/diskcheck/nginx/diskcheck.conf
+nginx_target=/etc/nginx/conf.d/diskcheck.conf
+nginx_previous="${nginx_target}.diskcheck-previous"
+if [ -f "$nginx_source" ] && [ -d /etc/nginx/conf.d ]; then
+  if [ -f "$nginx_target" ]; then
+    cp -p -- "$nginx_target" "$nginx_previous"
+  else
+    rm -f -- "$nginx_previous"
+  fi
+  cp -- "$nginx_source" "${nginx_target}.new"
+  chmod 0644 "${nginx_target}.new"
+  mv -f -- "${nginx_target}.new" "$nginx_target"
+  if ! nginx -t; then
+    if [ -f "$nginx_previous" ]; then
+      mv -f -- "$nginx_previous" "$nginx_target"
+    else
+      rm -f -- "$nginx_target"
+    fi
+    exit 1
+  fi
+  systemctl reload nginx
+  rm -f -- "$nginx_previous"
+fi
+
+# TOS currently keeps an existing desktop .oexe record unchanged during a Deb
+# upgrade.  Releases before 0.2.14 used the iframe launcher, so repair only this
+# application's known launcher fields after registration.  This preserves every
+# user-specific field while making old desktop icons follow config.ini again.
+for shortcut in /var/subvols/*/@/homes/*/Desktop/diskcheck.oexe; do
+  [ -f "$shortcut" ] || continue
+  repaired="${shortcut}.diskcheck-new"
+  sed \
+    -e 's/"open_path"[[:space:]]*:[[:space:]]*false/"open_path":true/g' \
+    -e 's/"type"[[:space:]]*:[[:space:]]*"iframe"/"type":""/g' \
+    "$shortcut" > "$repaired"
+  chown --reference="$shortcut" "$repaired"
+  chmod --reference="$shortcut" "$repaired"
+  mv -f -- "$repaired" "$shortcut"
+done
+
+if [ -x /etc/tos/scripts/msgConfigRegister ]; then
+  /etc/tos/scripts/msgConfigRegister -action unregister -id diskcheck -path /usr/local/diskcheck/depends/etc/retired-message.yaml
+fi
+# Keep a recoverable legacy manifest, but never expose a root message.yaml for
+# TOS to auto-register. Only this application's notification settings are retired.
+if [ -f /usr/local/diskcheck/message.yaml ]; then
+  mv -f /usr/local/diskcheck/message.yaml /usr/local/diskcheck/depends/etc/retired-message.yaml
+fi
+exit 0

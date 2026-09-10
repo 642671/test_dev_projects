@@ -1,0 +1,26 @@
+[Unit]
+StartLimitIntervalSec=60
+StartLimitBurst=5
+Description=TerraMaster DiskCheck API
+Requires=diskcheck-helper.service diskcheck-mail-helper.service diskcheck-api.socket
+After=network.target diskcheck-helper.service diskcheck-mail-helper.service diskcheck-api.socket
+
+[Service]
+Type=simple
+User=diskcheck
+Group=diskcheck
+EnvironmentFile=/usr/local/diskcheck/diskcheck.env
+ExecStart=/usr/local/diskcheck/bin/diskcheck api --listen systemd:// --additional-listen tcp://127.0.0.1:16689 --helper unix:///run/diskcheck/helper.sock --mail-helper unix:///run/diskcheck-mail/mail.sock --data-dir /usr/local/diskcheck/depends/data --web-root /usr/local/diskcheck/webui
+# TOS SPC uses the executable SMACK label to enter this application's domain.
+# NoNewPrivileges blocks that required label transition and produces 203/EXEC.
+# The API remains an unprivileged diskcheck process with an empty capability
+# bounding set; privileged diagnostics stay in the fixed helper IPC service.
+CapabilityBoundingSet=
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/usr/local/diskcheck/depends/data /usr/local/diskcheck/depends/logs
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

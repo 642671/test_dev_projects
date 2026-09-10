@@ -1,0 +1,120 @@
+Keyboard-interactive authentication prompts from server:
+End of keyboard-interactive prompts from server
+=== SMARTCTL VERSION ===
+smartctl 7.5 2025-04-30 r5714 [x86_64-linux-6.12.63+] (local build)
+Copyright (C) 2002-25, Bruce Allen, Christian Franke, www.smartmontools.org
+
+smartctl comes with ABSOLUTELY NO WARRANTY. This is free
+software, and you are welcome to redistribute it under
+the terms of the GNU General Public License; either
+version 2, or (at your option) any later version.
+See https://www.gnu.org for further details.
+
+smartmontools release 7.5 dated 2025-04-30 at 07:42:55 UTC
+smartmontools SVN rev 5714 dated 2025-04-30 at 07:43:44
+smartmontools build host: x86_64-pc-linux-gnu
+smartmontools build with: C++11, GCC 11.4.0
+smartmontools configure arguments: [hidden in reproducible builds]
+reproducible build SOURCE_DATE_EPOCH: 1781592120 (2026-06-16 14:42:00)
+=== LSBLK ===
+NAME TYPE   SIZE MODEL                                    SERIAL               TRAN
+sda  disk 931.5G TOSHIBA DT01ABA100V                      22OWV5LMS            usb
+sdb  disk 119.2G 2280                                     GD50910280368        usb
+sdc  disk   3.6T SN5100 4TB                               2535CK400542         usb
+sdza disk 119.2G Kingchuxing 128GB                        2025102300225        
+sdzh disk 894.3G Sandisk NAS 800 NVMe 960GB               262211900025         
+sdzg disk 119.2G Kingchuxing 128GB                        2025102300227        
+sdzd disk 119.2G Kingchuxing 128GB                        2025102300226        
+sdzc disk 119.2G Kingchuxing 128GB                        2025102300229        
+sdzb disk 894.3G Sandisk NAS 800 NVMe 960GB               262211900013         
+sdze disk 119.2G QUANXING N200 128GB                      QXT430P3F251900280   
+sdzf disk 119.2G QUANXING N200 128GB                      QXT430P3F251900277   
+=== SMART SCAN ===
+/dev/sda -d sat # /dev/sda [SAT], ATA device
+/dev/sdb -d sntrealtek # /dev/sdb [USB NVMe Realtek], NVMe device
+/dev/sdc -d sntrealtek # /dev/sdc [USB NVMe Realtek], NVMe device
+/dev/sdza -d scsi # /dev/sdza, SCSI device
+/dev/sdzb -d scsi # /dev/sdzb, SCSI device
+/dev/sdzc -d scsi # /dev/sdzc, SCSI device
+/dev/sdzd -d scsi # /dev/sdzd, SCSI device
+/dev/sdze -d scsi # /dev/sdze, SCSI device
+/dev/sdzf -d scsi # /dev/sdzf, SCSI device
+/dev/sdzg -d scsi # /dev/sdzg, SCSI device
+/dev/sdzh -d scsi # /dev/sdzh, SCSI device
+/dev/nvme0 -d nvme # /dev/nvme0, NVMe device
+/dev/nvme1 -d nvme # /dev/nvme1, NVMe device
+/dev/nvme2 -d nvme # /dev/nvme2, NVMe device
+/dev/nvme3 -d nvme # /dev/nvme3, NVMe device
+/dev/nvme4 -d nvme # /dev/nvme4, NVMe device
+/dev/nvme5 -d nvme # /dev/nvme5, NVMe device
+/dev/nvme6 -d nvme # /dev/nvme6, NVMe device
+/dev/nvme7 -d nvme # /dev/nvme7, NVMe device
+=== DEVICE LINKS ===
+crw------- 1 test test 245,  0 Sep  3 16:44 /dev/nvme0
+crw------- 1 test test 245,  1 Sep  3 16:44 /dev/nvme1
+crw------- 1 test test 245,  2 Sep  3 16:44 /dev/nvme2
+crw------- 1 test test 245,  3 Sep  3 16:44 /dev/nvme3
+crw------- 1 test test 245,  4 Sep  3 16:44 /dev/nvme4
+crw------- 1 test test 245,  5 Sep  3 16:44 /dev/nvme5
+crw------- 1 test test 245,  6 Sep  3 16:44 /dev/nvme6
+crw------- 1 test test 245,  7 Sep  3 16:44 /dev/nvme7
+brw-rw---- 1 test disk   8,  0 Sep  4 12:01 /dev/sda
+brw-rw---- 1 test disk   8,  1 Sep  4 12:01 /dev/sda1
+brw-rw---- 1 test disk   8, 16 Sep  4 12:01 /dev/sdb
+brw-rw---- 1 test disk   8, 17 Sep  4 12:01 /dev/sdb1
+brw-rw---- 1 test disk   8, 18 Sep  4 12:01 /dev/sdb2
+brw-rw---- 1 test disk   8, 19 Sep  4 12:01 /dev/sdb3
+brw-rw---- 1 test disk   8, 20 Sep  4 12:01 /dev/sdb4
+brw-rw---- 1 test disk   8, 32 Sep  4 12:01 /dev/sdc
+brw-rw---- 1 test disk   8, 33 Sep  4 12:01 /dev/sdc1
+brw-rw---- 1 test disk 259,  0 Sep  4 11:50 /dev/sdza
+brw-rw---- 1 test disk 259, 13 Sep  4 11:50 /dev/sdza1
+brw-rw---- 1 test disk 259, 15 Sep  4 11:50 /dev/sdza2
+brw-rw---- 1 test disk 259, 26 Sep  4 11:50 /dev/sdza3
+brw-rw---- 1 test disk 259, 27 Sep  4 11:50 /dev/sdza4
+brw-rw---- 1 test disk 259, 16 Sep  4 11:50 /dev/sdzb
+brw-rw---- 1 test disk 259,  4 Sep  4 11:50 /dev/sdzb1
+brw-rw---- 1 test disk 259, 12 Sep  4 11:50 /dev/sdzb2
+brw-rw---- 1 test disk 259, 17 Sep  4 11:50 /dev/sdzb3
+brw-rw---- 1 test disk 259, 18 Sep  4 11:50 /dev/sdzb4
+brw-rw---- 1 test disk 259, 14 Sep  4 11:50 /dev/sdzc
+brw-rw---- 1 test disk 259, 22 Sep  4 11:50 /dev/sdzc1
+brw-rw---- 1 test disk 259, 23 Sep  4 11:50 /dev/sdzc2
+brw-rw---- 1 test disk 259, 24 Sep  4 11:50 /dev/sdzc3
+brw-rw---- 1 test disk 259, 25 Sep  4 11:50 /dev/sdzc4
+brw-rw---- 1 test disk 259,  5 Sep  4 11:50 /dev/sdzd
+brw-rw---- 1 test disk 259, 21 Sep  4 11:50 /dev/sdzd4
+brw-rw---- 1 test disk 259, 30 Sep  4 11:50 /dev/sdze
+brw-rw---- 1 test disk 259, 32 Sep  4 11:50 /dev/sdze1
+brw-rw---- 1 test disk 259, 33 Sep  4 11:50 /dev/sdze2
+brw-rw---- 1 test disk 259, 34 Sep  4 11:50 /dev/sdze3
+brw-rw---- 1 test disk 259, 35 Sep  4 11:50 /dev/sdze4
+brw-rw---- 1 test disk 259, 31 Sep  4 11:50 /dev/sdzf
+brw-rw---- 1 test disk 259, 36 Sep  4 11:50 /dev/sdzf1
+brw-rw---- 1 test disk 259, 37 Sep  4 11:50 /dev/sdzf2
+brw-rw---- 1 test disk 259, 38 Sep  4 11:50 /dev/sdzf3
+brw-rw---- 1 test disk 259, 39 Sep  4 11:50 /dev/sdzf4
+brw-rw---- 1 test disk 259,  2 Sep  4 11:50 /dev/sdzg
+brw-rw---- 1 test disk 259,  6 Sep  4 11:50 /dev/sdzg1
+brw-rw---- 1 test disk 259,  7 Sep  4 11:50 /dev/sdzg2
+brw-rw---- 1 test disk 259,  9 Sep  4 11:50 /dev/sdzg3
+brw-rw---- 1 test disk 259, 10 Sep  4 11:50 /dev/sdzg4
+brw-rw---- 1 test disk 259,  1 Sep  4 11:50 /dev/sdzh
+brw-rw---- 1 test disk 259,  3 Sep  4 11:50 /dev/sdzh1
+brw-rw---- 1 test disk 259,  8 Sep  4 11:50 /dev/sdzh2
+brw-rw---- 1 test disk 259, 11 Sep  4 11:50 /dev/sdzh3
+=== NVME LIST ===
+Node                  SN                   Model                                    Namespace Usage                      Format           FW Rev  
+--------------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------
+=== DF ===
+Filesystem           Size  Used Avail Use% Mounted on
+/dev/md9              30G  3.0G   26G  11% /
+tmpfs                 50M   36K   50M   1% /dev/shm
+tmpfs                1.5G   22M  1.5G   2% /run
+tmpfs                5.0M     0  5.0M   0% /run/lock
+efivarfs             192K   85K  103K  46% /sys/firmware/efi/efivars
+tmpfs                3.8G  6.9M  3.8G   1% /tmp
+/dev/mapper/vg0-lv0   10G   65M  9.5G   1% /var/subvols/8vEbTxkKvwa
+/dev/mapper/vg0-lv0   10G   65M  9.5G   1% /Volume1
+/dev/mapper/vg0-lv0   10G   65M  9.5G   1% /home
+tmpfs                768M     0  768M   0% /run/user/0

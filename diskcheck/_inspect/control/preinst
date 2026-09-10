@@ -1,0 +1,48 @@
+#!/bin/sh
+set -eu
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+export PATH
+APP_ID=diskcheck
+APP_TARGET=/Volume1/@apps/diskcheck
+APP_LINK=/usr/local/diskcheck
+PERSISTENT_BACKUP=/Volume1/@apps/diskcheck-user-data
+LEGACY_DATA=$APP_TARGET/depends/data
+
+if ! getent group diskcheck >/dev/null 2>&1; then
+  addgroup --system diskcheck >/dev/null
+fi
+if ! getent passwd diskcheck >/dev/null 2>&1; then
+  adduser --system --ingroup diskcheck --home /nonexistent --no-create-home --disabled-login diskcheck >/dev/null
+fi
+mkdir -p /Volume1/@apps "$APP_TARGET"
+if [ -d "$APP_LINK" ] && [ ! -L "$APP_LINK" ]; then
+  cp -a "$APP_LINK/." "$APP_TARGET/"
+  rm -rf -- "$APP_LINK"
+fi
+if [ ! -L "$APP_LINK" ]; then
+  ln -s "$APP_TARGET" "$APP_LINK"
+fi
+
+# Application binaries may be replaced during an App Center or dpkg upgrade,
+# but user-created scans, reports, audit history and Guardian settings must be
+# recoverable outside that package directory. Refuse a package upgrade while a
+# scan is active, then refresh a package-independent rollback copy. No source
+# data is deleted or moved.
+if [ -f "$LEGACY_DATA/scan-jobs.json" ] && grep -Eq '"state"[[:space:]]*:[[:space:]]*"(queued|preflight|scanning|paused|cancelling)"' "$LEGACY_DATA/scan-jobs.json"; then
+  echo "DiskCheck upgrade blocked: a complete scan is still active." >&2
+  exit 1
+fi
+mkdir -p "$PERSISTENT_BACKUP"
+if [ -d "$LEGACY_DATA" ]; then cp -a "$LEGACY_DATA/." "$PERSISTENT_BACKUP/"; fi
+# SPC/SMACK labels are installation-specific. Preserve this app's current
+# domain so dpkg can safely replace the executable without turning it into a
+# generic TOS-domain file on an SPC-enabled NAS.
+if command -v getfattr >/dev/null 2>&1 && [ -x "$APP_TARGET/bin/diskcheck" ]; then
+  spc_label=$(getfattr -n security.SMACK64EXEC --only-values "$APP_TARGET/bin/diskcheck" 2>/dev/null || true)
+  case "$spc_label" in
+    diskchec-*) printf '%s\n' "$spc_label" > "$PERSISTENT_BACKUP/.diskcheck-spc-label" ;;
+  esac
+fi
+: > "$PERSISTENT_BACKUP/.diskcheck-storage-v1"
+chmod 0700 "$PERSISTENT_BACKUP"
+exit 0

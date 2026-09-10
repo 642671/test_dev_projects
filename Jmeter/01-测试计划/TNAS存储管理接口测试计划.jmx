@@ -11,7 +11,7 @@
           </elementProp>
           <elementProp name="server_ip" elementType="Argument">
             <stringProp name="Argument.name">server_ip</stringProp>
-            <stringProp name="Argument.value">10.18.15.106</stringProp>
+            <stringProp name="Argument.value">10.18.15.120</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="server_port" elementType="Argument">
@@ -61,6 +61,8 @@
           </elementProp>
         </collectionProp>
       </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="全局 HTTP 请求默认值">
@@ -76,7 +78,7 @@
         <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
       </ConfigTestElement>
       <hashTree/>
-      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="全局 HTTP 信息头">
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="全局 HTTP 信息头" enabled="true">
         <collectionProp name="HeaderManager.headers">
           <elementProp name="Accept" elementType="Header">
             <stringProp name="Header.name">Accept</stringProp>
@@ -89,7 +91,7 @@
         </collectionProp>
       </HeaderManager>
       <hashTree/>
-      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="超级管理员登录流程">
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="超级管理员登录流程" enabled="true">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -100,15 +102,15 @@
         </elementProp>
       </SetupThreadGroup>
       <hashTree>
-        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="超级管理员 Cookie 管理器">
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="超级管理员 Cookie 管理器" enabled="true">
           <collectionProp name="CookieManager.cookies"/>
           <boolProp name="CookieManager.clearEachIteration">true</boolProp>
           <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
         </CookieManager>
         <hashTree/>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="超级管理员登录流程"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="超级管理员登录流程" enabled="true"/>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SA-01 获取公钥与令牌">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SA-01 获取公钥与令牌" enabled="true">
             <stringProp name="TestPlan.comments">超级管理员获取公钥 X-Rsa-Token 和 CSRF Token</stringProp>
             <stringProp name="HTTPSampler.path">/tos/</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -193,7 +195,7 @@ SampleResult.setSuccessful(hasValue)
             <stringProp name="scriptLanguage">groovy</stringProp>
           </JSR223Sampler>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SA-02 登录接口">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SA-02 登录接口" enabled="true">
             <stringProp name="TestPlan.comments">POST /v2/login，超级管理员密码使用 RSA 公钥加密</stringProp>
             <stringProp name="HTTPSampler.path">/v2/login</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -410,6 +412,50 @@ log.info(&quot;${role} Cookie 提取完成，TMSESSNAME=&quot; + tms)
               <boolProp name="displaySystemProperties">false</boolProp>
             </DebugPostProcessor>
             <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="响应码断言 HTTP 200" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message">登录接口响应码应为200</stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="登录接口业务断言" enabled="true">
+              <stringProp name="TestPlan.comments">校验 HTTP 200、code=true、data=login successful!、code_num=0、code_msg为空</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">def responseCode = prev.getResponseCode() ?: &apos;&apos;
+def failures = []
+if (responseCode != &apos;200&apos;) {
+    failures.add(&apos;HTTP 响应码应为 200，实际：&apos; + responseCode)
+}
+try {
+    def json = new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString())
+    if (json.code != true) {
+        failures.add(&apos;code 应为 true，实际：&apos; + json.code)
+    }
+    if (json.data != &apos;login successful!&apos;) {
+        failures.add(&apos;data 应为 login successful!，实际：&apos; + json.data)
+    }
+    if (json.code_num != 0) {
+        failures.add(&apos;code_num 应为 0，实际：&apos; + json.code_num)
+    }
+    if (json.code_msg != &apos;&apos;) {
+        failures.add(&apos;code_msg 应为空，实际：&apos; + json.code_msg)
+    }
+} catch (Exception e) {
+    failures.add(&apos;响应不是合法 JSON，解析失败：&apos; + e.message)
+}
+if (failures) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage(&apos;登录接口断言失败：&apos; + failures.join(&apos;；&apos;))
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
           </hashTree>
           <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="SA-02 查看超级管理员登录本次新增变量">
             <stringProp name="TestPlan.comments">显示登录Cookie、CSRF和接口业务状态摘要</stringProp>
@@ -459,6 +505,94 @@ SampleResult.setSuccessful(hasValue)
             <stringProp name="scriptLanguage">groovy</stringProp>
           </JSR223Sampler>
           <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SA-03 登录状态">
+            <stringProp name="HTTPSampler.path">/v2/login/state</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="SA-03 登录状态请求头">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">application/json, text/plain, */*</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Encoding" elementType="Header">
+                  <stringProp name="Header.name">Accept-Encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Language" elementType="Header">
+                  <stringProp name="Header.name">Accept-Language</stringProp>
+                  <stringProp name="Header.value">zh-CN,zh;q=0.9</stringProp>
+                </elementProp>
+                <elementProp name="Connection" elementType="Header">
+                  <stringProp name="Header.name">Connection</stringProp>
+                  <stringProp name="Header.value">keep-alive</stringProp>
+                </elementProp>
+                <elementProp name="Cookie" elementType="Header">
+                  <stringProp name="Header.name">Cookie</stringProp>
+                  <stringProp name="Header.value">userName=${super_admin_username}; TMSESSNAME=${super_admin_cookie_TMSESSNAME}; X-Csrf-Token=${super_admin_csrf_token}; loginStatus=true; themeMode=light; themeColor=blue; tos_current_username=${super_admin_username}</stringProp>
+                </elementProp>
+                <elementProp name="Host" elementType="Header">
+                  <stringProp name="Header.name">Host</stringProp>
+                  <stringProp name="Header.value">${server_ip}:${server_port}</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">${protocol}://${server_ip}:${server_port}/tos/</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36</stringProp>
+                </elementProp>
+                <elementProp name="X-Csrf-Token" elementType="Header">
+                  <stringProp name="Header.name">X-Csrf-Token</stringProp>
+                  <stringProp name="Header.value">${super_admin_csrf_token}</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="SA-03 登录状态断言">
+              <stringProp name="TestPlan.comments">校验登录状态响应：is_login=true、code=true、code_num=0、code_msg为空</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">def text = prev.getResponseDataAsString()
+def json
+try {
+    json = new groovy.json.JsonSlurper().parseText(text)
+} catch (Exception e) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage(&apos;SA-03 响应不是合法 JSON：&apos; + e.message)
+    return
+}
+def failures = []
+if (json.is_login != true) {
+    failures.add(&apos;is_login 应为 true，实际：&apos; + json.is_login)
+}
+if (json.code != true) {
+    failures.add(&apos;code 应为 true，实际：&apos; + json.code)
+}
+if (json.code_num != 0) {
+    failures.add(&apos;code_num 应为 0，实际：&apos; + json.code_num)
+}
+if (json.code_msg != &apos;&apos;) {
+    failures.add(&apos;code_msg 应为空，实际：&apos; + json.code_msg)
+}
+if (failures) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage(&apos;SA-03 登录状态断言失败：&apos; + failures.join(&apos;；&apos;))
+}
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
           <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="超级管理员查看结果树">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
@@ -535,7 +669,18 @@ SampleResult.setSuccessful(hasValue)
           <hashTree/>
         </hashTree>
       </hashTree>
-      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="管理员登录流程">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="存储管理" enabled="true">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="循环控制器">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree/>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="管理员登录流程" enabled="false">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -546,15 +691,15 @@ SampleResult.setSuccessful(hasValue)
         </elementProp>
       </SetupThreadGroup>
       <hashTree>
-        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="管理员 Cookie 管理器">
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="管理员 Cookie 管理器" enabled="true">
           <collectionProp name="CookieManager.cookies"/>
           <boolProp name="CookieManager.clearEachIteration">true</boolProp>
           <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
         </CookieManager>
         <hashTree/>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="管理员登录流程"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="管理员登录流程" enabled="true"/>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ADM-01 获取公钥与令牌">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ADM-01 获取公钥与令牌" enabled="true">
             <stringProp name="TestPlan.comments">管理员获取公钥 X-Rsa-Token 和 CSRF Token</stringProp>
             <stringProp name="HTTPSampler.path">/tos/</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -615,7 +760,7 @@ log.info(&quot;${role} CSRF=&quot; + csrf)
             </DebugPostProcessor>
             <hashTree/>
           </hashTree>
-          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ADM-01 查看管理员本次新增变量">
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ADM-01 查看管理员本次新增变量" enabled="true">
             <stringProp name="TestPlan.comments">只显示公钥和CSRF的提取摘要</stringProp>
             <stringProp name="cacheKey">true</stringProp>
             <stringProp name="language">groovy</stringProp>
@@ -639,7 +784,7 @@ SampleResult.setSuccessful(hasValue)
             <stringProp name="scriptLanguage">groovy</stringProp>
           </JSR223Sampler>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ADM-02 登录接口">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ADM-02 登录接口" enabled="true">
             <stringProp name="TestPlan.comments">POST /v2/login，管理员密码使用 RSA 公钥加密</stringProp>
             <stringProp name="HTTPSampler.path">/v2/login</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -705,7 +850,7 @@ SampleResult.setSuccessful(hasValue)
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="RSA 加密 管理员 登录密码">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="RSA 加密 管理员 登录密码" enabled="true">
               <stringProp name="TestPlan.comments">等价的 Apifox 前置脚本 + encoderLoginPassword.go 的 JMeter 版本</stringProp>
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="language">groovy</stringProp>
@@ -770,7 +915,7 @@ log.info(&quot;${role} RSA 登录密码加密成功，PEM正文长度=&quot; + b
               <stringProp name="scriptLanguage">groovy</stringProp>
             </JSR223PreProcessor>
             <hashTree/>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="管理员登录请求头">
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="管理员登录请求头" enabled="true">
               <collectionProp name="HeaderManager.headers">
                 <elementProp name="X-Csrf-Token" elementType="Header">
                   <stringProp name="Header.name">X-Csrf-Token</stringProp>
@@ -856,8 +1001,52 @@ log.info(&quot;${role} Cookie 提取完成，TMSESSNAME=&quot; + tms)
               <boolProp name="displaySystemProperties">false</boolProp>
             </DebugPostProcessor>
             <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="响应码断言 HTTP 200" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message">登录接口响应码应为200</stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="登录接口业务断言" enabled="true">
+              <stringProp name="TestPlan.comments">校验 HTTP 200、code=true、data=login successful!、code_num=0、code_msg为空</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">def responseCode = prev.getResponseCode() ?: &apos;&apos;
+def failures = []
+if (responseCode != &apos;200&apos;) {
+    failures.add(&apos;HTTP 响应码应为 200，实际：&apos; + responseCode)
+}
+try {
+    def json = new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString())
+    if (json.code != true) {
+        failures.add(&apos;code 应为 true，实际：&apos; + json.code)
+    }
+    if (json.data != &apos;login successful!&apos;) {
+        failures.add(&apos;data 应为 login successful!，实际：&apos; + json.data)
+    }
+    if (json.code_num != 0) {
+        failures.add(&apos;code_num 应为 0，实际：&apos; + json.code_num)
+    }
+    if (json.code_msg != &apos;&apos;) {
+        failures.add(&apos;code_msg 应为空，实际：&apos; + json.code_msg)
+    }
+} catch (Exception e) {
+    failures.add(&apos;响应不是合法 JSON，解析失败：&apos; + e.message)
+}
+if (failures) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage(&apos;登录接口断言失败：&apos; + failures.join(&apos;；&apos;))
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
           </hashTree>
-          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ADM-02 查看管理员登录本次新增变量">
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ADM-02 查看管理员登录本次新增变量" enabled="true">
             <stringProp name="TestPlan.comments">显示登录Cookie、CSRF和接口业务状态摘要</stringProp>
             <stringProp name="cacheKey">true</stringProp>
             <stringProp name="language">groovy</stringProp>
@@ -905,7 +1094,7 @@ SampleResult.setSuccessful(hasValue)
             <stringProp name="scriptLanguage">groovy</stringProp>
           </JSR223Sampler>
           <hashTree/>
-          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="管理员查看结果树">
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="管理员查看结果树" enabled="true">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
               <name>saveConfig</name>
@@ -942,7 +1131,7 @@ SampleResult.setSuccessful(hasValue)
             <stringProp name="filename"></stringProp>
           </ResultCollector>
           <hashTree/>
-          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="管理员聚合报告">
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="管理员聚合报告" enabled="true">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
               <name>saveConfig</name>
@@ -981,7 +1170,7 @@ SampleResult.setSuccessful(hasValue)
           <hashTree/>
         </hashTree>
       </hashTree>
-      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="普通用户登录流程" enabled="true">
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="普通用户登录流程" enabled="false">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -1302,6 +1491,50 @@ log.info(&quot;${role} Cookie 提取完成，TMSESSNAME=&quot; + tms)
               <boolProp name="displaySystemProperties">false</boolProp>
             </DebugPostProcessor>
             <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="响应码断言 HTTP 200" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message">登录接口响应码应为200</stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="登录接口业务断言" enabled="true">
+              <stringProp name="TestPlan.comments">校验 HTTP 200、code=true、data=login successful!、code_num=0、code_msg为空</stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">def responseCode = prev.getResponseCode() ?: &apos;&apos;
+def failures = []
+if (responseCode != &apos;200&apos;) {
+    failures.add(&apos;HTTP 响应码应为 200，实际：&apos; + responseCode)
+}
+try {
+    def json = new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString())
+    if (json.code != true) {
+        failures.add(&apos;code 应为 true，实际：&apos; + json.code)
+    }
+    if (json.data != &apos;login successful!&apos;) {
+        failures.add(&apos;data 应为 login successful!，实际：&apos; + json.data)
+    }
+    if (json.code_num != 0) {
+        failures.add(&apos;code_num 应为 0，实际：&apos; + json.code_num)
+    }
+    if (json.code_msg != &apos;&apos;) {
+        failures.add(&apos;code_msg 应为空，实际：&apos; + json.code_msg)
+    }
+} catch (Exception e) {
+    failures.add(&apos;响应不是合法 JSON，解析失败：&apos; + e.message)
+}
+if (failures) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage(&apos;登录接口断言失败：&apos; + failures.join(&apos;；&apos;))
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
           </hashTree>
           <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="USER-02 查看普通用户登录本次新增变量" enabled="true">
             <stringProp name="TestPlan.comments">显示登录Cookie、CSRF和接口业务状态摘要</stringProp>
@@ -1388,7 +1621,7 @@ SampleResult.setSuccessful(hasValue)
             <stringProp name="filename"></stringProp>
           </ResultCollector>
           <hashTree/>
-          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="普通用户聚合报告" enabled="true">
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="普通用户聚合报告">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
               <name>saveConfig</name>

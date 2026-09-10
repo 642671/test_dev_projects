@@ -1,0 +1,24 @@
+[Unit]
+StartLimitIntervalSec=60
+StartLimitBurst=5
+Description=TerraMaster DiskCheck privileged diagnostic helper
+After=local-fs.target
+
+[Service]
+Type=simple
+User=root
+Group=diskcheck
+EnvironmentFile=/usr/local/diskcheck/diskcheck.env
+RuntimeDirectory=diskcheck
+RuntimeDirectoryMode=0755
+ExecStart=/usr/local/diskcheck/bin/diskcheck helper --listen unix:///run/diskcheck/helper.sock --socket-group diskcheck
+ExecStopPost=/usr/bin/rm -f /run/diskcheck/helper.sock
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadOnlyPaths=/dev /sys /proc
+ReadWritePaths=/run/diskcheck /usr/local/diskcheck/depends/data
+UMask=0007
+
+[Install]
+WantedBy=multi-user.target

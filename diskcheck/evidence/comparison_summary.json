@@ -1,0 +1,356 @@
+{
+  "generated_at": "2026-09-04T12:36:06.092024+08:00",
+  "target": {
+    "host": "10.18.15.135",
+    "hostname": "TNAS",
+    "port": 9222,
+    "tos_user": "test"
+  },
+  "open_source_tool": {
+    "name": "smartmontools/smartctl",
+    "version": "7.5",
+    "svn_revision": "5714",
+    "command": "smartctl -a -j <device>",
+    "license": "GPL-2.0"
+  },
+  "app": {
+    "name": "磁盘健康管家",
+    "version": "0.2.071",
+    "commit": "46febf67a690",
+    "build_time": "2026-09-03T09:45:50Z",
+    "uses_tools": "TOS-provided smartctl, nvme, lsblk, systemd and ter_* tools"
+  },
+  "devices": [
+    {
+      "path": "/dev/sda",
+      "id": "disk_f0a47345069e4c56777c",
+      "slot": "USB Disk_sda",
+      "app_top": {
+        "model": "TDAS",
+        "firmware": "0",
+        "protocol": "ata",
+        "temperature_celsius": 34,
+        "health": "failed"
+      },
+      "app_smart_snapshot": {
+        "model": "TOSHIBA DT01ABA100V",
+        "firmware": "MU2OA720",
+        "protocol": "ata",
+        "overall_passed": false,
+        "temperature_celsius": 34
+      },
+      "smartctl_raw": {
+        "model": "TOSHIBA DT01ABA100V",
+        "firmware": "MU2OA720",
+        "protocol": "ATA",
+        "temperature_celsius": 35,
+        "overall_passed": false,
+        "exit_status": 216
+      },
+      "flags": [
+        "top_model_differs_from_smart_snapshot",
+        "top_firmware_differs_from_smart_snapshot",
+        "top_firmware_differs_from_smartctl"
+      ]
+    },
+    {
+      "path": "/dev/sdb",
+      "id": "disk_a16fc32a1062fe443f85",
+      "slot": "USB Disk_sdb",
+      "app_top": {
+        "model": "2280",
+        "firmware": "1.01",
+        "protocol": "ata",
+        "temperature_celsius": 36,
+        "health": "passed"
+      },
+      "app_smart_snapshot": {
+        "model": "GVY-128-2280",
+        "firmware": "SN16223",
+        "protocol": "nvme",
+        "overall_passed": true,
+        "temperature_celsius": 36
+      },
+      "smartctl_raw": {
+        "model": "GVY-128-2280",
+        "firmware": "SN16223",
+        "protocol": "NVMe",
+        "temperature_celsius": 36,
+        "overall_passed": true,
+        "exit_status": 0
+      },
+      "flags": [
+        "top_model_differs_from_smart_snapshot",
+        "top_protocol_differs_from_smart_snapshot",
+        "top_firmware_differs_from_smart_snapshot",
+        "top_firmware_differs_from_smartctl",
+        "top_protocol_differs_from_smartctl"
+      ]
+    },
+    {
+      "path": "/dev/sdc",
+      "id": "disk_0bc30a965f67fe733d24",
+      "slot": "USB Disk_sdb",
+      "app_top": {
+        "model": "SN5100 4TB",
+        "firmware": "1.01",
+        "protocol": "ata",
+        "temperature_celsius": 65,
+        "health": "passed"
+      },
+      "app_smart_snapshot": {
+        "model": "WD Blue SN5100 4TB",
+        "firmware": "3517H0WD",
+        "protocol": "nvme",
+        "overall_passed": true,
+        "temperature_celsius": 65
+      },
+      "smartctl_raw": {
+        "model": "WD Blue SN5100 4TB",
+        "firmware": "3517H0WD",
+        "protocol": "NVMe",
+        "temperature_celsius": 74,
+        "overall_passed": true,
+        "exit_status": 0
+      },
+      "flags": [
+        "top_model_differs_from_smart_snapshot",
+        "top_protocol_differs_from_smart_snapshot",
+        "top_firmware_differs_from_smart_snapshot",
+        "top_firmware_differs_from_smartctl",
+        "top_protocol_differs_from_smartctl"
+      ]
+    },
+    {
+      "path": "/dev/sdza",
+      "id": "disk_4074adabbcfbb1a4987a",
+      "slot": "NVMe Disk1",
+      "app_top": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "nvme",
+        "temperature_celsius": 40,
+        "health": "passed"
+      },
+      "app_smart_snapshot": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "nvme",
+        "overall_passed": true,
+        "temperature_celsius": 40
+      },
+      "smartctl_raw": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "NVMe",
+        "temperature_celsius": 40,
+        "overall_passed": true,
+        "exit_status": 0
+      },
+      "flags": []
+    },
+    {
+      "path": "/dev/sdzb",
+      "id": "disk_dca18ea560370a2e80e2",
+      "slot": "NVMe Disk7",
+      "app_top": {
+        "model": "Sandisk NAS 800 NVMe 960GB",
+        "firmware": "64109100",
+        "protocol": "nvme",
+        "temperature_celsius": 46,
+        "health": "passed"
+      },
+      "app_smart_snapshot": {
+        "model": "Sandisk NAS 800 NVMe 960GB",
+        "firmware": "64109100",
+        "protocol": "nvme",
+        "overall_passed": true,
+        "temperature_celsius": 46
+      },
+      "smartctl_raw": {
+        "model": "Sandisk NAS 800 NVMe 960GB",
+        "firmware": "64109100",
+        "protocol": "NVMe",
+        "temperature_celsius": 46,
+        "overall_passed": true,
+        "exit_status": 0
+      },
+      "flags": []
+    },
+    {
+      "path": "/dev/sdzc",
+      "id": "disk_91d839ff18615fc1d5f9",
+      "slot": "NVMe Disk3",
+      "app_top": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "nvme",
+        "temperature_celsius": 40,
+        "health": "passed"
+      },
+      "app_smart_snapshot": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "nvme",
+        "overall_passed": true,
+        "temperature_celsius": 40
+      },
+      "smartctl_raw": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "NVMe",
+        "temperature_celsius": 40,
+        "overall_passed": true,
+        "exit_status": 0
+      },
+      "flags": []
+    },
+    {
+      "path": "/dev/sdzd",
+      "id": "disk_80f3628603f780c27233",
+      "slot": "NVMe Disk4",
+      "app_top": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "nvme",
+        "temperature_celsius": 40,
+        "health": "passed"
+      },
+      "app_smart_snapshot": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "nvme",
+        "overall_passed": true,
+        "temperature_celsius": 40
+      },
+      "smartctl_raw": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "NVMe",
+        "temperature_celsius": 40,
+        "overall_passed": true,
+        "exit_status": 0
+      },
+      "flags": []
+    },
+    {
+      "path": "/dev/sdze",
+      "id": "disk_5372da09163e94699fe1",
+      "slot": "NVMe Disk5",
+      "app_top": {
+        "model": "QUANXING N200 128GB",
+        "firmware": "W0824A0",
+        "protocol": "nvme",
+        "temperature_celsius": 52,
+        "health": "passed"
+      },
+      "app_smart_snapshot": {
+        "model": "QUANXING N200 128GB",
+        "firmware": "W0824A0",
+        "protocol": "nvme",
+        "overall_passed": true,
+        "temperature_celsius": 54
+      },
+      "smartctl_raw": {
+        "model": "QUANXING N200 128GB",
+        "firmware": "W0824A0",
+        "protocol": "NVMe",
+        "temperature_celsius": 50,
+        "overall_passed": true,
+        "exit_status": 0
+      },
+      "flags": []
+    },
+    {
+      "path": "/dev/sdzf",
+      "id": "disk_5c534ddc05705fd46797",
+      "slot": "NVMe Disk6",
+      "app_top": {
+        "model": "QUANXING N200 128GB",
+        "firmware": "W0824A0",
+        "protocol": "nvme",
+        "temperature_celsius": 76,
+        "health": "passed"
+      },
+      "app_smart_snapshot": {
+        "model": "QUANXING N200 128GB",
+        "firmware": "W0824A0",
+        "protocol": "nvme",
+        "overall_passed": true,
+        "temperature_celsius": 76
+      },
+      "smartctl_raw": {
+        "model": "QUANXING N200 128GB",
+        "firmware": "W0824A0",
+        "protocol": "NVMe",
+        "temperature_celsius": 75,
+        "overall_passed": true,
+        "exit_status": 0
+      },
+      "flags": []
+    },
+    {
+      "path": "/dev/sdzg",
+      "id": "disk_6657dd69ef5db195eb58",
+      "slot": "NVMe Disk2",
+      "app_top": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "nvme",
+        "temperature_celsius": 40,
+        "health": "passed"
+      },
+      "app_smart_snapshot": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "nvme",
+        "overall_passed": true,
+        "temperature_celsius": 40
+      },
+      "smartctl_raw": {
+        "model": "Kingchuxing 128GB",
+        "firmware": "SN12463",
+        "protocol": "NVMe",
+        "temperature_celsius": 40,
+        "overall_passed": true,
+        "exit_status": 0
+      },
+      "flags": []
+    },
+    {
+      "path": "/dev/sdzh",
+      "id": "disk_fa4d8971576c0e861d02",
+      "slot": "NVMe Disk8",
+      "app_top": {
+        "model": "Sandisk NAS 800 NVMe 960GB",
+        "firmware": "64109100",
+        "protocol": "nvme",
+        "temperature_celsius": 45,
+        "health": "passed"
+      },
+      "app_smart_snapshot": {
+        "model": "Sandisk NAS 800 NVMe 960GB",
+        "firmware": "64109100",
+        "protocol": "nvme",
+        "overall_passed": true,
+        "temperature_celsius": 45
+      },
+      "smartctl_raw": {
+        "model": "Sandisk NAS 800 NVMe 960GB",
+        "firmware": "64109100",
+        "protocol": "NVMe",
+        "temperature_celsius": 46,
+        "overall_passed": true,
+        "exit_status": 0
+      },
+      "flags": []
+    }
+  ],
+  "notable_findings": [
+    "Total: 11 disks detected, app reports 10 healthy and 1 risky.",
+    "/dev/sda is failed: SMART overall failed, ATA ID 05 raw=1994 value=1 threshold=5, ID 199 CRC raw=7, error_log_count=39782, one selftest failed/read failure and one aborted by host.",
+    "/dev/sdc (WD Blue SN5100 4TB) SMART report shows temperature 66 C and marks temperature row dangerous, but page summary says healthy.",
+    "Overview top-level fields for /dev/sda, /dev/sdb and /dev/sdc differ from the SMART snapshot/smartctl: model/firmware/protocol metadata uses TDAS/0, 2280/1.01/ATA, SN5100 4TB/1.01/ATA.",
+    "Guardian latest snapshot covers 8 internal NVMe disks only; USB disks /dev/sda, /dev/sdb, /dev/sdc are excluded from guardian history."
+  ]
+}

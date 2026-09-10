@@ -1,0 +1,14 @@
+[Unit]
+StartLimitIntervalSec=60
+StartLimitBurst=5
+Description=TerraMaster DiskCheck API socket
+PartOf=diskcheck-api.service
+
+[Socket]
+ListenStream=/var/api/diskcheck.sock
+SocketMode=0666
+RemoveOnStop=true
+Service=diskcheck-api.service
+
+[Install]
+WantedBy=sockets.target

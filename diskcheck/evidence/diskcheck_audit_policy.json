@@ -1,0 +1,4 @@
+{
+  "status": 200,
+  "body": "{\"policy\":{\"max_entries\":10000,\"max_bytes\":268435456,\"checkpoint_keep\":64},\"usage\":{\"bytes\":25591,\"entries\":55,\"oldest\":\"2026-09-04T02:10:33.56817045Z\"}}\n"
+}

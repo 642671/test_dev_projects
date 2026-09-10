@@ -1,0 +1,9 @@
+Package: tos-diskcheck
+Version: 0.2.071
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: TerraMaster <support@terra-master.com>
+Depends: systemd
+Installed-Size: 11000
+Description: Evidence-based disk health and read-only surface diagnostics for TOS 7

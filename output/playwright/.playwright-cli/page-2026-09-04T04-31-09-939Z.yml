@@ -1,0 +1,352 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e48]:
+    - generic [ref=e49]:
+      - generic [ref=e51]:
+        - generic [ref=e54] [cursor=pointer]
+        - generic [ref=e58] [cursor=pointer]
+        - generic [ref=e62] [cursor=pointer]
+        - generic [ref=e66] [cursor=pointer]
+        - generic [ref=e70] [cursor=pointer]
+        - generic [ref=e74] [cursor=pointer]
+        - generic [ref=e78] [cursor=pointer]
+        - generic [ref=e82] [cursor=pointer]
+        - generic [ref=e86] [cursor=pointer]
+        - generic [ref=e90] [cursor=pointer]
+        - generic [ref=e94] [cursor=pointer]
+        - generic [ref=e98] [cursor=pointer]
+        - generic [ref=e100]: Beta
+      - generic "磁盘健康管家" [ref=e106] [cursor=pointer]
+    - generic [ref=e111] [cursor=pointer]:
+      - generic [ref=e112]: 
+      - generic [ref=e113]: 
+      - generic [ref=e114]: 
+      - generic [ref=e115]:
+        - generic [ref=e116]: 
+        - text:  
+      - generic [ref=e117]: 
+    - generic [ref=e120]:
+      - heading "您好，test  " [level=1] [ref=e121]:
+        - generic [ref=e122]: 您好，test
+        - generic [ref=e123]:
+          - generic [ref=e124]: 
+          - generic [ref=e126]: 
+      - generic [ref=e128]:
+        - generic [ref=e129]: 12:31
+        - generic [ref=e130]: 2026/09/04 星期五
+    - generic [ref=e138]:
+      - heading " " [level=1] [ref=e139]:
+        - generic [ref=e140]:
+          - generic "删除全部" [ref=e142] [cursor=pointer]: 
+          - generic "设置" [ref=e144] [cursor=pointer]: 
+      - generic [ref=e145]:
+        - generic [ref=e149]:
+          - generic [ref=e150]:
+            - generic [ref=e151]: 
+            - generic [ref=e152]:
+              - heading "网络服务" [level=2] [ref=e153]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:25:01，IP：10.18.15.186" [ref=e154]
+              - generic [ref=e155]:
+                - generic [ref=e156] [cursor=pointer]: 查看详情
+                - generic [ref=e157]: 今天 12:25:01
+            - generic [ref=e158] [cursor=pointer]: 
+          - generic [ref=e159]:
+            - generic [ref=e160]: 
+            - generic [ref=e161]:
+              - heading "网络服务" [level=2] [ref=e162]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:25:01，IP：10.18.15.186" [ref=e163]
+              - generic [ref=e164]:
+                - generic [ref=e165] [cursor=pointer]: 查看详情
+                - generic [ref=e166]: 今天 12:25:01
+            - generic [ref=e167] [cursor=pointer]: 
+          - generic [ref=e168]:
+            - generic [ref=e169]: 
+            - generic [ref=e170]:
+              - heading "网络服务" [level=2] [ref=e171]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:25:01，IP：10.18.15.186" [ref=e172]
+              - generic [ref=e173]:
+                - generic [ref=e174] [cursor=pointer]: 查看详情
+                - generic [ref=e175]: 今天 12:25:01
+            - generic [ref=e176] [cursor=pointer]: 
+          - generic [ref=e177]:
+            - generic [ref=e178]: 
+            - generic [ref=e179]:
+              - heading "网络服务" [level=2] [ref=e180]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:25:00，IP：10.18.15.186" [ref=e181]
+              - generic [ref=e182]:
+                - generic [ref=e183] [cursor=pointer]: 查看详情
+                - generic [ref=e184]: 今天 12:25:01
+            - generic [ref=e185] [cursor=pointer]: 
+          - generic [ref=e186]:
+            - generic [ref=e187]: 
+            - generic [ref=e188]:
+              - heading "网络服务" [level=2] [ref=e189]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:25:00，IP：10.18.15.186" [ref=e190]
+              - generic [ref=e191]:
+                - generic [ref=e192] [cursor=pointer]: 查看详情
+                - generic [ref=e193]: 今天 12:25:00
+            - generic [ref=e194] [cursor=pointer]: 
+          - generic [ref=e195]:
+            - generic [ref=e196]: 
+            - generic [ref=e197]:
+              - heading "网络服务" [level=2] [ref=e198]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:25:00，IP：10.18.15.186" [ref=e199]
+              - generic [ref=e200]:
+                - generic [ref=e201] [cursor=pointer]: 查看详情
+                - generic [ref=e202]: 今天 12:25:00
+            - generic [ref=e203] [cursor=pointer]: 
+          - generic [ref=e204]:
+            - generic [ref=e205]: 
+            - generic [ref=e206]:
+              - heading "网络服务" [level=2] [ref=e207]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:25:00，IP：10.18.15.186" [ref=e208]
+              - generic [ref=e209]:
+                - generic [ref=e210] [cursor=pointer]: 查看详情
+                - generic [ref=e211]: 今天 12:25:00
+            - generic [ref=e212] [cursor=pointer]: 
+          - generic [ref=e213]:
+            - generic [ref=e214]: 
+            - generic [ref=e215]:
+              - heading "网络服务" [level=2] [ref=e216]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:25:00，IP：10.18.15.186" [ref=e217]
+              - generic [ref=e218]:
+                - generic [ref=e219] [cursor=pointer]: 查看详情
+                - generic [ref=e220]: 今天 12:25:00
+            - generic [ref=e221] [cursor=pointer]: 
+          - generic [ref=e222]:
+            - generic [ref=e223]: 
+            - generic [ref=e224]:
+              - heading "网络服务" [level=2] [ref=e225]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:24:59，IP：10.18.15.186" [ref=e226]
+              - generic [ref=e227]:
+                - generic [ref=e228] [cursor=pointer]: 查看详情
+                - generic [ref=e229]: 今天 12:25:00
+            - generic [ref=e230] [cursor=pointer]: 
+          - generic [ref=e231]:
+            - generic [ref=e232]: 
+            - generic [ref=e233]:
+              - heading "网络服务" [level=2] [ref=e234]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:24:59，IP：10.18.15.186" [ref=e235]
+              - generic [ref=e236]:
+                - generic [ref=e237] [cursor=pointer]: 查看详情
+                - generic [ref=e238]: 今天 12:24:59
+            - generic [ref=e239] [cursor=pointer]: 
+          - generic [ref=e240]:
+            - generic [ref=e241]: 
+            - generic [ref=e242]:
+              - heading "网络服务" [level=2] [ref=e243]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:24:59，IP：10.18.15.186" [ref=e244]
+              - generic [ref=e245]:
+                - generic [ref=e246] [cursor=pointer]: 查看详情
+                - generic [ref=e247]: 今天 12:24:59
+            - generic [ref=e248] [cursor=pointer]: 
+          - generic [ref=e249]:
+            - generic [ref=e250]: 
+            - generic [ref=e251]:
+              - heading "网络服务" [level=2] [ref=e252]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:24:57，IP：10.18.15.186" [ref=e253]
+              - generic [ref=e254]:
+                - generic [ref=e255] [cursor=pointer]: 查看详情
+                - generic [ref=e256]: 今天 12:24:57
+            - generic [ref=e257] [cursor=pointer]: 
+          - generic [ref=e258]:
+            - generic [ref=e259]: 
+            - generic [ref=e260]:
+              - heading "网络服务" [level=2] [ref=e261]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:24:09，IP：10.18.15.186" [ref=e262]
+              - generic [ref=e263]:
+                - generic [ref=e264] [cursor=pointer]: 查看详情
+                - generic [ref=e265]: 今天 12:24:09
+            - generic [ref=e266] [cursor=pointer]: 
+          - generic [ref=e267]:
+            - generic [ref=e268]: 
+            - generic [ref=e269]:
+              - heading "网络服务" [level=2] [ref=e270]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:22:19，IP：10.18.15.186" [ref=e271]
+              - generic [ref=e272]:
+                - generic [ref=e273] [cursor=pointer]: 查看详情
+                - generic [ref=e274]: 今天 12:22:20
+            - generic [ref=e275] [cursor=pointer]: 
+          - generic [ref=e276]:
+            - generic [ref=e277]: 
+            - generic [ref=e278]:
+              - heading "网络服务" [level=2] [ref=e279]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:20:39，IP：10.18.15.186" [ref=e280]
+              - generic [ref=e281]:
+                - generic [ref=e282] [cursor=pointer]: 查看详情
+                - generic [ref=e283]: 今天 12:20:39
+            - generic [ref=e284] [cursor=pointer]: 
+          - generic [ref=e285]:
+            - generic [ref=e286]: 
+            - generic [ref=e287]:
+              - heading "网络服务" [level=2] [ref=e288]
+              - generic "发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:19:37，IP：10.18.15.186" [ref=e289]
+              - generic [ref=e290]:
+                - generic [ref=e291] [cursor=pointer]: 查看详情
+                - generic [ref=e292]: 今天 12:19:38
+            - generic [ref=e293] [cursor=pointer]: 
+          - generic [ref=e294]:
+            - generic [ref=e295]: 
+            - generic [ref=e296]:
+              - heading "存储管理" [level=2] [ref=e297]
+              - generic "存储池 5 中的阵列已经降阶！磁盘 NVMe Disk6 发生故障，或从阵列中脱离。为了您的数据安全，请尽快更换故障磁盘并修复阵列。" [ref=e298]
+              - generic [ref=e299]:
+                - generic [ref=e300] [cursor=pointer]: 查看详情
+                - generic [ref=e301]: 今天 11:52:59
+            - generic [ref=e302] [cursor=pointer]: 
+          - generic [ref=e303]:
+            - generic [ref=e304]: 
+            - generic [ref=e305]:
+              - heading "存储管理" [level=2] [ref=e306]
+              - generic "存储池 1 中的阵列已经降阶！磁盘 NVMe Disk1 发生故障，或从阵列中脱离。为了您的数据安全，请尽快更换故障磁盘并修复阵列。" [ref=e307]
+              - generic [ref=e308]:
+                - generic [ref=e309] [cursor=pointer]: 查看详情
+                - generic [ref=e310]: 今天 11:46:50
+            - generic [ref=e311] [cursor=pointer]: 
+          - generic [ref=e312]:
+            - generic [ref=e313]: 
+            - generic [ref=e314]:
+              - heading "存储管理" [level=2] [ref=e315]
+              - generic "存储池 1 同步完成！" [ref=e316]
+              - generic [ref=e317]: 今天 10:25:46
+            - generic [ref=e319] [cursor=pointer]: 
+          - generic [ref=e320]:
+            - generic [ref=e321]: 
+            - generic [ref=e322]:
+              - heading "存储管理" [level=2] [ref=e323]
+              - generic "存储池 1 中的阵列已经降阶！磁盘 发生故障，或从阵列中脱离。为了您的数据安全，请尽快更换故障磁盘并修复阵列。" [ref=e324]
+              - generic [ref=e325]:
+                - generic [ref=e326] [cursor=pointer]: 查看详情
+                - generic [ref=e327]: 今天 9:37:31
+            - generic [ref=e328] [cursor=pointer]: 
+          - generic [ref=e329]:
+            - generic [ref=e330]: 
+            - generic [ref=e331]:
+              - heading "存储管理" [level=2] [ref=e332]
+              - generic "由于缺少必需磁盘，存储池 1 中的阵列已经损坏！请检查是否在您的阵列中有磁盘发生故障，或者有磁盘从阵列中脱离。为了您的数据安全，请尽快重新插入所有必需磁盘并尝试挂载存储池。" [ref=e333]
+              - generic [ref=e334]:
+                - generic [ref=e335] [cursor=pointer]: 查看详情
+                - generic [ref=e336]: 今天 8:59:13
+            - generic [ref=e337] [cursor=pointer]: 
+          - generic [ref=e338]:
+            - generic [ref=e339]: 
+            - generic [ref=e340]:
+              - heading "存储管理" [level=2] [ref=e341]
+              - generic "存储池 1 中的阵列已经降阶！磁盘 发生故障，或从阵列中脱离。为了您的数据安全，请尽快更换故障磁盘并修复阵列。" [ref=e342]
+              - generic [ref=e343]:
+                - generic [ref=e344] [cursor=pointer]: 查看详情
+                - generic [ref=e345]: 昨天 19:02:39
+            - generic [ref=e346] [cursor=pointer]: 
+          - generic [ref=e347]:
+            - generic [ref=e348]: 
+            - generic [ref=e349]:
+              - heading "存储管理" [level=2] [ref=e350]
+              - generic "存储池 1 中的阵列已经降阶！磁盘 NVMe Disk1 发生故障，或从阵列中脱离。为了您的数据安全，请尽快更换故障磁盘并修复阵列。" [ref=e351]
+              - generic [ref=e352]:
+                - generic [ref=e353] [cursor=pointer]: 查看详情
+                - generic [ref=e354]: 昨天 18:04:11
+            - generic [ref=e355] [cursor=pointer]: 
+          - generic [ref=e356]:
+            - generic [ref=e357]: 
+            - generic [ref=e358]:
+              - heading "存储管理" [level=2] [ref=e359]
+              - generic "系统盘迁移失败！请检查磁盘状态是否正常，或重启 TNAS 后重试。" [ref=e360]
+              - generic [ref=e361]:
+                - generic [ref=e362] [cursor=pointer]: 查看详情
+                - generic [ref=e363]: 昨天 16:54:00
+            - generic [ref=e364] [cursor=pointer]: 
+          - generic [ref=e365]:
+            - generic [ref=e366]: 
+            - generic [ref=e367]:
+              - heading "存储管理" [level=2] [ref=e368]
+              - generic "系统盘迁移失败！请检查磁盘状态是否正常，或重启 TNAS 后重试。" [ref=e369]
+              - generic [ref=e370]:
+                - generic [ref=e371] [cursor=pointer]: 查看详情
+                - generic [ref=e372]: 昨天 16:53:57
+            - generic [ref=e373] [cursor=pointer]: 
+          - generic [ref=e374]:
+            - generic [ref=e375]: 
+            - generic [ref=e376]:
+              - heading "存储管理" [level=2] [ref=e377]
+              - generic "存储池 2 数据清理已开始，预计耗时 0 分钟。" [ref=e378]
+              - generic [ref=e379]: 昨天 16:51:15
+            - generic [ref=e381] [cursor=pointer]: 
+          - generic [ref=e382]:
+            - generic [ref=e383]: 
+            - generic [ref=e384]:
+              - heading "存储管理" [level=2] [ref=e385]
+              - generic "存储池 2 数据清理已开始，预计耗时 0 分钟。" [ref=e386]
+              - generic [ref=e387]: 昨天 16:51:15
+            - generic [ref=e389] [cursor=pointer]: 
+          - generic [ref=e390]:
+            - generic [ref=e391]: 
+            - generic [ref=e392]:
+              - heading "存储管理" [level=2] [ref=e393]
+              - generic "存储池 1 数据清理已停止！" [ref=e394]
+              - generic [ref=e395]: 昨天 16:50:49
+            - generic [ref=e397] [cursor=pointer]: 
+          - generic [ref=e398]:
+            - generic [ref=e399]: 
+            - generic [ref=e400]:
+              - heading "其它" [level=2] [ref=e401]
+              - generic "系统安全扫描异常，发现 4 个待处理的安全风险" [ref=e402]
+              - generic [ref=e403]:
+                - generic [ref=e404] [cursor=pointer]: 查看详情
+                - generic [ref=e405]: 昨天 15:02:21
+            - generic [ref=e406] [cursor=pointer]: 
+        - generic [ref=e409] [cursor=pointer]
+  - generic [ref=e410]:
+    - text:  
+    - generic [ref=e411]:
+      - generic [ref=e412]: 
+      - generic [ref=e413] [cursor=pointer]: 
+    - generic [ref=e414]:
+      - generic [ref=e415]: 
+      - text: 
+    - generic [ref=e416]:
+      - generic [ref=e417]: 
+      - text: 
+    - generic [ref=e418]:
+      - generic [ref=e419]: 
+      - text: 
+    - generic [ref=e420]:
+      - generic [ref=e421]: 
+      - text: 
+    - generic [ref=e422]:
+      - generic [ref=e423]: 
+      - text: 
+    - generic [ref=e424]:
+      - generic [ref=e425]: 
+      - text: 
+    - generic [ref=e426]:
+      - generic [ref=e427]: 
+      - text: 
+    - generic [ref=e428]:
+      - generic [ref=e429]: 
+      - text: 
+    - generic [ref=e430]:
+      - generic [ref=e431]: 
+      - text: 
+    - generic [ref=e432]:
+      - generic [ref=e433]: 
+      - text: 
+    - generic [ref=e434]:
+      - generic [ref=e435]: 
+      - text: 
+    - generic [ref=e436]:
+      - generic [ref=e437]: 
+      - text: 
+    - generic [ref=e438]:
+      - generic [ref=e439]: 
+      - text: 
+    - generic [ref=e440]:
+      - generic [ref=e441]: 
+      - text: 
+    - generic [ref=e442]:
+      - generic [ref=e443]: 
+      - generic [ref=e444]:
+        - heading "网络服务" [level=2] [ref=e445]
+        - generic [ref=e446]: 发现有人通过 SSH 登录您的系统后台。登录时间：2026-09-04 12:25:01，IP：10.18.15.186
+        - generic [ref=e447]:
+          - generic [ref=e448] [cursor=pointer]: 查看详情
+          - generic [ref=e449]: 今天 12:25:01
+      - text: 

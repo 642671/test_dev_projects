@@ -1,0 +1,432 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic "TerraMaster DiskCheck" [ref=e4]:
+        - generic [aria-hidden] [ref=e5]: ◫
+        - generic [ref=e6]: 磁盘健康管家
+      - navigation "主导航" [ref=e7]:
+        - button "总览" [ref=e8] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e9]: ⌂
+        - button "完整检测" [ref=e11] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e12]: ▦
+        - button "SMART 报告" [active] [ref=e14] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e15]: ◈
+        - button "智能守护" [ref=e17] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e18]: ♢
+        - button "记录与审计" [ref=e20] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e21]: ≡
+      - generic [ref=e23]:
+        - combobox "界面语言" [ref=e25]:
+          - option "English"
+          - option "Deutsch"
+          - option "Français"
+          - option "Español"
+          - option "Italiano"
+          - option "Português"
+          - option "Magyar"
+          - option "Türkçe"
+          - option "Polski"
+          - option "Русский"
+          - option "日本語"
+          - option "한국어"
+          - option "简体中文" [selected]
+          - option "繁體中文"
+          - option "Tiếng Việt"
+          - option "Bahasa Indonesia"
+          - option "ไทย"
+          - option "Dansk"
+          - option "Norsk"
+          - option "Čeština"
+          - option "Svenska"
+          - option "Nederlands"
+          - option "Română"
+          - option "Ελληνικά"
+        - generic "软件版本 · 0.2.071 · 46febf67a690 · 2026-09-03T09:45:50Z" [ref=e26]:
+          - generic [ref=e27]: 软件版本
+          - strong [ref=e28]: v0.2.071
+    - main [ref=e29]:
+      - generic [ref=e30]:
+        - heading "SMART 报告" [level=1] [ref=e209]
+        - generic [ref=e33]:
+          - button "切换暗黑模式" [ref=e34] [cursor=pointer]: ☾
+          - button "帮助与检测原理" [ref=e35] [cursor=pointer]: "?"
+          - button "刷新磁盘与 SMART 信息" [ref=e36] [cursor=pointer]
+      - generic [ref=e211]:
+        - generic [ref=e212]:
+          - generic [ref=e213]:
+            - generic [ref=e214]: 选择磁盘
+            - combobox "选择磁盘" [ref=e215]:
+              - option "NVMe Disk1 · Kingchuxing 128GB · 128.0 GB · 在线业务盘" [selected]
+              - option "NVMe Disk2 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk3 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk4 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk5 · QUANXING N200 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk6 · QUANXING N200 128GB · 128.0 GB · 未加入存储池/未挂载"
+              - option "NVMe Disk7 · Sandisk NAS 800 NVMe 960GB · 960.2 GB · 未加入存储池/未挂载"
+              - option "NVMe Disk8 · Sandisk NAS 800 NVMe 960GB · 960.2 GB · 系统关键盘"
+              - option "USB Disk_sda · TDAS · 1.0 TB · 未加入存储池/未挂载"
+              - option "USB Disk_sdb · 2280 · 128.0 GB · 未加入存储池/未挂载"
+              - option "USB Disk_sdb · SN5100 4TB · 4.0 TB · 未加入存储池/未挂载"
+          - button "刷新 SMART" [ref=e216] [cursor=pointer]
+        - generic [ref=e220]:
+          - generic [ref=e222]:
+            - heading "Kingchuxing 128GB" [level=2] [ref=e223]
+            - paragraph [ref=e224]: NVMe Disk1 · 2025102300225 · 128.0 GB
+          - generic [ref=e225]:
+            - generic [ref=e226]:
+              - generic [ref=e227]: 健康状况
+              - strong [ref=e228]: ✓ 健康
+              - generic [ref=e229]: 当前未发现此项异常
+            - generic [ref=e230]:
+              - generic [ref=e231]: 温度
+              - strong [ref=e232]: 40 °C
+              - generic [ref=e233]: 温度处于建议范围
+            - generic [ref=e234]:
+              - generic [ref=e235]:
+                - text: 固件
+                - generic [ref=e236]: SN12463
+              - generic [ref=e237]:
+                - text: 通电时间
+                - generic "点击切换为总小时数/年月日时" [ref=e238] [cursor=pointer]: 172 天 16 小时
+              - generic [ref=e239]:
+                - text: 通电次数
+                - generic [ref=e240]: "119"
+              - generic [ref=e241]:
+                - text: 接口
+                - generic [ref=e242]: NVMe
+              - generic [ref=e243]:
+                - text: 传输模式
+                - generic [ref=e244]: PCIe 3.0 x1 | PCIe 3.0 x4
+              - generic [ref=e245]:
+                - text: 标准
+                - generic [ref=e246]: NVMe 1.4
+              - generic [ref=e247]:
+                - text: 主机读取总量
+                - generic [ref=e248]: 4.9 TB
+              - generic [ref=e249]:
+                - text: 主机写入总量
+                - generic [ref=e250]: 5.0 TB
+          - heading "主要指标" [level=3] [ref=e251]
+          - generic [ref=e252]:
+            - generic [ref=e253]:
+              - generic [ref=e254]: 主机读取总量
+              - strong [ref=e255]: 4.9 TB
+            - generic [ref=e256]:
+              - generic [ref=e257]: 主机写入总量
+              - strong [ref=e258]: 5.0 TB
+            - generic [ref=e259]:
+              - generic [ref=e260]: 已用寿命
+              - strong [ref=e261]: 2%
+            - generic [ref=e262]:
+              - generic [ref=e263]: 可用备用空间
+              - strong [ref=e264]: 100%
+            - generic [ref=e265]:
+              - generic [ref=e266]: 介质错误
+              - strong [ref=e267]: "0"
+            - generic [ref=e268]:
+              - generic [ref=e269]: 温度
+              - strong [ref=e270]: 40 °C
+          - table [ref=e272]:
+            - rowgroup [ref=e283]:
+              - row [ref=e284]:
+                - columnheader "状态 拖动调整列宽" [ref=e285]:
+                  - text: 状态
+                  - generic "拖动调整列宽" [ref=e286]
+                - columnheader "ID 拖动调整列宽" [ref=e287]:
+                  - text: ID
+                  - generic "拖动调整列宽" [ref=e288]
+                - columnheader "属性名称 拖动调整列宽" [ref=e289]:
+                  - text: 属性名称
+                  - generic "拖动调整列宽" [ref=e290]
+                - columnheader "当前值 拖动调整列宽" [ref=e291]:
+                  - text: 当前值
+                  - generic "拖动调整列宽" [ref=e292]
+                - columnheader "最差值 拖动调整列宽" [ref=e293]:
+                  - text: 最差值
+                  - generic "拖动调整列宽" [ref=e294]
+                - columnheader "临界值 拖动调整列宽" [ref=e295]:
+                  - text: 临界值
+                  - generic "拖动调整列宽" [ref=e296]
+                - columnheader "原始数据 拖动调整列宽" [ref=e297]:
+                  - text: 原始数据
+                  - generic "拖动调整列宽" [ref=e298]
+                - columnheader "判断依据 拖动调整列宽" [ref=e299]:
+                  - text: 判断依据
+                  - generic "拖动调整列宽" [ref=e300]
+                - columnheader "项目说明 拖动调整列宽" [ref=e301]:
+                  - text: 项目说明
+                  - generic "拖动调整列宽" [ref=e302]
+            - rowgroup [ref=e303]:
+              - row [ref=e304]:
+                - cell "✓ 健康" [ref=e305]:
+                  - generic [ref=e306]: ✓
+                  - text: 健康
+                - cell "01" [ref=e307]
+                - cell "严重警告标志 critical_warning" [ref=e308]:
+                  - strong [ref=e309]: 严重警告标志
+                  - generic [ref=e310]: critical_warning
+                - cell "—" [ref=e311]
+                - cell "—" [ref=e312]
+                - cell "—" [ref=e313]
+                - cell "0x00" [ref=e314]
+                - cell "判据：Critical Warning 必须为 0；当前 0。 与 1 小时 前相比：无变化；当前值 0 · 近 30 天（5 次记录）：无变化" [ref=e315]
+                - cell "控制器汇总的严重健康警告；非零时应立即备份并复查。 当前未发现此项异常" [ref=e316]:
+                  - text: 控制器汇总的严重健康警告；非零时应立即备份并复查。
+                  - generic [ref=e317]: 当前未发现此项异常
+              - row [ref=e318]:
+                - cell "✓ 健康" [ref=e319]:
+                  - generic [ref=e320]: ✓
+                  - text: 健康
+                - cell "02" [ref=e321]
+                - cell "温度 temperature_celsius" [ref=e322]:
+                  - strong [ref=e323]: 温度
+                  - generic [ref=e324]: temperature_celsius
+                - cell "—" [ref=e325]
+                - cell "—" [ref=e326]
+                - cell "—" [ref=e327]
+                - cell "40 °C" [ref=e328]
+                - cell "判据：<55°C 健康，55–59°C 警告，≥60°C 危险；本次温度 40°C。 与 1 小时 前相比：无变化；当前值 40 · 近 30 天（5 次记录）：无变化" [ref=e329]
+                - cell "当前磁盘温度，持续过高会加速老化。 当前未发现此项异常" [ref=e330]:
+                  - text: 当前磁盘温度，持续过高会加速老化。
+                  - generic [ref=e331]: 当前未发现此项异常
+              - row [ref=e332]:
+                - cell "✓ 健康" [ref=e333]:
+                  - generic [ref=e334]: ✓
+                  - text: 健康
+                - cell "03" [ref=e335]
+                - cell "可用备用空间 available_spare" [ref=e336]:
+                  - strong [ref=e337]: 可用备用空间
+                  - generic [ref=e338]: available_spare
+                - cell "—" [ref=e339]
+                - cell "—" [ref=e340]
+                - cell "—" [ref=e341]
+                - cell "100%" [ref=e342]
+                - cell "判据：可用备用空间 100% 必须不低于厂商阈值 1%。 与 1 小时 前相比：无变化；当前值 100 · 近 30 天（5 次记录）：无变化" [ref=e343]
+                - cell "控制器仍可用于替换故障闪存的备用容量比例。 当前未发现此项异常" [ref=e344]:
+                  - text: 控制器仍可用于替换故障闪存的备用容量比例。
+                  - generic [ref=e345]: 当前未发现此项异常
+              - row [ref=e346]:
+                - cell "✓ 健康" [ref=e347]:
+                  - generic [ref=e348]: ✓
+                  - text: 健康
+                - cell "04" [ref=e349]
+                - cell "备用空间阈值 available_spare_threshold" [ref=e350]:
+                  - strong [ref=e351]: 备用空间阈值
+                  - generic [ref=e352]: available_spare_threshold
+                - cell "—" [ref=e353]
+                - cell "—" [ref=e354]
+                - cell "—" [ref=e355]
+                - cell "1%" [ref=e356]
+                - cell "这是厂商给出的备用空间阈值，本身不是故障计数。 与 1 小时 前相比：无变化；当前值 1 · 近 30 天（5 次记录）：无变化" [ref=e357]
+                - cell "可用备用空间低于该值时，控制器将发出警告。 当前未发现此项异常" [ref=e358]:
+                  - text: 可用备用空间低于该值时，控制器将发出警告。
+                  - generic [ref=e359]: 当前未发现此项异常
+              - row [ref=e360]:
+                - cell "✓ 健康" [ref=e361]:
+                  - generic [ref=e362]: ✓
+                  - text: 健康
+                - cell "05" [ref=e363]
+                - cell "已用寿命 percentage_used" [ref=e364]:
+                  - strong [ref=e365]: 已用寿命
+                  - generic [ref=e366]: percentage_used
+                - cell "—" [ref=e367]
+                - cell "—" [ref=e368]
+                - cell "—" [ref=e369]
+                - cell "2%" [ref=e370]
+                - cell "判据：已用寿命 <100% 为范围内，≥100% 提示更换；当前 2%。 与 1 小时 前相比：无变化；当前值 2 · 近 30 天（5 次记录）：无变化" [ref=e371]
+                - cell "厂商估算的额定闪存寿命消耗比例，达到 100% 表示已用完额定寿命。 当前未发现此项异常" [ref=e372]:
+                  - text: 厂商估算的额定闪存寿命消耗比例，达到 100% 表示已用完额定寿命。
+                  - generic [ref=e373]: 当前未发现此项异常
+              - row [ref=e374]:
+                - cell "✓ 健康" [ref=e375]:
+                  - generic [ref=e376]: ✓
+                  - text: 健康
+                - cell "06" [ref=e377]
+                - cell "主机读取总量 data_units_read" [ref=e378]:
+                  - strong [ref=e379]: 主机读取总量
+                  - generic [ref=e380]: data_units_read
+                - cell "—" [ref=e381]
+                - cell "—" [ref=e382]
+                - cell "—" [ref=e383]
+                - cell "4.9 TB" [ref=e384]
+                - cell "这是工作量/寿命背景累计计数，增长本身不等于故障。 与 1 小时 前相比：增加 466；当前值 9,534,865 · 近 30 天（5 次记录）：累计增加 467" [ref=e385]
+                - cell "主机累计从此 NVMe 读取的数据量，用于了解负载，不直接代表故障。 当前未发现此项异常" [ref=e386]:
+                  - text: 主机累计从此 NVMe 读取的数据量，用于了解负载，不直接代表故障。
+                  - generic [ref=e387]: 当前未发现此项异常
+              - row [ref=e388]:
+                - cell "✓ 健康" [ref=e389]:
+                  - generic [ref=e390]: ✓
+                  - text: 健康
+                - cell "07" [ref=e391]
+                - cell "主机写入总量 data_units_written" [ref=e392]:
+                  - strong [ref=e393]: 主机写入总量
+                  - generic [ref=e394]: data_units_written
+                - cell "—" [ref=e395]
+                - cell "—" [ref=e396]
+                - cell "—" [ref=e397]
+                - cell "5.0 TB" [ref=e398]
+                - cell "这是工作量/寿命背景累计计数，增长本身不等于故障。 与 1 小时 前相比：增加 229,608；当前值 9,759,551 · 近 30 天（5 次记录）：累计增加 229,619" [ref=e399]
+                - cell "主机累计写入此 NVMe 的数据量，用于评估闪存写入消耗。 当前未发现此项异常" [ref=e400]:
+                  - text: 主机累计写入此 NVMe 的数据量，用于评估闪存写入消耗。
+                  - generic [ref=e401]: 当前未发现此项异常
+              - row [ref=e402]:
+                - cell "✓ 健康" [ref=e403]:
+                  - generic [ref=e404]: ✓
+                  - text: 健康
+                - cell "08" [ref=e405]
+                - cell "主机读取命令 host_read_commands" [ref=e406]:
+                  - strong [ref=e407]: 主机读取命令
+                  - generic [ref=e408]: host_read_commands
+                - cell "—" [ref=e409]
+                - cell "—" [ref=e410]
+                - cell "—" [ref=e411]
+                - cell "64,802,954" [ref=e412]
+                - cell "这是工作量/寿命背景累计计数，增长本身不等于故障。 与 1 小时 前相比：增加 7,594；当前值 64,802,954 · 近 30 天（5 次记录）：累计增加 7,611" [ref=e413]
+                - cell "主机累计提交的读取命令数量。 当前未发现此项异常" [ref=e414]:
+                  - text: 主机累计提交的读取命令数量。
+                  - generic [ref=e415]: 当前未发现此项异常
+              - row [ref=e416]:
+                - cell "✓ 健康" [ref=e417]:
+                  - generic [ref=e418]: ✓
+                  - text: 健康
+                - cell "09" [ref=e419]
+                - cell "主机写入命令 host_write_commands" [ref=e420]:
+                  - strong [ref=e421]: 主机写入命令
+                  - generic [ref=e422]: host_write_commands
+                - cell "—" [ref=e423]
+                - cell "—" [ref=e424]
+                - cell "—" [ref=e425]
+                - cell "114,341,592" [ref=e426]
+                - cell "这是工作量/寿命背景累计计数，增长本身不等于故障。 与 1 小时 前相比：增加 1,205,108；当前值 114,341,592 · 近 30 天（5 次记录）：累计增加 1,205,485" [ref=e427]
+                - cell "主机累计提交的写入命令数量。 当前未发现此项异常" [ref=e428]:
+                  - text: 主机累计提交的写入命令数量。
+                  - generic [ref=e429]: 当前未发现此项异常
+              - row [ref=e430]:
+                - cell "✓ 健康" [ref=e431]:
+                  - generic [ref=e432]: ✓
+                  - text: 健康
+                - cell "10" [ref=e433]
+                - cell "控制器忙碌时间 controller_busy_minutes" [ref=e434]:
+                  - strong [ref=e435]: 控制器忙碌时间
+                  - generic [ref=e436]: controller_busy_minutes
+                - cell "—" [ref=e437]
+                - cell "—" [ref=e438]
+                - cell "—" [ref=e439]
+                - cell "474 min" [ref=e440]
+                - cell "这是工作量/寿命背景累计计数，增长本身不等于故障。 与 1 小时 前相比：增加 10；当前值 474 · 近 30 天（5 次记录）：累计增加 10" [ref=e441]
+                - cell "控制器处理 I/O 的累计忙碌分钟数。 当前未发现此项异常" [ref=e442]:
+                  - text: 控制器处理 I/O 的累计忙碌分钟数。
+                  - generic [ref=e443]: 当前未发现此项异常
+              - row [ref=e444]:
+                - cell "✓ 健康" [ref=e445]:
+                  - generic [ref=e446]: ✓
+                  - text: 健康
+                - cell "11" [ref=e447]
+                - cell "通电次数 power_cycles" [ref=e448]:
+                  - strong [ref=e449]: 通电次数
+                  - generic [ref=e450]: power_cycles
+                - cell "—" [ref=e451]
+                - cell "—" [ref=e452]
+                - cell "—" [ref=e453]
+                - cell "119" [ref=e454]
+                - cell "这是工作量/寿命背景累计计数，增长本身不等于故障。 与 1 小时 前相比：无变化；当前值 119 · 近 30 天（5 次记录）：无变化" [ref=e455]
+                - cell "磁盘累计上电次数，不直接代表故障。 当前未发现此项异常" [ref=e456]:
+                  - text: 磁盘累计上电次数，不直接代表故障。
+                  - generic [ref=e457]: 当前未发现此项异常
+              - row [ref=e458]:
+                - cell "✓ 健康" [ref=e459]:
+                  - generic [ref=e460]: ✓
+                  - text: 健康
+                - cell "12" [ref=e461]
+                - cell "通电时间 power_on_hours" [ref=e462]:
+                  - strong [ref=e463]: 通电时间
+                  - generic [ref=e464]: power_on_hours
+                - cell "—" [ref=e465]
+                - cell "—" [ref=e466]
+                - cell "—" [ref=e467]
+                - cell "172 天 16 小时" [ref=e468]
+                - cell "这是工作量/寿命背景累计计数，增长本身不等于故障。 与 1 小时 前相比：增加 1；当前值 4,144 · 近 30 天（5 次记录）：累计增加 1" [ref=e469]
+                - cell "磁盘累计通电时间，用于了解使用年限，不直接代表故障。 当前未发现此项异常" [ref=e470]:
+                  - text: 磁盘累计通电时间，用于了解使用年限，不直接代表故障。
+                  - generic [ref=e471]: 当前未发现此项异常
+              - row [ref=e472]:
+                - cell "✓ 健康" [ref=e473]:
+                  - generic [ref=e474]: ✓
+                  - text: 健康
+                - cell "13" [ref=e475]
+                - cell "不安全关机次数 unsafe_shutdowns" [ref=e476]:
+                  - strong [ref=e477]: 不安全关机次数
+                  - generic [ref=e478]: unsafe_shutdowns
+                - cell "—" [ref=e479]
+                - cell "—" [ref=e480]
+                - cell "—" [ref=e481]
+                - cell "52" [ref=e482]
+                - cell "累计值不以历史非零单独判故障；在相邻快照确认增长时提示复查。 与 1 小时 前相比：无变化；当前值 52 · 近 30 天（5 次记录）：无变化" [ref=e483]
+                - cell "未正常完成关机流程的次数；持续增加时检查电源与异常重启。 当前未发现此项异常" [ref=e484]:
+                  - text: 未正常完成关机流程的次数；持续增加时检查电源与异常重启。
+                  - generic [ref=e485]: 当前未发现此项异常
+              - row [ref=e486]:
+                - cell "✓ 健康" [ref=e487]:
+                  - generic [ref=e488]: ✓
+                  - text: 健康
+                - cell "14" [ref=e489]
+                - cell "介质错误 media_errors" [ref=e490]:
+                  - strong [ref=e491]: 介质错误
+                  - generic [ref=e492]: media_errors
+                - cell "—" [ref=e493]
+                - cell "—" [ref=e494]
+                - cell "—" [ref=e495]
+                - cell "0" [ref=e496]
+                - cell "判据：介质错误应为 0；当前 0。 与 1 小时 前相比：无变化；当前值 0 · 近 30 天（5 次记录）：无变化" [ref=e497]
+                - cell "控制器检测到的不可恢复数据完整性错误；非零需立即备份。 当前未发现此项异常" [ref=e498]:
+                  - text: 控制器检测到的不可恢复数据完整性错误；非零需立即备份。
+                  - generic [ref=e499]: 当前未发现此项异常
+              - row [ref=e500]:
+                - cell "✓ 健康" [ref=e501]:
+                  - generic [ref=e502]: ✓
+                  - text: 健康
+                - cell "15" [ref=e503]
+                - cell "错误日志条目 error_log_entries" [ref=e504]:
+                  - strong [ref=e505]: 错误日志条目
+                  - generic [ref=e506]: error_log_entries
+                - cell "—" [ref=e507]
+                - cell "—" [ref=e508]
+                - cell "—" [ref=e509]
+                - cell "0" [ref=e510]
+                - cell "累计值不以历史非零单独判故障；在相邻快照确认增长时提示复查。 与 1 小时 前相比：无变化；当前值 0 · 近 30 天（5 次记录）：无变化" [ref=e511]
+                - cell "NVMe 错误日志累计条目；需结合介质错误和趋势分析。 当前未发现此项异常" [ref=e512]:
+                  - text: NVMe 错误日志累计条目；需结合介质错误和趋势分析。
+                  - generic [ref=e513]: 当前未发现此项异常
+              - row [ref=e514]:
+                - cell "✓ 健康" [ref=e515]:
+                  - generic [ref=e516]: ✓
+                  - text: 健康
+                - cell "16" [ref=e517]
+                - cell "警告温度累计时间 warning_temp_minutes" [ref=e518]:
+                  - strong [ref=e519]: 警告温度累计时间
+                  - generic [ref=e520]: warning_temp_minutes
+                - cell "—" [ref=e521]
+                - cell "—" [ref=e522]
+                - cell "—" [ref=e523]
+                - cell "0 min" [ref=e524]
+                - cell "累计值不以历史非零单独判故障；在相邻快照确认增长时提示复查。 与 1 小时 前相比：无变化；当前值 0 · 近 30 天（5 次记录）：无变化" [ref=e525]
+                - cell "设备处于警告温度范围的累计时间。 当前未发现此项异常" [ref=e526]:
+                  - text: 设备处于警告温度范围的累计时间。
+                  - generic [ref=e527]: 当前未发现此项异常
+              - row [ref=e528]:
+                - cell "✓ 健康" [ref=e529]:
+                  - generic [ref=e530]: ✓
+                  - text: 健康
+                - cell "17" [ref=e531]
+                - cell "严重温度累计时间 critical_temp_minutes" [ref=e532]:
+                  - strong [ref=e533]: 严重温度累计时间
+                  - generic [ref=e534]: critical_temp_minutes
+                - cell "—" [ref=e535]
+                - cell "—" [ref=e536]
+                - cell "—" [ref=e537]
+                - cell "0 min" [ref=e538]
+                - cell "累计值不以历史非零单独判故障；在相邻快照确认增长时提示复查。 与 1 小时 前相比：无变化；当前值 0 · 近 30 天（5 次记录）：无变化" [ref=e539]
+                - cell "设备处于严重温度范围的累计时间。 当前未发现此项异常" [ref=e540]:
+                  - text: 设备处于严重温度范围的累计时间。
+                  - generic [ref=e541]: 当前未发现此项异常
+  - status [ref=e208]

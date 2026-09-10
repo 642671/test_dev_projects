@@ -1,0 +1,3 @@
+test@F6-32:/# cd /etc.default/notifications/msgType/
+test@F6-32:/etc.default/notifications/msgType# # 下边是存储管理的通知
+test@F6-32:/etc.default/notifications/msgType# cat storage.yaml 

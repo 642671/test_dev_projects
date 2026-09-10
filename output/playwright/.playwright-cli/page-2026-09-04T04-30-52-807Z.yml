@@ -1,0 +1,22 @@
+- generic [ref=e3]:
+  - text: 
+  - generic [ref=e12]:
+    - generic [ref=e14]:
+      - heading "TOS 7.0" [level=1] [ref=e15]
+      - generic [ref=e16]: Evolved for Full Native AI
+    - generic [ref=e17]:
+      - generic [ref=e43]:
+        - textbox "密码" [ref=e44]: Admin123
+        - generic [ref=e45]:
+          - generic [ref=e46]: 
+          - generic [aria-hidden] [ref=e47] [cursor=pointer]: 
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - checkbox [ref=e39] [cursor=pointer]
+            - generic [ref=e40]: 保持登录
+          - generic [ref=e41] [cursor=pointer]: 忘记密码?
+        - generic [ref=e5]:
+          - generic [ref=e6]: F8 SSD
+          - generic [ref=e8]: 7.0.1163
+  - generic [ref=e10]: 

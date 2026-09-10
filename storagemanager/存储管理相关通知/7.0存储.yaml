@@ -1,0 +1,284 @@
+test@TNAS:/etc/notifications/msgType# cat storage.yaml 
+name: "storage,Storage_manager"
+sort: 5
+msg:
+  - description: "notification,event_capacity_reminder"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "capacity_reminder"
+    jump: 
+      path: "app,StorageManager,1"
+  - description: "notification,event_volume_create_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "volume_create_failed"
+    jump: 
+      path: "app,StorageManager,1"
+  - description: "notification,event_volume_format_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "volume_format_failed"
+    jump: 
+      path: "app,StorageManager,1"
+  - description: "notification,event_Volume_deletion_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "Volume_deletion_failed_Notice"
+    jump: 
+      path: "app,StorageManager,1,0,deleteVol"
+  - description: "notification,event_sot_fragmentation_complete"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "sot_fragmentation_complete"
+  - description: "notification,event_SSDTrim_End_Notice"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "SSDTrim_End_Notice"
+  - description: "notification,event_raid_risk_corrupted"
+    level: "error"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "raid_risk_corrupted"
+    jump: 
+      path: "app,StorageManager,2"
+  - description: "notification,event_raid_risk_warning"
+    level: "error"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "raid_disk_warning"
+    jump: 
+      path: "app,StorageManager,2"
+  - description: "notification,event_pool_create_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "pool_create_failed"
+    jump: 
+      path: "app,StorageManager,2"
+  - description: "notification,event_pool_delete_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "pool_delete_failed"
+    jump: 
+      path: "app,StorageManager,2"
+  - description: "notification,event_pool_mount_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "pool_mount_failed"
+    jump: 
+      path: "app,StorageManager,2"
+  - description: "notification,event_raid_sync_start"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "raid_sync_start"
+  - description: "notification,event_raid_sync_complete"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "raid_sync_complete"
+  - description: "notification,event_datascrubbing_start"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "datascrubbing_start"
+  - description: "notification,event_datascrubbing_finish"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "datascrubbing_finish"
+  - description: "notification,event_datascrubbing_error"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "datascrubbing_error"
+  - description: "notification,event_new_disk"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "new_disk_notice"
+    jump: 
+      path: "app,StorageManager,3,0,openManage"
+  - description: "notification,event_badblock_finished_notify"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "badblock_finished_notify"
+  - description: "notification,event_disk_secure_erase_started_notify"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "disk_secure_erase_started_notify"
+  - description: "notification,event_disk_secure_erase_failed_notify"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "disk_secure_erase_failed_notify"
+  - description: "notification,event_disk_secure_erase_succeed_notify"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "disk_secure_erase_succeed_notify"
+  - description: "notification,event_systemdisk_addition_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "systemdisk_addition_failed"
+    jump: 
+      path: "app,StorageManager,3,1"
+  - description: "notification,event_systemdisk_migration_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "systemdisk_migration_failed"
+    jump: 
+      path: "app,StorageManager,3,1"
+  - description: "notification,event_usb_mount_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "mount_usb_tips"
+  - description: "notification,event_capacity_reminder_usb"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "capacity_reminder_usb"
+    jump: 
+      path: "app,StorageManager,5"
+  - description: "notification,event_sot_USBAbnormal_eject"
+    level: "error"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "sot_USBAbnormal_eject"
+  - description: "notification,event_notice_hotspare_enable"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "notice_hotspare_enable"
+  - description: "notification,event_hot_create_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "hot_create_failed"
+    jump: 
+      path: "app,StorageManager,6"
+  - description: "notification,event_hot_delete_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "hot_delete_failed"
+    jump: 
+      path: "app,StorageManager,6"
+  - description: "notification,event_cache_create_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "cache_create_failed"
+    jump: 
+      path: "app,StorageManager,7"
+  - description: "notification,event_cache_delete_failed"
+    level: "warning"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "cache_delete_failed"
+    jump: 
+      path: "app,StorageManager,7"
+  - description: "notification,event_ssd_raid_corrupted"
+    level: "error"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "ssd_raid_disk_corrupted"
+    jump: 
+      path: "app,StorageManager,7"
+  - description: "notification,event_ssd_raid_warning"
+    level: "error"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "ssd_raid_disk_warning"
+    jump: 
+      path: "app,StorageManager,7"
+  - description: "notification,event_ssd_sync_complete"
+    level: "info"
+    status:
+      email: true
+      sms: true
+      ws: true
+    code: "ssd_sync_complete"test@TNAS:/etc/notifications/msgType# 
+
+# 比对日期：2026-09-07
+# 比对结果：与 7.1 原始通知内容完全一致；34 项通知，无新增、无缺失、无字段差异。
+# 说明：本地文件比对，不作为真实 7.1 设备配置的最终确认。

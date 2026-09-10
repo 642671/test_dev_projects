@@ -1,0 +1,476 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic "TerraMaster DiskCheck" [ref=e4]:
+        - generic [aria-hidden] [ref=e5]: ◫
+        - generic [ref=e6]: 磁盘健康管家
+      - navigation "主导航" [ref=e7]:
+        - button "总览" [ref=e8] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e9]: ⌂
+        - button "完整检测" [ref=e11] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e12]: ▦
+        - button "SMART 报告" [active] [ref=e14] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e15]: ◈
+        - button "智能守护" [ref=e17] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e18]: ♢
+        - button "记录与审计" [ref=e20] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e21]: ≡
+      - generic [ref=e23]:
+        - combobox "界面语言" [ref=e25]:
+          - option "English"
+          - option "Deutsch"
+          - option "Français"
+          - option "Español"
+          - option "Italiano"
+          - option "Português"
+          - option "Magyar"
+          - option "Türkçe"
+          - option "Polski"
+          - option "Русский"
+          - option "日本語"
+          - option "한국어"
+          - option "简体中文" [selected]
+          - option "繁體中文"
+          - option "Tiếng Việt"
+          - option "Bahasa Indonesia"
+          - option "ไทย"
+          - option "Dansk"
+          - option "Norsk"
+          - option "Čeština"
+          - option "Svenska"
+          - option "Nederlands"
+          - option "Română"
+          - option "Ελληνικά"
+        - generic "软件版本 · 0.2.071 · 46febf67a690 · 2026-09-03T09:45:50Z" [ref=e26]:
+          - generic [ref=e27]: 软件版本
+          - strong [ref=e28]: v0.2.071
+    - main [ref=e29]:
+      - generic [ref=e30]:
+        - heading "SMART 报告" [level=1] [ref=e1619]
+        - generic [ref=e33]:
+          - button "切换暗黑模式" [ref=e34] [cursor=pointer]: ☾
+          - button "帮助与检测原理" [ref=e35] [cursor=pointer]: "?"
+          - button "刷新磁盘与 SMART 信息" [ref=e36] [cursor=pointer]
+      - generic [ref=e211]:
+        - generic [ref=e212]:
+          - generic [ref=e213]:
+            - generic [ref=e214]: 选择磁盘
+            - combobox "选择磁盘" [ref=e215]:
+              - option "NVMe Disk1 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk2 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk3 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk4 · Kingchuxing 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk5 · QUANXING N200 128GB · 128.0 GB · 在线业务盘"
+              - option "NVMe Disk6 · QUANXING N200 128GB · 128.0 GB · 未加入存储池/未挂载"
+              - option "NVMe Disk7 · Sandisk NAS 800 NVMe 960GB · 960.2 GB · 未加入存储池/未挂载"
+              - option "NVMe Disk8 · Sandisk NAS 800 NVMe 960GB · 960.2 GB · 系统关键盘"
+              - option "USB Disk_sda · TDAS · 1.0 TB · 未加入存储池/未挂载" [selected]
+              - option "USB Disk_sdb · 2280 · 128.0 GB · 未加入存储池/未挂载"
+              - option "USB Disk_sdb · SN5100 4TB · 4.0 TB · 未加入存储池/未挂载"
+          - button "刷新 SMART" [ref=e216] [cursor=pointer]
+        - generic [ref=e1620]:
+          - generic [ref=e1622]:
+            - heading "TOSHIBA DT01ABA100V" [level=2] [ref=e1623]
+            - paragraph [ref=e1624]: USB Disk_sda · 22OWV5LMS · 1.0 TB
+          - generic [ref=e1625]:
+            - generic [ref=e1626]:
+              - generic [ref=e1627]: 健康状况
+              - strong [ref=e1628]: × 危险
+              - generic [ref=e1629]: 立即备份/更换
+            - generic [ref=e1630]:
+              - generic [ref=e1631]: 温度
+              - strong [ref=e1632]: 38 °C
+              - generic [ref=e1633]: 温度处于建议范围
+            - generic [ref=e1634]:
+              - generic [ref=e1635]:
+                - text: 固件
+                - generic [ref=e1636]: MU2OA720
+              - generic [ref=e1637]:
+                - text: 通电时间
+                - generic "点击切换为总小时数/年月日时" [ref=e1638] [cursor=pointer]: 110 天 15 小时
+              - generic [ref=e1639]:
+                - text: 通电次数
+                - generic [ref=e1640]: "4187"
+              - generic [ref=e1641]:
+                - text: 接口
+                - generic [ref=e1642]: SATA 6G
+              - generic [ref=e1643]:
+                - text: 传输模式
+                - generic [ref=e1644]: 6.0 Gb/s
+              - generic [ref=e1645]:
+                - text: 标准
+                - generic [ref=e1646]: SATA 3.0
+              - generic [ref=e1647]:
+                - text: 转速
+                - generic [ref=e1648]: 5700 RPM
+          - generic [ref=e1649]:
+            - heading "本次健康结论依据" [level=3] [ref=e1650]
+            - generic [ref=e1651]:
+              - generic [ref=e1652]:
+                - generic [ref=e1653]: ×
+                - text: 磁盘自身 SMART 总体健康检查失败
+              - generic [ref=e1654]:
+                - generic [ref=e1655]: ×
+                - text: ID 05 · 重映射扇区计数 · 厂商标准化数值已越过故障阈值
+              - generic [ref=e1656]:
+                - generic [ref=e1657]: "!"
+                - text: ID 05 · 重映射扇区计数 · 存在重映射扇区
+              - generic [ref=e1658]:
+                - generic [ref=e1659]: "?"
+                - text: SMART 自检被中断，不能视为通过
+          - heading "主要指标" [level=3] [ref=e1660]
+          - generic [ref=e1661]:
+            - generic [ref=e1662]:
+              - generic [ref=e1663]: 重映射扇区
+              - strong [ref=e1664]: "1994"
+              - generic [ref=e1665]: 0 绿色；非零黄色；触发厂商阈值红色
+            - generic [ref=e1666]:
+              - generic [ref=e1667]: 待处理扇区
+              - strong [ref=e1668]: "0"
+              - generic [ref=e1669]: 0 绿色；非零黄色；触发厂商阈值红色
+            - generic [ref=e1670]:
+              - generic [ref=e1671]: 不可校正扇区
+              - strong [ref=e1672]: "0"
+              - generic [ref=e1673]: 0 绿色；非零直接红色
+            - generic [ref=e1674]:
+              - generic [ref=e1675]: 接口传输错误
+              - strong [ref=e1676]: "7"
+              - generic [ref=e1677]: 稳定值不判故障；确认增长为黄色
+          - table [ref=e1679]:
+            - rowgroup [ref=e1690]:
+              - row [ref=e1691]:
+                - columnheader "状态 拖动调整列宽" [ref=e1692]:
+                  - text: 状态
+                  - generic "拖动调整列宽" [ref=e1693]
+                - columnheader "ID 拖动调整列宽" [ref=e1694]:
+                  - text: ID
+                  - generic "拖动调整列宽" [ref=e1695]
+                - columnheader "属性名称 拖动调整列宽" [ref=e1696]:
+                  - text: 属性名称
+                  - generic "拖动调整列宽" [ref=e1697]
+                - columnheader "当前值 拖动调整列宽" [ref=e1698]:
+                  - text: 当前值
+                  - generic "拖动调整列宽" [ref=e1699]
+                - columnheader "最差值 拖动调整列宽" [ref=e1700]:
+                  - text: 最差值
+                  - generic "拖动调整列宽" [ref=e1701]
+                - columnheader "临界值 拖动调整列宽" [ref=e1702]:
+                  - text: 临界值
+                  - generic "拖动调整列宽" [ref=e1703]
+                - columnheader "原始数据 拖动调整列宽" [ref=e1704]:
+                  - text: 原始数据
+                  - generic "拖动调整列宽" [ref=e1705]
+                - columnheader "判断依据 拖动调整列宽" [ref=e1706]:
+                  - text: 判断依据
+                  - generic "拖动调整列宽" [ref=e1707]
+                - columnheader "项目说明 拖动调整列宽" [ref=e1708]:
+                  - text: 项目说明
+                  - generic "拖动调整列宽" [ref=e1709]
+            - rowgroup [ref=e1710]:
+              - row [ref=e1711]:
+                - cell "✓ 健康" [ref=e1712]:
+                  - generic [ref=e1713]: ✓
+                  - text: 健康
+                - cell "01" [ref=e1714]
+                - cell "读取错误率 Raw_Read_Error_Rate" [ref=e1715]:
+                  - strong [ref=e1716]: 读取错误率
+                  - generic [ref=e1717]: Raw_Read_Error_Rate
+                - cell "83" [ref=e1718]
+                - cell "83" [ref=e1719]
+                - cell "16" [ref=e1720]
+                - cell "17039537" [ref=e1721]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 厂商标准化判据：标准化当前值 83 必须高于厂商临界值 16；达到或低于临界值判为危险。" [ref=e1722]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1723]: 厂商标准化判据：标准化当前值 83 必须高于厂商临界值 16；达到或低于临界值判为危险。
+                - cell "读取时由硬件检测到的错误率；不同厂商编码不同，应结合阈值与趋势。 当前未发现此项异常" [ref=e1724]:
+                  - text: 读取时由硬件检测到的错误率；不同厂商编码不同，应结合阈值与趋势。
+                  - generic [ref=e1725]: 当前未发现此项异常
+              - row [ref=e1726]:
+                - cell "✓ 健康" [ref=e1727]:
+                  - generic [ref=e1728]: ✓
+                  - text: 健康
+                - cell "02" [ref=e1729]
+                - cell "吞吐性能 Throughput_Performance" [ref=e1730]:
+                  - strong [ref=e1731]: 吞吐性能
+                  - generic [ref=e1732]: Throughput_Performance
+                - cell "100" [ref=e1733]
+                - cell "100" [ref=e1734]
+                - cell "54" [ref=e1735]
+                - cell "0" [ref=e1736]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 厂商标准化判据：标准化当前值 100 必须高于厂商临界值 54；达到或低于临界值判为危险。" [ref=e1737]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1738]: 厂商标准化判据：标准化当前值 100 必须高于厂商临界值 54；达到或低于临界值判为危险。
+                - cell "该项目由磁盘厂商定义；标准化值与厂商阈值配合判断，原始值用于趋势对比。 当前未发现此项异常" [ref=e1739]:
+                  - text: 该项目由磁盘厂商定义；标准化值与厂商阈值配合判断，原始值用于趋势对比。
+                  - generic [ref=e1740]: 当前未发现此项异常
+              - row [ref=e1741]:
+                - cell "✓ 健康" [ref=e1742]:
+                  - generic [ref=e1743]: ✓
+                  - text: 健康
+                - cell "03" [ref=e1744]
+                - cell "启动时间 Spin_Up_Time" [ref=e1745]:
+                  - strong [ref=e1746]: 启动时间
+                  - generic [ref=e1747]: Spin_Up_Time
+                - cell "137" [ref=e1748]
+                - cell "137" [ref=e1749]
+                - cell "24" [ref=e1750]
+                - cell "143 (Average 169)" [ref=e1751]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 厂商标准化判据：标准化当前值 137 必须高于厂商临界值 24；达到或低于临界值判为危险。" [ref=e1752]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1753]: 厂商标准化判据：标准化当前值 137 必须高于厂商临界值 24；达到或低于临界值判为危险。
+                - cell "机械硬盘从静止到正常转速所需时间。 当前未发现此项异常" [ref=e1754]:
+                  - text: 机械硬盘从静止到正常转速所需时间。
+                  - generic [ref=e1755]: 当前未发现此项异常
+              - row [ref=e1756]:
+                - cell "✓ 健康" [ref=e1757]:
+                  - generic [ref=e1758]: ✓
+                  - text: 健康
+                - cell "04" [ref=e1759]
+                - cell "启停次数 Start_Stop_Count" [ref=e1760]:
+                  - strong [ref=e1761]: 启停次数
+                  - generic [ref=e1762]: Start_Stop_Count
+                - cell "98" [ref=e1763]
+                - cell "98" [ref=e1764]
+                - cell "0" [ref=e1765]
+                - cell "9754" [ref=e1766]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 这是寿命/使用背景累计计数，增长本身不等于故障。" [ref=e1767]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1768]: 这是寿命/使用背景累计计数，增长本身不等于故障。
+                - cell "磁盘主轴启动和停止的累计次数。 当前未发现此项异常" [ref=e1769]:
+                  - text: 磁盘主轴启动和停止的累计次数。
+                  - generic [ref=e1770]: 当前未发现此项异常
+              - row [ref=e1771]:
+                - cell "× 危险" [ref=e1772]:
+                  - generic [ref=e1773]: ×
+                  - text: 危险
+                - cell "05" [ref=e1774]
+                - cell "重映射扇区计数 Reallocated_Sector_Ct" [ref=e1775]:
+                  - strong [ref=e1776]: 重映射扇区计数
+                  - generic [ref=e1777]: Reallocated_Sector_Ct
+                - cell "1" [ref=e1778]
+                - cell "1" [ref=e1779]
+                - cell "5" [ref=e1780]
+                - cell "1994" [ref=e1781]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 厂商标准化判据：标准化当前值 1 必须高于厂商临界值 5；达到或低于临界值判为危险。 判据：厂商原始计数应为 0；本次厂商原始计数为 1994。非零即提示备份并复查。" [ref=e1782]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1783]: 厂商标准化判据：标准化当前值 1 必须高于厂商临界值 5；达到或低于临界值判为危险。 判据：厂商原始计数应为 0；本次厂商原始计数为 1994。非零即提示备份并复查。
+                - cell "磁盘已用备用扇区替换的不稳定物理扇区数量。 已越过厂商阈值，应立即备份并更换磁盘" [ref=e1784]:
+                  - text: 磁盘已用备用扇区替换的不稳定物理扇区数量。
+                  - generic [ref=e1785]: 已越过厂商阈值，应立即备份并更换磁盘
+              - row [ref=e1786]:
+                - cell "✓ 健康" [ref=e1787]:
+                  - generic [ref=e1788]: ✓
+                  - text: 健康
+                - cell "07" [ref=e1789]
+                - cell "寻道错误率 Seek_Error_Rate" [ref=e1790]:
+                  - strong [ref=e1791]: 寻道错误率
+                  - generic [ref=e1792]: Seek_Error_Rate
+                - cell "100" [ref=e1793]
+                - cell "100" [ref=e1794]
+                - cell "67" [ref=e1795]
+                - cell "0" [ref=e1796]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 厂商标准化判据：标准化当前值 100 必须高于厂商临界值 67；达到或低于临界值判为危险。" [ref=e1797]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1798]: 厂商标准化判据：标准化当前值 100 必须高于厂商临界值 67；达到或低于临界值判为危险。
+                - cell "磁头定位过程中记录的错误率，厂商原始数据不可跨型号直接比较。 当前未发现此项异常" [ref=e1799]:
+                  - text: 磁头定位过程中记录的错误率，厂商原始数据不可跨型号直接比较。
+                  - generic [ref=e1800]: 当前未发现此项异常
+              - row [ref=e1801]:
+                - cell "✓ 健康" [ref=e1802]:
+                  - generic [ref=e1803]: ✓
+                  - text: 健康
+                - cell "08" [ref=e1804]
+                - cell "寻道时间性能 Seek_Time_Performance" [ref=e1805]:
+                  - strong [ref=e1806]: 寻道时间性能
+                  - generic [ref=e1807]: Seek_Time_Performance
+                - cell "100" [ref=e1808]
+                - cell "100" [ref=e1809]
+                - cell "20" [ref=e1810]
+                - cell "0" [ref=e1811]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 厂商标准化判据：标准化当前值 100 必须高于厂商临界值 20；达到或低于临界值判为危险。" [ref=e1812]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1813]: 厂商标准化判据：标准化当前值 100 必须高于厂商临界值 20；达到或低于临界值判为危险。
+                - cell "该项目由磁盘厂商定义；标准化值与厂商阈值配合判断，原始值用于趋势对比。 当前未发现此项异常" [ref=e1814]:
+                  - text: 该项目由磁盘厂商定义；标准化值与厂商阈值配合判断，原始值用于趋势对比。
+                  - generic [ref=e1815]: 当前未发现此项异常
+              - row [ref=e1816]:
+                - cell "✓ 健康" [ref=e1817]:
+                  - generic [ref=e1818]: ✓
+                  - text: 健康
+                - cell "09" [ref=e1819]
+                - cell "通电小时 Power_On_Hours" [ref=e1820]:
+                  - strong [ref=e1821]: 通电小时
+                  - generic [ref=e1822]: Power_On_Hours
+                - cell "100" [ref=e1823]
+                - cell "100" [ref=e1824]
+                - cell "0" [ref=e1825]
+                - cell "2655" [ref=e1826]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 这是寿命/使用背景累计计数，增长本身不等于故障。" [ref=e1827]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1828]: 这是寿命/使用背景累计计数，增长本身不等于故障。
+                - cell "磁盘累计通电时间，用于了解使用年限，不直接代表故障。 当前未发现此项异常" [ref=e1829]:
+                  - text: 磁盘累计通电时间，用于了解使用年限，不直接代表故障。
+                  - generic [ref=e1830]: 当前未发现此项异常
+              - row [ref=e1831]:
+                - cell "✓ 健康" [ref=e1832]:
+                  - generic [ref=e1833]: ✓
+                  - text: 健康
+                - cell "10" [ref=e1834]
+                - cell "启动重试次数 Spin_Retry_Count" [ref=e1835]:
+                  - strong [ref=e1836]: 启动重试次数
+                  - generic [ref=e1837]: Spin_Retry_Count
+                - cell "100" [ref=e1838]
+                - cell "100" [ref=e1839]
+                - cell "60" [ref=e1840]
+                - cell "0" [ref=e1841]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 厂商标准化判据：标准化当前值 100 必须高于厂商临界值 60；达到或低于临界值判为危险。" [ref=e1842]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1843]: 厂商标准化判据：标准化当前值 100 必须高于厂商临界值 60；达到或低于临界值判为危险。
+                - cell "主轴启动失败后重新尝试的次数。 当前未发现此项异常" [ref=e1844]:
+                  - text: 主轴启动失败后重新尝试的次数。
+                  - generic [ref=e1845]: 当前未发现此项异常
+              - row [ref=e1846]:
+                - cell "✓ 健康" [ref=e1847]:
+                  - generic [ref=e1848]: ✓
+                  - text: 健康
+                - cell "12" [ref=e1849]
+                - cell "通电次数 Power_Cycle_Count" [ref=e1850]:
+                  - strong [ref=e1851]: 通电次数
+                  - generic [ref=e1852]: Power_Cycle_Count
+                - cell "99" [ref=e1853]
+                - cell "99" [ref=e1854]
+                - cell "0" [ref=e1855]
+                - cell "4187" [ref=e1856]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 这是寿命/使用背景累计计数，增长本身不等于故障。" [ref=e1857]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1858]: 这是寿命/使用背景累计计数，增长本身不等于故障。
+                - cell "磁盘累计上电次数，不直接代表故障。 当前未发现此项异常" [ref=e1859]:
+                  - text: 磁盘累计上电次数，不直接代表故障。
+                  - generic [ref=e1860]: 当前未发现此项异常
+              - row [ref=e1861]:
+                - cell "✓ 健康" [ref=e1862]:
+                  - generic [ref=e1863]: ✓
+                  - text: 健康
+                - cell "192" [ref=e1864]
+                - cell "断电回缩次数 Power-Off_Retract_Count" [ref=e1865]:
+                  - strong [ref=e1866]: 断电回缩次数
+                  - generic [ref=e1867]: Power-Off_Retract_Count
+                - cell "75" [ref=e1868]
+                - cell "75" [ref=e1869]
+                - cell "0" [ref=e1870]
+                - cell "31076" [ref=e1871]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 这是寿命/使用背景累计计数，增长本身不等于故障。" [ref=e1872]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1873]: 这是寿命/使用背景累计计数，增长本身不等于故障。
+                - cell "断电或紧急情况下磁头回缩的累计次数。 当前未发现此项异常" [ref=e1874]:
+                  - text: 断电或紧急情况下磁头回缩的累计次数。
+                  - generic [ref=e1875]: 当前未发现此项异常
+              - row [ref=e1876]:
+                - cell "✓ 健康" [ref=e1877]:
+                  - generic [ref=e1878]: ✓
+                  - text: 健康
+                - cell "193" [ref=e1879]
+                - cell "磁头加载循环 Load_Cycle_Count" [ref=e1880]:
+                  - strong [ref=e1881]: 磁头加载循环
+                  - generic [ref=e1882]: Load_Cycle_Count
+                - cell "75" [ref=e1883]
+                - cell "75" [ref=e1884]
+                - cell "0" [ref=e1885]
+                - cell "31076" [ref=e1886]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 这是寿命/使用背景累计计数，增长本身不等于故障。" [ref=e1887]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1888]: 这是寿命/使用背景累计计数，增长本身不等于故障。
+                - cell "磁头加载和卸载的累计循环次数，用于评估机械磨损。 当前未发现此项异常" [ref=e1889]:
+                  - text: 磁头加载和卸载的累计循环次数，用于评估机械磨损。
+                  - generic [ref=e1890]: 当前未发现此项异常
+              - row [ref=e1891]:
+                - cell "✓ 健康" [ref=e1892]:
+                  - generic [ref=e1893]: ✓
+                  - text: 健康
+                - cell "194" [ref=e1894]
+                - cell "磁盘温度 Temperature_Celsius" [ref=e1895]:
+                  - strong [ref=e1896]: 磁盘温度
+                  - generic [ref=e1897]: Temperature_Celsius
+                - cell "157" [ref=e1898]
+                - cell "157" [ref=e1899]
+                - cell "0" [ref=e1900]
+                - cell "38 (Min/Max 16/51)" [ref=e1901]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 判据：<55°C 健康，55–59°C 警告，≥60°C 危险；本次温度 38°C。" [ref=e1902]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1903]: 判据：<55°C 健康，55–59°C 警告，≥60°C 危险；本次温度 38°C。
+                - cell "当前磁盘温度，持续过高会加速老化。 温度处于建议范围" [ref=e1904]:
+                  - text: 当前磁盘温度，持续过高会加速老化。
+                  - generic [ref=e1905]: 温度处于建议范围
+              - row [ref=e1906]:
+                - cell "✓ 健康" [ref=e1907]:
+                  - generic [ref=e1908]: ✓
+                  - text: 健康
+                - cell "196" [ref=e1909]
+                - cell "重映射事件次数 Reallocated_Event_Count" [ref=e1910]:
+                  - strong [ref=e1911]: 重映射事件次数
+                  - generic [ref=e1912]: Reallocated_Event_Count
+                - cell "1" [ref=e1913]
+                - cell "1" [ref=e1914]
+                - cell "0" [ref=e1915]
+                - cell "2008" [ref=e1916]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 厂商未提供跨品牌统一原始数据阈值；优先采用厂商标准化临界值和确认的趋势变化。" [ref=e1917]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1918]: 厂商未提供跨品牌统一原始数据阈值；优先采用厂商标准化临界值和确认的趋势变化。
+                - cell "发生扇区重映射操作的累计事件数。 当前未发现此项异常" [ref=e1919]:
+                  - text: 发生扇区重映射操作的累计事件数。
+                  - generic [ref=e1920]: 当前未发现此项异常
+              - row [ref=e1921]:
+                - cell "✓ 健康" [ref=e1922]:
+                  - generic [ref=e1923]: ✓
+                  - text: 健康
+                - cell "197" [ref=e1924]
+                - cell "待处理扇区计数 Current_Pending_Sector" [ref=e1925]:
+                  - strong [ref=e1926]: 待处理扇区计数
+                  - generic [ref=e1927]: Current_Pending_Sector
+                - cell "100" [ref=e1928]
+                - cell "100" [ref=e1929]
+                - cell "0" [ref=e1930]
+                - cell "0" [ref=e1931]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 判据：厂商原始计数应为 0；本次厂商原始计数为 0。非零即提示备份并复查。" [ref=e1932]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1933]: 判据：厂商原始计数应为 0；本次厂商原始计数为 0。非零即提示备份并复查。
+                - cell "读取不稳定、等待后续重读或重映射的扇区；非零即需重点关注。 当前未发现此项异常" [ref=e1934]:
+                  - text: 读取不稳定、等待后续重读或重映射的扇区；非零即需重点关注。
+                  - generic [ref=e1935]: 当前未发现此项异常
+              - row [ref=e1936]:
+                - cell "✓ 健康" [ref=e1937]:
+                  - generic [ref=e1938]: ✓
+                  - text: 健康
+                - cell "198" [ref=e1939]
+                - cell "脱机不可校正扇区 Offline_Uncorrectable" [ref=e1940]:
+                  - strong [ref=e1941]: 脱机不可校正扇区
+                  - generic [ref=e1942]: Offline_Uncorrectable
+                - cell "100" [ref=e1943]
+                - cell "100" [ref=e1944]
+                - cell "0" [ref=e1945]
+                - cell "0" [ref=e1946]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 判据：厂商原始计数应为 0；本次厂商原始计数为 0。非零表示已发现不可校正错误，属于高数据丢失风险。" [ref=e1947]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1948]: 判据：厂商原始计数应为 0；本次厂商原始计数为 0。非零表示已发现不可校正错误，属于高数据丢失风险。
+                - cell "离线检测中无法校正的扇区；非零表示数据损坏风险。 当前未发现此项异常" [ref=e1949]:
+                  - text: 离线检测中无法校正的扇区；非零表示数据损坏风险。
+                  - generic [ref=e1950]: 当前未发现此项异常
+              - row [ref=e1951]:
+                - cell "✓ 健康" [ref=e1952]:
+                  - generic [ref=e1953]: ✓
+                  - text: 健康
+                - cell "199" [ref=e1954]
+                - cell "接口 CRC 错误 UDMA_CRC_Error_Count" [ref=e1955]:
+                  - strong [ref=e1956]: 接口 CRC 错误
+                  - generic [ref=e1957]: UDMA_CRC_Error_Count
+                - cell "200" [ref=e1958]
+                - cell "200" [ref=e1959]
+                - cell "0" [ref=e1960]
+                - cell "7" [ref=e1961]
+                - cell "尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较 判据：厂商无统一绝对阈值，仅在前后快照确认厂商原始计数增长时提示；已有历史计数但未增长不单独判故障。" [ref=e1962]:
+                  - text: 尚无更早快照，无法计算变化 · 近 30 天：仅有 1 次记录，至少需要 2 次才能比较
+                  - generic [ref=e1963]: 判据：厂商无统一绝对阈值，仅在前后快照确认厂商原始计数增长时提示；已有历史计数但未增长不单独判故障。
+                - cell "SATA 传输校验失败，多由线缆、背板、接触或供电引起；只在计数增长时预警。 当前未发现此项异常" [ref=e1964]:
+                  - text: SATA 传输校验失败，多由线缆、背板、接触或供电引起；只在计数增长时预警。
+                  - generic [ref=e1965]: 当前未发现此项异常
+  - status [ref=e208]
