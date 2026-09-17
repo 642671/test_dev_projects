@@ -1,6 +1,6 @@
 # Codex 第三方模型接入统一文档
 
-> 适用机器：本机（Windows）。最近更新：2026-09-01。
+> 适用机器：本机（Windows）。最近更新：2026-09-15。
 > 本目录统一收编 Codex 接入第三方模型相关的说明；配置文件本身的真实位置不变，文档负责索引、解释与排障。
 
 > 当前 NewAPI、默认模型、历史 provider 兼容和重启验收基线，以 `07_NewAPI稳定修复与重启验收.md` 为准。较早文件保留历史接入背景，部分已移除 Provider/route 只作为历史记录。
@@ -21,7 +21,9 @@ Codex 不直连模型厂商，而是先走 CCSwitchMulti 本地代理（`http://
 | `05_9007公司模型接入手册.md` | 公司 9007 模型从零接入完整手册（由原 guides 目录迁移） |
 | `06_ZhipuGLM接入实录.md` | Zhipu GLM 从 Provider 到 Codex 选择器的完整同步实录（2026-08-27） |
 | `07_NewAPI稳定修复与重启验收.md` | NewAPI、`max` 推理、图片能力、旧任务 provider 修复、备份及重启后验收基线 |
+| `09_项目归属迁移故障与恢复记录_20260915.md` | `test_dev_projects` 项目消失、旧任务落入“最近”的证据、离线恢复和回滚记录 |
 | `scripts/verify-newapi-after-restart.ps1` | 重启前后逐项比较并真实请求两个 NewAPI 模型的只读脚本 |
+| `scripts/repair-test-dev-project-assignments.ps1` | 仅恢复 133 条明确历史归属的离线修复脚本，含备份、校验、回滚和重启 |
 
 ## 关键文件速查
 

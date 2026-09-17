@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     本模板供「手写」报告使用（单文件、自包含、断网可看、零外部请求）。
+     有采集结果时请用 scripts/perf_report.py --kind monitor 自动生成，结构与此一致。
+
+     占位符清单（**双花括号**，不要用 % 作占位符）：
+       {{TITLE}}         报告标题，如：MultimediaServer · 应用资源监控报告
+       {{DEVICE}}        设备，如：TOS 6 · 10.18.15.179 · 4 核 / 8 GB
+       {{INTERVAL_S}}    采样间隔秒数，如：1
+       {{GENERATED_AT}}  生成时间，如：2026-09-13 10:05:00
+       {{SUMMARY}}       一句话结论
+       {{CONCLUSION}}    结论段
+       {{SUGGESTION_1}} / {{SUGGESTION_2}}  建议条目
+       {{PROC_ROWS}} / {{IDLE_ROWS}} / {{COVERAGE_ROWS}}  表格行（每行一个 <tr>…</tr>）
+       {{CHART_MEMORY}} / {{CHART_CPU}} / {{CHART_DISK}}  内联 SVG 图表（整段贴入）
+     ============================================================ -->
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--text:#1f2430;--muted:#6b7280;--border:#e6e9ef;
+      --ok:#059669;--warn:#d97706;--bad:#dc2626;--na:#9ca3af;--accent:#2563eb}
+*{box-sizing:border-box}
+body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;margin:0;
+     background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:22px;margin:0 0 10px}
+h2{font-size:17px;margin:30px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:14px;margin:20px 0 8px;color:#39414f}
+p.meta{color:#4b5563;font-size:13px;margin:4px 0}
+code{background:#eef1f5;padding:1px 5px;border-radius:4px;font-size:12.5px}
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);
+      border:1px solid var(--border);border-radius:8px;overflow:hidden}
+th,td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{background:#f0f3f7;font-weight:600}
+tr:last-child td{border-bottom:none}
+.cards{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;
+      padding:10px 16px;min-width:104px;text-align:center}
+.card span{display:block;font-size:21px;font-weight:700;line-height:1.25}
+.card.ok span{color:var(--ok)} .card.warn span{color:var(--warn)}
+.card.bad span{color:var(--bad)} .card.na span{color:var(--na)}
+.kpis{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0}
+.kpi{flex:1 1 160px;background:var(--card);border:1px solid var(--border);
+     border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px}
+.kpi b{display:block;font-size:22px;font-weight:700;margin-top:4px}
+.kpi small{color:var(--muted);font-size:12px}
+.note{background:#eef4ff;border-left:3px solid var(--accent);padding:10px 14px;
+      border-radius:6px;font-size:13px;margin:12px 0}
+.note.warn{background:#fff7ed;border-left-color:var(--warn)}
+.note.bad{background:#fef2f2;border-left-color:var(--bad)}
+.note.ok{background:#f0fdf4;border-left-color:var(--ok)}
+.muted{color:var(--muted)}
+.chart{background:var(--card);border:1px solid var(--border);border-radius:10px;
+       padding:12px 14px;margin:12px 0}
+.ph{border:1px dashed var(--border);border-radius:6px;padding:22px;text-align:center;
+    color:var(--muted);font-size:13px;background:#fbfcfe}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:3px 0}
+footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--border);
+       color:var(--muted);font-size:12.5px}
+</style></head><body><div class="wrap">
+
+<h1>{{TITLE}}</h1>
+<p class="meta"><b>元信息</b>：设备 {{DEVICE}}　·　<b>CPU 口径：单核口径（100% = 1 个核；4 核跑满 = 400%）</b>　·　采样间隔 {{INTERVAL_S}}s　·　方法：进程树资源监控（父进程 + 全部子孙进程）　·　生成时间 {{GENERATED_AT}}</p>
+
+<!-- 统计卡：四条计数（通过 / 待确认 / 不通过 / 未采集）。数字要真填，别只留标题。 -->
+<div class="cards">
+  <div class="card ok"><span>0</span>✓ 通过</div>
+  <div class="card warn"><span>0</span>! 待确认</div>
+  <div class="card bad"><span>0</span>✗ 不通过</div>
+  <div class="card na"><span>0</span>– 未采集</div>
+</div>
+<div class="note ok"><b>总判定：✓ 通过</b></div>
+
+<h2>总结</h2>
+<p>{{SUMMARY}}</p>
+
+<!-- KPI 卡：取前 4 条有值的指标。数字与单位分开填。 -->
+<div class="kpis">
+  <div class="kpi"><small>CPU（单核口径）</small><b>0.62</b><small>%</small></div>
+  <div class="kpi"><small>PSS（使用期均值）</small><b>23.8</b><small>MB</small></div>
+  <div class="kpi"><small>private_Dirty（使用期均值）</small><b>8.79</b><small>MB</small></div>
+  <div class="kpi"><small>进程树规模</small><b>4</b><small>个</small></div>
+</div>
+
+<table><thead><tr><th>项</th><th>数值</th><th>口径 / 备注</th></tr></thead><tbody>
+  <tr><td>进程树规模</td><td>4 个进程</td><td>父 + 全部子孙</td></tr>
+  <tr><td>CPU（使用期均值）</td><td>0.62 %</td><td>单核口径</td></tr>
+  <tr><td>PSS（使用期均值）</td><td>23.8 MB</td><td>共享页按比例分摊</td></tr>
+  <tr><td>private_Dirty（使用期均值）</td><td>8.79 MB</td><td><b>判内存压力看这个</b></td></tr>
+  <tr><td>RSS（使用期均值）</td><td>34.4 MB</td><td>含 RssFile 页缓存，会虚高</td></tr>
+  <tr><td>磁盘写（峰值）</td><td>0.30 MB/s</td><td>发生时刻 10:00:02</td></tr>
+  <tr><td>网络（整机口径，收发合计）</td><td>0.05 MB/s</td><td><b>不可归因单应用</b></td></tr>
+</tbody></table>
+
+<h3>要点与建议</h3>
+<ul>
+  <li>使用期占 <b>39.3%</b> 的窗口，空闲期占 60.7% —— 窗口里确实有负载，不是空跑。</li>
+  <li>开销<b>长在子进程上</b>：只盯常驻父进程会漏掉大部分开销（实测有漏掉 77% 的反例）。</li>
+  <li>内存无单调爬升，<b>未见泄漏迹象</b>。</li>
+</ul>
+<ol>
+  <li>{{SUGGESTION_1}}</li>
+  <li>{{SUGGESTION_2}}</li>
+</ol>
+
+<h2>一、监控概况</h2>
+<table><thead><tr><th>项</th><th>值</th></tr></thead><tbody>
+  <tr><td>应用 / 进程组</td><td>MultimediaServer / mediaindex</td></tr>
+  <tr><td>采集窗口</td><td>2026-09-13 10:00:00 → 2026-09-13 10:04:59</td></tr>
+  <tr><td>样本数</td><td>300（1 秒采样）</td></tr>
+  <tr><td>坏行剔除</td><td>0 行</td></tr>
+  <tr><td>完整率</td><td>100 %（300 / 300）</td></tr>
+</tbody></table>
+
+<h3>进程构成明细（父 + 全部子孙，必给）</h3>
+<div class="note">只给合计会掩盖「开销长在子进程上」。实测反例：某监控只盯常驻父进程，漏掉 77% 的开销。</div>
+<table><thead><tr><th>进程</th><th>PID</th><th>PSS（峰值 / 均值）</th><th>private_Dirty（峰值 / 均值）</th><th>CPU 均值</th><th>说明</th></tr></thead><tbody>
+{{PROC_ROWS}}
+  <tr><td>mediaindex</td><td>1234</td><td>23.9 / 23.5 MB</td><td>8.81 / 8.72 MB</td><td>0.41 %</td><td>常驻父进程</td></tr>
+  <tr><td>mediaindex-worker</td><td>1251</td><td>5.2 / 5.1 MB</td><td>2.10 / 2.05 MB</td><td>0.18 %</td><td>子进程（转码 / 索引）</td></tr>
+  <tr><td><b>合计</b></td><td>—</td><td><b>29.1 / 28.6 MB</b></td><td><b>10.91 / 10.77 MB</b></td><td><b>0.59 %</b></td><td>报告以合计为准</td></tr>
+</tbody></table>
+
+<h2>二、使用期 vs 空闲期</h2>
+<div class="note">判定口径：<b>CPU &gt; 2% 或 磁盘读写合计 &gt; 0.5 MB/s 或 网络收发合计 &gt; 0.5 MB/s = 使用</b>。</div>
+<table><thead><tr><th>项</th><th>使用期</th><th>空闲期</th></tr></thead><tbody>
+{{IDLE_ROWS}}
+  <tr><td>样本数</td><td>118</td><td>182</td></tr>
+  <tr><td>占比</td><td>39.3 %</td><td>60.7 %</td></tr>
+  <tr><td>CPU 均值</td><td>0.62 %</td><td>0.04 %</td></tr>
+  <tr><td>PSS 均值</td><td>23.8 MB</td><td>23.4 MB</td></tr>
+  <tr><td>private_Dirty 均值</td><td>8.79 MB</td><td>8.70 MB</td></tr>
+  <tr><td>磁盘写均值</td><td>0.14 MB/s</td><td>0.00 MB/s</td></tr>
+</tbody></table>
+
+<h2>三、汇总曲线</h2>
+<div class="note">图表是<b>内联 SVG</b>（手绘、零外部请求、断网可看）。手写时把
+<code>perf_report.py</code> 生成的 SVG 整段贴进对应占位符；若自己画图，务必带<b>坐标轴与时间刻度</b>，
+否则峰值会被误读成持续压力。</div>
+<div class="chart"><h3>内存：PSS / private_Dirty / RSS（MB）</h3>
+  <div class="ph">{{CHART_MEMORY}}</div></div>
+<div class="chart"><h3>CPU（单核口径，%）</h3>
+  <div class="ph">{{CHART_CPU}}</div></div>
+<div class="chart"><h3>磁盘读写（MB/s）</h3>
+  <div class="ph">{{CHART_DISK}}</div></div>
+
+<h2>四、结论</h2>
+<div class="note">{{CONCLUSION}}</div>
+<div class="note warn"><b>原始数据落点</b>：结论章必须给数据来源，读者要能自己回去核数。
+<ul>
+  <li><code>P2_MultimediaServer_mediaindex.csv</code> —— 进程树口径，300 行，1 秒采样</li>
+  <li><code>P2_stats.json</code> —— 本节所有统计量的来源（<code>perf_analyze.py</code> 产出）</li>
+</ul></div>
+
+<h2>五、采集覆盖度与未测项</h2>
+<div class="note warn"><b>采不到 ≠ 达标。</b>下列指标本次没有采到，一律显示「未采集」而<b>不填 0</b>。</div>
+<table><thead><tr><th>项</th><th>状态</th><th>说明</th></tr></thead><tbody>
+{{COVERAGE_ROWS}}
+  <tr><td>CPU / PSS / private_Dirty / RSS</td><td>✅ 已采</td><td>进程树口径，逐秒</td></tr>
+  <tr><td>磁盘读写</td><td>✅ 已采</td><td>/proc/&lt;pid&gt;/io，已扣除 cancelled_write_bytes</td></tr>
+  <tr><td>网络收发</td><td>⚠️ 口径降级</td><td><b>整机口径</b>，不可归因单应用（Linux 无逐进程网络计数）</td></tr>
+  <tr><td>Full GC 次数</td><td>❌ 未采集</td><td>JRE 未开 GC 日志；如需请在应用侧打开后重采</td></tr>
+  <tr><td>磁盘 %util / %iowait</td><td>❌ 未采集</td><td>本次只采了 MB/s 速率，未采利用率</td></tr>
+</tbody></table>
+<p class="muted">统计：共 5 项 —— ✅2 / ⚠️1 / ❌2。</p>
+
+<h2>六、口径声明</h2>
+<ul>
+  <li><b>网络列为整机口径</b>：Linux 没有逐进程网络字节计数（<code>/proc/&lt;pid&gt;/net/dev</code> 属于整个网络命名空间），该列取自整机数据，<b>不可归因给单个应用 / 功能</b>。</li>
+  <li><b>内存判压力请用 <code>private_Dirty</code> 或 <code>PSS</code>，不要用 RSS</b>：RSS 含 <code>RssFile</code>（mmap 文件页缓存，内核可随时回收），会被严重放大。</li>
+  <li><b>CPU 为单核口径</b>：100% = 1 个核，4 核跑满 = 400%。</li>
+  <li><b>阈值来源为默认参考值</b>（业界参考），<b>非业务验收标准</b>。</li>
+</ul>
+
+<footer>本模板供手写使用（<code>templates/report-monitor.html</code>）。自动生成请用
+<code>性能测试</code> skill 的 <code>scripts/perf_report.py --kind monitor</code>。
+口径见 <code>references/metrics.md</code>，陷阱见 <code>references/methodology-pitfalls.md</code>。</footer>
+</div></body></html>

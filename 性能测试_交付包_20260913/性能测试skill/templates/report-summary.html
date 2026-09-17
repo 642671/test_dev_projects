@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     本模板供「手写」报告使用（单文件、自包含、断网可看、零外部请求）。
+     有采集结果时请用 scripts/perf_report.py --kind summary 自动生成，结构与此一致。
+
+     占位符清单（**双花括号**，不要用 % 作占位符）：
+       {{TITLE}}         报告标题，如：TOS 应用性能横向汇总
+       {{SUBTITLE}}      副标题一句话
+       {{DEVICE}}        设备，如：TOS 6 · 10.18.15.179 · 4 核 / 8 GB
+       {{INTERVAL_S}}    采样间隔秒数，如：1
+       {{GENERATED_AT}}  生成时间
+       {{COMPARABILITY}} 可比性前提结论一句话
+       {{CONCLUSION}}    综合结论
+       {{SUGGESTION_1}} / {{SUGGESTION_2}}   建议条目
+       {{MATRIX_ROWS}}   测试矩阵表行
+       {{SERVICE_SECTIONS}}  各服务对照小节（每服务一段 <h3> + 两张表）
+       {{CLIENT_ROWS}}   客户端并发测试表行
+       {{CROSS_ROWS}}    横向对比表行（统一 private_Dirty 口径）
+       {{REPORT_ROWS}}   分项报告清单行
+       {{COVERAGE_ROWS}} 采集覆盖度表行
+       {{WITHDRAWN_ROWS}} 已撤回的结论行
+     ============================================================ -->
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--text:#1f2430;--muted:#6b7280;--border:#e6e9ef;
+      --ok:#059669;--warn:#d97706;--bad:#dc2626;--na:#9ca3af;--accent:#2563eb}
+*{box-sizing:border-box}
+body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;margin:0;
+     background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:22px;margin:0 0 6px}
+h2{font-size:17px;margin:30px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:14px;margin:20px 0 8px;color:#39414f}
+p.meta{color:#4b5563;font-size:13px;margin:4px 0}
+p.sub{color:#39414f;font-size:14px;margin:0 0 8px}
+code{background:#eef1f5;padding:1px 5px;border-radius:4px;font-size:12.5px}
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);
+      border:1px solid var(--border);border-radius:8px;overflow:hidden}
+th,td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{background:#f0f3f7;font-weight:600}
+tr:last-child td{border-bottom:none}
+td.st,th.st{text-align:center;white-space:nowrap;font-weight:600}
+td.ok{color:var(--ok)} td.warn{color:var(--warn)} td.bad{color:var(--bad)} td.na{color:var(--na)}
+.note{background:#eef4ff;border-left:3px solid var(--accent);padding:10px 14px;
+      border-radius:6px;font-size:13px;margin:12px 0}
+.note.warn{background:#fff7ed;border-left-color:var(--warn)}
+.note.bad{background:#fef2f2;border-left-color:var(--bad)}
+.note.ok{background:#f0fdf4;border-left-color:var(--ok)}
+.muted{color:var(--muted)}
+.ph{border:1px dashed var(--border);border-radius:6px;padding:22px;text-align:center;
+    color:var(--muted);font-size:13px;background:#fbfcfe;margin:10px 0}
+del{color:var(--muted)}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:3px 0}
+footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--border);
+       color:var(--muted);font-size:12.5px}
+</style></head><body><div class="wrap">
+
+<h1>{{TITLE}}</h1>
+<p class="sub">{{SUBTITLE}}</p>
+<p class="meta"><b>元信息</b>：设备 {{DEVICE}}　·　<b>CPU 口径：单核口径（100% = 1 个核；4 核跑满 = 400%）</b>　·　采样间隔 {{INTERVAL_S}}s　·　生成时间 {{GENERATED_AT}}</p>
+
+<h2>一、测试矩阵与运行条件</h2>
+<div class="note warn"><b>可比性前提（三条，缺一条横向对比就失效）</b>：{{COMPARABILITY}}</div>
+<table><thead><tr><th>#</th><th>前提</th><th>本报告是否满足</th></tr></thead><tbody>
+  <tr><td>1</td><td><b>同一台设备</b>（同 CPU 核数、同内存、同磁盘）</td><td>✅ 均为 TOS 6 · 10.18.15.179 · 4 核 / 8 GB</td></tr>
+  <tr><td>2</td><td><b>同一采样间隔与窗口长度</b></td><td>✅ 全部 1 秒采样、5 分钟窗口</td></tr>
+  <tr><td>3</td><td><b>同一负载口径</b>（同样的并发路数 / 同样的素材）</td><td>⚠️ qBittorrent 无转码场景，只跑空闲态</td></tr>
+</tbody></table>
+
+<h3>测试矩阵</h3>
+<table><thead><tr><th>服务</th><th>版本</th><th>进程组</th><th>场景</th><th>窗口</th><th>样本</th></tr></thead><tbody>
+{{MATRIX_ROWS}}
+  <tr><td>Emby</td><td>4.8.x</td><td>EmbyServer</td><td>空闲 / 4 路转码</td><td>10:00→10:04 / 10:20→10:29</td><td>300 / 600</td></tr>
+  <tr><td>Jellyfin</td><td>10.9.x</td><td>jellyfin</td><td>空闲 / 4 路转码</td><td>同左</td><td>300 / 600</td></tr>
+  <tr><td>qBittorrent</td><td>4.6.x</td><td>qbittorrent-nox</td><td>空闲</td><td>同左</td><td>300</td></tr>
+</tbody></table>
+
+<h2>二、各服务对照</h2>
+<div class="note">每个服务给：使用期 vs 空闲期、放大倍数、<b>进程构成</b>。
+进程构成是必给项 —— 开销常长在子进程上（实测有漏掉 77% 的反例）。</div>
+{{SERVICE_SECTIONS}}
+<h3>Emby</h3>
+<table><thead><tr><th>项</th><th>空闲期</th><th>使用期（4 路转码）</th><th>放大倍数</th></tr></thead><tbody>
+  <tr><td>CPU（单核口径）</td><td>0.8 %</td><td>288.4 %</td><td><b>360.5×</b></td></tr>
+  <tr><td>PSS</td><td>96.2 MB</td><td>412.7 MB</td><td><b>4.3×</b></td></tr>
+  <tr><td>private_Dirty</td><td>41.5 MB</td><td>198.3 MB</td><td><b>4.8×</b></td></tr>
+  <tr><td>进程树规模</td><td>6 个</td><td>19 个</td><td><b>3.2×</b></td></tr>
+</tbody></table>
+<table><thead><tr><th>进程</th><th>PSS（使用期均值）</th><th>private_Dirty（使用期均值）</th><th>说明</th></tr></thead><tbody>
+  <tr><td>EmbyServer</td><td>88.4 MB</td><td>46.1 MB</td><td>常驻父进程</td></tr>
+  <tr><td>ffmpeg ×4</td><td>297.2 MB</td><td>143.6 MB</td><td><b>子进程：开销主体在这里</b></td></tr>
+  <tr><td><b>合计</b></td><td><b>412.7 MB</b></td><td><b>198.3 MB</b></td><td>报告以合计为准</td></tr>
+</tbody></table>
+
+<h2>三、客户端并发测试</h2>
+<h3>负载真实性验证（必给）</h3>
+<div class="note warn">没有这一节，读者无法区分「开销低」和「没压上」。</div>
+<table><thead><tr><th>服务</th><th>并发路数</th><th>服务端 TCP 连接数（峰值）</th><th>累计传输字节</th><th>素材一致性</th></tr></thead><tbody>
+{{CLIENT_ROWS}}
+  <tr><td>Emby</td><td>4</td><td>6</td><td>1.8 / 5.4 MB</td><td>同一批 1080p</td></tr>
+  <tr><td>Jellyfin</td><td>4</td><td>6</td><td>1.7 / 5.2 MB</td><td>同左</td></tr>
+</tbody></table>
+
+<h3>测试方法学陷阱</h3>
+<ul>
+  <li><b>重复测试前必须清缓存</b>，且保证请求唯一 —— 命中缓存会测出「CPU 接近 0」的假象。</li>
+  <li><b>峰值必须带发生时刻</b> —— 否则会把转码收尾落盘的一次性尖峰读成持续压力。</li>
+  <li><b>RSS 不能用</b>：qBittorrent 实测 RSS 5918 MB 里 5778 MB（97.6%）是页缓存，
+      真实匿名仅 140 MB —— 用 RSS 判会得出完全相反的结论。</li>
+</ul>
+
+<h2>四、横向对比</h2>
+<div class="note">横向对比<b>必须统一到同一内存口径</b>（建议 private_Dirty），
+不能一个用 RSS 一个用 PSS —— 那样比出来的差异是口径差异，不是应用差异。</div>
+<p class="muted">统一内存口径：<b>private_Dirty（MB）</b></p>
+<table><thead><tr><th>服务</th><th>空闲 private_Dirty</th><th>使用期 private_Dirty</th><th>放大倍数</th><th>进程树（空闲 → 使用）</th></tr></thead><tbody>
+{{CROSS_ROWS}}
+  <tr><td>Emby</td><td>41.5</td><td>198.3</td><td><b>4.8×</b></td><td>6 → 19</td></tr>
+  <tr><td>Jellyfin</td><td>33.7</td><td>161.4</td><td><b>4.8×</b></td><td>5 → 17</td></tr>
+  <tr><td>qBittorrent</td><td>140.2</td><td>—（未测）</td><td>—</td><td>6 → —</td></tr>
+</tbody></table>
+
+<h2>五、综合结论与建议</h2>
+<div class="note ok">{{CONCLUSION}}</div>
+<ol>
+  <li>{{SUGGESTION_1}}</li>
+  <li>{{SUGGESTION_2}}</li>
+</ol>
+
+<h2>六、分项报告</h2>
+<div class="note">一步可达，别写成 A 报告链 B、B 再链 C —— 否则读者会读到一半漏内容。</div>
+<table><thead><tr><th>报告</th><th>体裁</th><th>文件</th></tr></thead><tbody>
+{{REPORT_ROWS}}
+  <tr><td>Emby 空闲态</td><td>monitor</td><td><code>Emby_monitor.md</code> / <code>.html</code></td></tr>
+  <tr><td>Emby 转码态</td><td>perf</td><td><code>Emby_perf.md</code> / <code>.html</code></td></tr>
+  <tr><td>Jellyfin 转码态</td><td>perf</td><td><code>Jellyfin_perf.md</code> / <code>.html</code></td></tr>
+</tbody></table>
+
+<h2>七、采集覆盖度与未测项</h2>
+<div class="note warn"><b>采不到 ≠ 达标。</b>下列指标本次没有采到，一律显示「未采集」而<b>不填 0</b>。</div>
+<table><thead><tr><th>项</th><th>状态</th><th>说明</th></tr></thead><tbody>
+{{COVERAGE_ROWS}}
+  <tr><td>CPU / PSS / private_Dirty / 磁盘 / 进程树</td><td>✅ 已采</td><td>进程树口径，三服务一致</td></tr>
+  <tr><td>网络收发</td><td>⚠️ 口径降级</td><td><b>整机口径</b>；三服务同时段采样会互相污染，<b>不可横向比较网络列</b></td></tr>
+  <tr><td>qBittorrent 使用期</td><td>❌ 未采集</td><td>该应用无「运行中」的明确窗口，需另行设计负载</td></tr>
+  <tr><td>响应时间 / 错误率</td><td>❌ 未采集</td><td>本体裁是资源口径；接口指标需用 k6 / JMeter 另采</td></tr>
+</tbody></table>
+<p class="muted">统计：共 4 项 —— ✅1 / ⚠️1 / ❌2。</p>
+
+<h2>八、口径声明</h2>
+<ul>
+  <li><b>网络列为整机口径</b>：Linux 没有逐进程网络字节计数（<code>/proc/&lt;pid&gt;/net/dev</code> 属于整个网络命名空间），该列取自整机数据，<b>不可归因给单个应用 / 功能</b>。</li>
+  <li><b>内存判压力请用 <code>private_Dirty</code> 或 <code>PSS</code>，不要用 RSS</b>：RSS 含 <code>RssFile</code>（mmap 文件页缓存，内核可随时回收），会被严重放大。</li>
+  <li><b>CPU 为单核口径</b>：100% = 1 个核，4 核跑满 = 400%。</li>
+  <li><b>阈值来源为默认参考值</b>（业界参考），<b>非业务验收标准</b>。</li>
+  <li><b>跨应用对比的适用边界</b>：不同应用若采样窗口不同、素材不同，均值<b>不可直接精确比较</b>。</li>
+</ul>
+
+<h2>九、已撤回的结论</h2>
+<div class="note">保留纠错记录本身就是<b>报告质量的一部分</b> ——
+删掉纠错记录 = 下一个读者会把已经想清楚的问题重新推翻一遍。</div>
+<table><thead><tr><th>曾下的结论</th><th>为什么撤回</th></tr></thead><tbody>
+{{WITHDRAWN_ROWS}}
+  <tr><td><del>「qBittorrent 出现 OOM」</del></td><td>误判：RSS 含页缓存，改用 private_Dirty 后内存正常</td></tr>
+  <tr><td><del>「Jellyfin 发生 swap」</del></td><td>误判：swap 值为 0 时被错误地当成「未采集」而非「无交换」</td></tr>
+  <tr><td><del>「建议加大写缓存」</del></td><td>撤回：磁盘写峰值远未到瓶颈，加大缓存只会掩盖真实问题</td></tr>
+</tbody></table>
+
+<footer>本模板供手写使用（<code>templates/report-summary.html</code>）。自动生成请用
+<code>性能测试</code> skill 的 <code>scripts/perf_report.py --kind summary</code>。
+骨架见 <code>references/report-skeletons.md</code>，横向口径见 <code>references/memory-accounting.md</code>。</footer>
+</div></body></html>

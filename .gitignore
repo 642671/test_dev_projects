@@ -104,3 +104,14 @@ storagemanager/**/*.deb
 docs/codex-model-integration/backups/
 docs/codex-model-integration/direct-newapi-probe/
 docs/codex-model-integration/scripts/minirouter/router.log
+
+# Codex/浏览器任务运行时工作目录与临时产物
+.codex_tmp/
+.codex_work/
+.codex_tasks/
+.tmp/
+.playwright-cli/
+
+# Office 临时锁文件和 Windows 保留设备名误生成文件
+~$*
+NUL

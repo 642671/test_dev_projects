@@ -1,0 +1,28 @@
+{
+  "kind": "monitor",
+  "app": "minimal-demo",
+  "meta": {
+    "title": "极简样例（验证缺字段不崩）",
+    "cpu_scope": "单核口径（100% = 1 个核；4 核跑满 = 400%）"
+  },
+  "quality": {
+    "samples": 1,
+    "files": 1,
+    "bad_rows": 0
+  },
+  "procs": {
+    "demo": {
+      "samples": 1,
+      "window": [
+        "2026-09-13 00:00:00",
+        "2026-09-13 00:00:01"
+      ],
+      "cpu": {
+        "peak": 3.0,
+        "avg": 3.0,
+        "p95": 3.0,
+        "p99": 3.0
+      }
+    }
+  }
+}

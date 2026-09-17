@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     本模板供「手写」报告使用（单文件、自包含、断网可看、零外部请求）。
+     有采集结果时请用 scripts/perf_report.py --kind perf 自动生成，结构与此一致。
+
+     占位符清单（**双花括号**，不要用 % 作占位符）：
+       {{TITLE}}         报告标题，如：MultimediaServer · 性能测试报告
+       {{DEVICE}}        设备，如：TOS 6 · 10.18.15.179 · 4 核 / 8 GB
+       {{INTERVAL_S}}    采样间隔秒数，如：1
+       {{GENERATED_AT}}  生成时间
+       {{SCENARIOS}}     场景列表，如：空闲、4 路转码
+       {{BOTTLENECK}}    瓶颈定位一句话
+       {{SUGGESTION_1}} / {{SUGGESTION_2}}   建议条目
+       {{METRIC_ROWS}}   指标统计表行（均值 / 峰值 / P95 / P99）
+       {{AMP_ROWS}}      放大倍数表行
+       {{LEAK_ROWS}}     泄漏判定表行
+       {{COVERAGE_ROWS}} 采集覆盖度表行
+       {{CHART_CPU}} / {{CHART_MEM}} / {{CHART_DISK}} / {{CHART_NET}}  内联 SVG（整段贴入）
+     ============================================================ -->
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--text:#1f2430;--muted:#6b7280;--border:#e6e9ef;
+      --ok:#059669;--warn:#d97706;--bad:#dc2626;--na:#9ca3af;--accent:#2563eb}
+*{box-sizing:border-box}
+body{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;margin:0;
+     background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:22px;margin:0 0 10px}
+h2{font-size:17px;margin:30px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:14px;margin:20px 0 8px;color:#39414f}
+p.meta{color:#4b5563;font-size:13px;margin:4px 0}
+code{background:#eef1f5;padding:1px 5px;border-radius:4px;font-size:12.5px}
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);
+      border:1px solid var(--border);border-radius:8px;overflow:hidden}
+th,td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{background:#f0f3f7;font-weight:600}
+tr:last-child td{border-bottom:none}
+td.st,th.st{text-align:center;white-space:nowrap;font-weight:600}
+td.ok{color:var(--ok)} td.warn{color:var(--warn)} td.bad{color:var(--bad)} td.na{color:var(--na)}
+.cards{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;
+      padding:10px 16px;min-width:104px;text-align:center}
+.card span{display:block;font-size:21px;font-weight:700;line-height:1.25}
+.card.ok span{color:var(--ok)} .card.warn span{color:var(--warn)}
+.card.bad span{color:var(--bad)} .card.na span{color:var(--na)}
+.kpis{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0}
+.kpi{flex:1 1 160px;background:var(--card);border:1px solid var(--border);
+     border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px}
+.kpi b{display:block;font-size:22px;font-weight:700;margin-top:4px}
+.kpi small{color:var(--muted);font-size:12px}
+.note{background:#eef4ff;border-left:3px solid var(--accent);padding:10px 14px;
+      border-radius:6px;font-size:13px;margin:12px 0}
+.note.warn{background:#fff7ed;border-left-color:var(--warn)}
+.note.bad{background:#fef2f2;border-left-color:var(--bad)}
+.note.ok{background:#f0fdf4;border-left-color:var(--ok)}
+.muted{color:var(--muted)}
+.chart{background:var(--card);border:1px solid var(--border);border-radius:10px;
+       padding:12px 14px;margin:12px 0}
+.ph{border:1px dashed var(--border);border-radius:6px;padding:22px;text-align:center;
+    color:var(--muted);font-size:13px;background:#fbfcfe}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:3px 0}
+footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--border);
+       color:var(--muted);font-size:12.5px}
+</style></head><body><div class="wrap">
+
+<h1>{{TITLE}}</h1>
+<p class="meta"><b>元信息</b>：设备 {{DEVICE}}　·　<b>CPU 口径：单核口径（100% = 1 个核；4 核跑满 = 400%）</b>　·　采样间隔 {{INTERVAL_S}}s　·　方法：进程树资源监控 + 负载侧并发　·　生成时间 {{GENERATED_AT}}</p>
+
+<!-- 统计卡：四条计数（通过 / 待确认 / 不通过 / 未采集）。 -->
+<div class="cards">
+  <div class="card ok"><span>0</span>✓ 通过</div>
+  <div class="card warn"><span>0</span>! 待确认</div>
+  <div class="card bad"><span>0</span>✗ 不通过</div>
+  <div class="card na"><span>0</span>– 未采集</div>
+</div>
+<div class="note ok"><b>总判定：✓ 通过</b></div>
+
+<!-- KPI 卡：取前 4 条有值的指标（通常是 CPU / PSS / private_Dirty / 磁盘写）。 -->
+<div class="kpis">
+  <div class="kpi"><small>CPU（负载均值，单核口径）</small><b>297.75</b><small>%</small></div>
+  <div class="kpi"><small>PSS（负载均值）</small><b>97.4</b><small>MB</small></div>
+  <div class="kpi"><small>private_Dirty（负载均值）</small><b>41.2</b><small>MB</small></div>
+  <div class="kpi"><small>磁盘写（负载均值）</small><b>12.6</b><small>MB/s</small></div>
+</div>
+
+<h2>一、监控概况</h2>
+<table><thead><tr><th>项</th><th>值</th></tr></thead><tbody>
+  <tr><td>应用 / 进程组</td><td>MultimediaServer / mediaindex</td></tr>
+  <tr><td>场景数</td><td>2（{{SCENARIOS}}）</td></tr>
+  <tr><td>采集窗口</td><td>空闲 2026-09-13 10:00:00 → 10:04:59　·　负载 2026-09-13 10:20:00 → 10:29:59</td></tr>
+  <tr><td>样本数</td><td>空闲 300　·　负载 600</td></tr>
+  <tr><td>坏行剔除</td><td>0 行</td></tr>
+  <tr><td>采样间隔</td><td>1 s</td></tr>
+</tbody></table>
+
+<h3>负载真实性证据（必给）</h3>
+<div class="note warn">没有这一节，读者无法区分「测出来开销低」和「压根没压上」。</div>
+<table><thead><tr><th>项</th><th>值</th></tr></thead><tbody>
+  <tr><td>客户端并发路数</td><td>4 路</td></tr>
+  <tr><td>服务端 TCP 连接数（峰值）</td><td>6</td></tr>
+  <tr><td>累计传输字节</td><td>发送 1.8 MB / 接收 5.4 MB</td></tr>
+  <tr><td>媒资素材</td><td>4 路 1080p 转码，同一批素材（<b>两次测试素材必须一致</b>）</td></tr>
+</tbody></table>
+
+<h2>二、指标统计表</h2>
+<div class="note">列序固定为 <b>均值 / 峰值 / P95 / P99</b> —— 三种体裁里只有 perf 强制四列，别省 P99。
+峰值旁边必须能查到发生时刻。<b>「– 未采集」不等于「通过」</b>：有阈值才判，没阈值只展示。</div>
+<table><thead><tr>
+  <th>指标</th><th>单位</th><th>空闲 均值</th><th>负载 均值</th><th>空闲 峰值</th><th>负载 峰值</th>
+  <th>负载 P95</th><th>负载 P99</th><th>阈值</th><th class="st">判定</th>
+</tr></thead><tbody>
+{{METRIC_ROWS}}
+  <tr><td>CPU（单核口径）</td><td>%</td><td>0.4</td><td>297.75</td><td>0.98</td><td>341.2</td><td>331.0</td><td>338.5</td><td>≤70</td><td class="st bad">✗ 不通过</td></tr>
+  <tr><td>PSS</td><td>MB</td><td>23.5</td><td>97.4</td><td>23.9</td><td>104.6</td><td>101.2</td><td>103.4</td><td>—</td><td class="st na">– 未采集</td></tr>
+  <tr><td>private_Dirty</td><td>MB</td><td>8.72</td><td>41.2</td><td>8.81</td><td>45.8</td><td>44.1</td><td>45.2</td><td>—</td><td class="st na">– 未采集</td></tr>
+  <tr><td>RSS</td><td>MB</td><td>34.4</td><td>128.6</td><td>34.8</td><td>141.2</td><td>138.0</td><td>140.1</td><td>—</td><td class="st na">– 未采集</td></tr>
+  <tr><td>磁盘写</td><td>MB/s</td><td>0.01</td><td>12.6</td><td>0.30</td><td>31.4</td><td>28.8</td><td>30.9</td><td>—</td><td class="st na">– 未采集</td></tr>
+  <tr><td>网络发送（整机）</td><td>MB/s</td><td>0.01</td><td>0.42</td><td>0.02</td><td>1.10</td><td>1.02</td><td>1.08</td><td>≤30</td><td class="st ok">✓ 通过</td></tr>
+  <tr><td>进程树规模</td><td>个</td><td>4</td><td>11</td><td>4</td><td>13</td><td>13</td><td>13</td><td>—</td><td class="st na">– 未采集</td></tr>
+</tbody></table>
+<div class="note">阈值来源：<b>默认参考值（业界参考，非业务验收标准）</b>。按项目验收标准判定请用
+<code>perf_report.py --thresholds</code> 覆盖。注意：<b>297.75% 在单核口径下等于「约 3 个核在跑」</b>，
+不是「超标 297%」。</div>
+
+<h2>三、分组趋势折线图</h2>
+<div class="note">四组图按场景分组（空闲一条、负载一条）。缺采样点会<b>断线分段</b> ——
+断口表示「这一秒没采到」，<b>不是 0</b>。</div>
+<div class="chart"><h3>CPU（单核口径，%）</h3><div class="ph">{{CHART_CPU}}</div></div>
+<div class="chart"><h3>内存：PSS / private_Dirty / RSS（MB）</h3><div class="ph">{{CHART_MEM}}</div></div>
+<div class="chart"><h3>磁盘读写（MB/s）</h3><div class="ph">{{CHART_DISK}}</div></div>
+<div class="chart"><h3>网络收发（整机口径，MB/s）</h3><div class="ph">{{CHART_NET}}</div></div>
+
+<h2>四、放大倍数（空闲 → 负载）</h2>
+<div class="note">这一节回答「负载带来多少开销」。空载均值为 0 时倍数是无穷，写 <b>∞</b> 不要写数字。</div>
+<table><thead><tr><th>指标</th><th>空闲均值</th><th>负载均值</th><th>放大倍数</th></tr></thead><tbody>
+{{AMP_ROWS}}
+  <tr><td>CPU（单核口径）</td><td>0.4 %</td><td>297.75 %</td><td><b>744.4×</b></td></tr>
+  <tr><td>PSS</td><td>23.5 MB</td><td>97.4 MB</td><td><b>4.1×</b></td></tr>
+  <tr><td>private_Dirty</td><td>8.72 MB</td><td>41.2 MB</td><td><b>4.7×</b></td></tr>
+  <tr><td>磁盘写</td><td>0.01 MB/s</td><td>12.6 MB/s</td><td><b>1260×</b></td></tr>
+  <tr><td>进程树规模</td><td>4 个</td><td>11 个</td><td><b>2.8×</b></td></tr>
+</tbody></table>
+<div class="note">放大倍数用于说明<b>量级差异</b>；窗口不同、素材不同时<b>不宜作精确比较</b>。</div>
+
+<h2>五、内存回落与泄漏判定</h2>
+<div class="note">有 churn / 长稳数据时才出这一节。判据：<b>末段均值 − 首段均值</b>
+（各取 1/4 样本，避免单点噪声）配合<b>单调度</b>（相邻递增占比）。
+空闲期内存不归零属正常设计，只要<b>无单调爬升</b>即可判无泄漏。</div>
+<table><thead><tr><th>场景</th><th>进程</th><th>首段均值</th><th>末段均值</th><th>变化</th><th>单调度</th><th class="st">判定</th></tr></thead><tbody>
+{{LEAK_ROWS}}
+  <tr><td>4 路转码</td><td>mediaindex</td><td>41.02 MB</td><td>41.18 MB</td><td>+0.16 MB</td><td>0.48</td><td class="st ok">无增长</td></tr>
+</tbody></table>
+
+<h2>六、结论与优化建议</h2>
+<div class="note bad"><b>瓶颈定位</b>：{{BOTTLENECK}}</div>
+<ul>
+  <li>CPU 负载均值 297.75%（4 核上限 400%），已用掉 <b>74.4%</b> —— 逼近上限，是当前第一约束。</li>
+  <li>磁盘写峰值 31.4 MB/s、网络 1.10 MB/s，均远未到量级上限，不是瓶颈。</li>
+  <li>内存随负载线性放大（PSS 4.1× / private_Dirty 4.7×），无异常。</li>
+</ul>
+<ol>
+  <li>{{SUGGESTION_1}}</li>
+  <li>{{SUGGESTION_2}}</li>
+</ol>
+
+<h2>七、采集覆盖度与未测项</h2>
+<div class="note warn"><b>采不到 ≠ 达标。</b>下列指标本次没有采到，一律显示「未采集」而<b>不填 0</b>。</div>
+<table><thead><tr><th>项</th><th>状态</th><th>说明</th></tr></thead><tbody>
+{{COVERAGE_ROWS}}
+  <tr><td>CPU / PSS / private_Dirty / 磁盘 / 进程树</td><td>✅ 已采</td><td>进程树口径，逐秒</td></tr>
+  <tr><td>网络收发</td><td>⚠️ 口径降级</td><td><b>整机口径</b>，不可归因单应用</td></tr>
+  <tr><td>响应时间 / TPS / 错误率</td><td>❌ 未采集</td><td>本次是资源监控口径；接口侧指标需用 k6 / JMeter 另采</td></tr>
+  <tr><td>Full GC 次数</td><td>❌ 未采集</td><td>JRE 未开 GC 日志</td></tr>
+</tbody></table>
+<p class="muted">统计：共 4 项 —— ✅1 / ⚠️1 / ❌2。</p>
+
+<h2>八、口径声明</h2>
+<ul>
+  <li><b>网络列为整机口径</b>：Linux 没有逐进程网络字节计数（<code>/proc/&lt;pid&gt;/net/dev</code> 属于整个网络命名空间），该列取自整机数据，<b>不可归因给单个应用 / 功能</b>。</li>
+  <li><b>内存判压力请用 <code>private_Dirty</code> 或 <code>PSS</code>，不要用 RSS</b>：RSS 含 <code>RssFile</code>（mmap 文件页缓存，内核可随时回收），会被严重放大。</li>
+  <li><b>CPU 为单核口径</b>：100% = 1 个核，4 核跑满 = 400%。</li>
+  <li><b>阈值来源为默认参考值</b>（业界参考），<b>非业务验收标准</b>。</li>
+</ul>
+
+<footer>本模板供手写使用（<code>templates/report-perf.html</code>）。自动生成请用
+<code>性能测试</code> skill 的 <code>scripts/perf_report.py --kind perf</code>。
+结论话术见 <code>references/analysis-playbook.md</code>，陷阱见 <code>references/methodology-pitfalls.md</code>。</footer>
+</div></body></html>

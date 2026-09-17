@@ -1,0 +1,204 @@
+{
+  "kind": "summary",
+  "meta": {
+    "title": "性能测试汇总报告 — Emby / Jellyfin / qBittorrent",
+    "subtitle": "同一设备、同一套监控方法，按「服务 × 采集时长」两维交叉验证",
+    "device": "Intel N150 / 4 核 / 16 GB（参考材料实测机）",
+    "cpu_scope": "单核口径（100% = 1 个核；4 核跑满 = 400%）",
+    "interval_s": 1,
+    "method": "进程树资源监控（父进程 + 全部子孙进程）"
+  },
+  "quality": {
+    "samples": 1662,
+    "files": 6,
+    "bad_rows": 0,
+    "notes": "网络列为整机口径，不可归因单应用；Emby 为全新安装后首次启动，数值含媒体库初始化扫描，偏保守"
+  },
+  "metrics": {
+    "cpu": {
+      "unit": "%",
+      "scope": "单核",
+      "Emby(4路转码)": {
+        "avg": 297.75,
+        "peak": 372.0,
+        "p95": 355.0,
+        "p99": 368.0
+      },
+      "Jellyfin(4路转码)": {
+        "avg": 279.21,
+        "peak": 341.0,
+        "p95": 330.0,
+        "p99": 338.0
+      },
+      "qBittorrent(13路混合)": {
+        "avg": 102.4,
+        "peak": 158.0,
+        "p95": 131.0,
+        "p99": 141.0
+      }
+    },
+    "pvt": {
+      "unit": "MB",
+      "Emby(4路转码)": {
+        "avg": 333.0,
+        "peak": 402.0
+      },
+      "Jellyfin(4路转码)": {
+        "avg": 423.0,
+        "peak": 486.0
+      },
+      "qBittorrent(13路混合)": {
+        "avg": 812.0,
+        "peak": 1512.3
+      }
+    },
+    "pss": {
+      "unit": "MB",
+      "Emby(4路转码)": {
+        "avg": 412.0,
+        "peak": 486.0
+      },
+      "Jellyfin(4路转码)": {
+        "avg": 505.0,
+        "peak": 561.0
+      },
+      "qBittorrent(13路混合)": {
+        "avg": 6280.0,
+        "peak": 6412.0
+      }
+    },
+    "rss": {
+      "unit": "MB",
+      "Emby(4路转码)": {
+        "avg": 520.0,
+        "peak": 612.0
+      },
+      "Jellyfin(4路转码)": {
+        "avg": 561.0,
+        "peak": 628.0
+      },
+      "qBittorrent(13路混合)": {
+        "avg": 6294.0,
+        "peak": 6428.0
+      }
+    },
+    "file": {
+      "unit": "MB",
+      "qBittorrent(13路混合)": {
+        "avg": 5778.0,
+        "peak": 5900.0
+      }
+    },
+    "tree": {
+      "unit": "个",
+      "Emby(4路转码)": {
+        "avg": 4.2,
+        "peak": 5.0
+      },
+      "Jellyfin(4路转码)": {
+        "avg": 4.1,
+        "peak": 5.0
+      },
+      "qBittorrent(13路混合)": {
+        "avg": 1.0,
+        "peak": 1.0
+      }
+    },
+    "disk_r": {
+      "unit": "MB/s",
+      "Emby(4路转码)": {
+        "avg": 38.6,
+        "peak": 184.0
+      },
+      "qBittorrent(13路混合)": {
+        "avg": 4.1,
+        "peak": 45.0
+      }
+    },
+    "disk_w": {
+      "unit": "MB/s",
+      "Emby(4路转码)": {
+        "avg": 6.2,
+        "peak": 543.0
+      },
+      "qBittorrent(13路混合)": {
+        "avg": 0.4,
+        "peak": 12.0
+      }
+    },
+    "tx": {
+      "unit": "MB/s",
+      "qBittorrent(13路混合)": {
+        "avg": 62.3,
+        "peak": 119.19
+      }
+    },
+    "rx": {
+      "unit": "MB/s",
+      "qBittorrent(13路混合)": {
+        "avg": 8.8,
+        "peak": 41.0
+      }
+    }
+  },
+  "amplification": [
+    {
+      "metric": "CPU（单核口径）",
+      "idle": 0.4,
+      "load": 297.75,
+      "ratio": 744.0
+    },
+    {
+      "metric": "CPU（单核口径）",
+      "idle": 0.01,
+      "load": 279.21,
+      "ratio": 27900.0
+    },
+    {
+      "metric": "CPU（单核口径）",
+      "idle": 4.88,
+      "load": 102.4,
+      "ratio": 21.0
+    }
+  ],
+  "coverage": [
+    {
+      "item": "Full GC 频率与时长",
+      "status": "NA",
+      "reason": "三个应用均非 JVM 应用"
+    },
+    {
+      "item": "数据库连接数 / 慢查询 / 死锁",
+      "status": "NA",
+      "reason": "本次为进程级资源监控，未采数据库指标"
+    },
+    {
+      "item": "前端指标 FCP/LCP/FID/CLS",
+      "status": "NA",
+      "reason": "本次为服务端资源监控"
+    },
+    {
+      "item": "Emby 第二次窗口的 private_Dirty 峰值",
+      "status": "NA",
+      "reason": "该次测试未采集此维度"
+    }
+  ],
+  "analysis": {
+    "conclusion": "FAIL",
+    "bottleneck": "转码类负载瓶颈在 CPU；下载类负载瓶颈在网络出口带宽",
+    "evidence": [
+      "Emby / Jellyfin 4 路转码 CPU 均值 297.75% / 279.21%，均超过 70% 阈值，已达 4 核的约 3 个核",
+      "qBittorrent 13 路混合发送峰值 119.19 MB/s，**贴住千兆线速（≈119 MB/s）** → 瓶颈是网卡",
+      "三者空载真实匿名内存合计约 325 MB（占 16 GB 的 2.0%），空载不是任何压力来源"
+    ],
+    "suggestions": [
+      "转码：确认素材能否硬件解码，软解与硬解 CPU 开销差数十倍",
+      "下载：千兆网已贴线速，想再提速需上万兆或做限速/QoS",
+      "监控内存请用 private_Dirty，不要用 RSS（qBittorrent 的 5.9 GB RSS 里 97.6% 是页缓存）"
+    ],
+    "withdrawn": [
+      "初版曾据 RSS 判定 qBittorrent「吃掉 5.9 GB、存在 OOM 风险」，并建议「限制写缓存 512MB~1GB」—— 拆开看 RssFile 占 5778 MB（97.6%）是可回收的 mmap 文件页缓存，真实匿名仅 140 MB。该判定与建议均已撤回。",
+      "初版曾据 swap 判定 Jellyfin「内存不足」—— 其 PSS 仅 30 MB、CPU 0.01%，155 MB swap 是「深度空闲」的结果（页面长期未被访问），不是压力。该结论已撤回。"
+    ]
+  }
+}

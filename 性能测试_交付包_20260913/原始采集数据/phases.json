@@ -1,0 +1,58 @@
+{
+  "app": "MultimediaServer",
+  "app_version": "3.2.106",
+  "device": "10.18.15.179 (x86-70) / Intel 4 核 / 7684 MB / TOS 7 (kernel 6.12.63+)",
+  "collected_at": "2026-09-13",
+  "note": "安装与任务均由人工触发，采集只读。安装/卸载未由脚本代劳。",
+  "phases": {
+    "P0_pre_install": {
+      "window": "2026-09-13 15:01:29 → 15:05:21",
+      "samples": 233,
+      "scope": "整机",
+      "csv": "P0_pre_install_host.csv",
+      "caveat": "⚠️ 口径降级：窗口尾部可能已含安装包下载/解包活动（磁盘写峰值 88 MB/s），非绝对空载"
+    },
+    "P1_install": {
+      "window": "2026-09-13 15:04:00 → 15:05:28",
+      "process_appeared_at": "2026-09-13 15:05:28",
+      "install_recorded_at": "2026-09-13 15:05:21",
+      "csv": "P1_install_host.csv",
+      "scope": "整机"
+    },
+    "P2_idle": {
+      "window": "2026-09-13 15:06:35 → 15:11:35",
+      "samples": 300,
+      "scope": "进程树(MultimediaServer)",
+      "csv": "P2_MultimediaServer.csv",
+      "caveat": "⚠️ 口径降级：该段由 v1 采集器采集，进程树多计了采集器自身 1 个进程（约 +12 MB PSS）"
+    },
+    "index_rebuild": {
+      "window": "2026-09-13 15:33:27 → 持续",
+      "trigger": "人工在应用界面重建索引",
+      "worker": "mediaindex (MiniDLNA) —— 独立 systemd 服务，不在应用进程树内",
+      "csv": "P3b_mediaindex.csv",
+      "caveat": "⚠️ 口径降级：v1 采集器，进程树含采集器自身"
+    },
+    "playback_single": {
+      "window": "2026-09-13 15:40:50 → 15:45:50",
+      "scene": "1 路 1080p（Avatar.The.Way.of.Water.2022.1080p，3069.6 MB）经 DLNA 直传 HTTP 播放",
+      "client": "本机 Windows Media Player（10.18.15.203）",
+      "csv": "P4_app_fixed.csv",
+      "scope": "进程树(MultimediaServer|mediaindex)，修复版采集器"
+    },
+    "playback_multi": {
+      "window": "2026-09-13 15:46:02 →",
+      "scene": "2 / 4 / 8 路并发 DLNA 拉流，每路限速 1.5 MB/s（模拟真实播放）",
+      "note": "WMP 单路持续在播，作为第 1 路"
+    }
+  },
+  "collectors": {
+    "P3c_host_continuous.csv": "整机口径连续采集，覆盖 15:24 → 17:24",
+    "P4_app_fixed.csv": "进程树口径（修复版），覆盖 15:34 → 16:34"
+  },
+  "known_issues": [
+    "v1 采集器的 --app 正则会匹配到采集器自身命令行，导致进程树多 1 个进程（已在 perf_collect.py 修复，并写入 references/methodology-pitfalls.md 第 19 条同类坑）",
+    "mediaindex 在启动多媒体服务器时会重启（PID 变更），内存基线随之重置",
+    "该设备为共用设备，测试期间存在他人操作的可能"
+  ]
+}
